@@ -1,0 +1,11 @@
+{
+  "email": "xiu.liu@kapeixi.com",
+  "password": "lxjka001",
+  "isShowHeader": "",
+  "isShowParams": "1",
+  "isShowResponse": "1",
+  "importContent": "import { get, post } from '../axios'",
+  "jsContent": "export function [interfaceName](map) {\n  // [interfaceDescription]\n  return [interfaceMethods](`${[InterfaceHost]}[InterfacePath]`, map)\n}",
+  "projectIds": [],
+  "catIds": []
+}

@@ -1,0 +1,6 @@
+/node_modules
+/dist
+/static
+export-readme.js
+generateRouter.js
+/src/utils/cookies.js
