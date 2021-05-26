@@ -5,17 +5,17 @@
     frameborder="0"
   ></iframe>
   <iframe
-    :class="showIndex === 2 ? 'showAll2 container' : 'container'"
+    :class="showIndex === 2 ? 'showAll2 container2' : 'container2'"
     src="https://datav.aliyuncs.com/share/2886c7d533487c65acbf7a8d7a79fd0c"
     frameborder="0"
   ></iframe>
   <iframe
-    :class="showIndex === 3 ? 'showAll3 container' : 'container'"
+    :class="showIndex === 3 ? 'showAll3 container3' : 'container3'"
     src="https://datav.aliyuncs.com/share/5cbccfff0b653f955ef5b01b7b9cfddb"
     frameborder="0"
   ></iframe>
   <iframe
-    :class="showIndex === 4 ? 'showAll4 container' : 'container'"
+    :class="showIndex === 4 ? 'showAll4 container4' : 'container4'"
     src="https://datav.aliyuncs.com/share/45f265f19d8c9d34a586a511377ca629"
     frameborder="0"
   ></iframe>
@@ -47,6 +47,44 @@ export default {
   width: 50vw;
   height: 50vh;
   cursor: pointer;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: all 0.5s;
+  z-index: 4;
+}
+
+.container2 {
+  width: 50vw;
+  height: 50vh;
+  cursor: pointer;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: all 0.5s;
+  z-index: 3;
+}
+
+.container3 {
+  width: 50vw;
+  height: 50vh;
+  cursor: pointer;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transition: all 0.5s;
+  z-index: 2;
+}
+
+.container4 {
+  width: 50vw;
+  height: 50vh;
+  cursor: pointer;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  transition: all 0.5s;
+  z-index: 1;
 }
 
 .showAll {
@@ -97,6 +135,7 @@ export default {
   left: calc(50vw - 50px);
   top: calc(50vh - 50px);
   opacity: 0.4;
+  z-index: 5;
   cursor: pointer;
 }
 
