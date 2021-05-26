@@ -1,0 +1,55 @@
+{
+  "name": "cupshe-element",
+  "version": "0.0.1",
+  "private": false,
+  "main": "lib/cupshe-element.common.js",
+  "files": [
+    "packages",
+    "lib"
+  ],
+  "scripts": {
+    "router": "exportRouter init -f examples && eslint --fix  --ext .js,.vue examples",
+    "serve": "npm run router && vue-cli-service serve",
+    "test": " vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name cupshe-ui --dest lib packages/index.js",
+    "build": "npm run lib && npm publish"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "cupshe-css": "0.0.25",
+    "cupshe-icon": "^0.1.2",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "prettier": "^1.19.1",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "exportRouter": "0.0.7"
+  },
+  "prettier": {
+    "stylelintIntegration": true,
+    "eslintIntegration": true,
+    "singleQuote": true,
+    "semi": false,
+    "tabWidth": 2,
+    "endOfLine": "auto"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
