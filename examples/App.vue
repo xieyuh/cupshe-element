@@ -1,9 +1,15 @@
 <template>
   <div style="display:flex;height:100%;">
     <ul class="sideBar" style="width:256px">
-      <li v-for="item in menus" :key="item.name" @click="open(item.name)">
-        {{ item.name }}
-      </li>
+      <template v-for="item in menus" :key="item.name">
+        <li
+          v-if="item.name !== '/'"
+          @click="open(item)"
+          :class="item.name === activeIndex ? 'active' : ''"
+        >
+          {{ item.name }}
+        </li>
+      </template>
     </ul>
 
     <main>
@@ -13,23 +19,29 @@
 </template>
 <script>
 import { reactive, toRefs } from '@vue/reactivity'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import route from './router/index.js'
+import { onMounted } from '@vue/runtime-core'
 export default {
   name: 'Home',
   components: {},
   setup() {
     const state = reactive({
-      openKeys: ['sub1', 'sub2'],
-      selectedKeys: [],
+      activeIndex: '',
       menus: route.options.routes
     })
     const router = useRouter()
-    const open = id => {
+    const param = useRoute()
+    const open = item => {
+      state.activeIndex = item.name
       router.push({
-        name: id
+        name: item.name
       })
     }
+    onMounted(() => {
+      const name = param.name || 'Button'
+      state.activeIndex = name
+    })
     return {
       open,
       ...toRefs(state)
@@ -45,13 +57,17 @@ body,
   text-align: left !important;
 }
 .sideBar {
-  background: #000c17;
   box-shadow: 0 2px 8px rgb(0 0 0 / 45%) inset;
-  color: rgba(255, 255, 255, 0.65);
 }
 .sideBar li {
   height: 30px;
-  color: #fff;
+  line-height: 30px;
+  padding: 10px;
+  &.active {
+    color: #1890ff;
+    background-color: #e6f7ff;
+    border-right: 5px solid;
+  }
 }
 main {
   flex: 1;

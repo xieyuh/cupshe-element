@@ -1,40 +1,33 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import routes from './autoRoutes.js'
+import _ from 'lodash'
+import { createRouter, createWebHistory } from 'vue-router'
 
-// const routes = [
-// {
-//   path: '/',
-//   name: 'Home',
-//   component: Home
-// },
-// {
-//   path: '/checkbox',
-//   name: 'Checkbox',
-//   // route level code-splitting
-//   // this generates a separate chunk (about.[hash].js) for this route
-//   // which is lazy-loaded when the route is visited.
-//   component: () =>
-//     import(/* webpackChunkName: "about" */ '../views/Checkbox.vue')
-// },
-// {
-//   path: '/dropdown',
-//   name: 'Dropdown',
-//   // route level code-splitting
-//   // this generates a separate chunk (about.[hash].js) for this route
-//   // which is lazy-loaded when the route is visited.
-//   component: () =>
-//     import(/* webpackChunkName: "about" */ '../views/Dropdown.vue')
-// }
-// {
-//   path: '/button',
-//   name: 'Button',
-//   component: () => import(/* webpackChunkName: "about" */ '../docs/button.md')
-// }
-// ]
+let routers = require.context('../views/', true, /[a-zA-Z]+\.vue$/i).keys()
+let routes = []
+const loadComponent = name => {
+  return () => require(`../views/${name}.vue`)
+}
+routers.forEach(item => {
+  if (item.endsWith('.vue')) {
+    const name = item.match(/[a-zA-Z]+/g)[0]
+
+    routes.push({
+      name: _.upperFirst(name),
+      path: '/' + _.lowerCase(name),
+      component: loadComponent(name)
+    })
+  }
+})
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+  history: createWebHistory(),
+  routes: [
+    {
+      name: '/',
+      path: '/',
+      redirect: '/button'
+    },
+    ...routes
+  ]
 })
 
 export default router
