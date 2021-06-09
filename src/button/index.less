@@ -1,0 +1,123 @@
+@import './var';
+
+.c-button {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  height: @button-default-height;
+  font-size: @button-default-font-size;
+  line-height: @button-default-line-height;
+  transition: opacity @animation-duration-fast;
+  letter-spacing: 1px;
+  z-index: 1;
+
+  &::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    z-index: -1;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: @button-disabled-opacity;
+  }
+
+  &--ghost {
+    background-color: transparent;
+    border: @button-border-width solid @button-primary-border-color;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    &::before {
+      content: ' ';
+    }
+  }
+
+  &--large {
+    width: 100%;
+    height: @button-large-height;
+  }
+
+  &--normal {
+    padding: @button-normal-padding;
+    font-size: @button-normal-font-size;
+  }
+
+  &--small {
+    height: @button-small-height;
+    padding: @button-small-padding;
+    font-size: @button-small-font-size;
+  }
+
+  &--primary {
+    color: @white;
+    background: @white;
+    border: @button-border-width solid @button-primary-border-color;
+
+    &::before {
+      background-color: @black;
+    }
+
+    &.c-button--band {
+      .band(@black);
+    }
+  }
+
+  &--default:not(&--ghost) {
+    color: @black;
+    background: @black;
+    border: @button-border-width solid @button-default-border-color;
+
+    &::before {
+      background-color: @white;
+    }
+
+    &.c-button--band {
+      .band(@white);
+    }
+  }
+}
+
+.band(@color) {
+  transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+  &::before {
+    transition: transform 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    background: @color;
+    transform: scale(1, 1);
+    transform-origin: left center;
+  }
+
+  &:hover {
+    color: @color;
+    border-color: @color;
+
+    &::before {
+      transform-origin: right center;
+      transform: scale(0, 1);
+    }
+  }
+}

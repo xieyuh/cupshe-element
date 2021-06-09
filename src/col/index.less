@@ -1,0 +1,19 @@
+.c-col {
+  display: block;
+  box-sizing: border-box;
+  min-height: 1px;
+}
+
+.generate-col(24);
+.generate-col(@n, @i: 1) when (@i =< @n) {
+  .c-col--@{i} {
+    flex: 0 0 @i * (100% / 24);
+    max-width: @i * (100% / 24);
+  }
+
+  .c-col--offset-@{i} {
+    margin-left: @i * (100% / 24);
+  }
+
+  .generate-col(@n, (@i + 1));
+}
