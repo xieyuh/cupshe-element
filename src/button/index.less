@@ -8,6 +8,7 @@
   margin: 0;
   padding: 0;
   cursor: pointer;
+  overflow: hidden;
   border: 0;
   height: @button-default-height;
   font-size: @button-default-font-size;
@@ -71,36 +72,37 @@
     font-size: @button-small-font-size;
   }
 
+  &--round {
+    border-radius: @button-round-border-radius;
+  }
+
+  &--square {
+    border-radius: 0;
+  }
+
   &--primary {
     color: @white;
-    background: @white;
+    background-color: @black;
     border: @button-border-width solid @button-primary-border-color;
 
-    &::before {
-      background-color: @black;
-    }
-
     &.c-button--band {
-      .band(@black);
+      .band(@white, @black);
     }
   }
 
   &--default:not(&--ghost) {
     color: @black;
-    background: @black;
+    background-color: @white;
     border: @button-border-width solid @button-default-border-color;
 
-    &::before {
-      background-color: @white;
-    }
-
     &.c-button--band {
-      .band(@white);
+      .band(@black, @white);
     }
   }
 }
 
-.band(@color) {
+.band(@bgcolor, @color) {
+  background: @bgcolor;
   transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),
     border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
