@@ -5,7 +5,7 @@
   </demo-block>
 
   <demo-block title="数值精度">
-    <c-currency value="1000" precision="2" />
+    <c-currency value="1000" precision="0" />
   </demo-block>
 
   <demo-block title="隐藏货币名称">

@@ -73,6 +73,35 @@ app.use(Currency);
 <c-currency value="12.99" title="USD" title-position="left" />
 ```
 
+### 自定义样式
+
+通过 `symbol-class` 、 `value-class` 、 `title-class` 属性修改各部分样式。
+
+```html
+<template>
+  <c-currency
+    value="12.99"
+    title="USD"
+    symbol-class="italic"
+    value-class="bold"
+    title-class="margin"
+  />
+</template>
+<style>
+  .italic {
+    font-style: italic;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .margin {
+    margin-left: 8px;
+  }
+</style>
+```
+
 ## API
 
 ### Props
