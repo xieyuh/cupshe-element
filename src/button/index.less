@@ -1,20 +1,22 @@
-@import './var';
+@import './var.less';
 
 .c-button {
   position: relative;
   display: inline-block;
-  text-align: center;
   box-sizing: border-box;
+  height: @button-default-height;
   margin: 0;
   padding: 0;
-  cursor: pointer;
-  overflow: hidden;
-  border: 0;
-  height: @button-default-height;
+  border-radius: 0;
   font-size: @button-default-font-size;
   line-height: @button-default-line-height;
+  text-align: center;
+  border-radius: @button-border-radius;
+  cursor: pointer;
+  user-select: none;
   transition: opacity @animation-duration-fast;
   letter-spacing: 1px;
+  -webkit-appearance: none;
   z-index: 1;
 
   &::before {
@@ -26,8 +28,93 @@
     bottom: 0;
     width: 100%;
     height: 100%;
-    content: '';
+    content: ' ';
     z-index: -1;
+  }
+
+  &:active::before {
+    opacity: 0.1;
+  }
+
+  &--loading,
+  &--disabled {
+    &::before {
+      display: none;
+    }
+  }
+
+  &--primary {
+    color: @button-primary-color;
+    background-color: @button-primary-background-color;
+    border: @button-border-width solid @button-primary-border-color;
+
+    &.c-button--cover {
+      .cover(@button-primary-color, @button-primary-background-color);
+    }
+  }
+
+  &--default {
+    color: @button-default-color;
+    background-color: @button-default-background-color;
+    border: @button-border-width solid @button-default-border-color;
+
+    &.c-button--cover {
+      .cover(@button-default-color, @button-default-background-color);
+    }
+  }
+
+  &--success {
+    color: @button-success-color;
+    background-color: @button-success-background-color;
+    border: @button-border-width solid @button-success-border-color;
+  }
+
+  &--warning {
+    color: @button-warning-color;
+    background-color: @button-warning-background-color;
+    border: @button-border-width solid @button-warning-border-color;
+  }
+
+  &--info {
+    color: @button-info-color;
+    background-color: @button-info-background-color;
+    border: @button-border-width solid @button-info-border-color;
+  }
+
+  &--ghost {
+    background-color: @button-ghost-background-color;
+
+    &.c-button--primary {
+      color: @button-primary-background-color;
+    }
+  }
+
+  &--large {
+    padding: @button-padding;
+    height: @button-large-height;
+    font-size: @button-large-font-size;
+  }
+
+  &--normal {
+    padding: @button-padding;
+    font-size: @button-normal-font-size;
+  }
+
+  &--small {
+    height: @button-small-height;
+    padding: @button-padding;
+    font-size: @button-small-font-size;
+  }
+
+  &__loading {
+    color: inherit;
+    font-size: inherit;
+
+    .c-loading__spinner {
+      color: currentColor;
+      width: @button-loading-icon-size;
+      height: @button-loading-icon-size;
+    }
   }
 
   &--block {
@@ -37,12 +124,13 @@
 
   &--disabled {
     cursor: not-allowed;
-    opacity: @button-disabled-opacity;
+    background: @button-disabled-color;
+    border: 1px solid @button-disabled-text-color;
+    color: @button-disabled-text-color;
   }
 
-  &--ghost {
-    background-color: transparent;
-    border: @button-border-width solid @button-primary-border-color;
+  &--loading {
+    cursor: default;
   }
 
   &__content {
@@ -56,61 +144,30 @@
     }
   }
 
-  &--large {
-    width: 100%;
-    height: @button-large-height;
+  &__icon {
+    font-size: @button-icon-size;
+    line-height: inherit;
   }
 
-  &--normal {
-    padding: @button-normal-padding;
-    font-size: @button-normal-font-size;
-  }
-
-  &--small {
-    height: @button-small-height;
-    padding: @button-small-padding;
-    font-size: @button-small-font-size;
-  }
-
-  &--round {
-    border-radius: @button-round-border-radius;
-  }
-
-  &--square {
-    border-radius: 0;
-  }
-
-  &--primary {
-    color: @white;
-    background-color: @black;
-    border: @button-border-width solid @button-primary-border-color;
-
-    &.c-button--band {
-      .band(@white, @black);
-    }
-  }
-
-  &--default:not(&--ghost) {
-    color: @black;
-    background-color: @white;
-    border: @button-border-width solid @button-default-border-color;
-
-    &.c-button--band {
-      .band(@black, @white);
-    }
+  &__icon + &__text,
+  &__loading + &__text,
+  &__text + &__icon,
+  &__text + &__loading {
+    margin-left: @padding-base;
   }
 }
 
-.band(@bgcolor, @color) {
-  background: @bgcolor;
-  transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),
-    border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+.cover(@bg, @color) {
+  background-color: @bg;
+  transition-duration: 0.45s;
+  transition-property: color, border;
+  transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
   &::before {
-    transition: transform 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     background: @color;
-    transform: scale(1, 1);
     transform-origin: left center;
+    transform: scale(1, 1);
+    transition: transform 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   }
 
   &:hover {

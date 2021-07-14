@@ -37,8 +37,6 @@ export default {
 };
 ```
 
-<demo-code>./demo/index.vue</demo-code>
-
 ### 步长设置
 
 通过 `step` 属性设置每次点击增加或减少按钮时变化的值，默认为 `1`。
@@ -47,17 +45,13 @@ export default {
 <c-stepper v-model="value" step="2" />
 ```
 
-<demo-code>./demo/step.vue</demo-code>
-
 ### 限制输入范围
 
 通过 `min` 和 `max` 属性限制输入值的范围。
 
 ```html
-<c-stepper min="5" max="8" />
+<c-stepper v-model="value" min="5" max="8" />
 ```
-
-<demo-code>./demo/range.vue</demo-code>
 
 ### 禁用状态
 
@@ -67,12 +61,44 @@ export default {
 <c-stepper v-model="value" disabled />
 ```
 
-### 自定义大小
+### 禁用输入框
 
-通过 `input-width` 属性设置输入框宽度，通过 `button-size` 属性设置按钮大小和输入框高度。
+通过设置 `disable-input` 属性来禁用输入框，此时按钮仍然可以点击。
 
 ```html
-<c-stepper v-model="value" input-width="40px" button-size="32px" />
+<c-stepper v-model="value" disable-input />
+```
+
+### 异步变更
+
+通过 `before-change` 属性可以在
+
+```html
+<c-stepper v-model="value" :before-change="beforeChange" />
+```
+
+```js
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const value = ref(1);
+
+    const beforeChange = (value) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          // 在 resolve 函数中返回 true 或 false
+          resolve(true);
+        }, 500);
+      });
+    };
+
+    return {
+      value,
+      beforeChange,
+    };
+  },
+};
 ```
 
 ## API
@@ -87,13 +113,19 @@ export default {
 | default-value  | 初始值，当 v-model 为空时生效                                     | _number \| string_              | `1`     |
 | step           | 步长，每次点击时改变的值                                          | _number \| string_              | `1`     |
 | name           | 标识符，可以在 `change` 事件回调参数中获取                        | _number \| string_              | -       |
+| input-width    | 输入框宽度，默认单位为 `px`                                       | _number \| string_              | `32px`  |
+| button-size    | 按钮大小以及输入框高度，默认单位为 `px`                           | _number \| string_              | `28px`  |
+| placeholder    | 输入框占位提示文字                                                | _string_                        | -       |
 | disabled       | 是否禁用步进器                                                    | _boolean_                       | `false` |
+| disable-input  | 是否禁用输入框                                                    | _boolean_                       | `false` |
+| before-change  | 输入值变化前的回调函数，返回 `false` 可阻止输入，支持返回 Promise | _(value) => boolean \| Promise_ | `false` |
 
 ### Events
 
 | 事件名    | 说明                     | 回调参数                                  |
 | --------- | ------------------------ | ----------------------------------------- |
 | change    | 当绑定值变化时触发的事件 | _value: string, detail: { name: string }_ |
+| overlimit | 点击不可用的按钮时触发   | -                                         |
 | plus      | 点击增加按钮时触发       | -                                         |
 | minus     | 点击减少按钮时触发       | -                                         |
 | focus     | 输入框聚焦时触发         | _event: Event_                            |

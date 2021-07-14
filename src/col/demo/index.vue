@@ -1,55 +1,56 @@
 <template>
   <demo-block title="基础用法">
-    <van-row>
+    <c-row>
       <c-col span="8">span: 8</c-col>
       <c-col span="8">span: 8</c-col>
       <c-col span="8">span: 8</c-col>
-    </van-row>
+    </c-row>
 
-    <van-row>
+    <c-row>
       <c-col span="4">span: 4</c-col>
       <c-col span="10" offset="4"> offset: 4, span: 10 </c-col>
-    </van-row>
+    </c-row>
 
-    <van-row>
+    <c-row>
       <c-col offset="12" span="12"> offset: 12, span: 12 </c-col>
-    </van-row>
+    </c-row>
   </demo-block>
 
   <demo-block title="在列元素之间增加间距">
-    <van-row gutter="20">
+    <c-row gutter="20">
       <c-col span="8">span: 8</c-col>
       <c-col span="8">span: 8</c-col>
       <c-col span="8">span: 8</c-col>
-    </van-row>
+    </c-row>
   </demo-block>
 
   <demo-block v-if="!isWeapp" title="对齐方式">
-    <van-row justify="center">
+    <c-row justify="center">
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
-    </van-row>
+    </c-row>
 
-    <van-row justify="end">
+    <c-row justify="end">
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
-    </van-row>
+    </c-row>
 
-    <van-row justify="space-between">
+    <c-row justify="space-between">
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
-    </van-row>
+    </c-row>
 
-    <van-row justify="space-around">
+    <c-row justify="space-around">
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
-    </van-row>
+    </c-row>
   </demo-block>
 </template>
+
 <style lang="less">
 @import '../../style/var';
 

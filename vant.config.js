@@ -10,7 +10,8 @@ module.exports = {
   },
   site: {
     title: 'cupshe-element',
-    hideSimulator: true,
+    logo:
+      'https://cdn.shopifycdn.net/s/files/1/0784/0207/files/cupshe_32x32.png?v=1578467710',
     nav: [
       {
         title: '开发指南',
@@ -37,33 +38,39 @@ module.exports = {
             title: 'Button 按钮',
           },
           {
-            path: 'pagination',
-            title: 'Pagination 分页',
+            path: 'icon',
+            title: 'Icon 图标',
           },
           {
-            path: 'lazyload',
-            title: 'Lazyload 懒加载',
+            path: 'col',
+            title: 'Layout 布局',
           },
+        ],
+      },
+      {
+        title: '表单组件',
+        items: [
+          // {
+          //   path: 'checkbox',
+          //   title: 'Checkbox 复选框',
+          // },
           {
-            path: 'overlay',
-            title: 'Overlay 遮罩层',
+            path: 'rate',
+            title: 'Rate 评分',
           },
           {
             path: 'stepper',
             title: 'Stepper 步进器',
           },
+        ],
+      },
+      {
+        title: '展示组件',
+        items: [
           {
-            path: 'popup',
-            title: 'Popup 弹出层',
+            path: 'currency',
+            title: 'Currency 货币',
           },
-          // {
-          //   path: 'col',
-          //   title: 'Layout 布局',
-          // },
-          // {
-          //   path: 'rate',
-          //   title: '评分'
-          // }
         ],
       },
     ],

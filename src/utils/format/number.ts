@@ -1,4 +1,5 @@
-export function range(num: number, min: number, max: number): number {
+/** clamps number within the inclusive lower and upper bounds */
+export function clamp(num: number, min: number, max: number): number {
   return Math.min(Math.max(num, min), max);
 }
 
@@ -36,4 +37,10 @@ export function formatNumber(
   const regExp = allowDot ? /[^-0-9.]/g : /[^-0-9]/g;
 
   return value.replace(regExp, '');
+}
+
+// add num and avoid float number
+export function addNumber(num1: number, num2: number) {
+  const cardinal = 10 ** 10;
+  return Math.round((num1 + num2) * cardinal) / cardinal;
 }
