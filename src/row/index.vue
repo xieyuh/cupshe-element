@@ -19,11 +19,11 @@ import { useChildren } from '../composables/use-children';
 
 const [name, bem] = createNamespace('row');
 
-export const ROW_KEY: InjectionKey<RowProvide> = Symbol(name);
-
 type RowSpaces = { left?: number; right: number }[];
 
 export type RowProvide = { spaces: ComputedRef<RowSpaces> };
+
+export const ROW_KEY: InjectionKey<RowProvide> = Symbol(name);
 
 type RowAlign = 'top' | 'center' | 'bottom';
 
