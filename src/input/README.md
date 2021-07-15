@@ -23,11 +23,7 @@ app.use(Input);
 可以通过 `v-model:value` 双向绑定输入框的值，通过 `placeholder` 设置占位提示文字。。
 
 ```html
-<c-input
-  v-model:value="value"
-  placeholder="your name"
-  :maxlength="10"
-></c-input>
+<c-input v-model:value="value" placeholder="your name"></c-input>
 ```
 
 ### 多行文本
@@ -49,6 +45,6 @@ app.use(Input);
 通过 `readonly` 将输入框设置为只读状态，通过 `disabled` 将输入框设置为禁用状态。
 
 ```html
-<c-input v-model:value="value" placeholder="your name" disabled></c-input>
-<c-input v-model:value="value" placeholder="your name" readonly></c-input>
+<c-input value="禁用" disabled></c-input>
+<c-input value="只读" readonly></c-input>
 ```

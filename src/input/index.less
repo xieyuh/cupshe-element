@@ -1,13 +1,14 @@
+@import './var.less';
 .c-input {
   height: 44px;
-  background: #fff;
+  background: @input-color;
   width: 100%;
-  border: 1px solid #d8d8d8;
-  padding: 0 12px;
+  border: 1px solid @input-border-color;
+  padding: @input-padding;
   font-weight: 300;
   box-sizing: border-box;
-  color: #333;
-  font-size: 14px;
+  color: @input-fs-color;
+  font-size: @font-size-md;
   &__wrapper {
     height: 100%;
   }
@@ -16,6 +17,6 @@
   }
   &--textarea {
     height: auto;
-    padding: 10px 12px;
+    padding: @textarea-padding;
   }
 }
