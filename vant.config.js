@@ -41,6 +41,10 @@ module.exports = {
             path: 'icon',
             title: 'Icon 图标',
           },
+          // {
+          //   path: 'cell',
+          //   title: 'Cell 单元格',
+          // },
           {
             path: 'col',
             title: 'Layout 布局',
@@ -50,10 +54,10 @@ module.exports = {
       {
         title: '表单组件',
         items: [
-          // {
-          //   path: 'checkbox',
-          //   title: 'Checkbox 复选框',
-          // },
+          {
+            path: 'checkbox',
+            title: 'Checkbox 复选框',
+          },
           {
             path: 'rate',
             title: 'Rate 评分',
@@ -70,6 +74,10 @@ module.exports = {
           {
             path: 'currency',
             title: 'Currency 货币',
+          },
+          {
+            path: 'collapse',
+            title: 'Collapse 折叠面板',
           },
         ],
       },
