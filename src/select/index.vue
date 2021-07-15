@@ -15,9 +15,10 @@
       <!-- icon图标 -->
       <span
         :class="[
-          bem('arrow', {
+          bem('arrow'),
+          {
             'is-rotate': showPopup,
-          }),
+          },
         ]"
       >
         <slot name="icon">
@@ -77,6 +78,8 @@ export default {
         type: String,
         default: 'arrow_down',
       },
+      defaultOpen: Boolean,
+      open: Boolean,
     }
   ),
 
@@ -85,7 +88,7 @@ export default {
   setup(props, { emit }) {
     const state = reactive({
       defaultValue: props.value || '',
-      showPopup: false,
+      showPopup: props.defaultOpen || false,
     });
 
     watch(
@@ -111,7 +114,7 @@ export default {
     };
 
     const onClick = (item) => {
-      state.showPopup = false;
+      state.showPopup = props.open || false;
       emit('update:value', item.value);
       emit('change', item);
     };

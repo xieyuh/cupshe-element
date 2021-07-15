@@ -47,7 +47,9 @@
   }
   // 下拉内容体
   &__content {
+    z-index: 99;
     position: absolute;
+    background: #fff;
     top: 43px;
     right: 0;
     left: 0;
@@ -71,13 +73,12 @@
       padding: 0 13px;
       width: 100%;
       line-height: 44px;
-      &:not(:last-child) {
-        border-bottom: 1px solid #d8d8d8;
+      &:hover {
+        background-color: rgba(48, 133, 199, 0.07);
       }
     }
   }
   &__arrow {
-    border-left: 1px solid #d8d8d8;
     width: 44px;
     height: 44px;
     display: flex;
@@ -102,6 +103,9 @@
         background: #fafafa;
         // 斑马线风格
         li {
+          &:not(:last-child) {
+            border-bottom: 1px solid #d8d8d8;
+          }
           &:hover {
             background: #f2f2f2;
           }
@@ -109,6 +113,11 @@
             font-weight: bold;
           }
         }
+      }
+      &__arrow {
+        border-left: 1px solid #d8d8d8;
+        width: 44px;
+        height: 44px;
       }
     }
   }

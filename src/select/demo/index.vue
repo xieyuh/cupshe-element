@@ -18,6 +18,23 @@
       ></c-select>
     </div>
   </demo-block>
+  <demo-block title="自定义图标">
+    <div class="demo-input-row">
+      <c-select
+        v-model:value="value"
+        placeholder="icon name"
+        :options="option"
+        suffix-icon="down_full"
+      ></c-select>
+    </div>
+    <div class="demo-input-row">
+      <c-select v-model:value="value" placeholder="slot icon" :options="option">
+        <template #icon>
+          <c-icon name="down_full"></c-icon>
+        </template>
+      </c-select>
+    </div>
+  </demo-block>
 </template>
 <script>
 import { toRefs, reactive } from '@vue/reactivity';
@@ -46,7 +63,7 @@ export default {
 <style lang="less">
 @import '../../style/var';
 
-.demo-input {
+.demo-select {
   background: @white;
 
   .van-doc-demo-block {
