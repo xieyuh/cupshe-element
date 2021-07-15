@@ -15,7 +15,7 @@
 <script lang="ts">
 import { computed, ComputedRef, InjectionKey, PropType } from 'vue';
 import { createNamespace, truthProp } from '../utils';
-import { useChildren } from '../composables/use-children';
+import { useChildren } from '../composables';
 
 const [name, bem] = createNamespace('row');
 

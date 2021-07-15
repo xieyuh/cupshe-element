@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { PropType, CSSProperties } from 'vue';
-import { useRoute, routeProps } from '../composables/use-route';
+import { useRoute, routeProps } from '../composables';
 import {
   createNamespace,
   extend,

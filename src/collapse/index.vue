@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { InjectionKey, PropType } from 'vue';
-import { useChildren } from '../composables/use-children';
+import { useChildren } from '../composables';
 import { BORDER_TOP_BOTTOM } from '../utils/constant';
 import { createNamespace, truthProp } from '../utils';
 

@@ -10,7 +10,7 @@
 <script lang="ts">
 import { computed } from 'vue';
 import { createNamespace } from '../utils';
-import { useParent } from '../composables/use-parent';
+import { useParent } from '../composables';
 import { ROW_KEY } from '../row/index.vue';
 
 const [name, bem] = createNamespace('col');
@@ -31,7 +31,7 @@ export default {
 
     const style = computed(() => {
       if (!parent) {
-        return;
+        return {};
       }
 
       const { spaces } = parent;
@@ -43,6 +43,8 @@ export default {
           paddingRight: right ? `${right}px` : null,
         };
       }
+
+      return {};
     });
 
     return {

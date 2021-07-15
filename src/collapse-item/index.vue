@@ -45,16 +45,16 @@
 import { computed, nextTick, ref, watch } from 'vue';
 import { COLLAPSE_KEY } from '../collapse/index.vue';
 import { cellProps } from '../cell/index.vue';
-import { useParent } from '../composables/use-parent';
+import { useParent, useExpose, raf, doubleRaf } from '../composables';
 import LazyRender from '../composables/lazy-render.vue';
 import { createNamespace, extend, pick, truthProp } from '../utils';
-import { raf, doubleRaf } from '../composables/utils';
-import { useExpose } from '../composables/use-expose';
 
 const [name, bem] = createNamespace('collapse-item');
 
 export default {
   name,
+
+  components: { LazyRender },
 
   props: extend({}, cellProps, {
     name: [String, Number],
@@ -153,6 +153,5 @@ export default {
       onTransitionEnd,
     };
   },
-  components: { LazyRender },
 };
 </script>
