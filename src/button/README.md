@@ -85,7 +85,7 @@ app.use(Button);
 
 ### 自定义颜色
 
-通过 `color` 和 `` 属性可以自定义按钮的颜色。
+通过 `color` 属性可以自定义按钮的颜色。
 
 ```html
 <c-button color="#7232dd">单色按钮</c-button>
@@ -97,7 +97,7 @@ app.use(Button);
 
 ### 渲染为其他标签
 
-通过 `color` 和 `` 属性可以自定义按钮的颜色。
+使用 `tag` 属性渲染为 `a` 标签， 通过 `url` 属性进行 URL 跳转，或通过 `to` 属性进行路由跳转。
 
 ```html
 <c-button tag="a" url="https://baidu.com">外部链接</c-button>
