@@ -41,6 +41,14 @@ module.exports = {
             path: 'icon',
             title: 'Icon 图标',
           },
+          {
+            path: 'popup',
+            title: 'Popup 弹出层',
+          },
+          {
+            path: 'style',
+            title: 'Style 内置样式',
+          },
           // {
           //   path: 'cell',
           //   title: 'Cell 单元格',
@@ -78,6 +86,15 @@ module.exports = {
           {
             path: 'collapse',
             title: 'Collapse 折叠面板',
+          },
+        ],
+      },
+      {
+        title: '反馈组件',
+        items: [
+          {
+            path: 'overlay',
+            title: 'Overlay 遮罩层',
           },
         ],
       },
