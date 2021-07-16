@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/font.less';
 
 .c-button {
   position: relative;
@@ -17,6 +18,7 @@
   letter-spacing: 1px;
   -webkit-appearance: none;
   z-index: 1;
+  .muli-bold();
 
   &::before {
     position: absolute;
@@ -89,20 +91,37 @@
   }
 
   &--large {
-    padding: @button-padding;
-    height: @button-large-height;
-    font-size: @button-large-font-size;
+    padding: 13px 20px;
+
+    @media (min-width: 768px) {
+      height: 48px;
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      height: 44px;
+      font-size: 14px;
+    }
   }
 
   &--normal {
-    padding: @button-padding;
-    font-size: @button-normal-font-size;
+    padding: 13px 20px;
+
+    @media (min-width: 768px) {
+      height: 44px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      height: 36px;
+      font-size: 12px;
+    }
   }
 
   &--small {
-    height: @button-small-height;
-    padding: @button-padding;
-    font-size: @button-small-font-size;
+    padding: 6px 20px;
+    height: 28px;
+    font-size: 12px;
   }
 
   &__loading {

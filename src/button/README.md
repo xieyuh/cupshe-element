@@ -30,7 +30,6 @@ app.use(Button);
 <c-button type="info">信息按钮</c-button>
 ```
 
-
 ### 朴素按钮
 
 通过 `ghost` 属性将按钮设置为朴素按钮，朴素按钮的文字为按钮颜色，背景为透明。
@@ -49,7 +48,7 @@ app.use(Button);
 
 ### 动画效果
 
-通过 `cover` 设置按钮hover动画。目前支持 `type` 为 `primary` 和 `default` 的按钮。
+通过 `cover` 设置按钮 hover 动画。目前支持 `type` 为 `primary` 和 `default` 的按钮。
 
 ```html
 <c-button type="primary" cover>主要按钮</c-button>
@@ -96,25 +95,34 @@ app.use(Button);
 </c-button>
 ```
 
+### 渲染为其他标签
+
+通过 `color` 和 `` 属性可以自定义按钮的颜色。
+
+```html
+<c-button tag="a" url="https://baidu.com">主要按钮</c-button>
+<c-button tag="a" to="/home">回到首页</c-button>
+```
+
 ## API
 
 ### Props
 
-| 参数          | 说明                                                  | 类型      | 默认值     |
-| ------------- | ----------------------------------------------------- | --------- | ---------- |
-| type          | 类型，可选值为 `primary` `success` `warning` `info` | _string_  | `default`  |
-| size          | 尺寸，可选值为 `large` `small`                       | _string_  | `normal`   |
-| color         | 按钮颜色，支持传入 `linear-gradient` 渐变色           | _string_  | -          |
-| text-color    | 按钮文字颜色                                        | _string_  | -          |
-| icon          | 左侧[图标名称](#****/icon)或图片链接                  | _string_  | -          |
-| native-type   | 原生 button 标签的 type 属性                          | _string_  | `button`   |
-| block         | 是否为块级元素                                        | _boolean_ | `false`    |
-| ghost         | 是否为透明按钮                                        | _boolean_ | `false`    |
-| disabled      | 是否禁用按钮                                          | _boolean_ | `false`    |
-<!-- | loading       | 是否显示为加载状态                                    | _boolean_ | `false`    |
-| loading-text  | 加载状态提示文字                                      | _string_  | -          |
-| loading-type  | [加载图标类型](#/zh-CN/loading)，可选值为 `spinner`   | _string_  | `circular` |
-| loading-size  | 加载图标大小                                          | _string_  | `20px`     | -->
+| 参数         | 说明                                                | 类型               | 默认值     |
+| ------------ | --------------------------------------------------- | ------------------ | ---------- |
+| type         | 类型，可选值为 `primary` `success` `warning` `info` | _string_           | `default`  |
+| size         | 尺寸，可选值为 `large` `small`                      | _string_           | `normal`   |
+| color        | 按钮颜色，支持传入 `linear-gradient` 渐变色         | _string_           | -          |
+| text-color   | 按钮文字颜色                                        | _string_           | -          |
+| icon         | 左侧[图标名称](#****/icon)或图片链接                | _string_           | -          |
+| native-type  | 原生 button 标签的 type 属性                        | _string_           | `button`   |
+| block        | 是否为块级元素                                      | _boolean_          | `false`    |
+| ghost        | 是否为透明按钮                                      | _boolean_          | `false`    |
+| disabled     | 是否禁用按钮                                        | _boolean_          | `false`    |
+| <!--         | loading                                             | 是否显示为加载状态 | _boolean_  | `false` |
+| loading-text | 加载状态提示文字                                    | _string_           | -          |
+| loading-type | [加载图标类型](#/zh-CN/loading)，可选值为 `spinner` | _string_           | `circular` |
+| loading-size | 加载图标大小                                        | _string_           | `20px`     | --> |
 
 ### Events
 

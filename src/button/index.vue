@@ -1,5 +1,6 @@
 <template>
-  <button
+  <component
+    :is="tag"
     :type="nativeType"
     :class="classes"
     :disabled="disabled"
@@ -17,12 +18,12 @@
         <slot />
       </span>
     </div>
-  </button>
+  </component>
 </template>
 
 <script lang="ts">
 import { PropType, ButtonHTMLAttributes, CSSProperties } from 'vue';
-import { useRoute, routeProps } from '../composables/use-route';
+import { useRoute, routeProps } from '../composables';
 import { createNamespace, extend } from '../utils';
 
 const [name, bem] = createNamespace('button');
@@ -43,7 +44,7 @@ export default {
     disabled: Boolean,
     cover: Boolean,
     tag: {
-      type: String as PropType<keyof HTMLElementTagNameMap>,
+      type: String,
       default: 'button',
     },
     type: {
