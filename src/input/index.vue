@@ -54,6 +54,10 @@
 import { PropType, reactive, toRefs, watch } from 'vue';
 import { createNamespace, extend } from '../utils';
 
+import { useExpose, useParent } from '../composables';
+
+import { FORMITEM_KEY } from '../form-item/index.vue';
+
 const [name, bem] = createNamespace('input');
 
 export type inputType = 'text' | 'textarea';
@@ -88,19 +92,27 @@ export default {
   emits: ['pressEnter', 'change', 'blur', 'update:value'],
 
   setup(props, { emit }) {
+    // 获取父组件
+    const { parent, index } = useParent(FORMITEM_KEY);
+
+    console.log('item input', parent, index);
+
     const state = reactive({
       inputValue: props.value || props.defaultValue,
     });
+
     watch(
       () => props.value,
       (val) => {
         state.inputValue = val;
       }
     );
+
     watch(
       () => state.inputValue,
       (val) => {
         emit('update:value', val);
+        parent && parent.validateWithTrigger('change');
       }
     );
 
@@ -119,7 +131,13 @@ export default {
     };
     const onBlur = (event) => {
       emit('blur', event);
+      parent && parent.validateWithTrigger('blur');
     };
+
+    useExpose({
+      onBlur,
+      onChange,
+    });
 
     return {
       bem,

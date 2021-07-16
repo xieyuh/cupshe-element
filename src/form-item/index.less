@@ -1,0 +1,27 @@
+.c-form-item {
+  &__label {
+    &--required {
+      &::before {
+        display: inline-block;
+        margin-right: 4px;
+        color: #ff4d4f;
+        font-size: 14px;
+        line-height: 1;
+        content: '*';
+      }
+    }
+  }
+  &.is-error {
+    .c-form-item {
+      &__control-input {
+        border: 1px solid #fa5050;
+      }
+      &__error {
+        font-size: 12px;
+        font-weight: 300;
+        color: #e61717;
+        line-height: 15px;
+      }
+    }
+  }
+}

@@ -3,6 +3,18 @@
 * {
   box-sizing: border-box;
 }
+.alignCenter {
+  display: flex;
+  align-items: center;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex1 {
+  flex: 1;
+}
 @keyframes slide-down {
   0% {
     transform: scale(1, 0);
@@ -17,48 +29,47 @@
   margin: 0;
   padding: 0;
   color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
+  font-size: @font-size-md;
   list-style: none;
   position: relative;
   display: flex;
   cursor: pointer;
-  height: 44px;
-  background: #fff;
-  border: 1px solid #d8d8d8;
+  height: @select-height;
+  background: @white;
+  border: 1px solid @gray-9;
   width: 100%;
   &:hover {
-    border-color: #333;
+    border-color: @black-1;
   }
   &__search {
-    padding-right: 44px;
+    padding-right: @select-height;
   }
   &__search,
   &__selector {
-    flex: 1;
-    display: flex;
-    align-items: center;
+    .flex1;
+    .alignCenter;
   }
   &__item {
     padding-left: 12px;
-    flex: 1;
+    .flex1;
   }
   &__placeholder {
-    color: #999;
+    color: @gray-10;
   }
   // 下拉内容体
   &__content {
     z-index: 99;
     position: absolute;
-    background: #fff;
+    background: @white;
     top: 43px;
     right: 0;
     left: 0;
-    color: #333;
+    color: @black-1;
     font-size: 14px;
     overflow: auto;
     overflow-x: hidden;
     max-height: 0;
-    border: 1px solid #d8d8d8;
+    border: 1px solid @gray-9;
     border-top: 0;
     transition: max-height 0.3s ease-out;
     &.is-open {
@@ -67,26 +78,24 @@
       transition: max-height 0.3s ease-in;
       transform-origin: 50% 0;
     }
-    // 斑马线风格
+    // 标准
     li {
-      height: 44px;
+      height: @select-height;
       padding: 0 13px;
       width: 100%;
-      line-height: 44px;
+      line-height: @select-height;
       &:hover {
-        background-color: rgba(48, 133, 199, 0.07);
+        background-color: @hover-background;
       }
     }
   }
   &__arrow {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: @select-height;
+    height: @select-height;
     position: absolute;
     top: 0;
     right: 0;
+    .flex-center;
     .c-icon {
       transition: all 0.3s;
     }
@@ -104,10 +113,10 @@
         // 斑马线风格
         li {
           &:not(:last-child) {
-            border-bottom: 1px solid #d8d8d8;
+            border-bottom: 1px solid @gray-9;
           }
           &:hover {
-            background: #f2f2f2;
+            background: @zebra-hover-background;
           }
           &.active {
             font-weight: bold;
@@ -115,9 +124,9 @@
         }
       }
       &__arrow {
-        border-left: 1px solid #d8d8d8;
-        width: 44px;
-        height: 44px;
+        border-left: 1px solid @gray-9;
+        width: @select-height;
+        height: @select-height;
       }
     }
   }

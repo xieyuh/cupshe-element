@@ -74,6 +74,10 @@ module.exports = {
             path: 'select',
             title: 'Select 选择框',
           },
+          {
+            path: 'form',
+            title: 'Form 表单',
+          },
         ],
       },
       {

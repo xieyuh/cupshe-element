@@ -52,36 +52,34 @@
 
 <script lang="ts">
 import { computed, onMounted, PropType, reactive, toRefs, watch } from 'vue';
-import { createNamespace, extend } from '../utils';
+import { createNamespace } from '../utils';
 
 const [name, bem] = createNamespace('select');
 // 下拉选择风格
 export type type = 'default ' | 'zebra';
 
+const props = {
+  value: [String, Number],
+  placeholder: String,
+  options: {
+    type: Array,
+    default: () => [],
+  },
+  type: {
+    type: String as PropType<type>,
+    default: 'default',
+  },
+  suffixIcon: {
+    type: String,
+    default: 'arrow_down',
+  },
+  defaultOpen: Boolean,
+  open: Boolean,
+};
 export default {
   name,
 
-  props: extend(
-    {},
-    {
-      value: [String, Number],
-      placeholder: String,
-      options: {
-        type: Array,
-        default: () => [],
-      },
-      type: {
-        type: String as PropType<type>,
-        default: 'default',
-      },
-      suffixIcon: {
-        type: String,
-        default: 'arrow_down',
-      },
-      defaultOpen: Boolean,
-      open: Boolean,
-    }
-  ),
+  props,
 
   emits: ['change', 'update:value'],
 
