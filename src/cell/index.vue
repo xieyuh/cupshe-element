@@ -9,7 +9,7 @@
       <slot name="icon" />
     </template>
     <template v-else-if="icon">
-      <c-icon name="icon" :class="bem('left-icon')" />
+      <c-icon :name="icon" :class="bem('left-icon')" />
     </template>
     <template v-if="showTitle">
       <div :class="[bem('title'), titleClass]" :style="titleStyle">
@@ -40,13 +40,22 @@
         </template>
       </div>
     </template>
+    <template v-if="$slots['right-icon']">
+      <slot name="right-icon" />
+    </template>
+    <template v-else-if="isLink">
+      <c-icon
+        :class="bem('right-icon')"
+        :name="arrowDirection ? `arrow_${arrowDirection}` : `arrow_right`"
+      ></c-icon>
+    </template>
     <slot name="extra" />
   </div>
 </template>
 
 <script lang="ts">
 import { PropType, CSSProperties } from 'vue';
-import { useRoute, routeProps } from '../composables/use-route';
+import { useRoute, routeProps } from '../composables';
 import {
   createNamespace,
   extend,

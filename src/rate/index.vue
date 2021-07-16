@@ -44,8 +44,7 @@
 <script lang="ts">
 import { computed, CSSProperties } from 'vue';
 import { addUnit, createNamespace } from '../utils';
-import { useRefs } from '../composables/use-refs';
-import { useLinkField } from '../composables/use-link-field';
+import { useRefs, useLinkField } from '../composables';
 
 type RateStatus = 'full' | 'half' | 'void';
 

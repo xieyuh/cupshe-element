@@ -168,7 +168,7 @@ export default {
       const input = event.target as HTMLInputElement;
       const { value } = input;
 
-      let formatted = formatNumber(String(value));
+      const formatted = formatNumber(String(value));
 
       if (props.beforeChange) {
         input.value = String(current.value);

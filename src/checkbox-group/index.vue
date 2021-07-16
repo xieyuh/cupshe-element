@@ -8,9 +8,7 @@
 import { PropType, watch, InjectionKey, ExtractPropTypes } from 'vue';
 import { CheckerParent } from '../checkbox/checker.vue';
 import { createNamespace } from '../utils';
-import { useChildren } from '../composables/use-children';
-import { useExpose } from '../composables/use-expose';
-import { useLinkField } from '../composables/use-link-field';
+import { useChildren, useExpose, useLinkField } from '../composables';
 
 const [name, bem] = createNamespace('checkbox-group');
 
