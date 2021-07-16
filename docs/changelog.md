@@ -1,15 +1,23 @@
 # 更新日志
 
-
 ### 介绍
 
 cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
-
 ## 更新内容
 
-### v1.0.0
+### v1.1.0
 
+**New Component**
+
+- 新增 Style 内置样式
+- 新增 Overlay 遮罩层组件
+
+**Bug Fixes**
+
+- 修复 Button 组件样式不符合设计规范的问题
+
+### v1.0.0
 
 **New Component**
 

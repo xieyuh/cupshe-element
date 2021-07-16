@@ -51,8 +51,8 @@
   </demo-block>
 
   <demo-block title="渲染为其他标签">
-    <c-button tag="a" url="https://baidu.com">主要按钮</c-button>
-    <c-button tag="a" to="/home">回到首页</c-button>
+    <c-button tag="a" url="https://baidu.com">外部链接</c-button>
+    <c-button tag="a" to="/home">内部路由</c-button>
   </demo-block>
 </template>
 

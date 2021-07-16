@@ -62,10 +62,10 @@ module.exports = {
       {
         title: '表单组件',
         items: [
-          {
-            path: 'checkbox',
-            title: 'Checkbox 复选框',
-          },
+          // {
+          //   path: 'checkbox',
+          //   title: 'Checkbox 复选框',
+          // },
           {
             path: 'rate',
             title: 'Rate 评分',
@@ -83,10 +83,10 @@ module.exports = {
             path: 'currency',
             title: 'Currency 货币',
           },
-          {
-            path: 'collapse',
-            title: 'Collapse 折叠面板',
-          },
+          // {
+          //   path: 'collapse',
+          //   title: 'Collapse 折叠面板',
+          // },
         ],
       },
       {

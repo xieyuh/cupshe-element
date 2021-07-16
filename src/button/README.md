@@ -100,8 +100,8 @@ app.use(Button);
 通过 `color` 和 `` 属性可以自定义按钮的颜色。
 
 ```html
-<c-button tag="a" url="https://baidu.com">主要按钮</c-button>
-<c-button tag="a" to="/home">回到首页</c-button>
+<c-button tag="a" url="https://baidu.com">外部链接</c-button>
+<c-button tag="a" to="/home">内部路由</c-button>
 ```
 
 ## API
