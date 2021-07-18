@@ -92,7 +92,7 @@ export default {
   emits: ['pressEnter', 'change', 'blur', 'update:value'],
 
   setup(props, { emit }) {
-    // 获取父组件
+    // 获取Form item父组件
     const { parent, index } = useParent(FORMITEM_KEY);
 
     console.log('item input', parent, index);

@@ -26,7 +26,14 @@
       :offset="wrapperCol.offset"
       :class="bem('control')"
     >
-      <div :class="bem('control-input')">
+      <div
+        :class="[
+          bem('control-input'),
+          {
+            'has-error': validateFailed,
+          },
+        ]"
+      >
         <slot></slot>
       </div>
       <div :class="bem('error')" v-if="validateFailed">
@@ -69,6 +76,8 @@ const props = {
   rules: [Object, Array],
   label: String,
   required: Boolean,
+  labelCol: Object,
+  wrapperCol: Object,
   validateStatus: String as PropType<ValidateStatusType>,
   labelAlign: {
     type: String as PropType<labelAlignType>,
@@ -92,7 +101,12 @@ export default {
     // 获取父组件
     const { parent } = useParent(FORM_KEY);
 
-    const { linkChildren } = useChildren(FORMITEM_KEY);
+    const { linkChildren, children } = useChildren(FORMITEM_KEY);
+
+    //  item 布局
+    const labelCol = props.labelCol || parent.props.labelCol;
+
+    const wrapperCol = props.wrapperCol || parent.props.wrapperCol;
 
     const state = reactive({
       focused: false,
@@ -164,6 +178,7 @@ export default {
           rulesMap.push({
             required: props.required,
             message: `${props.name} is required`,
+            trigger: 'blur',
           });
         }
 
@@ -187,6 +202,7 @@ export default {
       });
     // 校验trigger
     const validateWithTrigger = (trigger) => {
+      console.log(children);
       const newRules =
         props.rules || (parent.props.rules && parent.props.rules[props.name]);
       if (parent && newRules) {
@@ -216,8 +232,8 @@ export default {
       formItemRef,
       model: parent.props.model,
       ...toRefs(state),
-      labelCol: parent.props.labelCol,
-      wrapperCol: parent.props.wrapperCol,
+      labelCol,
+      wrapperCol,
     };
   },
 };

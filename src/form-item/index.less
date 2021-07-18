@@ -1,5 +1,7 @@
 .c-form-item {
+  margin-bottom: 16px;
   &__label {
+    word-break: break-all;
     &--required {
       &::before {
         display: inline-block;
@@ -13,15 +15,22 @@
   }
   &.is-error {
     .c-form-item {
-      &__control-input {
-        border: 1px solid #fa5050;
-      }
+      // &__control-input {
+      //   border: 1px solid #fa5050;
+      // }
       &__error {
         font-size: 12px;
         font-weight: 300;
         color: #e61717;
         line-height: 15px;
       }
+    }
+  }
+  .has-error {
+    .c-select,
+    .c-input,
+    .c-input:hover {
+      border-color: #fa5050;
     }
   }
 }

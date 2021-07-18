@@ -119,7 +119,7 @@ export default {
 
         return form;
       }, {} as Record<string, unknown>);
-    //  校验成功
+    //  提交校验成功
     const submit = () => {
       const values = getValues();
 

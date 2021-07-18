@@ -54,6 +54,10 @@
 import { computed, onMounted, PropType, reactive, toRefs, watch } from 'vue';
 import { createNamespace } from '../utils';
 
+import { useParent } from '../composables';
+
+import { FORMITEM_KEY } from '../form-item/index.vue';
+
 const [name, bem] = createNamespace('select');
 // 下拉选择风格
 export type type = 'default ' | 'zebra';
@@ -84,6 +88,9 @@ export default {
   emits: ['change', 'update:value'],
 
   setup(props, { emit }) {
+    // 获取Form item父组件
+    const { parent } = useParent(FORMITEM_KEY);
+
     const state = reactive({
       defaultValue: props.value || '',
       showPopup: props.defaultOpen || false,
@@ -99,6 +106,7 @@ export default {
     const showPlaceholder = computed(() => {
       return props.placeholder && !props.value;
     });
+
     // 计算显示选中的label
     const selectLabel = computed(() => {
       const selectItem = props.options.find((item) => {
@@ -106,6 +114,7 @@ export default {
       });
       return selectItem ? selectItem.label : '';
     });
+
     // 下拉切换
     const toggle = () => {
       state.showPopup = !state.showPopup;
@@ -113,8 +122,12 @@ export default {
 
     const onClick = (item) => {
       state.showPopup = props.open || false;
+
       emit('update:value', item.value);
+
       emit('change', item);
+
+      parent && parent.validateWithTrigger('change');
     };
     // 区域以外的点击关闭select
     onMounted(() => {
