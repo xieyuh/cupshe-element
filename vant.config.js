@@ -74,6 +74,18 @@ module.exports = {
             path: 'stepper',
             title: 'Stepper 步进器',
           },
+          {
+            path: 'input',
+            title: 'Input 输入框',
+          },
+          {
+            path: 'select',
+            title: 'Select 选择框',
+          },
+          {
+            path: 'form',
+            title: 'Form 表单',
+          },
         ],
       },
       {

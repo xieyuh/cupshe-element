@@ -1,0 +1,22 @@
+@import './var.less';
+.c-input {
+  height: 44px;
+  background: @input-color;
+  width: 100%;
+  border: 1px solid @input-border-color;
+  padding: @input-padding;
+  font-weight: 300;
+  box-sizing: border-box;
+  color: @input-fs-color;
+  font-size: @font-size-md;
+  &__wrapper {
+    height: 100%;
+  }
+  &::-webkit-input-placeholder {
+    color: #999;
+  }
+  &--textarea {
+    height: auto;
+    padding: @textarea-padding;
+  }
+}
