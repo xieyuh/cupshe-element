@@ -77,7 +77,7 @@ const inputProps = {
     type: String as PropType<inputType>,
     default: 'text',
   },
-  value: String,
+  modelValue: String,
   allowClear: Boolean,
 };
 
@@ -98,11 +98,11 @@ export default {
     console.log('item input', parent, index);
 
     const state = reactive({
-      inputValue: props.value || props.defaultValue,
+      inputValue: props.modelValue || props.defaultValue,
     });
 
     watch(
-      () => props.value,
+      () => props.modelValue,
       (val) => {
         state.inputValue = val;
       }
