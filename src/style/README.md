@@ -2,7 +2,7 @@
 
 ### 介绍
 
-cupshe-element 中默认包含了一些常用样式，可以直接通过 class 的方式使用。
+cupshe-element 中默认包含了一些常用样式，可以直接通过 class 的方式使用。[PC 端预览](/mobile.html#/style)
 
 ### 内置字体
 

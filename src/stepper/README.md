@@ -2,7 +2,7 @@
 
 ### 介绍
 
-步进器由增加按钮、减少按钮和输入框组成，用于在一定范围内输入、调整数字。
+步进器由增加按钮、减少按钮和输入框组成，用于在一定范围内输入、调整数字。[PC 端预览](/mobile.html#/stepper)
 
 ### 引入
 
@@ -105,20 +105,20 @@ export default {
 
 ### Props
 
-| 参数           | 说明                                                              | 类型                            | 默认值  |
-| -------------- | ----------------------------------------------------------------- | ------------------------------- | ------- |
-| v-model        | 当前输入的值                                                      | _number \| string_              | -       |
-| min            | 最小值                                                            | _number \| string_              | `1`     |
-| max            | 最大值                                                            | _number \| string_              | -       |
-| default-value  | 初始值，当 v-model 为空时生效                                     | _number \| string_              | `1`     |
-| step           | 步长，每次点击时改变的值                                          | _number \| string_              | `1`     |
-| name           | 标识符，可以在 `change` 事件回调参数中获取                        | _number \| string_              | -       |
-| input-width    | 输入框宽度，默认单位为 `px`                                       | _number \| string_              | `32px`  |
-| button-size    | 按钮大小以及输入框高度，默认单位为 `px`                           | _number \| string_              | `28px`  |
-| placeholder    | 输入框占位提示文字                                                | _string_                        | -       |
-| disabled       | 是否禁用步进器                                                    | _boolean_                       | `false` |
-| disable-input  | 是否禁用输入框                                                    | _boolean_                       | `false` |
-| before-change  | 输入值变化前的回调函数，返回 `false` 可阻止输入，支持返回 Promise | _(value) => boolean \| Promise_ | `false` |
+| 参数          | 说明                                                              | 类型                            | 默认值  |
+| ------------- | ----------------------------------------------------------------- | ------------------------------- | ------- |
+| v-model       | 当前输入的值                                                      | _number \| string_              | -       |
+| min           | 最小值                                                            | _number \| string_              | `1`     |
+| max           | 最大值                                                            | _number \| string_              | -       |
+| default-value | 初始值，当 v-model 为空时生效                                     | _number \| string_              | `1`     |
+| step          | 步长，每次点击时改变的值                                          | _number \| string_              | `1`     |
+| name          | 标识符，可以在 `change` 事件回调参数中获取                        | _number \| string_              | -       |
+| input-width   | 输入框宽度，默认单位为 `px`                                       | _number \| string_              | `32px`  |
+| button-size   | 按钮大小以及输入框高度，默认单位为 `px`                           | _number \| string_              | `28px`  |
+| placeholder   | 输入框占位提示文字                                                | _string_                        | -       |
+| disabled      | 是否禁用步进器                                                    | _boolean_                       | `false` |
+| disable-input | 是否禁用输入框                                                    | _boolean_                       | `false` |
+| before-change | 输入值变化前的回调函数，返回 `false` 可阻止输入，支持返回 Promise | _(value) => boolean \| Promise_ | `false` |
 
 ### Events
 

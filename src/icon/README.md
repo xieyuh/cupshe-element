@@ -2,7 +2,7 @@
 
 ### 介绍
 
-基于字体的图标集，可以通过 Icon 组件使用，也可以在其他组件中通过 `icon` 属性引用。图标库存放在 [iconfont](https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.13&manage_type=myprojects&projectId=2670671&keyword=&project_type=&page=) 上，使用前联系设计开通 iconfont 图标库权限。
+基于字体的图标集，可以通过 Icon 组件使用，也可以在其他组件中通过 `icon` 属性引用。图标库存放在 [iconfont](https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.13&manage_type=myprojects&projectId=2670671&keyword=&project_type=&page=) 上，使用前联系设计开通 iconfont 图标库权限。[PC 端预览](/mobile.html#/icon)
 
 ### 引入
 
@@ -53,11 +53,11 @@ app.use(Icon);
 
 ### Props
 
-| 参数         | 说明                                       | 类型               | 默认值     |
-| ------------ | ------------------------------------------ | ------------------ | ---------- |
-| name         | 图标名称或图片链接                         | _string_           | -          |
-| color        | 图标颜色                                   | _string_           | `inherit`  |
-| size         | 图标大小，如 `20px` `2em`，默认单位为 `px` | _number \| string_ | `inherit`  |
+| 参数  | 说明                                       | 类型               | 默认值    |
+| ----- | ------------------------------------------ | ------------------ | --------- |
+| name  | 图标名称或图片链接                         | _string_           | -         |
+| color | 图标颜色                                   | _string_           | `inherit` |
+| size  | 图标大小，如 `20px` `2em`，默认单位为 `px` | _number \| string_ | `inherit` |
 
 ### Events
 
