@@ -9,11 +9,11 @@
         :wrapper-col="wrapperCol"
       >
         <c-form-item name="name" label="Activity name" required>
-          <c-input v-model:value="formModel.name"></c-input>
+          <c-input v-model="formModel.name"></c-input>
         </c-form-item>
         <c-form-item name="region" label="Activity zone">
           <c-select
-            v-model:value="formModel.region"
+            v-model="formModel.region"
             placeholder="please select your zone"
             :options="selectOption"
           ></c-select>

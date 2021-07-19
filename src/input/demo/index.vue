@@ -2,7 +2,7 @@
   <demo-block title="基本用法">
     <div class="demo-input-row">
       <c-input
-        v-model:value="value"
+        v-model="value"
         placeholder="your name"
         :maxlength="10"
       ></c-input>
@@ -11,7 +11,7 @@
   <demo-block title="多行文本">
     <div class="demo-input-row">
       <c-input
-        v-model:value="value"
+        v-model="value1"
         type="textarea"
         placeholder="your name"
         :rows="3"
@@ -21,10 +21,10 @@
   </demo-block>
   <demo-block title="禁用输入框">
     <div class="demo-input-row">
-      <c-input value="禁用" disabled></c-input>
+      <c-input default-value="禁用" disabled></c-input>
     </div>
     <div class="demo-input-row">
-      <c-input value="只读" readonly></c-input>
+      <c-input default-value="只读" readonly></c-input>
     </div>
   </demo-block>
 </template>
@@ -35,6 +35,7 @@ export default {
   setup() {
     const state = reactive({
       value: '',
+      value1: '',
     });
     return {
       ...toRefs(state),

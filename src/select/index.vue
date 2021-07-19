@@ -63,7 +63,7 @@ const [name, bem] = createNamespace('select');
 export type type = 'default ' | 'zebra';
 
 const props = {
-  value: [String, Number],
+  modelValue: [String, Number],
   placeholder: String,
   options: {
     type: Array,
@@ -92,19 +92,19 @@ export default {
     const { parent } = useParent(FORMITEM_KEY);
 
     const state = reactive({
-      defaultValue: props.value || '',
+      defaultValue: props.modelValue || '',
       showPopup: props.defaultOpen || false,
     });
 
     watch(
-      () => props.value,
+      () => props.modelValue,
       (val) => {
         state.defaultValue = val;
       }
     );
     // 是否显示placeholder
     const showPlaceholder = computed(() => {
-      return props.placeholder && !props.value;
+      return props.placeholder && !props.modelValue;
     });
 
     // 计算显示选中的label

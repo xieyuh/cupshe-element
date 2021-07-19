@@ -2,7 +2,7 @@
   <demo-block title="基本用法">
     <div class="demo-input-row">
       <c-select
-        v-model:value="value"
+        v-model="value"
         placeholder="please select"
         :options="option"
       ></c-select>
@@ -11,7 +11,7 @@
   <demo-block title="斑马线风格">
     <div class="demo-input-row">
       <c-select
-        v-model:value="value"
+        v-model="value1"
         placeholder="please select"
         :options="option"
         type="zebra"
@@ -21,14 +21,14 @@
   <demo-block title="自定义图标">
     <div class="demo-input-row">
       <c-select
-        v-model:value="value"
+        v-model="value2"
         placeholder="icon name"
         :options="option"
         suffix-icon="down_full"
       ></c-select>
     </div>
     <div class="demo-input-row">
-      <c-select v-model:value="value" placeholder="slot icon" :options="option">
+      <c-select v-model="value3" placeholder="slot icon" :options="option">
         <template #icon>
           <c-icon name="down_full"></c-icon>
         </template>
@@ -43,6 +43,9 @@ export default {
   setup() {
     const state = reactive({
       value: '',
+      value1: '',
+      value2: '',
+      value3: '',
       option: [
         {
           label: 111,
