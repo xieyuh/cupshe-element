@@ -95,10 +95,10 @@ module.exports = {
             path: 'currency',
             title: 'Currency 货币',
           },
-          // {
-          //   path: 'collapse',
-          //   title: 'Collapse 折叠面板',
-          // },
+          {
+            path: 'collapse',
+            title: 'Collapse 折叠面板',
+          },
         ],
       },
       {

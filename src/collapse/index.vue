@@ -1,5 +1,12 @@
 <template>
-  <div :class="[bem(), { [BORDER_TOP_BOTTOM]: border }]">
+  <div
+    :class="[
+      bem({
+        [type]: type,
+      }),
+      { [BORDER_TOP_BOTTOM]: border },
+    ]"
+  >
     <slot />
   </div>
 </template>
@@ -26,6 +33,7 @@ function validateModelValue(
 export type CollapseProvide = {
   toggle: (name: number | string, expanded: boolean) => void;
   isExpanded: (name: number | string) => boolean;
+  type: string;
 };
 
 const [name, bem] = createNamespace('collapse');
@@ -38,6 +46,8 @@ export default {
   props: {
     border: truthProp,
     accordion: Boolean,
+    // 业务场景类型
+    type: String,
     modelValue: {
       type: [String, Number, Array] as PropType<
         string | number | Array<string | number>
@@ -80,7 +90,7 @@ export default {
         : (props.modelValue as Array<number | string>).includes(name);
     };
 
-    linkChildren({ toggle, isExpanded });
+    linkChildren({ toggle, isExpanded, type: props.type });
 
     return {
       bem,

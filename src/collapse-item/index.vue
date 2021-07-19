@@ -25,6 +25,10 @@
       <template v-if="$slots['right-icon']" #right-icon>
         <slot name="right-icon" />
       </template>
+      <template v-else-if="type === 'zebra'" #right-icon>
+        <c-icon name="minus" v-if="expanded"></c-icon>
+        <c-icon name="plus" v-else></c-icon>
+      </template>
     </c-cell>
     <LazyRender :show="show">
       <div
@@ -150,6 +154,7 @@ export default {
       onClickTitle,
       contentRef,
       wrapperRef,
+      type: parent.type,
       onTransitionEnd,
     };
   },

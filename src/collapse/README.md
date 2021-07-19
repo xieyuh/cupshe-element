@@ -106,6 +106,19 @@ export default {
 };
 ```
 
+### 业务场景斑马线风格
+
+```html
+<c-collapse v-model="active5" type="zebra">
+  <c-collapse-item title="Account Related" icon="account_sel">
+    内容
+  </c-collapse-item>
+  <c-collapse-item title="Account Related" icon="account_sel">
+    内容
+  </c-collapse-item>
+</c-collapse>
+```
+
 ## API
 
 ### Collapse Props
