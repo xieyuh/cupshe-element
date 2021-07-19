@@ -8,14 +8,7 @@
 import { PropType, watch, InjectionKey, ExtractPropTypes } from 'vue';
 import { CheckerParent } from '../checkbox/checker.vue';
 import { createNamespace } from '../utils';
-import {
-  useChildren,
-  useExpose,
-  useLinkField,
-  useParent,
-} from '../composables';
-
-import { FORMITEM_KEY } from '../form-item/index.vue';
+import { useChildren, useExpose, useLinkField } from '../composables';
 
 const [name, bem] = createNamespace('checkbox-group');
 
@@ -56,9 +49,6 @@ export default {
   setup(props, { emit }) {
     const { children, linkChildren } = useChildren(CHECKBOX_GROUP_KEY);
 
-    // 获取Form item父组件
-    const { parent } = useParent(FORMITEM_KEY);
-
     const updateValue = (value: unknown[]) => emit('update:modelValue', value);
 
     const toggleAll = (options: CheckboxGroupToggleAllOptions = {}) => {
@@ -73,9 +63,9 @@ export default {
           return false;
         }
         if (item.props.disabled && skipDisabled) {
-          return item.checked.value;
+          return item.checked;
         }
-        return checked ?? !item.checked.value;
+        return checked ?? !item.checked;
       });
 
       const names = checkedChildren.map((item: any) => item.name);
@@ -86,7 +76,6 @@ export default {
       () => props.modelValue,
       (value) => {
         emit('change', value);
-        parent && parent.validateWithTrigger('change');
       }
     );
 

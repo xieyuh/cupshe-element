@@ -1,5 +1,6 @@
 <template>
   <div
+    :role="role"
     :class="
       bem([
         {
@@ -22,7 +23,7 @@
       ref="iconRef"
       :style="{ fontSize: iconSize }"
     >
-      <c-icon name="tick" :style="iconStyle"></c-icon>
+      <c-icon name="tick" :style="iconStyle" />
     </div>
     <template v-if="$slots.default">
       <span :class="bem('label', [{ disabled: isDisabled }])">
@@ -37,6 +38,7 @@ import { ref, computed, PropType, CSSProperties } from 'vue';
 import { extend, unknownProp, truthProp, addUnit } from '../utils';
 
 export type CheckerDirection = 'horizontal' | 'vertical';
+
 export type CheckerParent = {
   props: {
     disabled?: boolean;
@@ -92,6 +94,8 @@ export default {
           backgroundColor: checkedColor,
         };
       }
+
+      return {};
     });
 
     const onClick = (event: MouseEvent) => {

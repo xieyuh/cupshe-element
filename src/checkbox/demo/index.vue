@@ -8,26 +8,9 @@
     <c-checkbox :model-value="true" disabled> 复选框 </c-checkbox>
   </demo-block>
 
-  <demo-block title="自定义形状">
-    <c-checkbox v-model="checkboxShape" shape="square"> 自定义形状 </c-checkbox>
-  </demo-block>
-
   <demo-block title="自定义颜色">
     <c-checkbox v-model="checkbox2" checked-color="#ee0a24">
       自定义颜色
-    </c-checkbox>
-  </demo-block>
-
-  <demo-block title="自定义大小">
-    <c-checkbox v-model="checboxIcon" icon-size="24px"> 自定义大小 </c-checkbox>
-  </demo-block>
-
-  <demo-block title="自定义图标">
-    <c-checkbox v-model="checkbox3">
-      自定义图标
-      <template #icon="{ checked }">
-        <img :src="checked ? activeIcon : inactiveIcon" />
-      </template>
     </c-checkbox>
   </demo-block>
 
@@ -58,27 +41,9 @@
     </c-checkbox-group>
 
     <div class="demo-checkbox-buttons">
-      <c-button type="primary" @click="checkAll"> 全选 </c-button>
-      <c-button type="primary" @click="toggleAll"> 反选 </c-button>
+      <c-button type="primary" @click="checkAll">全选</c-button>
+      <c-button type="primary" @click="toggleAll">反选</c-button>
     </div>
-  </demo-block>
-
-  <demo-block title="搭配单元格组件使用">
-    <c-checkbox-group v-model="result3">
-      <van-cell-group>
-        <van-cell
-          v-for="(item, index) in list"
-          clickable
-          :key="index"
-          :title="`复选框 ${item}`"
-          @click="toggle(index)"
-        >
-          <template #right-icon>
-            <c-checkbox :ref="setRefs(index)" :name="item" @click.stop />
-          </template>
-        </van-cell>
-      </van-cell-group>
-    </c-checkbox-group>
   </demo-block>
 </template>
 
@@ -126,8 +91,6 @@ export default {
       setRefs,
       checkAll,
       toggleAll,
-      activeIcon: 'https://img.yzcdn.cn/vant/user-active.png',
-      inactiveIcon: 'https://img.yzcdn.cn/vant/user-inactive.png',
     };
   },
 };

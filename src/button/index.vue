@@ -12,7 +12,7 @@
         <slot name="icon" />
       </template>
       <template v-else-if="icon">
-        <c-icon :name="icon" :class="bem('icon')"></c-icon>
+        <c-icon :name="icon" :class="bem('icon')" />
       </template>
       <span :class="bem('text')" :style="getTextStyle()" v-if="$slots.default">
         <slot />
