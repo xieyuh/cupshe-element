@@ -2,7 +2,7 @@
 
 ### 介绍
 
-按钮用于触发一个操作，如提交表单。[PC 端预览](/mobile.html#/input)
+通过鼠标或键盘输入内容，是最基础的表单域的包装。
 
 ### 引入
 
@@ -20,10 +20,10 @@ app.use(Input);
 
 ### 基础用法
 
-可以通过 `v-model:value` 双向绑定输入框的值，通过 `placeholder` 设置占位提示文字。。
+可以通过 `v-model` 双向绑定输入框的值，通过 `placeholder` 设置占位提示文字。。
 
 ```html
-<c-input v-model:value="value" placeholder="your name"></c-input>
+<c-input v-model="value" placeholder="your name"></c-input>
 ```
 
 ### 多行文本
@@ -32,7 +32,7 @@ app.use(Input);
 
 ```html
 <c-input
-  v-model:value="value"
+  v-model="value"
   type="textarea"
   placeholder="your name"
   :rows="3"
