@@ -13,6 +13,9 @@
       @click="onClickTitle"
       v-bind="attrs"
     >
+      <template v-if="$slots.icon" #icon>
+        <slot name="icon" />
+      </template>
       <template v-if="$slots.title" #title>
         <slot name="title" />
       </template>

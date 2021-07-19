@@ -37,7 +37,13 @@
 
   <demo-block title="业务场景斑马线风格">
     <c-collapse v-model="active5" type="zebra">
-      <c-collapse-item title="Account Related" icon="account_sel">
+      <c-collapse-item title="Account Related">
+        <template #icon>
+          <div class="icon">
+            <c-icon name="account_sel" />
+          </div>
+        </template>
+
         内容
       </c-collapse-item>
       <c-collapse-item title="Account Related" icon="account_sel">
