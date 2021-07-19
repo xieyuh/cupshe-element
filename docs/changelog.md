@@ -6,6 +6,19 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.2.0
+
+**New Component**
+
+- 新增 Form 表单组件
+- 新增 Input 输入框组件
+- 新增 Select 下拉组件
+- 新增 Collapse 折叠面板组件斑马线风格和基础风格样式
+
+**Bug Fixes**
+
+- 修复 Collapse 组件支持 slot icon 的问题
+
 ### v1.1.0
 
 **New Component**

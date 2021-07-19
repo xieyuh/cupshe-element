@@ -106,10 +106,12 @@ export default {
 };
 ```
 
-### 业务场景斑马线风格
+### 斑马线风格
+
+通过 `type` 属性为`zebra`来设置斑马线风格。
 
 ```html
-<c-collapse v-model="active5" type="zebra">
+<c-collapse v-model="activeName" type="zebra">
   <c-collapse-item title="Account Related" icon="account_sel">
     内容
   </c-collapse-item>
@@ -117,6 +119,77 @@ export default {
     内容
   </c-collapse-item>
 </c-collapse>
+```
+
+### 基础风格
+
+通过 `type` 属性为`normal`来设置基础风格面板。
+
+```html
+<c-collapse v-model="activeNames" type="normal" :border="false">
+  <c-collapse-item
+    :border="false"
+    title="1. Should I create an account before make purchase?"
+  >
+    内容
+  </c-collapse-item>
+  <c-collapse-item
+    :border="false"
+    title="2. Should I create an account before make purchase?"
+  >
+    内容
+  </c-collapse-item>
+</c-collapse>
+```
+
+### 嵌套面板
+
+```html
+<c-collapse v-model="actives[0].value" type="zebra">
+  <c-collapse-item title="Account Related">
+    <template #icon>
+      <div class="icon">
+        <c-icon name="account_sel" />
+      </div>
+    </template>
+
+    <c-collapse v-model="actives[0].children" type="normal" :border="false">
+      <c-collapse-item
+        :border="false"
+        title="1. Should I create an account before make purchase?"
+      >
+        内容
+      </c-collapse-item>
+      <c-collapse-item
+        :border="false"
+        title="2. Should I create an account before make purchase?"
+      >
+        内容
+      </c-collapse-item>
+    </c-collapse>
+  </c-collapse-item>
+  <c-collapse-item title="Account Related" icon="account_sel">
+    内容
+  </c-collapse-item>
+</c-collapse>
+```
+
+```js
+import { reactive } from 'vue';
+
+export default {
+  setup() {
+    const activeNames = reactive({
+      actives: [
+        {
+          value: [],
+          children: [],
+        },
+      ],
+    });
+    return { ...toRefs(state) };
+  },
+};
 ```
 
 ## API

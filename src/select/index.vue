@@ -85,7 +85,7 @@ export default {
 
   props,
 
-  emits: ['change', 'update:value'],
+  emits: ['change', 'update:modelValue'],
 
   setup(props, { emit }) {
     // 获取Form item父组件
@@ -123,7 +123,7 @@ export default {
     const onClick = (item) => {
       state.showPopup = props.open || false;
 
-      emit('update:value', item.value);
+      emit('update:modelValue', item.value);
 
       emit('change', item);
 

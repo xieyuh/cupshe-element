@@ -89,7 +89,7 @@ export default {
 
   props: extend({}, textareaProps, inputProps),
 
-  emits: ['pressEnter', 'change', 'blur', 'update:value'],
+  emits: ['pressEnter', 'change', 'blur', 'update:modelValue'],
 
   setup(props, { emit }) {
     // 获取Form item父组件
@@ -111,7 +111,7 @@ export default {
     watch(
       () => state.inputValue,
       (val) => {
-        emit('update:value', val);
+        emit('update:modelValue', val);
         parent && parent.validateWithTrigger('change');
       }
     );

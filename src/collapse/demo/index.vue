@@ -35,7 +35,7 @@
     </c-collapse>
   </demo-block>
 
-  <demo-block title="业务场景斑马线风格">
+  <demo-block title="斑马线风格">
     <c-collapse v-model="active5" type="zebra">
       <c-collapse-item title="Account Related">
         <template #icon>
@@ -51,7 +51,7 @@
       </c-collapse-item>
     </c-collapse>
   </demo-block>
-  <demo-block title="业务场景基础用法">
+  <demo-block title="基础风格">
     <c-collapse v-model="active6" type="normal" :border="false">
       <c-collapse-item
         :border="false"
@@ -67,8 +67,8 @@
       </c-collapse-item>
     </c-collapse>
   </demo-block>
-  <demo-block title="业务场景嵌套">
-    <c-collapse v-model="active5" type="zebra">
+  <demo-block title="面板嵌套">
+    <c-collapse v-model="actives[0].value" type="zebra">
       <c-collapse-item title="Account Related">
         <template #icon>
           <div class="icon">
@@ -76,7 +76,7 @@
           </div>
         </template>
 
-        <c-collapse v-model="active6" type="normal" :border="false">
+        <c-collapse v-model="actives[0].children" type="normal" :border="false">
           <c-collapse-item
             :border="false"
             title="1. Should I create an account before make purchase?"
@@ -110,6 +110,12 @@ export default {
       active4: [],
       active5: [],
       active6: [],
+      actives: [
+        {
+          value: [],
+          children: [],
+        },
+      ],
     });
 
     return {
