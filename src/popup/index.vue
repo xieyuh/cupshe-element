@@ -17,6 +17,7 @@
     @after-leave="onClosed"
   >
     <div
+      v-bind="attrs"
       v-show="show"
       ref="popupRef"
       :style="style"
@@ -26,7 +27,6 @@
         })
       "
       @click="onClick"
-      v-bind="attrs"
     >
       <slot />
       <c-icon

@@ -1,6 +1,7 @@
 <template>
   <div :class="[bem({ border: index && border })]">
     <c-cell
+      v-bind="attrs"
       :class="
         bem('title', {
           disabled,
@@ -11,7 +12,6 @@
       :aria-expanded="String(expanded)"
       role="button"
       @click="onClickTitle"
-      v-bind="attrs"
     >
       <template v-if="$slots.title" #title>
         <slot name="title" />

@@ -40,6 +40,8 @@ const [name, bem] = createNamespace('collapse');
 
 export const COLLAPSE_KEY: InjectionKey<CollapseProvide> = Symbol(name);
 
+export type COLLAPSE_THEME = 'normal' | 'gray';
+
 export default {
   name,
 
