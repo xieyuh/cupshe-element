@@ -6,6 +6,7 @@
           disabled,
           expanded,
           borderless: !border,
+          [type]: type,
         })
       "
       :aria-expanded="String(expanded)"
@@ -52,7 +53,7 @@
 import { computed, nextTick, ref, watch } from 'vue';
 import { COLLAPSE_KEY } from '../collapse/index.vue';
 import { cellProps } from '../cell/index.vue';
-import { useParent, useExpose, raf, doubleRaf } from '../composables';
+import { useParent, useExpose, raf } from '../composables';
 import LazyRender from '../composables/lazy-render.vue';
 import { createNamespace, extend, pick, truthProp } from '../utils';
 
@@ -107,19 +108,20 @@ export default {
         if (!contentRef.value || !wrapperRef.value) {
           return;
         }
+        onTransitionEnd();
 
-        const { offsetHeight } = contentRef.value;
-        if (offsetHeight) {
-          const contentHeight = `${offsetHeight}px`;
-          wrapperRef.value.style.height = value ? '0' : contentHeight;
+        // const { offsetHeight } = contentRef.value;
+        // if (offsetHeight) {
+        //   const contentHeight = `${offsetHeight}px`;
+        //   wrapperRef.value.style.height = value ? '0' : contentHeight;
 
-          // use double raf to ensure animation can start
-          doubleRaf(() => {
-            wrapperRef.value!.style.height = value ? contentHeight : '0';
-          });
-        } else {
-          onTransitionEnd();
-        }
+        //   // use double raf to ensure animation can start
+        //   doubleRaf(() => {
+        //     wrapperRef.value!.style.height = value ? contentHeight : '0';
+        //   });
+        // } else {
+        //   onTransitionEnd();
+        // }
       });
     });
 

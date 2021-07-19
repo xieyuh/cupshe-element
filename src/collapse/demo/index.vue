@@ -67,6 +67,35 @@
       </c-collapse-item>
     </c-collapse>
   </demo-block>
+  <demo-block title="业务场景嵌套">
+    <c-collapse v-model="active5" type="zebra">
+      <c-collapse-item title="Account Related">
+        <template #icon>
+          <div class="icon">
+            <c-icon name="account_sel" />
+          </div>
+        </template>
+
+        <c-collapse v-model="active6" type="normal" :border="false">
+          <c-collapse-item
+            :border="false"
+            title="1. Should I create an account before make purchase?"
+          >
+            内容
+          </c-collapse-item>
+          <c-collapse-item
+            :border="false"
+            title="2. Should I create an account before make purchase?"
+          >
+            内容
+          </c-collapse-item>
+        </c-collapse>
+      </c-collapse-item>
+      <c-collapse-item title="Account Related" icon="account_sel">
+        内容
+      </c-collapse-item>
+    </c-collapse>
+  </demo-block>
 </template>
 
 <script lang="ts">
