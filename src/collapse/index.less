@@ -1,29 +1,27 @@
 @import '../style/font.less';
+@import '../style/mixins/ellipsis.less';
 
 .c-collapse {
   &--normal {
     background: #fff;
-    & > .c-collapse-item {
-      margin-bottom: 2px;
-      & > .c-collapse-item__title {
-        height: 44px;
-        background: #fafafa;
-        font-size: 14px;
-        font-weight: bold;
-        color: #333;
-        line-height: 21px;
-        padding: 0 16px;
-        align-items: center;
-        .c-muli-bold;
-        .c-cell__title {
-          flex: 1;
-          margin: 0 4px;
-          .c-ellipsis;
-        }
-        .c-icon--arrow_right {
-          font-size: 16px;
-        }
-        &--expanded {
+    .c-collapse {
+      &-item {
+        margin-bottom: 2px;
+        &__title {
+          height: 44px;
+          background: #fafafa;
+          font-size: 14px;
+          font-weight: bold;
+          color: #333;
+          line-height: 21px;
+          padding: 0 16px;
+          align-items: center;
+          .c-muli-bold;
+          .c-cell__title {
+            flex: 1;
+            margin: 0 4px;
+            .ellipsis();
+          }
           .c-icon--arrow_right {
             color: #333;
           }
@@ -32,28 +30,22 @@
     }
   }
   &--zebra {
-    & > .c-collapse-item {
-      & > .c-collapse-item__title {
-        position: relative;
-        height: 56px;
-        background: #f2f2f2;
-        font-size: 18px;
-        font-weight: 300;
-        display: flex;
-        align-items: center;
-        color: #333;
-        line-height: 23px;
-        margin-bottom: 2px;
-        padding: 0 16px;
-        .muli-light();
-        .c-cell__title {
-          margin: 0 8px;
-        }
-        &--zebra {
-          & + .c-collapse-item__wrapper {
-            & > .c-collapse-item__content {
-              padding: 0;
-            }
+    .c-collapse {
+      &-item {
+        &__title {
+          height: 56px;
+          background: #f2f2f2;
+          font-size: 18px;
+          font-weight: 300;
+          display: flex;
+          align-items: center;
+          color: #333;
+          line-height: 23px;
+          margin-bottom: 2px;
+          padding: 0 16px;
+          .muli-light;
+          .c-cell__title {
+            margin: 0 8px;
           }
         }
       }

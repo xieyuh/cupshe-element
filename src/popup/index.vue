@@ -11,7 +11,7 @@
     <slot name="overlay-content" />
   </c-overlay>
   <transition
-    :name="transition || name"
+    :name="transition || transiionName"
     :appear="transitionAppear"
     @after-enter="onOpened"
     @after-leave="onClosed"
@@ -211,7 +211,7 @@ export default {
 
     provide(POPUP_TOGGLE_KEY, () => props.show);
 
-    const name =
+    const transiionName =
       props.position === 'center'
         ? 'c-fade'
         : `c-popup-slide-${props.position}`;
@@ -219,7 +219,7 @@ export default {
     return {
       bem,
       zIndex,
-      name,
+      transiionName,
       popupRef,
       style,
       onClickOverlay,

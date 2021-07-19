@@ -42,7 +42,7 @@ export default {
       formModel: {
         name: '',
         region: '',
-        type: '',
+        type: [],
       },
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
