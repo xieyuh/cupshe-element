@@ -31,7 +31,6 @@ app.use(Select);
 ```
 
 ```js
-<script>
 import { toRefs, reactive } from '@vue/reactivity';
 
 export default {
@@ -54,7 +53,6 @@ export default {
     };
   },
 };
-</script>
 ```
 
 ### 斑马线风格
