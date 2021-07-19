@@ -1,6 +1,6 @@
 {
   "name": "cupshe-element",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "",
   "main": "lib/cupshe-element.js",
   "style": "lib/index.css",
@@ -14,7 +14,7 @@
     "lint": "vant-cli lint",
     "build": "vant-cli build",
     "prepare": "husky install",
-    "release": "vant-cli release",
+    "release": "vant-cli build && npm publish",
     "test:coverage": "open test/coverage/index.html",
     "build-site": "vant-cli build-site"
   },
