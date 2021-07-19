@@ -86,3 +86,22 @@ export default {
 >
 </c-select>
 ```
+
+## API
+
+### Props
+
+| 参数        | 说明                   | 类型                                            | 默认值 |
+| ----------- | ---------------------- | ----------------------------------------------- | ------ |
+| v-model     | 指定当前选中的条目     | _number \| \_string_                            | -      |
+| placeholder | 选择框默认文字         | _string_                                        | -      |
+| suffixIcon  | 自定义的选择框后缀图标 | _string_ \| _slot_                              | -      |
+| options     | options 数据           | _array<{value, label, [disabled, key, title]}>_ | -      |
+| defaultOpen | 是否默认展开下拉菜单   | _boolean_                                       | -      |
+| open        | 是否展开下拉菜单       | _boolean_                                       | -      |
+
+### Events
+
+| 事件名称 | 说明                       | 回调参数                                 |
+| -------- | -------------------------- | ---------------------------------------- |
+| change   | 选中 option 时，调用此函数 | _function(item: Object<{label, value}>)_ |
