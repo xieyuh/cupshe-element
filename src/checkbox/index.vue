@@ -5,6 +5,7 @@
     :parent="parent"
     :checked="checked"
     @toggle="toggle"
+    v-bind="props"
   >
     <template #default>
       <slot />
@@ -25,6 +26,8 @@ const [name, bem] = createNamespace('checkbox');
 
 export default {
   name,
+
+  components: { Checker },
 
   props: extend({}, checkerProps, {
     bindGroup: truthProp,
@@ -91,8 +94,8 @@ export default {
       parent,
       checked,
       toggle,
+      props,
     };
   },
-  components: { Checker },
 };
 </script>

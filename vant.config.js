@@ -62,10 +62,10 @@ module.exports = {
       {
         title: '表单组件',
         items: [
-          // {
-          //   path: 'checkbox',
-          //   title: 'Checkbox 复选框',
-          // },
+          {
+            path: 'checkbox',
+            title: 'Checkbox 复选框',
+          },
           {
             path: 'rate',
             title: 'Rate 评分',

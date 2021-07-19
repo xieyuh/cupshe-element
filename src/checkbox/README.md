@@ -46,22 +46,6 @@ export default {
 <c-checkbox v-model="checked" disabled>复选框</c-checkbox>
 ```
 
-### 自定义颜色
-
-通过 `checked-color` 属性设置选中状态的图标颜色。
-
-```html
-<c-checkbox v-model="checked" checked-color="#ee0a24">复选框</c-checkbox>
-```
-
-### 自定义大小
-
-通过 `icon-size` 属性可以自定义图标的大小。
-
-```html
-<c-checkbox v-model="checked" icon-size="24px">复选框</c-checkbox>
-```
-
 ### 禁用文本点击
 
 设置 `label-disabled` 属性后，点击图标以外的内容不会触发复选框切换。
@@ -87,28 +71,6 @@ import { ref } from 'vue';
 export default {
   setup() {
     const checked = ref(['a', 'b']);
-    return { checked };
-  },
-};
-```
-
-### 水平排列
-
-将 `direction` 属性设置为 `horizontal` 后，复选框组会变成水平排列。
-
-```html
-<c-checkbox-group v-model="checked" direction="horizontal">
-  <c-checkbox name="a">复选框 a</c-checkbox>
-  <c-checkbox name="b">复选框 b</c-checkbox>
-</c-checkbox-group>
-```
-
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const checked = ref([]);
     return { checked };
   },
 };
@@ -166,83 +128,25 @@ export default {
 };
 ```
 
-### 搭配单元格组件使用
-
-此时你需要再引入 `Cell` 和 `CellGroup` 组件，并通过 `Checkbox` 实例上的 toggle 方法触发切换。
-
-```html
-<c-checkbox-group v-model="checked">
-  <van-cell-group>
-    <van-cell
-      v-for="(item, index) in list"
-      clickable
-      :key="item"
-      :title="`复选框 ${item}`"
-      @click="toggle(index)"
-    >
-      <template #right-icon>
-        <c-checkbox
-          :name="item"
-          :ref="el => checkboxRefs[index] = el"
-          @click.stop
-        />
-      </template>
-    </van-cell>
-  </van-cell-group>
-</c-checkbox-group>
-```
-
-```js
-import { ref, onBeforeUpdate } from 'vue';
-
-export default {
-  setup() {
-    const checked = ref([]);
-    const checkboxRefs = ref([]);
-    const toggle = (index) => {
-      checkboxRefs.value[index].toggle();
-    };
-
-    onBeforeUpdate(() => {
-      checkboxRefs.value = [];
-    });
-
-    return {
-      list: ['a', 'b'],
-      toggle,
-      checked,
-      checkboxRefs,
-    };
-  },
-};
-```
-
 ## API
 
 ### Checkbox Props
 
-| 参数           | 说明                      | 类型               | 默认值    |
-| -------------- | ------------------------- | ------------------ | --------- |
-| v-model        | 是否为选中状态            | _boolean_          | `false`   |
-| name           | 标识符                    | _any_              | -         |
-| shape          | 形状，可选值为 `square`   | _string_           | `round`   |
-| disabled       | 是否禁用复选框            | _boolean_          | `false`   |
-| label-disabled | 是否禁用复选框文本点击    | _boolean_          | `false`   |
-| label-position | 文本位置，可选值为 `left` | _string_           | `right`   |
-| icon-size      | 图标大小，默认单位为 `px` | _number \| string_ | `20px`    |
-| checked-color  | 选中状态颜色              | _string_           | `#1989fa` |
-| bind-group     | 是否与复选框组绑定        | _boolean_          | `true`    |
+| 参数           | 说明                   | 类型      | 默认值  |
+| -------------- | ---------------------- | --------- | ------- |
+| v-model        | 是否为选中状态         | _boolean_ | `false` |
+| name           | 标识符                 | _any_     | -       |
+| disabled       | 是否禁用复选框         | _boolean_ | `false` |
+| label-disabled | 是否禁用复选框文本点击 | _boolean_ | `false` |
+| bind-group     | 是否与复选框组绑定     | _boolean_ | `true`  |
 
 ### CheckboxGroup Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| v-model | 所有选中项的标识符 | _any[]_ | - |
-| disabled | 是否禁用所有复选框 | _boolean_ | `false` |
-| max | 最大可选数，`0` 为无限制 | _number \| string_ | `0` |
-| direction | 排列方向，可选值为 `horizontal` | _string_ | `vertical` |
-| icon-size | 所有复选框的图标大小，默认单位为 `px` | _number \| string_ | `20px` |
-| checked-color | 所有复选框的选中状态颜色 | _string_ | `#1989fa` |
+| 参数     | 说明                     | 类型               | 默认值  |
+| -------- | ------------------------ | ------------------ | ------- |
+| v-model  | 所有选中项的标识符       | _any[]_            | -       |
+| disabled | 是否禁用所有复选框       | _boolean_          | `false` |
+| max      | 最大可选数，`0` 为无限制 | _number \| string_ | `0`     |
 
 ### Checkbox Events
 
@@ -268,9 +172,9 @@ export default {
 
 通过 ref 可以获取到 CheckboxGroup 实例并调用实例方法，详见[组件实例方法](#/zh-CN/advanced-usage#zu-jian-shi-li-fang-fa)。
 
-| 方法名 | 说明 | 参数 | 返回值 |
-| --- | --- | --- | --- |
-| toggleAll | 切换所有复选框，传 `true` 为选中，`false` 为取消选中，不传参为取反 | _options?: boolean \| object_ | - |
+| 方法名    | 说明                                                               | 参数                          | 返回值 |
+| --------- | ------------------------------------------------------------------ | ----------------------------- | ------ |
+| toggleAll | 切换所有复选框，传 `true` 为选中，`false` 为取消选中，不传参为取反 | _options?: boolean \| object_ | -      |
 
 ### toggleAll 方法示例
 
@@ -299,22 +203,6 @@ checkboxGroup.toggleAll({
 
 通过 ref 可以获取到 Checkbox 实例并调用实例方法，详见[组件实例方法](#/zh-CN/advanced-usage#zu-jian-shi-li-fang-fa)。
 
-| 方法名 | 说明 | 参数 | 返回值 |
-| --- | --- | --- | --- |
-| toggle | 切换选中状态，传 `true` 为选中，`false` 为取消选中，不传参为取反 | _checked?: boolean_ | - |
-
-### 样式变量
-
-组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/config-provider)。
-
-| 名称 | 默认值 | 描述 |
-| --- | --- | --- |
-| --c-checkbox-size | _20px_ | - |
-| --c-checkbox-border-color | _var(--van-gray-5)_ | - |
-| --c-checkbox-transition-duration | _var(--van-animation-duration-fast)_ | - |
-| --c-checkbox-label-margin | _var(--van-padding-xs)_ | - |
-| --c-checkbox-label-color | _var(--van-text-color)_ | - |
-| --c-checkbox-checked-icon-color | _var(--van-primary-color)_ | - |
-| --c-checkbox-disabled-icon-color | _var(--van-gray-5)_ | - |
-| --c-checkbox-disabled-label-color | _var(--van-gray-5)_ | - |
-| --c-checkbox-disabled-background-color | _var(--van-border-color)_ | - |
+| 方法名 | 说明                                                             | 参数                | 返回值 |
+| ------ | ---------------------------------------------------------------- | ------------------- | ------ |
+| toggle | 切换选中状态，传 `true` 为选中，`false` 为取消选中，不传参为取反 | _checked?: boolean_ | -      |

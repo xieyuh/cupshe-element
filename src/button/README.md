@@ -114,7 +114,7 @@ app.use(Button);
 | size        | 尺寸，可选值为 `large` `small`                      | _string_  | `normal`  |
 | color       | 按钮颜色，支持传入 `linear-gradient` 渐变色         | _string_  | -         |
 | text-color  | 按钮文字颜色                                        | _string_  | -         |
-| icon        | 左侧[图标名称](#****/icon)或图片链接                | _string_  | -         |
+| icon        | 左侧[图标名称](#/icon)或图片链接                    | _string_  | -         |
 | native-type | 原生 button 标签的 type 属性                        | _string_  | `button`  |
 | block       | 是否为块级元素                                      | _boolean_ | `false`   |
 | ghost       | 是否为透明按钮                                      | _boolean_ | `false`   |
