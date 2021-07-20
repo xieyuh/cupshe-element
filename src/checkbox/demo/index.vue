@@ -3,15 +3,16 @@
     <c-checkbox v-model="checkbox1">复选框</c-checkbox>
   </demo-block>
 
+  <demo-block title="水平排列">
+    <c-checkbox-group v-model="horizontalResult" direction="horizontal">
+      <c-checkbox name="a">复选框</c-checkbox>
+      <c-checkbox name="b">复选框</c-checkbox>
+    </c-checkbox-group>
+  </demo-block>
+
   <demo-block title="禁用状态">
     <c-checkbox :model-value="false" disabled> 复选框 </c-checkbox>
     <c-checkbox :model-value="true" disabled> 复选框 </c-checkbox>
-  </demo-block>
-
-  <demo-block title="自定义颜色">
-    <c-checkbox v-model="checkbox2" checked-color="#ee0a24">
-      自定义颜色
-    </c-checkbox>
   </demo-block>
 
   <demo-block title="禁用文本点击">
@@ -58,6 +59,8 @@ export default {
       checkbox1: true,
       checkbox2: true,
       checkbox3: true,
+      checkbox4: true,
+      checkbox5: true,
       checkboxShape: true,
       checkboxLabel: true,
       checboxIcon: true,
@@ -103,7 +106,7 @@ export default {
   background: @white;
 
   .c-checkbox {
-    margin: 0 0 8px 20px;
+    margin-left: 20px;
   }
 
   .van-cell {

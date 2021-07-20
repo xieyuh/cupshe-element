@@ -7,6 +7,7 @@
           disabled: isDisabled,
           'label-disabled': labelDisabled,
         },
+        Direction,
       ])
     "
     :tabindex="isDisabled ? -1 : 0"
@@ -23,7 +24,7 @@
       ref="iconRef"
       :style="{ fontSize: iconSize }"
     >
-      <c-icon name="tick" :style="iconStyle" />
+      <c-icon name="tick" />
     </div>
     <template v-if="$slots.default">
       <span :class="bem('label', [{ disabled: isDisabled }])">
@@ -34,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, PropType, CSSProperties } from 'vue';
+import { ref, computed, PropType } from 'vue';
 import { extend, unknownProp, truthProp, addUnit } from '../utils';
 
 export type CheckerDirection = 'horizontal' | 'vertical';
@@ -43,7 +44,7 @@ export type CheckerParent = {
   props: {
     disabled?: boolean;
     iconSize?: number | string;
-    checkedColor?: string;
+    direction?: CheckerDirection;
   };
 };
 
@@ -52,7 +53,6 @@ export const checkerProps = {
   disabled: Boolean,
   iconSize: [Number, String],
   modelValue: unknownProp,
-  checkedColor: String,
   labelDisabled: Boolean,
 };
 
@@ -85,18 +85,7 @@ export default {
       () => getParentProps('disabled') || props.disabled
     );
 
-    const iconStyle = computed<CSSProperties>(() => {
-      const checkedColor = props.checkedColor || getParentProps('checkedColor');
-
-      if (checkedColor && props.checked && !isDisabled.value) {
-        return {
-          borderColor: checkedColor,
-          backgroundColor: checkedColor,
-        };
-      }
-
-      return {};
-    });
+    const Direction = computed(() => getParentProps('direction'));
 
     const onClick = (event: MouseEvent) => {
       const { target } = event;
@@ -112,8 +101,8 @@ export default {
     const iconSize = props.iconSize || getParentProps('iconSize');
 
     return {
-      iconStyle,
       iconSize: addUnit(iconSize),
+      Direction,
       isDisabled,
       iconRef,
       onClick,

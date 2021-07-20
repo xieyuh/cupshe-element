@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/font.less';
 
 .c-checkbox {
   display: flex;
@@ -6,6 +7,7 @@
   overflow: hidden;
   cursor: pointer;
   user-select: none;
+  .muli-light;
 
   &--disabled {
     cursor: not-allowed;
@@ -16,12 +18,11 @@
   }
 
   &--horizontal {
-    margin-right: @padding-sm;
+    margin-right: 60px;
   }
 
   &__icon {
     flex: none;
-    height: 0.75em;
     font-size: @checkbox-size;
     line-height: 1em;
     cursor: pointer;
@@ -29,21 +30,21 @@
     .c-icon {
       display: block;
       box-sizing: border-box;
-      width: 1.25em;
-      height: 1.25em;
+      width: 16px;
+      height: 16px;
       color: transparent;
-      font-size: 0.6em;
+      font-size: 8px;
       line-height: 1.25;
       text-align: center;
-      border: 1px solid @checkbox-border-color;
+      border: 1px solid #e8e8e8;
       transition: opacity @checkbox-transition-duration ease-in-out;
     }
 
     &--checked {
       .c-icon {
         color: @white;
-        background-color: @checkbox-checked-icon-color;
-        border-color: @checkbox-checked-icon-color;
+        background-color: #333;
+        border-color: #333;
       }
     }
 
@@ -51,8 +52,8 @@
       cursor: not-allowed;
 
       .c-icon {
-        background-color: @checkbox-disabled-background-color;
-        border-color: @checkbox-disabled-icon-color;
+        background-color: #fafafa;
+        border-color: #d8d8d8;
       }
     }
 
@@ -64,13 +65,20 @@
   }
 
   &__label {
-    margin-left: @checkbox-label-margin;
-    color: @checkbox-label-color;
+    color: #333;
     line-height: @checkbox-size;
-    font-size: @checkbox-label-size;
+    font-size: 14px;
+
+    @media (min-width: 768px) {
+      margin-left: 10px;
+    }
+
+    @media (max-width: 768px) {
+      margin-left: 8px;
+    }
 
     &--disabled {
-      color: @checkbox-disabled-label-color;
+      color: #969799;
     }
   }
 }

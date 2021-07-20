@@ -1,12 +1,12 @@
 <template>
-  <div :class="bem()">
+  <div :class="bem([direction])">
     <slot />
   </div>
 </template>
 
 <script lang="ts">
 import { PropType, watch, InjectionKey, ExtractPropTypes } from 'vue';
-import { CheckerParent } from '../checkbox/checker.vue';
+import { CheckerParent, CheckerDirection } from '../checkbox/checker.vue';
 import { createNamespace } from '../utils';
 import { useChildren, useExpose, useLinkField } from '../composables';
 
@@ -15,8 +15,8 @@ const [name, bem] = createNamespace('checkbox-group');
 const props = {
   max: [String, Number],
   disabled: Boolean,
+  direction: String as PropType<CheckerDirection>,
   iconSize: [String, Number],
-  checkedColor: String,
   modelValue: {
     type: Array as PropType<unknown[]>,
     default: () => [],

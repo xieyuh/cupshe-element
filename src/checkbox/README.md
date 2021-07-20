@@ -142,11 +142,12 @@ export default {
 
 ### CheckboxGroup Props
 
-| 参数     | 说明                     | 类型               | 默认值  |
-| -------- | ------------------------ | ------------------ | ------- |
-| v-model  | 所有选中项的标识符       | _any[]_            | -       |
-| disabled | 是否禁用所有复选框       | _boolean_          | `false` |
-| max      | 最大可选数，`0` 为无限制 | _number \| string_ | `0`     |
+| 参数      | 说明                            | 类型               | 默认值     |
+| --------- | ------------------------------- | ------------------ | ---------- |
+| v-model   | 所有选中项的标识符              | _any[]_            | -          |
+| disabled  | 是否禁用所有复选框              | _boolean_          | `false`    |
+| max       | 最大可选数，`0` 为无限制        | _number \| string_ | `0`        |
+| direction | 排列方向，可选值为 `horizontal` | _string_           | `vertical` |
 
 ### Checkbox Events
 
@@ -163,10 +164,9 @@ export default {
 
 ### Checkbox Slots
 
-| 名称    | 说明       | 参数                                      |
-| ------- | ---------- | ----------------------------------------- |
-| default | 自定义文本 | -                                         |
-| icon    | 自定义图标 | _{ checked: boolean, disabled: boolean }_ |
+| 名称    | 说明       | 参数 |
+| ------- | ---------- | ---- |
+| default | 自定义文本 | -    |
 
 ### CheckboxGroup 方法
 
