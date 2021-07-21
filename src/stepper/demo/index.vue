@@ -6,15 +6,21 @@
       </template>
     </c-cell>
 
+    <c-cell center title="无边框模式">
+      <template #value>
+        <c-stepper :border="false" v-model="stepper2" />
+      </template>
+    </c-cell>
+
     <c-cell center title="步长设置">
       <template #value>
-        <c-stepper v-model="stepper2" step="2" />
+        <c-stepper v-model="stepper3" step="2" />
       </template>
     </c-cell>
 
     <c-cell center title="限制输入范围">
       <template #value>
-        <c-stepper v-model="stepper3" :min="5" :max="8" />
+        <c-stepper v-model="stepper4" :min="5" :max="8" />
       </template>
     </c-cell>
 

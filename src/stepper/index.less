@@ -1,11 +1,16 @@
 @import './var.less';
+@import '../style/font.less';
 
 .c-stepper {
-  border: 1px solid @stepper-border-color;
-  user-select: none;
   display: inline-flex;
   align-items: center;
-  color: @black;
+  box-sizing: border-box;
+  user-select: none;
+  color: #333;
+
+  &--border {
+    border: 1px solid #eaeaea;
+  }
 
   &__button {
     position: relative;
@@ -15,21 +20,39 @@
     box-sizing: border-box;
     padding: 7px 14px;
     background: 0 0;
+
+    &--disabled {
+      color: #ededed;
+      cursor: not-allowed;
+    }
   }
 
   &__input {
     display: inline-block;
-    width: @stepper-input-width;
+    width: 25px;
     padding: @stepper-input-padding;
-    font-size: @stepper-font-size;
     text-align: center;
     letter-spacing: normal;
     background: 0 0;
     border: none;
+
+    &--disabled {
+      color: #a9a9a9;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 12px;
+      .muli-semibold;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      .muli-light;
+    }
   }
 
   &__icon {
-    width: @stepper-icon-size;
-    height: @stepper-icon-size;
+    width: 12px;
+    height: 12px;
   }
 }

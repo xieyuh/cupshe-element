@@ -1,15 +1,15 @@
 <template>
-  <div :class="bem()">
+  <div :class="bem({ border })">
     <button
       type="button"
-      :class="bem('button')"
+      :class="bem('button', { disabled: minusDisabled })"
       @click="createListener('minus', $event)"
       :style="buttonStyle"
     >
       <c-icon :class="bem('icon')" name="minus" />
     </button>
     <input
-      :class="bem('input')"
+      :class="bem('input', { disabled })"
       :style="inputStyle"
       :value="current"
       :disabled="disabled"
@@ -26,7 +26,7 @@
     />
     <button
       type="button"
-      :class="bem('button')"
+      :class="bem('button', { disabled: plusDisabled })"
       @click="createListener('plus', $event)"
       :style="buttonStyle"
     >
@@ -63,6 +63,10 @@ export default {
     disableInput: Boolean,
     placeholder: String,
     beforeChange: Function as PropType<Interceptor>,
+    border: {
+      type: Boolean,
+      default: true,
+    },
     name: {
       type: [String, Number],
       default: '',
@@ -234,6 +238,8 @@ export default {
       buttonStyle,
       current,
       inputRef,
+      minusDisabled,
+      plusDisabled,
       createListener,
       onInput,
       onFocus,
