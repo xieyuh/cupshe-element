@@ -53,8 +53,9 @@ import {
   ref,
   watch,
 } from 'vue';
-import { createNamespace, extend, isDef } from '../utils';
 import { popupSharedProps } from './shared';
+import { createNamespace, extend, isDef } from '../utils';
+import { callInterceptor } from '../utils/interceptor';
 import {
   useEventListener,
   useExpose,
@@ -111,6 +112,7 @@ export default {
   setup(props, { emit, attrs }) {
     let opened: boolean;
     let shouldReopen: boolean;
+
     const zIndex = ref<number>();
     const popupRef = ref<HTMLElement>();
 
@@ -138,13 +140,23 @@ export default {
 
         opened = true;
         zIndex.value = ++globalZIndex;
+
+        emit('open');
       }
+    };
+
+    const triggerClose = () => {
+      opened = false;
+      emit('close');
+      emit('update:show', false);
     };
 
     const close = () => {
       if (opened) {
-        opened = false;
-        emit('update:show', false);
+        callInterceptor({
+          interceptor: props.beforeClose,
+          done: triggerClose,
+        });
       }
     };
 
@@ -170,10 +182,8 @@ export default {
       (value) => {
         if (value) {
           open();
-          emit('open');
         } else {
           close();
-          emit('close');
         }
       }
     );
