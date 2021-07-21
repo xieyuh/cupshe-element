@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/font.less';
 
 .c-rate {
   display: inline-flex;
@@ -7,23 +8,30 @@
 
   &__item {
     position: relative;
-
-    &:not(:last-child) {
-      padding-right: @rate-icon-gutter;
-    }
   }
 
   &__icon {
     display: block;
     width: 1em;
     color: @rate-icon-void-color;
-    font-size: @rate-icon-size;
 
     &--half {
       position: absolute;
       top: 0;
       left: 0;
       overflow: hidden;
+    }
+
+    &--small {
+      font-size: 14px;
+    }
+
+    &--middle {
+      font-size: 16px;
+    }
+
+    &--large {
+      font-size: 24px;
     }
 
     &--full {
@@ -33,6 +41,15 @@
     &--disabled {
       color: @rate-icon-disabled-color;
     }
+  }
+
+  &__text {
+    margin-left: 4px;
+    font-size: 12px;
+    line-height: 15px;
+    color: #333;
+    text-decoration: underline;
+    .muli-light;
   }
 
   &--disabled {

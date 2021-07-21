@@ -3,18 +3,30 @@
     <c-rate v-model="value1" />
   </demo-block>
 
+  <demo-block title="评分文案">
+    <c-rate v-model="value2">
+      <template #text>Write a review</template>
+    </c-rate>
+  </demo-block>
+
   <demo-block title="自定义图标">
     <c-rate v-model="value2" icon="like" void-icon="like-o" />
   </demo-block>
 
-  <demo-block title="自定义样式">
-    <c-rate
-      v-model="value3"
-      :size="25"
-      color="#ffd21e"
-      void-icon="star"
-      void-color="#eee"
-    />
+  <demo-block title="自定义颜色">
+    <c-rate v-model="value9" color="#333" void-color="#333" />
+  </demo-block>
+
+  <demo-block title="自定义大小">
+    <div>
+      <c-rate v-model="value3" size="small" />
+    </div>
+    <div>
+      <c-rate v-model="value3" />
+    </div>
+    <div>
+      <c-rate v-model="value3" size="large" />
+    </div>
   </demo-block>
 
   <demo-block title="半星">
@@ -56,9 +68,10 @@ export default {
       value6: 3,
       value7: 3.3,
       value8: 2,
+      value9: 3,
     });
 
-    const onChange = (value: number) => {};
+    const onChange = () => {};
 
     return {
       ...toRefs(state),

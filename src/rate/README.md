@@ -37,6 +37,16 @@ export default {
 };
 ```
 
+### 评分文案
+
+`Rate` 组件提供了 `text` 插槽，用于设置评分文案。
+
+```html
+<c-rate v-model="value2">
+  <template #text>Write a review</template>
+</c-rate>
+```
+
 ### 自定义图标
 
 通过 `icon` 属性设置选中时的图标，`void-icon` 属性设置未选中时的图标。
@@ -45,18 +55,22 @@ export default {
 <c-rate v-model="value" icon="like" void-icon="like-o" />
 ```
 
-### 自定义样式
+### 自定义颜色
+
+通过 `color` 属性设置选中时的颜色，`void-color` 属性设置未选中时的颜色。
+
+```html
+<c-rate v-model="value9" color="#333" void-color="#333" />
+```
+
+### 自定义大小
 
 通过 `size` 属性设置图标大小，`color` 属性设置选中时的颜色，`void-color` 设置未选中时的颜色。
 
 ```html
-<c-rate
-  v-model="value"
-  :size="25"
-  color="#ffd21e"
-  void-icon="star"
-  void-color="#eee"
-/>
+<c-rate v-model="value" size="small" />
+<c-rate v-model="value" />
+<c-rate v-model="value" size="large" />
 ```
 
 ### 半星
@@ -152,7 +166,7 @@ export default {
 | -------------- | -------------------------------------------- | ------------------ | --------- |
 | v-model        | 当前分值                                     | _number_           | -         |
 | count          | 图标总数                                     | _number \| string_ | `5`       |
-| size           | 图标大小，默认单位为`px`                     | _number \| string_ | `20px`    |
+| size           | 尺寸，可选值为 `large` `small`               | _string_           | `normal`  |
 | gutter         | 图标间距，默认单位为`px`                     | _number \| string_ | `4px`     |
 | color          | 选中时的颜色                                 | _string_           | `#f6be42` |
 | void-color     | 未选中时的颜色                               | _string_           | `#c8c9cc` |
@@ -165,6 +179,13 @@ export default {
 
 ### Events
 
-| 事件名 | 说明                     | 回调参数 |
-| ------ | ------------------------ | -------- |
-| change | 当前分值变化时触发的事件 | 当前分值 |
+| 事件名     | 说明                     | 回调参数            |
+| ---------- | ------------------------ | ------------------- |
+| change     | 当前分值变化时触发的事件 | 当前分值            |
+| click-text | 点击文案时触发的事件     | _event: MouseEvent_ |
+
+### Slots
+
+| 名称 | 说明     |
+| ---- | -------- |
+| text | 评分文案 |

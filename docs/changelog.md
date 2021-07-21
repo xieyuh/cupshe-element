@@ -11,6 +11,7 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 **Feature**
 
 - Popup 新增 `before-close` 事件
+- Rate 新增 `text` 插槽，并根据设计稿修改样式
 
 ### v1.2.4
 

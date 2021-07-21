@@ -23,30 +23,34 @@
       @click="item.onClickItem"
     >
       <c-icon
-        :size="size"
         :name="item.isFull ? icon : voidIcon"
-        :class="bem('icon', { disabled, full: item.isFull })"
+        :class="bem('icon', [size, { disabled, full: item.isFull }])"
         :color="disabled ? disabledColor : item.isFull ? color : voidColor"
       />
       <c-icon
         v-if="item.renderHalf"
-        :size="size"
         :style="{ width: item.value + 'em' }"
-        :data-a="item.value"
         :name="item.isVoid ? voidIcon : icon"
-        :class="bem('icon', ['half', { disabled, full: !item.isVoid }])"
+        :class="bem('icon', ['half', size, { disabled, full: !item.isVoid }])"
         :color="disabled ? disabledColor : item.isVoid ? voidColor : color"
       />
     </div>
+    <template v-if="$slots.text">
+      <span :class="bem('text')" @click="onTextClick">
+        <slot name="text" />
+      </span>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, CSSProperties } from 'vue';
+import { computed, CSSProperties, PropType } from 'vue';
 import { addUnit, createNamespace } from '../utils';
 import { useRefs, useLinkField } from '../composables';
 
 type RateStatus = 'full' | 'half' | 'void';
+
+type RateSize = 'small' | 'middle' | 'large';
 
 type RateListItem = {
   value: number;
@@ -84,7 +88,6 @@ export default {
   name,
 
   props: {
-    size: [String, Number],
     color: String,
     gutter: [Number, String],
     readonly: Boolean,
@@ -92,6 +95,10 @@ export default {
     allowHalf: Boolean,
     voidColor: String,
     disabledColor: String,
+    size: {
+      type: String as PropType<RateSize>,
+      default: 'middle',
+    },
     modelValue: {
       type: Number,
       default: 0,
@@ -110,7 +117,7 @@ export default {
     },
   },
 
-  emits: ['change', 'update:modelValue'],
+  emits: ['change', 'update:modelValue', 'click-text'],
 
   setup(props, { emit }) {
     const [itemRefs, setItemRefs] = useRefs();
@@ -162,6 +169,8 @@ export default {
       }
     };
 
+    const onTextClick = (e: MouseEvent) => emit('click-text', e);
+
     const renderStar = (item: RateListItem, index: number) => {
       const score = index + 1;
       const isFull = item.status === 'full';
@@ -197,6 +206,7 @@ export default {
       bem,
       list,
       renderStar,
+      onTextClick,
     };
   },
 };
