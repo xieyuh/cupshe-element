@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.2.5
+
+**Feature**
+
+- Popup 新增 `before-close` 事件
+
 ### v1.2.4
 
 **Bug Fixes**
