@@ -49,10 +49,6 @@ module.exports = {
             path: 'style',
             title: 'Style 内置样式',
           },
-          // {
-          //   path: 'cell',
-          //   title: 'Cell 单元格',
-          // },
           {
             path: 'col',
             title: 'Layout 布局',
@@ -65,6 +61,10 @@ module.exports = {
           {
             path: 'checkbox',
             title: 'Checkbox 复选框',
+          },
+          {
+            path: 'radio',
+            title: 'Radio 复选框',
           },
           {
             path: 'rate',

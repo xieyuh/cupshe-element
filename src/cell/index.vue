@@ -5,50 +5,40 @@
     :tabindex="isClickable ? 0 : undefined"
     @click="route"
   >
-    <template v-if="$slots.icon">
-      <slot name="icon" />
-    </template>
-    <template v-else-if="icon">
-      <c-icon :name="icon" :class="bem('left-icon')" />
-    </template>
-    <template v-if="showTitle">
-      <div :class="[bem('title'), titleClass]" :style="titleStyle">
-        <template v-if="$slots.title">
-          <slot name="title" />
-        </template>
-        <span v-else>{{ title }}</span>
-        <template v-if="showLabel">
-          <div :class="[bem('label'), labelClass]">
-            <template v-if="$slots.label">
-              <slot name="label" />
-            </template>
-            <template v-else>{{ label }}</template>
-          </div>
-        </template>
+    <slot name="icon">
+      <c-icon v-if="icon" :name="icon" :class="bem('left-icon')" />
+    </slot>
+    <div
+      v-if="showTitle"
+      :class="[bem('title'), titleClass]"
+      :style="titleStyle"
+    >
+      <slot name="title">
+        <span>{{ title }}</span>
+      </slot>
+      <div v-if="showLabel" :class="[bem('label'), labelClass]">
+        <slot name="label">
+          {{ label }}
+        </slot>
       </div>
-    </template>
-    <template v-if="hasValue">
-      <div :class="[bem('value', { alone: !hasTitle }), valueClass]">
-        <template v-if="$slots.value">
-          <slot name="value" />
-        </template>
-        <template v-else-if="$slots.default">
-          <slot />
-        </template>
-        <template v-else>
+    </div>
+    <div
+      v-if="hasValue"
+      :class="[bem('value', { alone: !hasTitle }), valueClass]"
+    >
+      <slot name="value">
+        <slot>
           <span>{{ value }}</span>
-        </template>
-      </div>
-    </template>
-    <template v-if="$slots['right-icon']">
-      <slot name="right-icon" />
-    </template>
-    <template v-else-if="isLink">
+        </slot>
+      </slot>
+    </div>
+    <slot name="right-icon">
       <c-icon
+        v-if="isLink"
         :class="bem('right-icon')"
         :name="arrowDirection ? `arrow_${arrowDirection}` : `arrow_right`"
       ></c-icon>
-    </template>
+    </slot>
     <slot name="extra" />
   </div>
 </template>

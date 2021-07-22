@@ -1,12 +1,9 @@
 <template>
-  <template v-if="renderTitle">
-    <div :class="bem('title', { inset })">
-      <template v-if="$slots.title">
-        <slot name="title" />
-      </template>
-      <template v-else>{{ title }}</template>
-    </div>
-  </template>
+  <div v-if="renderTitle" :class="bem('title', { inset })">
+    <slot name="title">
+      {{ title }}
+    </slot>
+  </div>
   <div
     :class="[
       bem({ inset }),

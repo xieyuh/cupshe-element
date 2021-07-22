@@ -35,11 +35,9 @@
         :color="disabled ? disabledColor : item.isVoid ? voidColor : color"
       />
     </div>
-    <template v-if="$slots.text">
-      <span :class="bem('text')" @click="onTextClick">
-        <slot name="text" />
-      </span>
-    </template>
+    <span v-if="$slots.text" :class="bem('text')" @click="onTextClick">
+      <slot name="text" />
+    </span>
   </div>
 </template>
 

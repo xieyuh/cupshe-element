@@ -6,6 +6,17 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.4.0
+
+**New Component**
+
+- 新增 Radio, RadioGroup 组件
+
+**Feature**
+
+- Checkbox 新增 `icon` 插槽
+- Rate 新增 `text` 插槽
+
 ### v1.3.0
 
 **Feature**

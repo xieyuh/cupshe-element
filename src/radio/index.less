@@ -1,7 +1,7 @@
 @import './var.less';
 @import '../style/font.less';
 
-.c-checkbox {
+.c-radio {
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -19,7 +19,7 @@
 
   &__icon {
     flex: none;
-    font-size: @checkbox-size;
+    font-size: @radio-size;
     line-height: 1em;
     cursor: pointer;
 
@@ -54,14 +54,14 @@
 
     &--disabled&--checked {
       .c-icon {
-        color: @checkbox-disabled-icon-color;
+        color: @radio-disabled-icon-color;
       }
     }
   }
 
   &__label {
     color: #333;
-    line-height: @checkbox-size;
+    line-height: @radio-size;
     font-size: 14px;
 
     @media (min-width: 768px) {

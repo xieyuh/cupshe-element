@@ -5,7 +5,6 @@
       bem([
         {
           disabled: isDisabled,
-          'label-disabled': labelDisabled,
         },
         Direction,
       ])
@@ -14,28 +13,27 @@
     :aria-checked="checked"
     @click="onClick"
   >
-    <div
-      :class="
-        bem('icon', {
-          disabled: isDisabled,
-          checked,
-        })
-      "
-      ref="iconRef"
-      :style="{ fontSize: iconSize }"
-    >
-      <c-icon name="tick" />
-    </div>
-    <template v-if="$slots.default">
-      <span :class="bem('label', [{ disabled: isDisabled }])">
-        <slot />
-      </span>
-    </template>
+    <slot v-bind="{ checked, disabled: isDisabled }" name="icon">
+      <div
+        :class="
+          bem('icon', {
+            disabled: isDisabled,
+            checked,
+          })
+        "
+        :style="{ fontSize: iconSize }"
+      >
+        <c-icon name="tick" />
+      </div>
+    </slot>
+    <span v-if="$slots.default" :class="bem('label', { disabled: isDisabled })">
+      <slot />
+    </span>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, computed, PropType } from 'vue';
+import { computed, PropType } from 'vue';
 import { extend, unknownProp, truthProp, addUnit } from '../utils';
 
 export type CheckerDirection = 'horizontal' | 'vertical';
@@ -53,7 +51,6 @@ export const checkerProps = {
   disabled: Boolean,
   iconSize: [Number, String],
   modelValue: unknownProp,
-  labelDisabled: Boolean,
 };
 
 export default {
@@ -71,8 +68,6 @@ export default {
   emits: ['click', 'toggle'],
 
   setup(props, { emit }) {
-    const iconRef = ref<HTMLElement>();
-
     const getParentProps = <T extends keyof CheckerParent['props']>(
       name: T
     ) => {
@@ -88,11 +83,7 @@ export default {
     const Direction = computed(() => getParentProps('direction'));
 
     const onClick = (event: MouseEvent) => {
-      const { target } = event;
-      const icon = iconRef.value;
-      const iconClicked = icon === target || icon!.contains(target as Node);
-
-      if (!isDisabled.value && (iconClicked || !props.labelDisabled)) {
+      if (!isDisabled.value) {
         emit('toggle');
       }
       emit('click', event);
@@ -104,7 +95,6 @@ export default {
       iconSize: addUnit(iconSize),
       Direction,
       isDisabled,
-      iconRef,
       onClick,
     };
   },

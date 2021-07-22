@@ -11,12 +11,18 @@
   </demo-block>
 
   <demo-block title="禁用状态">
-    <c-checkbox :model-value="false" disabled> 复选框 </c-checkbox>
-    <c-checkbox :model-value="true" disabled> 复选框 </c-checkbox>
+    <c-checkbox :model-value="false" disabled>复选框</c-checkbox>
+    <c-checkbox :model-value="true" disabled>复选框</c-checkbox>
   </demo-block>
 
-  <demo-block title="禁用文本点击">
-    <c-checkbox v-model="checkboxLabel" label-disabled> 复选框 </c-checkbox>
+  <demo-block title="自定义图标">
+    <c-checkbox v-model="checkbox6"
+      >复选框
+      <template #icon="{ checked }">
+        <c-icon v-if="checked" name="tick" />
+        <c-icon v-else name="close" />
+      </template>
+    </c-checkbox>
   </demo-block>
 
   <demo-block title="复选框组">
@@ -61,6 +67,7 @@ export default {
       checkbox3: true,
       checkbox4: true,
       checkbox5: true,
+      checkbox6: true,
       checkboxShape: true,
       checkboxLabel: true,
       checboxIcon: true,

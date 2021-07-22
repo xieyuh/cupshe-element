@@ -38,6 +38,17 @@ export default {
 };
 ```
 
+### 水平排列
+
+通过设置 `direction` 属性值为 `horizontal` 设置为水平排列方式。
+
+```html
+<c-checkbox-group v-model="horizontalResult" direction="horizontal">
+  <c-checkbox name="a">复选框</c-checkbox>
+  <c-checkbox name="b">复选框</c-checkbox>
+</c-checkbox-group>
+```
+
 ### 禁用状态
 
 通过设置 `disabled` 属性可以禁用复选框。
@@ -46,12 +57,18 @@ export default {
 <c-checkbox v-model="checked" disabled>复选框</c-checkbox>
 ```
 
-### 禁用文本点击
+### 自定义图标
 
-设置 `label-disabled` 属性后，点击图标以外的内容不会触发复选框切换。
+通过 icon 插槽自定义图标，可以通过 slotProps 判断选中状态和禁用状态。
 
 ```html
-<c-checkbox v-model="checked" label-disabled>复选框</c-checkbox>
+<c-checkbox>
+  复选框
+  <template #icon="{ checked }">
+    <c-icon v-if="checked" name="tick" />
+    <c-icon v-else name="close" />
+  </template>
+</c-checkbox>
 ```
 
 ### 复选框组
@@ -99,8 +116,8 @@ export default {
   <c-checkbox name="c">复选框 c</c-checkbox>
 </c-checkbox-group>
 
-<van-button type="primary" @click="checkAll">全选</van-button>
-<van-button type="primary" @click="toggleAll">反选</van-button>
+<c-button type="primary" @click="checkAll">全选</c-button>
+<c-button type="primary" @click="toggleAll">反选</c-button>
 ```
 
 ```js
@@ -132,13 +149,12 @@ export default {
 
 ### Checkbox Props
 
-| 参数           | 说明                   | 类型      | 默认值  |
-| -------------- | ---------------------- | --------- | ------- |
-| v-model        | 是否为选中状态         | _boolean_ | `false` |
-| name           | 标识符                 | _any_     | -       |
-| disabled       | 是否禁用复选框         | _boolean_ | `false` |
-| label-disabled | 是否禁用复选框文本点击 | _boolean_ | `false` |
-| bind-group     | 是否与复选框组绑定     | _boolean_ | `true`  |
+| 参数       | 说明               | 类型      | 默认值  |
+| ---------- | ------------------ | --------- | ------- |
+| v-model    | 是否为选中状态     | _boolean_ | `false` |
+| name       | 标识符             | _any_     | -       |
+| disabled   | 是否禁用复选框     | _boolean_ | `false` |
+| bind-group | 是否与复选框组绑定 | _boolean_ | `true`  |
 
 ### CheckboxGroup Props
 

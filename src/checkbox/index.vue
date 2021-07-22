@@ -7,8 +7,9 @@
     @toggle="toggle"
     v-bind="props"
   >
-    <template #default>
-      <slot />
+    <slot />
+    <template #icon="prop">
+      <slot name="icon" v-bind="prop" />
     </template>
   </Checker>
 </template>
