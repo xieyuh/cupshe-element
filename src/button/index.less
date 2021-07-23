@@ -1,20 +1,17 @@
-@import './var.less';
 @import '../style/font.less';
 
 .c-button {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-  height: @button-default-height;
+  height: 44px;
   margin: 0;
   padding: 0;
-  font-size: @button-default-font-size;
-  line-height: @button-default-line-height;
+  line-height: 1.2;
   text-align: center;
   border-radius: 0;
   cursor: pointer;
   user-select: none;
-  transition: opacity @animation-duration-fast;
   letter-spacing: 1px;
   -webkit-appearance: none;
   z-index: 1;
@@ -45,48 +42,48 @@
   }
 
   &--primary {
-    color: @button-primary-color;
-    background-color: @button-primary-background-color;
-    border: @button-border-width solid @button-primary-border-color;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #000;
 
     &.c-button--cover {
-      .cover(@button-primary-color, @button-primary-background-color);
+      .cover(#fff, #000);
     }
   }
 
   &--default {
-    color: @button-default-color;
-    background-color: @button-default-background-color;
-    border: @button-border-width solid @button-default-border-color;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
 
     &.c-button--cover {
-      .cover(@button-default-color, @button-default-background-color);
+      .cover(#000, #fff);
     }
   }
 
   &--success {
-    color: @button-success-color;
-    background-color: @button-success-background-color;
-    border: @button-border-width solid @button-success-border-color;
+    color: #fff;
+    background-color: #00b45a;
+    border: 1px solid #00b45a;
   }
 
   &--warning {
-    color: @button-warning-color;
-    background-color: @button-warning-background-color;
-    border: @button-border-width solid @button-warning-border-color;
+    color: #fff;
+    background-color: #fa5050;
+    border: 1px solid #fa5050;
   }
 
   &--info {
-    color: @button-info-color;
-    background-color: @button-info-background-color;
-    border: @button-border-width solid @button-info-border-color;
+    color: #fff;
+    background-color: #1ea0f0;
+    border: 1px solid #1ea0f0;
   }
 
   &--ghost {
-    background-color: @button-ghost-background-color;
+    background-color: transparent;
 
     &.c-button--primary {
-      color: @button-primary-background-color;
+      color: #000;
     }
   }
 
@@ -130,8 +127,8 @@
 
     .c-loading__spinner {
       color: currentColor;
-      width: @button-loading-icon-size;
-      height: @button-loading-icon-size;
+      width: 20px;
+      height: 20px;
     }
   }
 
@@ -142,9 +139,9 @@
 
   &--disabled {
     cursor: not-allowed;
-    background: @button-disabled-color;
-    border: 1px solid @button-disabled-text-color;
-    color: @button-disabled-text-color;
+    background: #fafafa;
+    border: 1px solid #d8d8d8;
+    color: #d8d8d8;
   }
 
   &--loading {
@@ -163,7 +160,7 @@
   }
 
   &__icon {
-    font-size: @button-icon-size;
+    font-size: 20px;
     line-height: inherit;
   }
 
@@ -171,7 +168,7 @@
   &__loading + &__text,
   &__text + &__icon,
   &__text + &__loading {
-    margin-left: @padding-base;
+    margin-left: 4px;
   }
 }
 

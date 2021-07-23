@@ -78,14 +78,6 @@ module.exports = {
             path: 'input',
             title: 'Input 输入框',
           },
-          {
-            path: 'select',
-            title: 'Select 选择框',
-          },
-          {
-            path: 'form',
-            title: 'Form 表单',
-          },
         ],
       },
       {
@@ -98,6 +90,10 @@ module.exports = {
           {
             path: 'collapse',
             title: 'Collapse 折叠面板',
+          },
+          {
+            path: 'swipe',
+            title: 'Swipe 轮播图',
           },
         ],
       },
