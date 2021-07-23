@@ -13,3 +13,5 @@ export * from './use-refs';
 export * from './use-route';
 export * from './use-scroll-parent';
 export * from './use-touch';
+export * from './use-window-size';
+export * from './use-page-visibility';
