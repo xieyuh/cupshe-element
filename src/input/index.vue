@@ -1,151 +1,128 @@
 <template>
-  <span :class="bem('wrapper')">
-    <textarea
+  <span :class="bem()">
+    <span
       :class="
-        bem([
-          {
-            disabled: disabled,
-          },
-          'textarea',
-        ])
-      "
-      v-if="type === 'textarea'"
-      :value="inputValue"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :placeholder="placeholder"
-      :name="name"
-      :id="id"
-      @input="onInput"
-      :readonly="readonly"
-      :disabled="disabled"
-      @change="onChange"
-      @blur="onBlur"
-      @keypress.enter="pressEnter"
-    ></textarea>
-    <input
-      v-else
-      :class="
-        bem({
-          disabled: disabled,
-          readonly: readonly,
+        bem('wrapper', {
+          focused,
+          disabled,
+          readonly,
+          ['with-addon']: !!$slots.addon,
         })
       "
-      :value="inputValue"
-      :type="type"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :placeholder="placeholder"
-      :readonly="readonly"
-      :disabled="disabled"
-      :name="name"
-      :id="id"
-      @input="onInput"
-      @change="onChange"
-      @blur="onBlur"
-      @keypress.enter="pressEnter"
-    />
-    <!-- 清除 -->
-    <c-icon :name="icon" :class="bem('affix')" v-if="allowClear"></c-icon>
+    >
+      <div
+        :class="bem('prefix')"
+        v-if="$slots.prefix || prefix"
+        @click="onClickPrefix"
+      >
+        <slot name="prefix">
+          <c-icon :name="prefix" />
+        </slot>
+      </div>
+      <input v-bind="inputAttrs" />
+      <div
+        :class="bem('suffix')"
+        v-if="$slots.suffix || suffix"
+        @click="onClickSuffix"
+      >
+        <slot name="suffix">
+          <c-icon :name="suffix" />
+        </slot>
+      </div>
+    </span>
+    <div :class="bem('addon')" v-if="$slots.addon" @click="onClickAddon">
+      <slot name="addon" />
+    </div>
   </span>
 </template>
 
 <script lang="ts">
-import { PropType, reactive, toRefs, watch } from 'vue';
+import { ref } from 'vue';
 import { createNamespace, extend } from '../utils';
-
-import { useExpose, useParent } from '../composables';
-
-import { FORMITEM_KEY } from '../form-item/index.vue';
+import { inputProps } from './shared';
+import { endComposing } from './utils';
 
 const [name, bem] = createNamespace('input');
 
-export type inputType = 'text' | 'textarea';
-
-// export type ButtonSize = 'large' | 'normal' | 'small';
-
-const inputProps = {
-  name: String,
-  placeholder: String,
-  defaultValue: String,
-  disabled: Boolean,
-  id: String,
-  readonly: Boolean,
-  maxlength: Number,
-  minlength: Number,
-  type: {
-    type: String as PropType<inputType>,
-    default: 'text',
-  },
-  modelValue: String,
-  allowClear: Boolean,
-};
-
-const textareaProps = {
-  showCount: Boolean,
-};
 export default {
   name,
 
-  props: extend({}, textareaProps, inputProps),
+  props: extend({}, inputProps, {
+    addon: String,
+    prefix: String,
+    suffix: String,
+  }),
 
-  emits: ['pressEnter', 'change', 'blur', 'update:modelValue'],
+  emits: [
+    'update:modelValue',
+    'focus',
+    'blur',
+    'click-prefix',
+    'click-suffix',
+    'click-addon',
+  ],
 
   setup(props, { emit }) {
-    // 获取Form item父组件
-    const { parent, index } = useParent(FORMITEM_KEY);
+    const inputRef = ref<HTMLInputElement>();
+    const focused = ref(false);
 
-    console.log('item input', parent, index);
+    const focus = () => inputRef.value?.focus();
+    const blur = () => inputRef.value?.blur();
 
-    const state = reactive({
-      inputValue: props.modelValue || props.defaultValue,
-    });
-
-    watch(
-      () => props.modelValue,
-      (val) => {
-        state.inputValue = val;
-      }
-    );
-
-    watch(
-      () => state.inputValue,
-      (val) => {
-        emit('update:modelValue', val);
-        parent && parent.validateWithTrigger('change');
-      }
-    );
-
-    const onInput = (event) => {
-      state.inputValue = event.target.value;
-    };
-    const pressEnter = (event) => {
-      if (!props.disabled) {
-        emit('pressEnter', event);
+    const onFocus = (event: Event) => {
+      focused.value = true;
+      emit('focus', event);
+      if (props.readonly) {
+        blur();
       }
     };
-    const onChange = (event) => {
-      if (!props.disabled) {
-        emit('change', event);
-      }
-    };
-    const onBlur = (event) => {
+
+    const onBlur = (event: Event) => {
+      focused.value = false;
       emit('blur', event);
-      parent && parent.validateWithTrigger('blur');
     };
 
-    useExpose({
+    const updateValue = (value: string) => {
+      if (inputRef.value && inputRef.value.value !== value) {
+        inputRef.value.value = value;
+      }
+
+      if (value !== props.modelValue) {
+        emit('update:modelValue', value);
+      }
+    };
+
+    const onInput = (event: Event) => {
+      updateValue((event.target as HTMLInputElement).value);
+    };
+
+    const inputAttrs = {
+      ref: inputRef,
+      class: bem('control'),
+      value: props.modelValue,
+      disabled: props.disabled,
+      placeholder: props.placeholder,
+      autofocus: props.autofocus,
+      autocomplete: props.autocomplete,
+      onFocus,
       onBlur,
-      onChange,
-    });
+      onChange: endComposing,
+      onInput,
+    };
+
+    const onClickPrefix = (event: Event) => emit('click-prefix', event);
+    const onClickSuffix = (event: Event) => emit('click-suffix', event);
+    const onClickAddon = (event: Event) => emit('click-addon', event);
 
     return {
       bem,
-      onInput,
-      onChange,
-      onBlur,
-      pressEnter,
-      ...toRefs(state),
+      focused,
+      inputAttrs,
+      blur,
+      focus,
+      onClickPrefix,
+      onClickSuffix,
+      onClickAddon,
     };
   },
 };

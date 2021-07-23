@@ -1,64 +1,69 @@
 <template>
-  <demo-block title="基本用法">
+  <demo-block title="基础用法">
     <div class="demo-input-row">
-      <c-input
-        v-model="value"
-        placeholder="your name"
-        :maxlength="10"
-      ></c-input>
+      <c-input v-model="value0" placeholder="请输入文本" />
     </div>
   </demo-block>
-  <demo-block title="多行文本">
+
+  <demo-block title="禁用和只读">
     <div class="demo-input-row">
-      <c-input
-        v-model="value1"
-        type="textarea"
-        placeholder="your name"
-        :rows="3"
-        :cols="3"
-      ></c-input>
+      <c-input disabled model-value="123" />
+      <c-input readonly model-value="123" />
     </div>
   </demo-block>
-  <demo-block title="禁用输入框">
+
+  <demo-block title="前缀和后缀">
     <div class="demo-input-row">
-      <c-input default-value="禁用" disabled></c-input>
+      <c-input suffix="question" />
+      <c-input prefix="search" />
     </div>
+  </demo-block>
+
+  <demo-block title="插入按钮">
     <div class="demo-input-row">
-      <c-input default-value="只读" readonly></c-input>
+      <c-input>
+        <template #addon>
+          <c-button type="primary" size="large" icon="copy" />
+        </template>
+      </c-input>
     </div>
   </demo-block>
 </template>
+
 <script>
-import { toRefs, reactive } from '@vue/reactivity';
+import { reactive, toRefs } from 'vue';
 
 export default {
   setup() {
     const state = reactive({
-      value: '',
-      value1: '',
+      value0: '',
     });
+
+    const onChange = (value) => {
+      console.log(value);
+    };
+
     return {
       ...toRefs(state),
+      onChange,
     };
   },
 };
 </script>
+
 <style lang="less">
-@import '../../style/var';
-
 .demo-input {
-  background: @white;
-
-  .van-doc-demo-block {
-    padding: 0 @padding-md;
-  }
-
-  .van-doc-demo-block__title {
-    padding-left: 0;
-  }
+  background: #fff;
 
   &-row {
-    margin-bottom: 4px;
+    .c-input {
+      margin-bottom: 8px;
+      margin-left: 20px;
+    }
+  }
+
+  .van-doc-demo-block__title:not(:first-child) {
+    margin-top: -8px;
   }
 }
 </style>
