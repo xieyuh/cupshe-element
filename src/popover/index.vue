@@ -109,7 +109,6 @@ export default {
     show: Boolean,
     overlay: Boolean,
     duration: [Number, String],
-    iconPrefix: String,
     overlayClass: unknownProp,
     overlayStyle: Object as PropType<CSSProperties>,
     closeOnClickAction: truthProp,
