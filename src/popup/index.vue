@@ -3,7 +3,7 @@
     v-if="overlay"
     :show="show"
     :class="overlayClass"
-    :z-index="zIndex"
+    :z-index="z"
     :duration="duration"
     :custom-style="overlayStyle"
     @click="onClickOverlay"
@@ -228,7 +228,7 @@ export default {
 
     return {
       bem,
-      zIndex,
+      z: zIndex.value,
       transiionName,
       popupRef,
       style,
