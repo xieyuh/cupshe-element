@@ -59,6 +59,8 @@ export default {
 @import '../../style/font';
 
 .demo-style {
+  background: #fff;
+
   *[class*='c-muli'],
   .c-ellipsis,
   .c-multi-ellipsis--l2 {

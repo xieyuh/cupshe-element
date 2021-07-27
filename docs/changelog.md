@@ -6,6 +6,16 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.6.1
+
+**Feature**
+
+- Input 组件新增 `style` 属性用以自定义样式。新增 `onChange` 事件。
+
+**Bug Fixes**
+
+- 修复 Input 组件 `maxlength` 属性没有生效的问题，修复自定义高度下 `prefix` 和 `suffix` 没有居中的问题。
+
 ### v1.6.0
 
 **New Component**

@@ -20,11 +20,11 @@ cupshe-element 已将 `Muli` 系列字体内置，可通过 class 的方式直�
 @import 'cupshe-elemnt/lib/style/font.less';
 
 .some-class {
-  .muli-light();
-  .muli();
-  .muli-bold();
-  .muli-semibold();
-  .muli-extrabold();
+  .muli-light;
+  .muli;
+  .muli-bold;
+  .muli-semibold;
+  .muli-extrabold;
 }
 ```
 

@@ -1,5 +1,5 @@
 <template>
-  <span :class="bem()">
+  <span :class="bem()" :style="style">
     <span
       :class="
         bem('wrapper', {
@@ -55,6 +55,7 @@ export default {
 
   emits: [
     'update:modelValue',
+    'change',
     'focus',
     'blur',
     'click-prefix',
@@ -94,6 +95,7 @@ export default {
 
     const onInput = (event: Event) => {
       updateValue((event.target as HTMLInputElement).value);
+      emit('change', event);
     };
 
     const inputAttrs = {
@@ -104,6 +106,7 @@ export default {
       placeholder: props.placeholder,
       autofocus: props.autofocus,
       autocomplete: props.autocomplete,
+      maxlength: props.maxlength,
       onFocus,
       onBlur,
       onChange: endComposing,

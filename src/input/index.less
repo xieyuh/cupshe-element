@@ -6,11 +6,12 @@
 
   &__wrapper {
     display: inline-flex;
+    width: 100%;
     box-sizing: border-box;
     border: 1px solid #d8d8d8;
     color: #333;
     background: #fff;
-    transition: border 0.1s ease-in-out;
+    transition: border 0.2s;
     .muli-light;
 
     &--focused {
@@ -42,7 +43,8 @@
 
   &__prefix,
   &__suffix {
-    line-height: 42px;
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
 
     .c-icon {
@@ -52,6 +54,7 @@
 
   &__control {
     border: 0;
+    width: 100%;
     font-size: 14px;
     padding: 0 12px;
     cursor: inherit;

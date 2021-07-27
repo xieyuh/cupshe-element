@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import { CSSProperties, PropType } from 'vue';
 
 export type InputType = 'text' | 'password' | 'textarea';
 
@@ -8,6 +8,9 @@ export const inputProps = {
   autocomplete: Boolean,
   maxlength: [String, Number],
   defaultValue: [String, Number],
+  style: {
+    type: Object as PropType<CSSProperties>,
+  },
   type: {
     type: String as PropType<InputType>,
     default: 'text',

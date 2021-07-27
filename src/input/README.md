@@ -74,6 +74,7 @@ export default {
 | v-model      | 当前输入的值                                                                                              | _number \| string_ | -       |
 | maxlength    | 输入的最大字符数                                                                                          | _number \| string_ | -       |
 | placeholder  | 输入框占位提示文字                                                                                        | _string_           | -       |
+| style        | 自定义容器样式                                                                                            | _object_           | -       |
 | disabled     | 是否禁用输入框                                                                                            | _boolean_          | `false` |
 | readonly     | 是否为只读状态，只读状态下无法输入内容                                                                    | _boolean_          | `false` |
 | autofocus    | 是否自动聚焦，iOS 系统不支持该属性                                                                        | _boolean_          | `false` |
@@ -86,6 +87,7 @@ export default {
 | 事件               | 说明                 | 回调参数                       |
 | ------------------ | -------------------- | ------------------------------ |
 | update:model-value | 输入框内容变化时触发 | _value: string (当前输入的值)_ |
+| change             | 输入框内容变化时触发 | _event: Event_                 |
 | focus              | 输入框获得焦点时触发 | _event: Event_                 |
 | blur               | 输入框失去焦点时触发 | _event: Event_                 |
 | click-prefix       | 点击左侧图标时触发   | _event: MouseEvent_            |
