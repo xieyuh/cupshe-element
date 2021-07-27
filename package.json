@@ -1,6 +1,6 @@
 {
   "name": "cupshe-element",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "卡佩希 Vue 组件库",
   "main": "lib/cupshe-element.js",
   "style": "lib/index.css",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@vant/cli": "^3.9.0",
+    "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.0.0",
     "vue": "^3.0.0"
   },
@@ -51,5 +52,8 @@
   "browserslist": [
     "Chrome >= 51",
     "iOS >= 10"
-  ]
+  ],
+  "dependencies": {
+    "@popperjs/core": "^2.9.2"
+  }
 }

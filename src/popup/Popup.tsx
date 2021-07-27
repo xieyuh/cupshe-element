@@ -1,69 +1,32 @@
-<template>
-  <c-overlay
-    v-if="overlay"
-    :show="show"
-    :class="overlayClass"
-    :z-index="z"
-    :duration="duration"
-    :custom-style="overlayStyle"
-    @click="onClickOverlay"
-  >
-    <slot name="overlay-content" />
-  </c-overlay>
-  <transition
-    :name="transition || transiionName"
-    :appear="transitionAppear"
-    @after-enter="onOpened"
-    @after-leave="onClosed"
-  >
-    <div
-      v-bind="attrs"
-      v-show="show"
-      ref="popupRef"
-      :style="style"
-      :class="
-        bem({
-          [position]: position,
-        })
-      "
-      @click="onClick"
-    >
-      <slot />
-      <c-icon
-        v-if="closeable"
-        role="button"
-        tabindex="0"
-        :name="closeIcon"
-        :class="bem('close-icon', closeIconPosition)"
-        @click="onClickCloseIcon"
-      />
-    </div>
-  </transition>
-</template>
-
-<script lang="ts">
 import {
-  computed,
-  CSSProperties,
-  onActivated,
-  onDeactivated,
-  onMounted,
-  PropType,
-  provide,
   ref,
   watch,
+  provide,
+  Teleport,
+  computed,
+  PropType,
+  onMounted,
+  Transition,
+  onActivated,
+  CSSProperties,
+  onDeactivated,
+  defineComponent,
 } from 'vue';
+
+// Utils
 import { popupSharedProps } from './shared';
 import { createNamespace, extend, isDef } from '../utils';
 import { callInterceptor } from '../utils/interceptor';
-import {
-  useEventListener,
-  useExpose,
-  useLockScroll,
-  POPUP_TOGGLE_KEY,
-} from '../composables';
 
-const [name, bem] = createNamespace('popup');
+// Composables
+import { useEventListener } from '../composables';
+import { useExpose } from '../composables/use-expose';
+import { useLockScroll } from '../composables/use-lock-scroll';
+import { useLazyRender } from '../composables/use-lazy-render';
+import { POPUP_TOGGLE_KEY } from '../composables/on-popup-reopen';
+
+// Components
+import { Overlay } from '../overlay';
 
 export type PopupPosition = 'top' | 'left' | 'bottom' | 'right' | 'center' | '';
 
@@ -73,17 +36,21 @@ export type PopupCloseIconPosition =
   | 'bottom-left'
   | 'bottom-right';
 
+const [name, bem] = createNamespace('popup');
+
 let globalZIndex = 2000;
 
-export default {
+export default defineComponent({
   name,
 
   inheritAttrs: false,
 
   props: extend({}, popupSharedProps, {
+    round: Boolean,
     closeable: Boolean,
     transition: String,
     closeOnPopstate: Boolean,
+    safeAreaInsetBottom: Boolean,
     position: {
       type: String as PropType<PopupPosition>,
       default: 'center',
@@ -109,15 +76,17 @@ export default {
     'click-close-icon',
   ],
 
-  setup(props, { emit, attrs }) {
+  setup(props, { emit, attrs, slots }) {
     let opened: boolean;
     let shouldReopen: boolean;
 
     const zIndex = ref<number>();
     const popupRef = ref<HTMLElement>();
 
+    const lazyRender = useLazyRender(() => props.show || !props.lazyRender);
+
     const style = computed(() => {
-      const s: CSSProperties = {
+      const style: CSSProperties = {
         zIndex: zIndex.value,
       };
 
@@ -126,10 +95,10 @@ export default {
           props.position === 'center'
             ? 'animationDuration'
             : 'transitionDuration';
-        s[key] = `${props.duration}s`;
+        style[key] = `${props.duration}s`;
       }
 
-      return s;
+      return style;
     });
 
     const open = () => {
@@ -168,14 +137,82 @@ export default {
       }
     };
 
+    const renderOverlay = () => {
+      if (props.overlay) {
+        return (
+          <Overlay
+            v-slots={{ default: slots['overlay-content'] }}
+            show={props.show}
+            class={props.overlayClass}
+            zIndex={zIndex.value}
+            duration={props.duration}
+            customStyle={props.overlayStyle}
+            onClick={onClickOverlay}
+          />
+        );
+      }
+    };
+
     const onClickCloseIcon = (event: MouseEvent) => {
       emit('click-close-icon', event);
       close();
     };
 
+    const renderCloseIcon = () => {
+      if (props.closeable) {
+        return (
+          <c-icon
+            role="button"
+            tabindex={0}
+            name={props.closeIcon}
+            class={bem('close-icon', props.closeIconPosition)}
+            onClick={onClickCloseIcon}
+          />
+        );
+      }
+    };
+
     const onClick = (event: MouseEvent) => emit('click', event);
     const onOpened = () => emit('opened');
     const onClosed = () => emit('closed');
+
+    const renderPopup = lazyRender(() => {
+      const { round, position, safeAreaInsetBottom } = props;
+      return (
+        <div
+          v-show={props.show}
+          ref={popupRef}
+          style={style.value}
+          class={bem({
+            round,
+            [position]: position,
+            'safe-area-inset-bottom': safeAreaInsetBottom,
+          })}
+          onClick={onClick}
+          {...attrs}
+        >
+          {slots.default?.()}
+          {renderCloseIcon()}
+        </div>
+      );
+    });
+
+    const renderTransition = () => {
+      const { position, transition, transitionAppear } = props;
+      const name =
+        position === 'center' ? 'c-fade' : `c-popup-slide-${position}`;
+
+      return (
+        <Transition
+          name={transition || name}
+          appear={transitionAppear}
+          onAfterEnter={onOpened}
+          onAfterLeave={onClosed}
+        >
+          {renderPopup()}
+        </Transition>
+      );
+    };
 
     watch(
       () => props.show,
@@ -221,24 +258,22 @@ export default {
 
     provide(POPUP_TOGGLE_KEY, () => props.show);
 
-    const transiionName =
-      props.position === 'center'
-        ? 'c-fade'
-        : `c-popup-slide-${props.position}`;
+    return () => {
+      if (props.teleport) {
+        return (
+          <Teleport to={props.teleport}>
+            {renderOverlay()}
+            {renderTransition()}
+          </Teleport>
+        );
+      }
 
-    return {
-      bem,
-      z: zIndex.value,
-      transiionName,
-      popupRef,
-      style,
-      onClickOverlay,
-      onClick,
-      onOpened,
-      onClosed,
-      onClickCloseIcon,
-      attrs,
+      return (
+        <>
+          {renderOverlay()}
+          {renderTransition()}
+        </>
+      );
     };
   },
-};
-</script>
+});

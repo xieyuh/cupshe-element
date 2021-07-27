@@ -64,7 +64,7 @@ module.exports = {
           },
           {
             path: 'radio',
-            title: 'Radio 复选框',
+            title: 'Radio 单选框',
           },
           {
             path: 'rate',
@@ -84,16 +84,37 @@ module.exports = {
         title: '展示组件',
         items: [
           {
+            path: 'swipe',
+            title: 'Swipe 轮播图',
+          },
+          {
+            path: 'avatar',
+            title: 'Avatar 头像',
+          },
+          {
+            path: 'popover',
+            title: 'Popover 气泡弹出框',
+          },
+          {
             path: 'currency',
             title: 'Currency 货币',
           },
           {
-            path: 'collapse',
-            title: 'Collapse 折叠面板',
+            path: 'progress',
+            title: 'Progress 进度条',
           },
           {
-            path: 'swipe',
-            title: 'Swipe 轮播图',
+            path: 'tag',
+            title: 'Tag 标签',
+          },
+        ],
+      },
+      {
+        title: '导航组件',
+        items: [
+          {
+            path: 'pagination',
+            title: 'Pagination 分页器',
           },
         ],
       },

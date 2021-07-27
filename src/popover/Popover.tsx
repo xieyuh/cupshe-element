@@ -1,75 +1,37 @@
-<template>
-  <span ref="wrapperRef" :class="bem('wrapper')" @click="onClickWrapper">
-    <slot name="reference" />
-  </span>
-  <c-popup
-    ref="popoverRef"
-    :class="bem([theme])"
-    :lock-scroll="false"
-    position=""
-    transition="c-popover-zoom"
-    @touchstart="onTouchstart"
-    v-bind="attrs"
-    :show="show"
-    @update:show="updateShow"
-  >
-    <div :class="bem('arrow')" />
-    <div role="menu" :class="bem('content')">
-      <slot>
-        <div
-          role="menuitem"
-          :class="[
-            bem('action', {
-              disabled: item.disabled,
-              'with-icon': item.icon,
-            }),
-            item.className,
-          ]"
-          :style="{ color: item.color }"
-          v-for="(item, index) in actions"
-          :key="index"
-          @click="onClickAction(item, index)"
-        >
-          <c-icon
-            v-if="item.icon"
-            :name="item.icon"
-            :class="bem('action-icon')"
-          />
-          <div :class="[bem('action-text'), BORDER_BOTTOM]">
-            {{ item.text }}
-          </div>
-        </div>
-      </slot>
-    </div>
-  </c-popup>
-</template>
-
-<script lang="ts">
 import {
-  nextTick,
-  onMounted,
-  onBeforeUnmount,
-  PropType,
-  TeleportProps,
-  CSSProperties,
   ref,
   watch,
+  nextTick,
+  PropType,
+  onMounted,
+  CSSProperties,
+  TeleportProps,
+  onBeforeUnmount,
+  defineComponent,
 } from 'vue';
 import { Instance, createPopper, offsetModifier } from '../utils/popper';
+
+// Utils
 import {
-  createNamespace,
+  pick,
+  extend,
   truthProp,
   unknownProp,
+  createNamespace,
   ComponentInstance,
-  extend,
-  pick,
 } from '../utils';
-import { useClickAway } from '../composables';
 import { BORDER_BOTTOM } from '../utils/constant';
+
+// Composables
+import { useClickAway } from '../composables';
+
+// Components
+import { Popup } from '../popup';
 
 const [name, bem] = createNamespace('popover');
 
 const popupProps = [
+  'show',
   'overlay',
   'duration',
   'teleport',
@@ -102,7 +64,7 @@ export type PopoverAction = {
   className?: string;
 };
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -142,14 +104,14 @@ export default {
 
   emits: ['select', 'touchstart', 'update:show'],
 
-  setup(props, { emit, attrs }) {
+  setup(props, { emit, slots, attrs }) {
     let popper: Instance | null;
 
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
     const createPopperInstance = () => {
-      return createPopper(wrapperRef.value!, popoverRef.value!.popupRef, {
+      return createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
         placement: props.placement,
         modifiers: [
           {
@@ -218,6 +180,21 @@ export default {
       }
     };
 
+    const renderAction = (action: PopoverAction, index: number) => {
+      const { icon, text, color, disabled, className } = action;
+      return (
+        <div
+          role="menuitem"
+          class={[bem('action', { disabled, 'with-icon': icon }), className]}
+          style={{ color }}
+          onClick={() => onClickAction(action, index)}
+        >
+          {icon && <c-icon name={icon} class={bem('action-icon')} />}
+          <div class={[bem('action-text'), BORDER_BOTTOM]}>{text}</div>
+        </div>
+      );
+    };
+
     onMounted(updateLocation);
     onBeforeUnmount(() => {
       if (popper) {
@@ -230,17 +207,28 @@ export default {
 
     useClickAway(wrapperRef, onClickAway, { eventName: 'touchstart' });
 
-    return {
-      bem,
-      wrapperRef,
-      popoverRef,
-      onClickWrapper,
-      onTouchstart,
-      updateShow,
-      attrs: { ...attrs, ...pick(props, popupProps) },
-      onClickAction,
-      BORDER_BOTTOM,
-    };
+    return () => (
+      <>
+        <span ref={wrapperRef} class={bem('wrapper')} onClick={onClickWrapper}>
+          {slots.reference?.()}
+        </span>
+        <Popup
+          ref={popoverRef}
+          class={bem([props.theme])}
+          position={''}
+          transition="c-popover-zoom"
+          lockScroll={false}
+          onTouchstart={onTouchstart}
+          {...attrs}
+          {...pick(props, popupProps)}
+          {...{ 'onUpdate:show': updateShow }}
+        >
+          <div class={bem('arrow')} />
+          <div role="menu" class={bem('content')}>
+            {slots.default ? slots.default() : props.actions.map(renderAction)}
+          </div>
+        </Popup>
+      </>
+    );
   },
-};
-</script>
+});

@@ -16,7 +16,7 @@
   </demo-block>
 
   <demo-block title="自定义样式">
-    <c-tag checked-class="checked">Tag</c-tag>
+    <c-tag checked-class="checked" checked>Tag</c-tag>
   </demo-block>
 </template>
 

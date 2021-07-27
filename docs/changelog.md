@@ -14,6 +14,7 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 - 新增 Pagination 组件
 - 新增 Popover 组件
 - 新增 Progress 组件
+- 新增 Tag 组件
 
 **Feature**
 
