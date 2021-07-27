@@ -10,7 +10,7 @@
 
 ```js
 import { createApp } from 'vue';
-import { Popover } from 'vant';
+import { Popover } from 'cupshe-element';
 
 const app = createApp();
 app.use(Popover);
@@ -23,11 +23,11 @@ app.use(Popover);
 当 Popover 弹出时，会基于 `reference` 插槽的内容进行定位。
 
 ```html
-<van-popover v-model:show="showPopover" :actions="actions" @select="onSelect">
+<c-popover v-model:show="showPopover" :actions="actions" @select="onSelect">
   <template #reference>
-    <van-button type="primary">浅色风格</van-button>
+    <c-button type="primary">浅色风格</c-button>
   </template>
-</van-popover>
+</c-popover>
 ```
 
 ```js
@@ -60,11 +60,11 @@ export default {
 Popover 支持浅色和深色两种风格，默认为浅色风格，将 `theme` 属性设置为 `dark` 可切换为深色风格。
 
 ```html
-<van-popover v-model:show="showPopover" theme="dark" :actions="actions">
+<c-popover v-model:show="showPopover" theme="dark" :actions="actions">
   <template #reference>
-    <van-button type="primary">深色风格</van-button>
+    <c-button type="primary">深色风格</c-button>
   </template>
-</van-popover>
+</c-popover>
 ```
 
 ```js
@@ -92,7 +92,7 @@ export default {
 通过 `placement` 属性来控制气泡的弹出位置。
 
 ```html
-<van-popover placement="top" />
+<c-popover placement="top" />
 ```
 
 `placement` 支持以下值：
@@ -117,11 +117,11 @@ bottom-end    # 底部右侧位置
 在 `actions` 数组中，可以通过 `icon` 字段来定义选项的图标，支持传入[图标名称](#/zh-CN/icon)或图片链接。
 
 ```html
-<van-popover v-model:show="showPopover" :actions="actions">
+<c-popover v-model:show="showPopover" :actions="actions">
   <template #reference>
-    <van-button type="primary">展示图标</van-button>
+    <c-button type="primary">展示图标</c-button>
   </template>
-</van-popover>
+</c-popover>
 ```
 
 ```js
@@ -149,11 +149,11 @@ export default {
 在 `actions` 数组中，可以通过 `disabled` 字段来禁用某个选项。
 
 ```html
-<van-popover v-model:show="showPopover" :actions="actions">
+<c-popover v-model:show="showPopover" :actions="actions">
   <template #reference>
-    <van-button type="primary">禁用选项</van-button>
+    <c-button type="primary">禁用选项</c-button>
   </template>
-</van-popover>
+</c-popover>
 ```
 
 ```js
@@ -181,26 +181,20 @@ export default {
 通过默认插槽，可以在 Popover 内部放置任意内容。
 
 ```html
-<van-popover v-model:show="showPopover">
-  <van-grid
-    square
-    clickable
-    :border="false"
-    column-num="3"
-    style="width: 240px;"
-  >
-    <van-grid-item
+<c-popover v-model:show="showPopover">
+  <c-grid square clickable :border="false" column-num="3" style="width: 240px;">
+    <c-grid-item
       v-for="i in 6"
       :key="i"
       text="选项"
       icon="photo-o"
       @click="showPopover = false"
     />
-  </van-grid>
+  </c-grid>
   <template #reference>
-    <van-button type="primary">自定义内容</van-button>
+    <c-button type="primary">自定义内容</c-button>
   </template>
-</van-popover>
+</c-popover>
 ```
 
 ```js
@@ -218,23 +212,22 @@ export default {
 
 ### Props
 
-| 参数                             | 说明                                                                 | 类型                        | 默认值     |
-| -------------------------------- | -------------------------------------------------------------------- | --------------------------- | ---------- |
-| v-model:show                     | 是否展示气泡弹出层                                                   | _boolean_                   | `false`    |
-| actions                          | 选项列表                                                             | _Action[]_                  | `[]`       |
-| placement                        | 弹出位置                                                             | _string_                    | `bottom`   |
-| theme                            | 主题风格，可选值为 `dark`                                            | _string_                    | `light`    |
-| trigger                          | 触发方式，可选值为 `manual`                                          | `click`                     |
-| duration                         | 动画时长，单位秒                                                     | _number \| string_          | `0.3`      |
-| offset                           | 出现位置的偏移量                                                     | _[number, number]_          | `[0, 8]`   |
-| overlay                          | 是否显示遮罩层                                                       | _boolean_                   | `false`    |
-| overlay-class `v3.0.10`          | 自定义遮罩层类名                                                     | _string \| Array \| object_ | -          |
-| overlay-style `v3.0.10`          | 自定义遮罩层样式                                                     | _object_                    | -          |
-| close-on-click-action            | 是否在点击选项后关闭                                                 | _boolean_                   | `true`     |
-| close-on-click-outside           | 是否在点击外部元素后关闭菜单                                         | _boolean_                   | `true`     |
-| close-on-click-overlay `v3.0.10` | 是否在点击遮罩层后关闭菜单                                           | _boolean_                   | `true`     |
-| teleport                         | 指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)   | _string \| Element_         | `body`     |
-| icon-prefix `v3.0.17`            | 图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props) | _string_                    | `van-icon` |
+| 参数                             | 说明                                                               | 类型                        | 默认值   |
+| -------------------------------- | ------------------------------------------------------------------ | --------------------------- | -------- |
+| v-model:show                     | 是否展示气泡弹出层                                                 | _boolean_                   | `false`  |
+| actions                          | 选项列表                                                           | _Action[]_                  | `[]`     |
+| placement                        | 弹出位置                                                           | _string_                    | `bottom` |
+| theme                            | 主题风格，可选值为 `dark`                                          | _string_                    | `light`  |
+| trigger                          | 触发方式，可选值为 `manual`                                        | `click`                     |
+| duration                         | 动画时长，单位秒                                                   | _number \| string_          | `0.3`    |
+| offset                           | 出现位置的偏移量                                                   | _[number, number]_          | `[0, 8]` |
+| overlay                          | 是否显示遮罩层                                                     | _boolean_                   | `false`  |
+| overlay-class `v3.0.10`          | 自定义遮罩层类名                                                   | _string \| Array \| object_ | -        |
+| overlay-style `v3.0.10`          | 自定义遮罩层样式                                                   | _object_                    | -        |
+| close-on-click-action            | 是否在点击选项后关闭                                               | _boolean_                   | `true`   |
+| close-on-click-outside           | 是否在点击外部元素后关闭菜单                                       | _boolean_                   | `true`   |
+| close-on-click-overlay `v3.0.10` | 是否在点击遮罩层后关闭菜单                                         | _boolean_                   | `true`   |
+| teleport                         | 指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi) | _string \| Element_         | `body`   |
 
 ### Action 数据结构
 
@@ -265,26 +258,6 @@ export default {
 | --------- | --------------------------- |
 | default   | 自定义菜单内容              |
 | reference | 触发 Popover 显示的元素内容 |
-
-### 样式变量
-
-组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/config-provider)。
-
-| 名称                                           | 默认值                        | 描述 |
-| ---------------------------------------------- | ----------------------------- | ---- |
-| --van-popover-arrow-size                       | _6px_                         | -    |
-| --van-popover-border-radius                    | _var(--van-border-radius-lg)_ | -    |
-| --van-popover-action-width                     | _128px_                       | -    |
-| --van-popover-action-height                    | _44px_                        | -    |
-| --van-popover-action-font-size                 | _var(--van-font-size-md)_     | -    |
-| --van-popover-action-line-height               | _var(--van-line-height-md)_   | -    |
-| --van-popover-action-icon-size                 | _20px_                        | -    |
-| --van-popover-light-text-color                 | _var(--van-text-color)_       | -    |
-| --van-popover-light-background-color           | _var(--van-white)_            | -    |
-| --van-popover-light-action-disabled-text-color | _var(--van-gray-5)_           | -    |
-| --van-popover-dark-text-color                  | _var(--van-white)_            | -    |
-| --van-popover-dark-background-color            | _#4a4a4a_                     | -    |
-| --van-popover-dark-action-disabled-text-color  | _var(--van-gray-6)_           | -    |
 
 ## 常见问题
 
