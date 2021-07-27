@@ -1,0 +1,33 @@
+@import '../style/font.less';
+
+.c-pagination {
+  font-size: 14px;
+  text-align: center;
+  user-select: none;
+  .muli-light;
+
+  &__item {
+    display: inline-block;
+    width: 40px;
+    padding: 12px 0;
+    margin: 0 9px;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #333;
+
+    &--active {
+      color: #454545;
+      border-bottom: 3px solid #000;
+    }
+
+    &--ellipses {
+      cursor: auto;
+    }
+  }
+
+  &__prev,
+  &__next {
+    width: 6px;
+    height: 10px;
+  }
+}
