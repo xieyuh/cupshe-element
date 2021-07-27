@@ -1,0 +1,33 @@
+@import '../style/font.less';
+
+.c-progress {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  .muli-light;
+
+  &__text {
+    max-width: 80px;
+    margin-right: 16px;
+    color: #666;
+  }
+
+  &__track {
+    position: relative;
+    width: 140px;
+    height: 8px;
+    margin-right: 16px;
+    background: #f0f0f0;
+  }
+
+  &__portion {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    background: #000;
+  }
+
+  &__percentage {
+    color: #333;
+  }
+}
