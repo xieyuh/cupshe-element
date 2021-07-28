@@ -10,16 +10,6 @@
         <c-button type="primary">浅色风格</c-button>
       </template>
     </c-popover>
-    <c-popover
-      v-model:show="show.darkTheme"
-      theme="dark"
-      :actions="[{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }]"
-      @select="onSelect"
-    >
-      <template #reference>
-        <c-button type="primary"> 深色风格 </c-button>
-      </template>
-    </c-popover>
   </demo-block>
 
   <!-- <demo-block title="弹出位置">

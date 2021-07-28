@@ -40,7 +40,6 @@ const popupProps = [
   'closeOnClickOverlay',
 ] as const;
 
-export type PopoverTheme = 'light' | 'dark';
 export type PopoverTrigger = 'manual' | 'click';
 export type PopoverPlacement =
   | 'top'
@@ -79,10 +78,6 @@ export default defineComponent({
     offset: {
       type: (Array as unknown) as PropType<[number, number]>,
       default: () => [0, 8],
-    },
-    theme: {
-      type: String as PropType<PopoverTheme>,
-      default: 'light',
     },
     trigger: {
       type: String as PropType<PopoverTrigger>,
@@ -214,7 +209,7 @@ export default defineComponent({
         </span>
         <Popup
           ref={popoverRef}
-          class={bem([props.theme])}
+          class={bem()}
           position={''}
           transition="c-popover-zoom"
           lockScroll={false}

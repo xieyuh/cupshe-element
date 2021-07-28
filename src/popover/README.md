@@ -55,38 +55,6 @@ export default {
 };
 ```
 
-### 深色风格
-
-Popover 支持浅色和深色两种风格，默认为浅色风格，将 `theme` 属性设置为 `dark` 可切换为深色风格。
-
-```html
-<c-popover v-model:show="showPopover" theme="dark" :actions="actions">
-  <template #reference>
-    <c-button type="primary">深色风格</c-button>
-  </template>
-</c-popover>
-```
-
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const showPopover = ref(false);
-    const actions = [
-      { text: '选项一' },
-      { text: '选项二' },
-      { text: '选项三' },
-    ];
-
-    return {
-      actions,
-      showPopover,
-    };
-  },
-};
-```
-
 ### 弹出位置
 
 通过 `placement` 属性来控制气泡的弹出位置。
@@ -114,7 +82,7 @@ bottom-end    # 底部右侧位置
 
 ### 展示图标
 
-在 `actions` 数组中，可以通过 `icon` 字段来定义选项的图标，支持传入[图标名称](#/zh-CN/icon)或图片链接。
+在 `actions` 数组中，可以通过 `icon` 字段来定义选项的图标，支持传入[图标名称](#/icon)或图片链接。
 
 ```html
 <c-popover v-model:show="showPopover" :actions="actions">
@@ -217,7 +185,6 @@ export default {
 | v-model:show                     | 是否展示气泡弹出层                                                 | _boolean_                   | `false`  |
 | actions                          | 选项列表                                                           | _Action[]_                  | `[]`     |
 | placement                        | 弹出位置                                                           | _string_                    | `bottom` |
-| theme                            | 主题风格，可选值为 `dark`                                          | _string_                    | `light`  |
 | trigger                          | 触发方式，可选值为 `manual`                                        | `click`                     |
 | duration                         | 动画时长，单位秒                                                   | _number \| string_          | `0.3`    |
 | offset                           | 出现位置的偏移量                                                   | _[number, number]_          | `[0, 8]` |

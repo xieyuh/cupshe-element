@@ -24,6 +24,7 @@ app.use(Input);
 
 ```html
 <c-input v-model="value" placeholder="请输入文本" />
+<c-input v-model="value1" style="width: 220px" placeholder="自定义尺寸" />
 ```
 
 ```js

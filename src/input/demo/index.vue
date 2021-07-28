@@ -2,7 +2,7 @@
   <demo-block title="基础用法">
     <div class="demo-input-row">
       <c-input v-model="value0" placeholder="请输入文本" />
-      <c-input v-model="value1" style="width: 220px" placeholder="请输入文本" />
+      <c-input v-model="value1" style="width: 220px" placeholder="自定义尺寸" />
     </div>
   </demo-block>
 
