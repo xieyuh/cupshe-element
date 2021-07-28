@@ -19,7 +19,7 @@
           <c-icon :name="prefix" />
         </slot>
       </div>
-      <input v-bind="inputAttrs" />
+      <input v-bind="inputAttrs" :value="modelValue" />
       <div
         :class="bem('suffix')"
         v-if="$slots.suffix || suffix"
@@ -101,7 +101,6 @@ export default {
     const inputAttrs = {
       ref: inputRef,
       class: bem('control'),
-      value: props.modelValue,
       disabled: props.disabled,
       placeholder: props.placeholder,
       autofocus: props.autofocus,

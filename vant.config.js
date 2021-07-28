@@ -78,6 +78,10 @@ module.exports = {
             path: 'input',
             title: 'Input 输入框',
           },
+          {
+            path: 'select',
+            title: 'Select 选择器',
+          },
         ],
       },
       {

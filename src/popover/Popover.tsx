@@ -200,7 +200,7 @@ export default defineComponent({
 
     watch(() => [props.show, props.placement], updateLocation);
 
-    useClickAway(wrapperRef, onClickAway, { eventName: 'touchstart' });
+    useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
 
     return () => (
       <>
