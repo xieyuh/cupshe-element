@@ -7,7 +7,7 @@
   .muli-light;
 
   &__text {
-    flex-basis: 60px;
+    flex-basis: 65px;
     margin-right: 16px;
     color: #666;
   }
@@ -27,9 +27,17 @@
   }
 
   &__percentage {
-    margin-left: 16px;
     flex-basis: 45px;
-    text-align: right;
     color: #333;
+
+    @media (max-width: 768px) {
+      text-align: right;
+      margin-left: 10px;
+    }
+
+    @media (min-width: 768px) {
+      text-align: left;
+      margin-left: 16px;
+    }
   }
 }
