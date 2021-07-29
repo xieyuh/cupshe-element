@@ -23,16 +23,73 @@ app.use(Select);
 通过 `v-model` 来绑定当前评分值。
 
 ```html
-<c-rate v-model="value" />
+<c-select :options="option" v-model="select" placeholder="请选择" />
 ```
 
 ```js
-import { ref } from 'vue';
+import { reactive, toRefs } from 'vue';
 
 export default {
   setup() {
-    const value = ref(3);
-    return { value };
+    const state = reactive({
+      option: [
+        {
+          text: '选项 1',
+          value: '1',
+        },
+        {
+          text: '选项 2',
+          value: '2',
+        },
+      ],
+      select: '',
+    });
+
+    return { ...toRefs(state) };
+  },
+};
+```
+
+### 自定义选项内容
+
+通过 `option` 插槽来自定义选项内容。
+
+```html
+<c-select :options="option" v-model="select" placeholder="请选择">
+  <template #option="{ index }">
+    <c-rate :modelValue="index" readonly />
+  </template>
+</c-select>
+```
+
+```js
+import { reactive, toRefs } from 'vue';
+
+export default {
+  setup() {
+    const state = reactive({
+      option: [
+        {
+          text: '选项 1',
+          value: '1',
+        },
+        {
+          text: '选项 2',
+          value: '2',
+        },
+        {
+          text: '选项 3',
+          value: '3',
+        },
+        {
+          text: '选项 4',
+          value: '4',
+        },
+      ],
+      select: '',
+    }),
+
+    return { ...toRefs(state) };
   },
 };
 ```

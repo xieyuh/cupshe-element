@@ -18,7 +18,7 @@
         :class="bem('option', { selected: modelValue === item.value })"
         @click="onClickOption(item)"
       >
-        <slot name="option" v-bind="{ item }">
+        <slot name="option" v-bind="{ item, index }">
           {{ item.text }}
         </slot>
       </div>
