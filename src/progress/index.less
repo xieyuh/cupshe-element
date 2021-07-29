@@ -7,16 +7,15 @@
   .muli-light;
 
   &__text {
-    max-width: 80px;
+    flex-basis: 60px;
     margin-right: 16px;
     color: #666;
   }
 
   &__track {
     position: relative;
-    width: 140px;
+    flex: 1;
     height: 8px;
-    margin-right: 16px;
     background: #f0f0f0;
   }
 
@@ -28,6 +27,9 @@
   }
 
   &__percentage {
+    margin-left: 16px;
+    flex-basis: 45px;
+    text-align: right;
     color: #333;
   }
 }

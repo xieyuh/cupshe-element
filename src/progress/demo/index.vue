@@ -17,7 +17,7 @@
   </demo-block>
 
   <demo-block title="自定义内容">
-    <c-progress :percentage="50" text="progres6">
+    <c-progress :percentage="100" text="progres6">
       <template #text>
         <c-icon name="star" />
       </template>
