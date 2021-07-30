@@ -111,6 +111,10 @@ module.exports = {
             path: 'tag',
             title: 'Tag 标签',
           },
+          {
+            path: 'collapse',
+            title: 'Collapse 折叠面板',
+          },
         ],
       },
       {
