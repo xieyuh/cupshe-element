@@ -18,7 +18,9 @@
           {{ title }}
         </slot>
       </div>
-      <c-icon :class="bem('right-icon')" :name="rightIcon" />
+      <slot name="icon" v-bind="{ expanded }">
+        <c-icon :class="bem('right-icon')" :name="rightIcon" />
+      </slot>
     </div>
     <div
       v-show="show"

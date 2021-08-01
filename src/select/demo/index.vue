@@ -10,6 +10,24 @@
       </template>
     </c-select>
   </demo-block>
+
+  <demo-block title="自定义长度">
+    <c-select
+      :options="option1"
+      v-model="select3"
+      placeholder="请选择"
+      :style="{ width: '280px' }"
+    />
+  </demo-block>
+
+  <demo-block title="自定义大小">
+    <c-select
+      :options="option1"
+      v-model="select4"
+      placeholder="请选择"
+      size="small"
+    />
+  </demo-block>
 </template>
 
 <script>
@@ -21,11 +39,11 @@ export default {
       option0: [
         {
           text: '选项 1',
-          value: '1',
+          value: '选项 1',
         },
         {
           text: '选项 2',
-          value: '2',
+          value: '选项 2',
         },
       ],
       option1: [
@@ -48,6 +66,8 @@ export default {
       ],
       select1: '',
       select2: '',
+      select3: '',
+      select4: '',
     });
 
     return {
@@ -59,6 +79,8 @@ export default {
 
 <style lang="less">
 .demo-select {
+  background: #fff;
+
   .c-select {
     margin-left: 20px;
   }

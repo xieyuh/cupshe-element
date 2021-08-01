@@ -98,30 +98,28 @@ export default {
 
 ### Props
 
-| 参数           | 说明                                         | 类型               | 默认值    |
-| -------------- | -------------------------------------------- | ------------------ | --------- |
-| v-model        | 当前分值                                     | _number_           | -         |
-| count          | 图标总数                                     | _number \| string_ | `5`       |
-| size           | 尺寸，可选值为 `large` `small`               | _string_           | `normal`  |
-| gutter         | 图标间距，默认单位为`px`                     | _number \| string_ | `4px`     |
-| color          | 选中时的颜色                                 | _string_           | `#f6be42` |
-| void-color     | 未选中时的颜色                               | _string_           | `#c8c9cc` |
-| disabled-color | 禁用时的颜色                                 | _string_           | `#c8c9cc` |
-| icon           | 选中时的[图标名称](#/zh-CN/icon)或图片链接   | _string_           | `star`    |
-| void-icon      | 未选中时的[图标名称](#/zh-CN/icon)或图片链接 | _string_           | `star-o`  |
-| allow-half     | 是否允许半选                                 | _boolean_          | `false`   |
-| readonly       | 是否为只读状态，只读状态下无法修改评分       | _boolean_          | `false`   |
-| disabled       | 是否禁用评分                                 | _boolean_          | `false`   |
+| 参数        | 说明                            | 类型       | 默认值   |
+| ----------- | ------------------------------- | ---------- | -------- |
+| v-model     | 当前分值                        | _number_   | -        |
+| size        | 尺寸，可选值为 `normal` `small` | _number_   | `normal` |
+| placeholder | 输入框占位提示文字              | _string_   | -        |
+| options     | 选项列表                        | _Option[]_ | -        |
+
+### Option 数据结构
+
+| 参数  | 说明   | 类型             | 默认值 |
+| ----- | ------ | ---------------- | ------ |
+| text  | 文案   | _number_         | -      |
+| value | 选项值 | _number\|string_ | -      |
 
 ### Events
 
-| 事件名     | 说明                     | 回调参数            |
-| ---------- | ------------------------ | ------------------- |
-| change     | 当前分值变化时触发的事件 | 当前分值            |
-| click-text | 点击文案时触发的事件     | _event: MouseEvent_ |
+| 事件名 | 说明                     | 回调参数 |
+| ------ | ------------------------ | -------- |
+| change | 当前分值变化时触发的事件 | 当前分值 |
 
 ### Slots
 
-| 名称 | 说明     |
-| ---- | -------- |
-| text | 评分文案 |
+| 名称   | 说明     |
+| ------ | -------- |
+| option | 选项内容 |

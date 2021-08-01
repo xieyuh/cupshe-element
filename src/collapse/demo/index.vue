@@ -3,13 +3,11 @@
     <c-collapse v-model="active1">
       <c-collapse-item title="标题">文本</c-collapse-item>
       <c-collapse-item title="标题">文本</c-collapse-item>
-      <c-collapse-item title="标题">文本</c-collapse-item>
     </c-collapse>
   </demo-block>
 
   <demo-block title="标题栏大小">
     <c-collapse v-model="active2" size="small">
-      <c-collapse-item title="标题">文本</c-collapse-item>
       <c-collapse-item title="标题">文本</c-collapse-item>
       <c-collapse-item title="标题">文本</c-collapse-item>
     </c-collapse>
@@ -27,7 +25,6 @@
     <c-collapse v-model="active4" accordion theme="dark">
       <c-collapse-item title="标题">文本</c-collapse-item>
       <c-collapse-item title="标题">文本</c-collapse-item>
-      <c-collapse-item title="标题">文本</c-collapse-item>
     </c-collapse>
   </demo-block>
 
@@ -43,12 +40,22 @@
     <c-collapse v-model="active6">
       <c-collapse-item title="标题">文本</c-collapse-item>
       <c-collapse-item title="标题" disabled>文本</c-collapse-item>
-      <c-collapse-item title="标题" disabled>文本</c-collapse-item>
+    </c-collapse>
+  </demo-block>
+
+  <demo-block title="自定义图标">
+    <c-collapse v-model="active7">
+      <c-collapse-item title="标题"
+        >文本
+        <template #icon="{ expanded }">
+          <c-icon :name="expanded ? 'minus' : 'plus'" />
+        </template>
+      </c-collapse-item>
     </c-collapse>
   </demo-block>
 
   <demo-block title="自定义标题内容">
-    <c-collapse v-model="active7">
+    <c-collapse v-model="active8">
       <c-collapse-item>
         <template #title>标题<c-icon name="question" /></template>
         文本
@@ -70,6 +77,7 @@ export default {
       active5: [],
       active6: [],
       active7: [],
+      active8: [],
     });
 
     return {

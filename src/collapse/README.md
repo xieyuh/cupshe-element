@@ -2,7 +2,7 @@
 
 ### 介绍
 
-将一组内容放置在多个折叠面板中，点击面板的标题可以展开或收缩其内容。
+将一组内容放置在多个折叠面板中，点击面板的标题可以展开或收缩其内容。[PC 端预览](/mobile.html#/collapse)
 
 ### 引入
 
@@ -135,6 +135,21 @@ export default {
 </c-collapse>
 ```
 
+### 自定义图标
+
+通过 `icon` 插槽可以自定义图标。
+
+```html
+<c-collapse v-model="active7">
+  <c-collapse-item title="标题"
+    >文本
+    <template #icon="{ expanded }">
+      <c-icon :name="expanded ? 'minus' : 'plus'" />
+    </template>
+  </c-collapse-item>
+</c-collapse>
+```
+
 ### 自定义标题内容
 
 通过 `title` 插槽可以自定义标题栏的内容。
@@ -194,11 +209,11 @@ export default {
 
 ### CollapseItem Slots
 
-| 名称       | 说明                 |
-| ---------- | -------------------- |
-| default    | 面板内容             |
-| title      | 自定义标题栏左侧内容 |
-| right-icon | 自定义标题栏右侧图标 |
+| 名称    | 说明                 |
+| ------- | -------------------- |
+| default | 面板内容             |
+| title   | 自定义标题栏左侧内容 |
+| icon    | 自定义标题栏右侧图标 |
 
 ### CollapseItem 方法
 

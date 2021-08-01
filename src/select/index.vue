@@ -1,5 +1,5 @@
 <template>
-  <span ref="wrapperRef" :class="bem()">
+  <span ref="wrapperRef" :class="bem()" :style="style">
     <c-input v-bind="inputAttrs" />
   </span>
   <c-popup
@@ -11,7 +11,7 @@
     transition=""
     v-model:show="state.popupShow"
   >
-    <div :class="bem('content')">
+    <div :class="bem('content')" :style="contentStyle">
       <div
         v-for="(item, index) in options"
         :key="index"
@@ -34,16 +34,18 @@ import {
   onMounted,
   PropType,
   reactive,
+  CSSProperties,
   ref,
 } from 'vue';
 import {
   createNamespace,
   unknownProp,
   ComponentInstance,
-  extend,
+  addUnit,
 } from '../utils';
-import { Instance, createPopper, offsetModifier } from '../utils/popper';
-import { useClickAway } from '../composables';
+import { Instance, createPopper } from '../utils/popper';
+import { useClickAway, useRect } from '../composables';
+import { InputSize } from '../input/index.vue';
 
 const [name, bem] = createNamespace('select');
 
@@ -58,6 +60,13 @@ export default {
   props: {
     modelValue: unknownProp,
     placeholder: String,
+    size: {
+      type: String as PropType<InputSize>,
+      default: 'normal',
+    },
+    style: {
+      type: Object as PropType<CSSProperties>,
+    },
     options: {
       type: Array as PropType<SelectOption[]>,
       default: () => [],
@@ -71,6 +80,7 @@ export default {
 
     const state = reactive({
       popupShow: false,
+      popupWidth: 0,
     });
 
     const wrapperRef = ref<HTMLElement>();
@@ -87,11 +97,6 @@ export default {
               gpuAcceleration: false,
             },
           },
-          extend({}, offsetModifier, {
-            options: {
-              offset: [0, 10],
-            },
-          }),
         ],
       });
     };
@@ -101,6 +106,8 @@ export default {
         if (!state.popupShow) {
           return;
         }
+
+        state.popupWidth = useRect(wrapperRef).width;
 
         if (!popper) {
           popper = createPopperInstance();
@@ -131,10 +138,15 @@ export default {
     const inputAttrs = computed(() => ({
       readonly: true,
       suffix: 'arrow_down',
-      class: bem('reference'),
+      class: bem('control'),
       placeholder: props.placeholder,
       onFocus: () => updateShow(true),
       modelValue: props.modelValue,
+      size: props.size,
+    }));
+
+    const contentStyle = computed(() => ({
+      width: addUnit(state.popupWidth),
     }));
 
     onMounted(updateLocation);
@@ -150,6 +162,7 @@ export default {
       wrapperRef,
       popoverRef,
       inputAttrs,
+      contentStyle,
       onClickOption,
       state,
     };

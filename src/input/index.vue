@@ -1,5 +1,5 @@
 <template>
-  <span :class="bem()" :style="style">
+  <span :class="bem([size])" :style="style">
     <span
       :class="
         bem('wrapper', {
@@ -37,12 +37,14 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { PropType, ref } from 'vue';
 import { createNamespace, extend } from '../utils';
 import { inputProps } from './shared';
 import { endComposing } from './utils';
 
 const [name, bem] = createNamespace('input');
+
+export type InputSize = 'normal' | 'small';
 
 export default {
   name,
@@ -51,6 +53,10 @@ export default {
     addon: String,
     prefix: String,
     suffix: String,
+    size: {
+      type: String as PropType<InputSize>,
+      default: 'normal',
+    },
   }),
 
   emits: [
