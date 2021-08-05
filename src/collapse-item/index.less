@@ -17,8 +17,9 @@
     align-items: center;
 
     .c-collapse-item__right-icon::before {
+      color: #999;
       transform: rotate(0);
-      transition: transform @collapse-item-transition-duration;
+      transition: all @collapse-item-transition-duration;
     }
 
     &--light {
@@ -45,6 +46,7 @@
     &--expanded {
       .c-collapse-item__right-icon::before {
         transform: rotate(180deg);
+        color: #333;
       }
 
       &::after {
