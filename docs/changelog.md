@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.7.6
+
+**Fix**
+
+- Tag 组件选中状态字重从 `semi-bold` 调整到 `bold`
+
 ### v1.7.5
 
 **Feature**
