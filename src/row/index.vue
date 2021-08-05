@@ -13,7 +13,13 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, InjectionKey, PropType } from 'vue';
+import {
+  defineComponent,
+  computed,
+  ComputedRef,
+  InjectionKey,
+  PropType,
+} from 'vue';
 import { createNamespace, truthProp } from '../utils';
 import { useChildren } from '../composables';
 
@@ -29,7 +35,7 @@ type RowAlign = 'top' | 'center' | 'bottom';
 
 type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between';
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -95,5 +101,5 @@ export default {
       bem,
     };
   },
-};
+});
 </script>

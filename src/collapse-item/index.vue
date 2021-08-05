@@ -36,14 +36,21 @@
 </template>
 
 <script lang="ts">
-import { computed, CSSProperties, nextTick, ref, watch } from 'vue';
+import {
+  defineComponent,
+  computed,
+  CSSProperties,
+  nextTick,
+  ref,
+  watch,
+} from 'vue';
 import { addUnit, createNamespace, unknownProp } from '../utils';
 import { useParent, raf, doubleRaf, useExpose } from '../composables';
 import { COLLAPSE_KEY } from '../collapse/index.vue';
 
 const [name, bem] = createNamespace('collapse-item');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -60,14 +67,14 @@ export default {
     const { parent, index } = useParent(COLLAPSE_KEY);
 
     const name = computed(() => props.name ?? index.value);
-    const expanded = computed<boolean>(() => parent.isExpanded(name.value));
-    const { size, theme, border, gutter } = parent.props;
+    const expanded = computed<boolean>(() => parent!.isExpanded(name.value));
+    const { size, theme, border, gutter } = parent!.props;
 
     const show = ref(expanded.value);
 
     const style = computed<CSSProperties>(() => {
       if (index.value === 0) {
-        return;
+        return {};
       }
 
       return {
@@ -115,7 +122,7 @@ export default {
     });
 
     const toggle = (newValue = !expanded.value) => {
-      parent.toggle(name.value, newValue);
+      parent!.toggle(name.value, newValue);
     };
 
     const onClickTitle = () => {
@@ -150,5 +157,5 @@ export default {
       style,
     };
   },
-};
+});
 </script>

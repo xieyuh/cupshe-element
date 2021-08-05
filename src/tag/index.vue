@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import { CSSProperties, ref, watch } from 'vue';
+import { defineComponent, CSSProperties, ref, watch } from 'vue';
 import { createNamespace } from '../utils';
 
 const [name, bem] = createNamespace('tag');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -67,5 +67,5 @@ export default {
       onClick,
     };
   },
-};
+});
 </script>

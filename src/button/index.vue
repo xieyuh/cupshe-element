@@ -19,7 +19,12 @@
 </template>
 
 <script lang="ts">
-import { PropType, ButtonHTMLAttributes, CSSProperties } from 'vue';
+import {
+  defineComponent,
+  PropType,
+  ButtonHTMLAttributes,
+  CSSProperties,
+} from 'vue';
 import { useRoute, routeProps } from '../composables';
 import { createNamespace, extend } from '../utils';
 
@@ -29,7 +34,7 @@ export type ButtonType = 'info' | 'primary' | 'default' | 'success' | 'warning';
 
 export type ButtonSize = 'large' | 'normal' | 'small';
 
-export default {
+export default defineComponent({
   name,
 
   props: extend({}, routeProps, {
@@ -117,5 +122,5 @@ export default {
       onClick,
     };
   },
-};
+});
 </script>

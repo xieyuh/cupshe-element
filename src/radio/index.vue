@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { createNamespace } from '../utils';
 import { RADIO_KEY } from '../radio-group/index.vue';
 import { useParent } from '../composables';
@@ -23,7 +23,7 @@ import Checker, { checkerProps } from '../checkbox/checker.vue';
 
 const [name, bem] = createNamespace('radio');
 
-export default {
+export default defineComponent({
   name,
 
   components: { Checker },
@@ -56,5 +56,5 @@ export default {
       props,
     };
   },
-};
+});
 </script>

@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, nextTick, PropType } from 'vue';
+import { defineComponent, ref, computed, watch, nextTick, PropType } from 'vue';
 import {
   createNamespace,
   formatNumber,
@@ -52,7 +52,7 @@ function equal(value1?: string | number, value2?: string | number) {
 
 const [name, bem] = createNamespace('stepper');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -197,7 +197,7 @@ export default {
       () => props.modelValue,
       (value) => {
         if (!equal(value, current.value)) {
-          current.value = format(value);
+          current.value = format(value as string | number);
         }
       }
     );
@@ -246,5 +246,5 @@ export default {
       onBlur,
     };
   },
-};
+});
 </script>

@@ -8,14 +8,14 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { createNamespace } from '../utils';
 import { useParent } from '../composables';
 import { ROW_KEY } from '../row/index.vue';
 
 const [name, bem] = createNamespace('col');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -52,5 +52,5 @@ export default {
       style,
     };
   },
-};
+});
 </script>

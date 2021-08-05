@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { computed, watch } from 'vue';
+import { defineComponent, computed, watch } from 'vue';
 import { createNamespace, extend, truthProp } from '../utils';
 import { useParent } from '../composables/use-parent';
 import { useExpose } from '../composables/use-expose';
@@ -25,7 +25,7 @@ import Checker, { checkerProps } from './checker.vue';
 
 const [name, bem] = createNamespace('checkbox');
 
-export default {
+export default defineComponent({
   name,
 
   components: { Checker },
@@ -98,5 +98,5 @@ export default {
       props,
     };
   },
-};
+});
 </script>

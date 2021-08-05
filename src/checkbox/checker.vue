@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { computed, PropType } from 'vue';
+import { defineComponent, computed, PropType } from 'vue';
 import { extend, unknownProp, truthProp, addUnit } from '../utils';
 
 export type CheckerDirection = 'horizontal' | 'vertical';
@@ -53,7 +53,7 @@ export const checkerProps = {
   modelValue: unknownProp,
 };
 
-export default {
+export default defineComponent({
   props: extend({}, checkerProps, {
     role: String,
     parent: Object as PropType<CheckerParent | null>,
@@ -98,5 +98,5 @@ export default {
       onClick,
     };
   },
-};
+});
 </script>

@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { createNamespace, extend } from '../utils';
 import { inputProps } from './shared';
 import { endComposing } from './utils';
@@ -46,7 +46,7 @@ const [name, bem] = createNamespace('input');
 
 export type InputSize = 'normal' | 'small';
 
-export default {
+export default defineComponent({
   name,
 
   props: extend({}, inputProps, {
@@ -133,5 +133,5 @@ export default {
       onClickAddon,
     };
   },
-};
+});
 </script>

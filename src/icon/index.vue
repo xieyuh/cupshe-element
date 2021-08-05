@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { createNamespace, addUnit } from '../utils';
 
 const [name, bem] = createNamespace('icon');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -38,5 +38,5 @@ export default {
       isImageIcon,
     };
   },
-};
+});
 </script>

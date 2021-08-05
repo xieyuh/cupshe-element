@@ -65,12 +65,10 @@ export default {
 
 ### 自定义大小
 
-通过 `size` 属性设置图标大小，`color` 属性设置选中时的颜色，`void-color` 设置未选中时的颜色。
+通过 `size` 属性设置图标大小，可选值为 `normal`，`large`。
 
 ```html
-<c-rate v-model="value" size="small" />
-<c-rate v-model="value" />
-<c-rate v-model="value" size="large" />
+<c-rate v-model="value" /> <c-rate v-model="value" size="large" />
 ```
 
 ### 半星
@@ -166,7 +164,7 @@ export default {
 | -------------- | -------------------------------------------- | ------------------ | --------- |
 | v-model        | 当前分值                                     | _number_           | -         |
 | count          | 图标总数                                     | _number \| string_ | `5`       |
-| size           | 尺寸，可选值为 `large` `small`               | _string_           | `normal`  |
+| size           | 尺寸，可选值为 `large` `normal`              | _string_           | `normal`  |
 | gutter         | 图标间距，默认单位为`px`                     | _number \| string_ | `4px`     |
 | color          | 选中时的颜色                                 | _string_           | `#f6be42` |
 | void-color     | 未选中时的颜色                               | _string_           | `#c8c9cc` |

@@ -5,7 +5,13 @@
 </template>
 
 <script lang="ts">
-import { ExtractPropTypes, InjectionKey, PropType, watch } from 'vue';
+import {
+  defineComponent,
+  ExtractPropTypes,
+  InjectionKey,
+  PropType,
+  watch,
+} from 'vue';
 import { createNamespace, unknownProp } from '../utils';
 import { useChildren, useLinkField } from '../composables';
 import type { CheckerDirection } from '../checkbox/checker.vue';
@@ -26,7 +32,7 @@ export type RadioGroupProvide = {
 
 export const RADIO_KEY: InjectionKey<RadioGroupProvide> = Symbol(name);
 
-export default {
+export default defineComponent({
   name,
 
   props,
@@ -53,5 +59,5 @@ export default {
       bem,
     };
   },
-};
+});
 </script>

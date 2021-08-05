@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { createNamespace, extend, isDef, padZero } from '../utils';
-import { symbols, Symbol, Formatter } from './symbol';
+import { symbols, CurrencySymbol, Formatter } from './symbol';
 
 const [name, bem] = createNamespace('currency');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -30,7 +30,7 @@ export default {
       type: Object as PropType<Record<string, string>>,
     },
     title: {
-      type: String as PropType<Symbol>,
+      type: String as PropType<CurrencySymbol>,
       default: 'USD',
     },
     showTitle: {
@@ -66,7 +66,7 @@ export default {
       }
 
       const val = String(props.value);
-      const cells = val.match(/^(-?)(\d*)(\.(\d+))?$/);
+      const cells = val.match(/^(-?)(\d*)(\.(\d+))?$/) as RegExpMatchArray;
       let int = cells[2] || '0';
       let decimal = cells[4] || '';
       int = int.replace(/\B(?=(\d{3})+(?!\d))/g, props.groupSeparator);
@@ -91,5 +91,5 @@ export default {
       getSymbol,
     };
   },
-};
+});
 </script>

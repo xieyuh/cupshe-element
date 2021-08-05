@@ -19,9 +19,6 @@
 
   <demo-block title="自定义大小">
     <div>
-      <c-rate v-model="value3" size="small" />
-    </div>
-    <div>
       <c-rate v-model="value3" />
     </div>
     <div>

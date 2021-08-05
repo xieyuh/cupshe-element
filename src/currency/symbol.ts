@@ -6,7 +6,7 @@ export const symbols = {
   MXN: '$',
 };
 
-export type Symbol = keyof typeof symbols;
+export type CurrencySymbol = keyof typeof symbols;
 
 export interface Formatter {
   (value: string | number): string;

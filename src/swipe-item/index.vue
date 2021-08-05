@@ -5,14 +5,21 @@
 </template>
 
 <script lang="ts">
-import { computed, CSSProperties, nextTick, onMounted, reactive } from 'vue';
+import {
+  defineComponent,
+  computed,
+  CSSProperties,
+  nextTick,
+  onMounted,
+  reactive,
+} from 'vue';
 import { createNamespace } from '../utils';
 import { useParent, useExpose } from '../composables';
 import { SWIPE_KEY } from '../swipe/index.vue';
 
 const [name, bem] = createNamespace('swipe-item');
 
-export default {
+export default defineComponent({
   name,
 
   setup() {
@@ -28,10 +35,10 @@ export default {
 
     const style = computed(() => {
       const s: CSSProperties = {};
-      const { vertical } = parent.props;
+      const { vertical } = parent!.props;
 
-      if (parent.size.value) {
-        s[vertical ? 'height' : 'width'] = `${parent.size.value}px`;
+      if (parent!.size.value) {
+        s[vertical ? 'height' : 'width'] = `${parent!.size.value}px`;
       }
 
       if (state.offset) {
@@ -42,7 +49,7 @@ export default {
     });
 
     const shouldRender = computed(() => {
-      const { loop, lazyRender } = parent.props;
+      const { loop, lazyRender } = parent!.props;
 
       if (!lazyRender || rendered) {
         return true;
@@ -52,8 +59,8 @@ export default {
         return false;
       }
 
-      const active = parent.activeIndicator.value;
-      const maxActive = parent.count.value - 1;
+      const active = parent!.activeIndicator.value;
+      const maxActive = parent!.count.value - 1;
       const prevActive = active === 0 && loop ? maxActive : active - 1;
       const nextActive = active === maxActive && loop ? 0 : active + 1;
       rendered =
@@ -82,5 +89,5 @@ export default {
       shouldRender,
     };
   },
-};
+});
 </script>

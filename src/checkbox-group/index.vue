@@ -5,7 +5,13 @@
 </template>
 
 <script lang="ts">
-import { PropType, watch, InjectionKey, ExtractPropTypes } from 'vue';
+import {
+  defineComponent,
+  PropType,
+  watch,
+  InjectionKey,
+  ExtractPropTypes,
+} from 'vue';
 import { CheckerParent, CheckerDirection } from '../checkbox/checker.vue';
 import { createNamespace } from '../utils';
 import { useChildren, useExpose, useLinkField } from '../composables';
@@ -39,7 +45,7 @@ export const CHECKBOX_GROUP_KEY: InjectionKey<CheckboxGroupProvide> = Symbol(
   name
 );
 
-export default {
+export default defineComponent({
   name,
 
   props,
@@ -90,5 +96,5 @@ export default {
       bem,
     };
   },
-};
+});
 </script>

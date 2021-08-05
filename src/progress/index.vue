@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import {
+  defineComponent,
   computed,
   CSSProperties,
   nextTick,
@@ -27,7 +28,7 @@ import { addUnit, createNamespace } from '../utils';
 
 const [name, bem] = createNamespace('progress');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -76,5 +77,5 @@ export default {
       portionStyle,
     };
   },
-};
+});
 </script>

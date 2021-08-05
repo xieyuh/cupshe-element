@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import {
+  defineComponent,
   computed,
   nextTick,
   onBeforeUnmount,
@@ -54,7 +55,7 @@ type SelectOption = {
   value: string | number;
 };
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -167,5 +168,5 @@ export default {
       state,
     };
   },
-};
+});
 </script>

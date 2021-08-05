@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { computed, watch } from 'vue';
+import { defineComponent, computed, watch } from 'vue';
 import { createNamespace } from '../utils';
 
 const [name, bem] = createNamespace('pagination');
@@ -45,7 +45,7 @@ function makePage(
   return { number, ellipses, active };
 }
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -73,8 +73,8 @@ export default {
         items.push(page);
       }
 
-      const prefixItems = [];
-      const suffixItems = [];
+      const prefixItems: PageItem[] = [];
+      const suffixItems: PageItem[] = [];
 
       if (startPage > 1) {
         prefixItems.push({ number: 1, active: false });
@@ -118,5 +118,5 @@ export default {
       select,
     };
   },
-};
+});
 </script>

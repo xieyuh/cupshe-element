@@ -17,12 +17,13 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 import { truthProp, createNamespace } from '../utils';
 import { BORDER_TOP_BOTTOM } from '../utils/constant';
 
 const [name, bem] = createNamespace('cell-group');
 
-export default {
+export default defineComponent({
   name,
 
   inheritAttrs: false,
@@ -42,5 +43,5 @@ export default {
       BORDER_TOP_BOTTOM,
     };
   },
-};
+});
 </script>

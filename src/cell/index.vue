@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, CSSProperties } from 'vue';
+import { defineComponent, PropType, CSSProperties } from 'vue';
 import { useRoute, routeProps } from '../composables';
 import {
   createNamespace,
@@ -80,7 +80,7 @@ export const cellProps = {
   },
 };
 
-export default {
+export default defineComponent({
   name,
 
   props: extend({}, cellProps, routeProps),
@@ -122,5 +122,5 @@ export default {
       isClickable,
     };
   },
-};
+});
 </script>

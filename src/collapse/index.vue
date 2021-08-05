@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { ExtractPropTypes, InjectionKey, PropType } from 'vue';
+import { defineComponent, ExtractPropTypes, InjectionKey, PropType } from 'vue';
 import { createNamespace } from '../utils';
 import { useChildren } from '../composables';
 
@@ -65,7 +65,7 @@ function validateModelValue(
   return true;
 }
 
-export default {
+export default defineComponent({
   name,
 
   props,
@@ -110,5 +110,5 @@ export default {
       bem,
     };
   },
-};
+});
 </script>

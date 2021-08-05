@@ -10,12 +10,12 @@
 </template>
 
 <script lang="ts">
-import { computed, CSSProperties } from 'vue';
+import { defineComponent, computed, CSSProperties } from 'vue';
 import { createNamespace } from '../utils';
 
 const [name, bem] = createNamespace('avatar');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -49,5 +49,5 @@ export default {
       textStyle,
     };
   },
-};
+});
 </script>

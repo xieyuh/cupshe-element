@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import {
+  defineComponent,
   ref,
   reactive,
   computed,
@@ -94,7 +95,7 @@ const [name, bem] = createNamespace('swipe');
 
 export const SWIPE_KEY: InjectionKey<SwipeProvide> = Symbol(name);
 
-export default {
+export default defineComponent({
   name,
 
   props,
@@ -458,5 +459,5 @@ export default {
       onTouchMove,
     };
   },
-};
+});
 </script>

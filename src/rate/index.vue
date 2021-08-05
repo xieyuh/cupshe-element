@@ -42,13 +42,13 @@
 </template>
 
 <script lang="ts">
-import { computed, CSSProperties, PropType } from 'vue';
+import { defineComponent, computed, CSSProperties, PropType } from 'vue';
 import { addUnit, createNamespace } from '../utils';
 import { useRefs, useLinkField } from '../composables';
 
 type RateStatus = 'full' | 'half' | 'void';
 
-type RateSize = 'small' | 'middle' | 'large';
+type RateSize = 'normal' | 'large';
 
 type RateListItem = {
   value: number;
@@ -82,7 +82,7 @@ function getRateStatus(
 
 const [name, bem] = createNamespace('rate');
 
-export default {
+export default defineComponent({
   name,
 
   props: {
@@ -95,7 +95,7 @@ export default {
     disabledColor: String,
     size: {
       type: String as PropType<RateSize>,
-      default: 'middle',
+      default: 'normal',
     },
     modelValue: {
       type: Number,
@@ -175,9 +175,9 @@ export default {
       const isVoid = item.status === 'void';
       const renderHalf = props.allowHalf && item.value > 0 && item.value < 1;
 
-      let style: CSSProperties;
+      const style: CSSProperties = {};
       if (props.gutter && score !== +props.count) {
-        style = { paddingRight: addUnit(props.gutter) };
+        style.paddingRight = addUnit(props.gutter);
       }
 
       const onClickItem = (event: MouseEvent) => {
@@ -207,5 +207,5 @@ export default {
       onTextClick,
     };
   },
-};
+});
 </script>
