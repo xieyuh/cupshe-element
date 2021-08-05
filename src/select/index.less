@@ -2,6 +2,7 @@
 
 .c-select {
   display: inline-block;
+  cursor: pointer;
 
   &__control {
     width: 100%;
@@ -19,6 +20,7 @@
     padding-left: 12px;
     line-height: 36px;
     cursor: pointer;
+    user-select: none;
     color: #333;
     .muli-light;
 
@@ -29,5 +31,15 @@
     &--selected {
       .muli-bold;
     }
+
+    &--disabled {
+      background-color: #fafafa;
+      cursor: not-allowed;
+      color: #999;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
   }
 }

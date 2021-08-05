@@ -1,5 +1,10 @@
 <template>
-  <span ref="wrapperRef" :class="bem()" :style="style">
+  <span
+    ref="wrapperRef"
+    :class="bem({ disabled })"
+    :style="style"
+    @click="onClickWrapper"
+  >
     <c-input v-bind="inputAttrs" />
   </span>
   <c-popup
@@ -15,8 +20,13 @@
       <div
         v-for="(item, index) in options"
         :key="index"
-        :class="bem('option', { selected: modelValue === item.value })"
-        @click="onClickOption(item)"
+        :class="
+          bem('option', {
+            disabled: item.disabled,
+            selected: modelValue === item.value,
+          })
+        "
+        @click="onClickOption(item, $event)"
       >
         <slot name="option" v-bind="{ item, index }">
           {{ item.text }}
@@ -43,6 +53,7 @@ import {
   unknownProp,
   ComponentInstance,
   addUnit,
+  preventDefault,
 } from '../utils';
 import { Instance, createPopper } from '../utils/popper';
 import { useClickAway, useRect } from '../composables';
@@ -53,6 +64,7 @@ const [name, bem] = createNamespace('select');
 type SelectOption = {
   text: string;
   value: string | number;
+  disabled?: boolean;
 };
 
 export default defineComponent({
@@ -61,6 +73,7 @@ export default defineComponent({
   props: {
     modelValue: unknownProp,
     placeholder: String,
+    disabled: Boolean,
     size: {
       type: String as PropType<InputSize>,
       default: 'normal',
@@ -128,10 +141,21 @@ export default defineComponent({
       updateLocation();
     };
 
-    const onClickOption = (option: SelectOption) => {
+    const onClickOption = (option: SelectOption, event: Event) => {
+      if (option.disabled) {
+        return preventDefault(event, true);
+      }
+
       emit('change', option);
       emit('update:modelValue', option.value);
       state.popupShow = false;
+    };
+
+    const onClickWrapper = () => {
+      if (props.disabled) {
+        return;
+      }
+      updateShow(true);
     };
 
     useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
@@ -140,8 +164,8 @@ export default defineComponent({
       readonly: true,
       suffix: 'arrow_down',
       class: bem('control'),
+      disabled: props.disabled,
       placeholder: props.placeholder,
-      onFocus: () => updateShow(true),
       modelValue: props.modelValue,
       size: props.size,
     }));
@@ -164,6 +188,7 @@ export default defineComponent({
       popoverRef,
       inputAttrs,
       contentStyle,
+      onClickWrapper,
       onClickOption,
       state,
     };

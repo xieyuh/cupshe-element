@@ -6,6 +6,16 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.7.5
+
+**Feature**
+
+- Select 组件支持组件级和选项级的 `disabled` 属性
+
+**Fix**
+
+- 修复了 Select 组件点击 icon 不能弹出选项的问题
+
 ### v1.7.2
 
 **Feature**

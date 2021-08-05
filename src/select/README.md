@@ -94,6 +94,51 @@ export default {
 };
 ```
 
+### 禁用状态
+
+通过 `disabled` 属性设置禁用状态。
+
+```html
+<c-select :options="option" v-model="select" placeholder="请选择" disabled />
+```
+
+### 选项禁用
+
+通过 `option` 插槽来自定义选项内容。
+
+```html
+<c-select :options="option" v-model="select" placeholder="请选择" disabled />
+```
+
+```js
+import { reactive, toRefs } from 'vue';
+
+export default {
+  setup() {
+    const state = reactive({
+      option: [
+        {
+          text: '选项 1',
+          value: '1',
+        },
+        {
+          text: '选项 2',
+          value: '2',
+          disabled: true
+        },
+        {
+          text: '选项 3',
+          value: '3',
+        },
+      ],
+      select: '',
+    }),
+
+    return { ...toRefs(state) };
+  },
+};
+```
+
 ## API
 
 ### Props
@@ -103,14 +148,16 @@ export default {
 | v-model     | 当前分值                        | _number_   | -        |
 | size        | 尺寸，可选值为 `normal` `small` | _number_   | `normal` |
 | placeholder | 输入框占位提示文字              | _string_   | -        |
+| disabled    | 禁用状态                        | _boolean_  | `false`  |
 | options     | 选项列表                        | _Option[]_ | -        |
 
 ### Option 数据结构
 
-| 参数  | 说明   | 类型             | 默认值 |
-| ----- | ------ | ---------------- | ------ |
-| text  | 文案   | _number_         | -      |
-| value | 选项值 | _number\|string_ | -      |
+| 参数     | 说明     | 类型             | 默认值  |
+| -------- | -------- | ---------------- | ------- |
+| text     | 文案     | _number_         | -       |
+| value    | 选项值   | _number\|string_ | -       |
+| disabled | 禁用状态 | _boolean_        | `false` |
 
 ### Events
 
