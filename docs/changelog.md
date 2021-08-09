@@ -6,6 +6,13 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.7.7
+
+**Fix**
+
+- 修复了 Select 通过点击控件不能切换开关状态的问题
+- 修复了 Rate 图标行高问题
+
 ### v1.7.6
 
 **Fix**
