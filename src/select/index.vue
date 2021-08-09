@@ -155,7 +155,7 @@ export default defineComponent({
       if (props.disabled) {
         return;
       }
-      updateShow(true);
+      updateShow(!state.popupShow);
     };
 
     useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
