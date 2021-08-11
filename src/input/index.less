@@ -3,20 +3,13 @@
 .c-input {
   display: inline-flex;
 
-  &--normal {
-    height: 44px;
-  }
-
-  &--small {
-    height: 36px;
-  }
-
   &__wrapper {
     display: inline-flex;
     width: 100%;
+    padding: 12px;
+    color: #333;
     box-sizing: border-box;
     border: 1px solid #d8d8d8;
-    color: #333;
     background: #fff;
     transition: border 0.2s;
     .muli-light;
@@ -41,11 +34,11 @@
   }
 
   &__prefix {
-    padding-left: 12px;
+    padding-right: 12px;
   }
 
   &__suffix {
-    padding-right: 12px;
+    padding-left: 12px;
   }
 
   &__prefix,
@@ -62,10 +55,18 @@
 
   &__control {
     border: 0;
+    height: 100%;
     width: 100%;
+    padding: 0;
+    line-height: 18px;
     font-size: 14px;
-    padding: 0 12px;
+    background: transparent;
     cursor: inherit;
+
+    &--textarea {
+      line-height: 21px;
+      resize: none;
+    }
 
     &::-webkit-input-placeholder {
       color: #999;

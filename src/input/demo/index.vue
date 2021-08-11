@@ -6,12 +6,6 @@
     </div>
   </demo-block>
 
-  <demo-block title="输入框尺寸">
-    <div class="demo-input-row">
-      <c-input v-model="value2" size="small" placeholder="请输入文本" />
-    </div>
-  </demo-block>
-
   <demo-block title="禁用和只读">
     <div class="demo-input-row">
       <c-input disabled model-value="123" />
@@ -19,10 +13,16 @@
     </div>
   </demo-block>
 
-  <demo-block title="前缀和后缀">
+  <demo-block title="显示图标">
     <div class="demo-input-row">
       <c-input v-model="value3" suffix="question" />
       <c-input v-model="value4" prefix="search" />
+    </div>
+  </demo-block>
+
+  <demo-block title="多行文本">
+    <div class="demo-input-row">
+      <c-input v-model="value5" rows="2" type="textarea" autosize />
     </div>
   </demo-block>
 

@@ -1,5 +1,5 @@
 <template>
-  <span :class="bem([size])" :style="style">
+  <span :class="bem()" :style="style">
     <span
       :class="
         bem('wrapper', {
@@ -19,7 +19,7 @@
           <c-icon :name="prefix" />
         </slot>
       </div>
-      <input v-bind="inputAttrs" :value="modelValue" />
+      <component :is="inputElement" v-bind="inputAttrs" />
       <div
         :class="bem('suffix')"
         v-if="$slots.suffix || suffix"
@@ -37,26 +37,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import { createNamespace, extend } from '../utils';
-import { inputProps } from './shared';
-import { endComposing } from './utils';
+import { defineComponent, nextTick, onMounted, ref, watch } from 'vue';
+import { useExpose } from '../composables';
+import { createNamespace, extend, isDef } from '../utils';
+import { inputProps, textareaProps, InputExpose } from './shared';
+import { endComposing, resizeTextarea, mapInputType } from './utils';
 
 const [name, bem] = createNamespace('input');
-
-export type InputSize = 'normal' | 'small';
 
 export default defineComponent({
   name,
 
-  props: extend({}, inputProps, {
+  props: extend({}, inputProps, textareaProps, {
+    name: String,
     addon: String,
     prefix: String,
     suffix: String,
-    size: {
-      type: String as PropType<InputSize>,
-      default: 'normal',
-    },
   }),
 
   emits: [
@@ -72,7 +68,6 @@ export default defineComponent({
   setup(props, { emit }) {
     const inputRef = ref<HTMLInputElement>();
     const focused = ref(false);
-
     const focus = () => inputRef.value?.focus();
     const blur = () => inputRef.value?.blur();
 
@@ -89,8 +84,9 @@ export default defineComponent({
       emit('blur', event);
     };
 
-    const updateValue = (value: string) => {
+    const updateValue = (value: string | number) => {
       if (inputRef.value && inputRef.value.value !== value) {
+        value = String(value);
         inputRef.value.value = value;
       }
 
@@ -104,28 +100,61 @@ export default defineComponent({
       emit('change', event);
     };
 
+    const adjustTextareaSize = () => {
+      const input = inputRef.value;
+      if (props.type === 'textarea' && props.autosize && input) {
+        resizeTextarea(input, props.autosize);
+      }
+    };
+
+    onMounted(() => {
+      nextTick(adjustTextareaSize);
+    });
+
+    watch(
+      () => props.modelValue,
+      () => {
+        nextTick(adjustTextareaSize);
+      }
+    );
+
     const inputAttrs = {
       ref: inputRef,
-      class: bem('control'),
+      name: props.name,
+      class: bem('control', [props.type]),
       disabled: props.disabled,
       placeholder: props.placeholder,
       autofocus: props.autofocus,
       autocomplete: props.autocomplete,
       maxlength: props.maxlength,
+      value: props.modelValue,
+      rows: isDef(props.rows) ? +props.rows : undefined,
       onFocus,
       onBlur,
       onChange: endComposing,
       onInput,
     };
 
+    if (props.type !== 'textarea') {
+      extend(inputAttrs, mapInputType(props.type));
+    }
+
     const onClickPrefix = (event: Event) => emit('click-prefix', event);
     const onClickSuffix = (event: Event) => emit('click-suffix', event);
     const onClickAddon = (event: Event) => emit('click-addon', event);
+
+    const inputElement = props.type === 'textarea' ? 'textarea' : 'input';
+
+    useExpose<InputExpose>({
+      focus,
+      blur,
+    });
 
     return {
       bem,
       focused,
       inputAttrs,
+      inputElement,
       blur,
       focus,
       onClickPrefix,

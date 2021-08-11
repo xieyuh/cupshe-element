@@ -54,6 +54,14 @@ export default {
 <c-input suffix="question" /> <c-input prefix="search" />
 ```
 
+### 多行文本
+
+设置 `type` 属性为 `textarea` 设置为多行文本框。
+
+```html
+<c-input rows="2" type="textarea" autosize />
+```
+
 ### 插入按钮
 
 通过 `addon` 插槽可以在输入框尾部插入按钮。
@@ -70,18 +78,21 @@ export default {
 
 ### Props
 
-| 参数         | 说明                                                                                                      | 类型               | 默认值  |
-| ------------ | --------------------------------------------------------------------------------------------------------- | ------------------ | ------- |
-| v-model      | 当前输入的值                                                                                              | _number \| string_ | -       |
-| maxlength    | 输入的最大字符数                                                                                          | _number \| string_ | -       |
-| placeholder  | 输入框占位提示文字                                                                                        | _string_           | -       |
-| style        | 自定义容器样式                                                                                            | _object_           | -       |
-| disabled     | 是否禁用输入框                                                                                            | _boolean_          | `false` |
-| readonly     | 是否为只读状态，只读状态下无法输入内容                                                                    | _boolean_          | `false` |
-| autofocus    | 是否自动聚焦，iOS 系统不支持该属性                                                                        | _boolean_          | `false` |
-| prefix       | 左侧[图标名称](#/icon)或图片链接                                                                          | _string_           | -       |
-| suffix       | 右侧[图标名称](#/icon)或图片链接                                                                          | _string_           | -       |
-| autocomplete | input 标签原生的[自动完成属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) | _string_           | -       |
+| 参数         | 说明                                                                                                        | 类型                | 默认值  |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------------------- | ------- |
+| v-model      | 当前输入的值                                                                                                | _number \| string_  | -       |
+| name         | 名称，提交表单的标识符                                                                                      | _string_            | -       |
+| type         | 输入框类型, 可选值为 `tel` `digit`<br>`number` `textarea` `password` 等                                     | _string_            | `text`  |
+| maxlength    | 输入的最大字符数                                                                                            | _number \| string_  | -       |
+| placeholder  | 输入框占位提示文字                                                                                          | _string_            | -       |
+| style        | 自定义容器样式                                                                                              | _object_            | -       |
+| disabled     | 是否禁用输入框                                                                                              | _boolean_           | `false` |
+| readonly     | 是否为只读状态，只读状态下无法输入内容                                                                      | _boolean_           | `false` |
+| autofocus    | 是否自动聚焦，iOS 系统不支持该属性                                                                          | _boolean_           | `false` |
+| autosize     | 是否自适应内容高度，只对 textarea 有效，<br>可传入对象,如 { maxHeight: 100, minHeight: 50 }，<br>单位为`px` | _boolean \| object_ | `false` |
+| prefix       | 左侧[图标名称](#/icon)或图片链接                                                                            | _string_            | -       |
+| suffix       | 右侧[图标名称](#/icon)或图片链接                                                                            | _string_            | -       |
+| autocomplete | input 标签原生的[自动完成属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)   | _string_            | -       |
 
 ### Events
 

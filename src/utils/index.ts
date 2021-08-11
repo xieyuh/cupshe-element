@@ -8,3 +8,4 @@ export * from './dom/style';
 export * from './dom/event';
 export * from './dom/scroll';
 export * from './with-install';
+export * from './interceptor';

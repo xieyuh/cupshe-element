@@ -15,8 +15,7 @@ import {
 
 // Utils
 import { popupSharedProps } from './shared';
-import { createNamespace, extend, isDef } from '../utils';
-import { callInterceptor } from '../utils/interceptor';
+import { createNamespace, extend, isDef, callInterceptor } from '../utils';
 
 // Composables
 import { useEventListener } from '../composables';

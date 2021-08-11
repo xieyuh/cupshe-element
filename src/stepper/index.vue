@@ -43,8 +43,9 @@ import {
   addNumber,
   addUnit,
   getSizeStyle,
+  Interceptor,
+  callInterceptor,
 } from '../utils';
-import { Interceptor, callInterceptor } from '../utils/interceptor';
 
 function equal(value1?: string | number, value2?: string | number) {
   return String(value1) === String(value2);
