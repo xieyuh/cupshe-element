@@ -48,7 +48,7 @@ import { useRefs, useLinkField } from '../composables';
 
 type RateStatus = 'full' | 'half' | 'void';
 
-type RateSize = 'normal' | 'large';
+type RateSize = 'large' | 'normal' | 'small';
 
 type RateListItem = {
   value: number;

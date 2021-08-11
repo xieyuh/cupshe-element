@@ -21,14 +21,14 @@
 
   <demo-block title="前缀和后缀">
     <div class="demo-input-row">
-      <c-input suffix="question" />
-      <c-input prefix="search" />
+      <c-input v-model="value3" suffix="question" />
+      <c-input v-model="value4" prefix="search" />
     </div>
   </demo-block>
 
   <demo-block title="插入按钮">
     <div class="demo-input-row">
-      <c-input>
+      <c-input v-model="value6">
         <template #addon>
           <c-button type="primary" size="large" icon="copy" />
         </template>
@@ -46,6 +46,10 @@ export default {
       value0: '',
       value1: '',
       value2: '',
+      value3: '',
+      value4: '',
+      value5: '',
+      value6: '',
     });
 
     const onChange = (value) => {
