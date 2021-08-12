@@ -41,6 +41,10 @@ module.exports = {
             path: 'icon',
             title: 'Icon 图标',
           },
+          // {
+          //   path: 'image',
+          //   title: 'Image 图片',
+          // },
           {
             path: 'popup',
             title: 'Popup 弹出层',
@@ -81,6 +85,10 @@ module.exports = {
           {
             path: 'select',
             title: 'Select 选择器',
+          },
+          {
+            path: 'uploader',
+            title: 'Uploader 文件上传',
           },
         ],
       },
