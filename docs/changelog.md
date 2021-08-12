@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.0
+
+**Feature**
+
+- Input 组件支持 `type` 属性设置值为 `textarea` 等，并支持 `autosize` 自动调整大小
+
 ### v1.7.8
 
 **Feature**
