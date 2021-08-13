@@ -8,27 +8,23 @@
           v-bind="item"
         />
       </template>
-      <div
-        v-if="renderUpload"
-        :class="bem('upload', { readonly })"
-        @click="onClickUpload"
-      >
-        <c-icon name="update_full" :class="bem('upload-icon')" />
-        <span :class="bem('upload-text')" v-if="uploadText">{{
-          uploadText
-        }}</span>
-        <input
-          v-if="!readonly"
-          ref="inputRef"
-          type="file"
-          :class="bem('input')"
-          :accept="accept"
-          :capture="capture"
-          :multiple="multiple"
-          :disabled="disabled"
-          @change="onChange"
-        />
-      </div>
+      <template v-if="renderUpload">
+        <div
+          v-if="$slots.default"
+          :class="bem('input-wrapper')"
+          @click="onClickUpload"
+        >
+          <slot />
+          <input v-if="!readonly" v-bind="inputAttrs" />
+        </div>
+        <div v-else :class="bem('upload', { readonly })" @click="onClickUpload">
+          <c-icon name="update_full" :class="bem('upload-icon')" />
+          <span :class="bem('upload-text')" v-if="uploadText">{{
+            uploadText
+          }}</span>
+          <input v-if="!readonly" v-bind="inputAttrs" />
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -192,7 +188,10 @@ export default defineComponent({
       emit('delete', item, getDetail(index));
     };
 
-    const onClickUpload = (event: MouseEvent) => emit('click-upload', event);
+    const onClickUpload = (event: MouseEvent) => {
+      console.log(event);
+      emit('click-upload', event);
+    };
 
     const renderPreviewItem = (item: UploaderFileListItem, index: number) => {
       const needPickData = [
@@ -228,6 +227,17 @@ export default defineComponent({
       () => props.modelValue.length < props.maxCount && props.showUpload
     );
 
+    const inputAttrs = {
+      ref: inputRef,
+      type: 'file',
+      class: bem('input'),
+      accept: props.accept,
+      capture: props.capture,
+      multiple: props.multiple,
+      disabled: props.disabled,
+      onChange,
+    };
+
     useExpose<UploaderExpose>({
       chooseFile,
     });
@@ -235,7 +245,7 @@ export default defineComponent({
     return {
       bem,
       renderUpload,
-      inputRef,
+      inputAttrs,
       onChange,
       onClickUpload,
       renderPreviewItem,

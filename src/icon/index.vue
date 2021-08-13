@@ -1,5 +1,5 @@
 <template>
-  <i :class="bem([name])" :style="style">
+  <i :class="bem([isImageIcon ? '' : name])" :style="style">
     <img v-if="isImageIcon" :src="name" alt="" :class="bem('image')" />
   </i>
 </template>

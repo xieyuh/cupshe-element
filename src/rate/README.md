@@ -160,20 +160,20 @@ export default {
 
 ### Props
 
-| 参数           | 说明                                         | 类型               | 默认值    |
-| -------------- | -------------------------------------------- | ------------------ | --------- |
-| v-model        | 当前分值                                     | _number_           | -         |
-| count          | 图标总数                                     | _number \| string_ | `5`       |
-| size           | 尺寸，可选值为 `large` `normal`              | _string_           | `normal`  |
-| gutter         | 图标间距，默认单位为`px`                     | _number \| string_ | `4px`     |
-| color          | 选中时的颜色                                 | _string_           | `#f6be42` |
-| void-color     | 未选中时的颜色                               | _string_           | `#c8c9cc` |
-| disabled-color | 禁用时的颜色                                 | _string_           | `#c8c9cc` |
-| icon           | 选中时的[图标名称](#/zh-CN/icon)或图片链接   | _string_           | `star`    |
-| void-icon      | 未选中时的[图标名称](#/zh-CN/icon)或图片链接 | _string_           | `star-o`  |
-| allow-half     | 是否允许半选                                 | _boolean_          | `false`   |
-| readonly       | 是否为只读状态，只读状态下无法修改评分       | _boolean_          | `false`   |
-| disabled       | 是否禁用评分                                 | _boolean_          | `false`   |
+| 参数           | 说明                                    | 类型               | 默认值      |
+| -------------- | --------------------------------------- | ------------------ | ----------- |
+| v-model        | 当前分值                                | _number_           | -           |
+| count          | 图标总数                                | _number \| string_ | `5`         |
+| size           | 尺寸，可选值为 `large` `normal` `small` | _string_           | `normal`    |
+| gutter         | 图标间距，默认单位为`px`                | _number \| string_ | `0px`       |
+| color          | 选中时的颜色                            | _string_           | `#f6be42`   |
+| void-color     | 未选中时的颜色                          | _string_           | `#c8c9cc`   |
+| disabled-color | 禁用时的颜色                            | _string_           | `#c8c9cc`   |
+| icon           | 选中时的[图标名称](#/icon)或图片链接    | _string_           | `star_full` |
+| void-icon      | 未选中时的[图标名称](#/icon)或图片链接  | _string_           | `star`      |
+| allow-half     | 是否允许半选                            | _boolean_          | `false`     |
+| readonly       | 是否为只读状态，只读状态下无法修改评分  | _boolean_          | `false`     |
+| disabled       | 是否禁用评分                            | _boolean_          | `false`     |
 
 ### Events
 

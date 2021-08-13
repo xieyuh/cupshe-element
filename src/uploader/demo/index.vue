@@ -20,6 +20,12 @@
     />
   </demo-block>
 
+  <demo-block title="自定义上传样式">
+    <c-uploader>
+      <c-button type="primary" icon="plus">上传文件</c-button>
+    </c-uploader>
+  </demo-block>
+
   <demo-block title="上传前置处理">
     <c-uploader v-model="fileList3" :before-read="beforeRead" />
   </demo-block>
