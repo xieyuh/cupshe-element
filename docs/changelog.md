@@ -8,6 +8,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ### v1.8.2
 
+**Feature**
+
+- Input 组件新增 `format`, `format-trigger` 属性
+
+### v1.8.2
+
 **Performance**
 
 - 优化样式引入方式以缩小打包体积

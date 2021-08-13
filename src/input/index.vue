@@ -37,10 +37,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watch } from 'vue';
+import {
+  defineComponent,
+  nextTick,
+  onMounted,
+  PropType,
+  ref,
+  watch,
+} from 'vue';
 import { useExpose } from '../composables';
-import { createNamespace, extend, isDef } from '../utils';
-import { inputProps, textareaProps, InputExpose } from './shared';
+import { createNamespace, extend, formatNumber, isDef } from '../utils';
+import {
+  inputProps,
+  textareaProps,
+  InputExpose,
+  InputFormatTrigger,
+} from './shared';
 import { endComposing, resizeTextarea, mapInputType } from './utils';
 
 const [name, bem] = createNamespace('input');
@@ -53,6 +65,11 @@ export default defineComponent({
     addon: String,
     prefix: String,
     suffix: String,
+    formatter: Function as PropType<(value: string) => string>,
+    formatTrigger: {
+      type: String as PropType<InputFormatTrigger>,
+      default: 'onChange',
+    },
   }),
 
   emits: [
@@ -68,8 +85,48 @@ export default defineComponent({
   setup(props, { emit }) {
     const inputRef = ref<HTMLInputElement>();
     const focused = ref(false);
+
+    const getModelValue = () => String(props.modelValue ?? '');
+
     const focus = () => inputRef.value?.focus();
     const blur = () => inputRef.value?.blur();
+
+    const limitValueLength = (value: string) => {
+      const { maxlength } = props;
+      if (isDef(maxlength) && value.length > maxlength) {
+        const modelValue = getModelValue();
+        if (modelValue && modelValue.length === +maxlength) {
+          return modelValue;
+        }
+        return value.slice(0, +maxlength);
+      }
+      return value;
+    };
+
+    const updateValue = (
+      value: string,
+      trigger: InputFormatTrigger = 'onChange'
+    ) => {
+      value = limitValueLength(value);
+
+      if (props.type === 'number' || props.type === 'digit') {
+        const isNumber = props.type === 'number';
+        value = formatNumber(value, isNumber, isNumber);
+      }
+
+      if (props.formatter && trigger === props.formatTrigger) {
+        value = props.formatter(value);
+      }
+
+      if (inputRef.value && inputRef.value.value !== value) {
+        value = String(value);
+        inputRef.value.value = value;
+      }
+
+      if (value !== props.modelValue) {
+        emit('update:modelValue', value);
+      }
+    };
 
     const onFocus = (event: Event) => {
       focused.value = true;
@@ -81,18 +138,8 @@ export default defineComponent({
 
     const onBlur = (event: Event) => {
       focused.value = false;
+      updateValue(getModelValue(), 'onBlur');
       emit('blur', event);
-    };
-
-    const updateValue = (value: string | number) => {
-      if (inputRef.value && inputRef.value.value !== value) {
-        value = String(value);
-        inputRef.value.value = value;
-      }
-
-      if (value !== props.modelValue) {
-        emit('update:modelValue', value);
-      }
     };
 
     const onInput = (event: Event) => {

@@ -46,6 +46,44 @@ export default {
 <c-input disabled modelValue="123" /> <c-input readonly modelValue="123" />
 ```
 
+### 格式化输入内容
+
+通过 `formatter` 属性可以对输入的内容进行格式化，通过 `format-trigger` 属性可以指定执行格式化的时机，默认在输入时进行格式化。
+
+```html
+<c-input
+  v-model="value1"
+  :formatter="formatter"
+  placeholder="在输入时执行格式化"
+/>
+<c-input
+  v-model="value2"
+  :formatter="formatter"
+  placeholder="在失焦时执行格式化"
+  format-trigger="onBlur"
+/>
+```
+
+```js
+import { reactive } from 'vue';
+
+export default {
+  setup() {
+    const state = reactive({
+      value1: '',
+      value2: '',
+    });
+    // 过滤输入的数字
+    const formatter = (value) => value.replace(/\d/g, '');
+
+    return {
+      state,
+      formatter,
+    };
+  },
+};
+```
+
 ### 显示图标
 
 通过 `prefix` 和 `suffix` 配置输入框两侧的图标。
@@ -78,21 +116,23 @@ export default {
 
 ### Props
 
-| 参数         | 说明                                                                                                        | 类型                | 默认值  |
-| ------------ | ----------------------------------------------------------------------------------------------------------- | ------------------- | ------- |
-| v-model      | 当前输入的值                                                                                                | _number \| string_  | -       |
-| name         | 名称，提交表单的标识符                                                                                      | _string_            | -       |
-| type         | 输入框类型, 可选值为 `tel` `digit`<br>`number` `textarea` `password` 等                                     | _string_            | `text`  |
-| maxlength    | 输入的最大字符数                                                                                            | _number \| string_  | -       |
-| placeholder  | 输入框占位提示文字                                                                                          | _string_            | -       |
-| style        | 自定义容器样式                                                                                              | _object_            | -       |
-| disabled     | 是否禁用输入框                                                                                              | _boolean_           | `false` |
-| readonly     | 是否为只读状态，只读状态下无法输入内容                                                                      | _boolean_           | `false` |
-| autofocus    | 是否自动聚焦，iOS 系统不支持该属性                                                                          | _boolean_           | `false` |
-| autosize     | 是否自适应内容高度，只对 textarea 有效，<br>可传入对象,如 { maxHeight: 100, minHeight: 50 }，<br>单位为`px` | _boolean \| object_ | `false` |
-| prefix       | 左侧[图标名称](#/icon)或图片链接                                                                            | _string_            | -       |
-| suffix       | 右侧[图标名称](#/icon)或图片链接                                                                            | _string_            | -       |
-| autocomplete | input 标签原生的[自动完成属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)   | _string_            | -       |
+| 参数           | 说明                                                                                                        | 类型                      | 默认值     |
+| -------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------- | ---------- |
+| v-model        | 当前输入的值                                                                                                | _number \| string_        | -          |
+| name           | 名称，提交表单的标识符                                                                                      | _string_                  | -          |
+| type           | 输入框类型, 可选值为 `tel` `digit`<br>`number` `textarea` `password` 等                                     | _string_                  | `text`     |
+| maxlength      | 输入的最大字符数                                                                                            | _number \| string_        | -          |
+| placeholder    | 输入框占位提示文字                                                                                          | _string_                  | -          |
+| style          | 自定义容器样式                                                                                              | _object_                  | -          |
+| disabled       | 是否禁用输入框                                                                                              | _boolean_                 | `false`    |
+| readonly       | 是否为只读状态，只读状态下无法输入内容                                                                      | _boolean_                 | `false`    |
+| formatter      | 输入内容格式化函数                                                                                          | _(val: string) => string_ | -          |
+| format-trigger | 格式化函数触发的时机，可选值为 `onBlur`                                                                     | _string_                  | `onChange` |
+| autofocus      | 是否自动聚焦，iOS 系统不支持该属性                                                                          | _boolean_                 | `false`    |
+| autosize       | 是否自适应内容高度，只对 textarea 有效，<br>可传入对象,如 { maxHeight: 100, minHeight: 50 }，<br>单位为`px` | _boolean \| object_       | `false`    |
+| prefix         | 左侧[图标名称](#/icon)或图片链接                                                                            | _string_                  | -          |
+| suffix         | 右侧[图标名称](#/icon)或图片链接                                                                            | _string_                  | -          |
+| autocomplete   | input 标签原生的[自动完成属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)   | _string_                  | -          |
 
 ### Events
 

@@ -49,3 +49,5 @@ export type InputExpose = {
   focus: () => void;
   blur: () => void;
 };
+
+export type InputFormatTrigger = 'onBlur' | 'onChange';
