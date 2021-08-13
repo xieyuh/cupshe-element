@@ -188,10 +188,7 @@ export default defineComponent({
       emit('delete', item, getDetail(index));
     };
 
-    const onClickUpload = (event: MouseEvent) => {
-      console.log(event);
-      emit('click-upload', event);
-    };
+    const onClickUpload = (event: MouseEvent) => emit('click-upload', event);
 
     const renderPreviewItem = (item: UploaderFileListItem, index: number) => {
       const needPickData = [

@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.5
+
+**Bug Fixes**
+
+- 修复了 Input 无法手动设置 `value` 的问题
+
 ### v1.8.4
 
 **Feature**
@@ -45,14 +51,14 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ### v1.7.7
 
-**Fix**
+**Bug Fixes**
 
 - 修复了 Select 通过点击控件不能切换开关状态的问题
 - 修复了 Rate 图标行高问题
 
 ### v1.7.6
 
-**Fix**
+**Bug Fixes**
 
 - Tag 组件选中状态字重从 `semi-bold` 调整到 `bold`
 
@@ -62,7 +68,7 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 - Select 组件支持组件级和选项级的 `disabled` 属性
 
-**Fix**
+**Bug Fixes**
 
 - 修复了 Select 组件点击 icon 不能弹出选项的问题
 
@@ -105,7 +111,7 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 **Feature**
 
-- Input 组件新增 `style` 属性用以自定义样式新增 `onChange` 事件
+- Input 组件新增 `style` 属性用以自定义样式，新增 `onChange` 事件
 
 **Bug Fixes**
 

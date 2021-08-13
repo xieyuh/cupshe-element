@@ -2,7 +2,7 @@
 
 ### 介绍
 
-用于对事物进行评级操作。[PC 端预览](/mobile.html#/Select)
+下拉选项列表。[PC 端预览](/mobile.html#/Select)
 
 ### 引入
 

@@ -161,6 +161,7 @@ export default defineComponent({
     watch(
       () => props.modelValue,
       () => {
+        updateValue(getModelValue());
         nextTick(adjustTextareaSize);
       }
     );
