@@ -2,12 +2,15 @@
   <span :class="bem()" :style="style">
     <span
       :class="
-        bem('wrapper', {
-          focused,
-          disabled,
-          readonly,
-          ['with-addon']: !!$slots.addon,
-        })
+        bem('wrapper', [
+          size,
+          {
+            focused,
+            disabled,
+            readonly,
+            ['with-addon']: !!$slots.addon,
+          },
+        ])
       "
     >
       <div
@@ -57,6 +60,8 @@ import { endComposing, resizeTextarea, mapInputType } from './utils';
 
 const [name, bem] = createNamespace('input');
 
+export type InputSize = 'normal' | 'small';
+
 export default defineComponent({
   name,
 
@@ -65,6 +70,10 @@ export default defineComponent({
     addon: String,
     prefix: String,
     suffix: String,
+    size: {
+      type: String as PropType<InputSize>,
+      default: 'normal',
+    },
     formatter: Function as PropType<(value: string) => string>,
     formatTrigger: {
       type: String as PropType<InputFormatTrigger>,

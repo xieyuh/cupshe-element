@@ -1,26 +1,23 @@
 <template>
   <demo-block title="基础用法">
     <c-select :options="option" v-model="select1" placeholder="请选择" />
+    <c-select
+      :options="option"
+      v-model="select2"
+      placeholder="请选择"
+      :style="{ width: '280px', marginTop: '20px' }"
+    />
   </demo-block>
 
   <demo-block title="自定义选项内容">
-    <c-select :options="option" v-model="select2" placeholder="请选择">
+    <c-select :options="option" v-model="select3" placeholder="请选择">
       <template #option="{ index }">
         <c-rate :model-value="index" readonly />
       </template>
     </c-select>
   </demo-block>
 
-  <demo-block title="自定义长度">
-    <c-select
-      :options="option"
-      v-model="select3"
-      placeholder="请选择"
-      :style="{ width: '280px' }"
-    />
-  </demo-block>
-
-  <demo-block title="自定义大小">
+  <demo-block title="选择器尺寸">
     <c-select
       :options="option"
       v-model="select4"
@@ -29,17 +26,34 @@
     />
   </demo-block>
 
-  <demo-block title="禁用状态">
+  <demo-block title="自定义控件">
     <c-select
-      disabled
       :options="option"
       v-model="select5"
       placeholder="请选择"
-    />
+      placement="bottom-start"
+      :popper-style="{ width: '178px', marginTop: '10px' }"
+    >
+      <template #reference>
+        <span class="select-reference">
+          <span>请选择</span>
+          <c-icon name="arrow_down" />
+        </span>
+      </template>
+    </c-select>
   </demo-block>
 
   <demo-block title="选项禁用">
     <c-select :options="option1" v-model="select6" placeholder="请选择" />
+  </demo-block>
+
+  <demo-block title="禁用状态">
+    <c-select
+      disabled
+      :options="option"
+      v-model="select7"
+      placeholder="请选择"
+    />
   </demo-block>
 </template>
 
@@ -84,6 +98,7 @@ export default {
       select4: '',
       select5: '',
       select6: '',
+      select7: '',
     });
 
     return {
@@ -99,6 +114,18 @@ export default {
 
   .c-select {
     margin-left: 20px;
+  }
+
+  .select-reference {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 28px;
+    width: 131px;
+    color: #333;
+    border-bottom: 1px solid #333;
+    font-family: 'Muli-light', sans-serif;
+    font-size: 14px;
   }
 }
 </style>

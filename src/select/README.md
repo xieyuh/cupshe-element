@@ -24,6 +24,12 @@ app.use(Select);
 
 ```html
 <c-select :options="option" v-model="select" placeholder="请选择" />
+<c-select
+  :options="option"
+  v-model="select"
+  placeholder="请选择"
+  :style="{ width: '280px' }"
+/>
 ```
 
 ```js
@@ -94,12 +100,38 @@ export default {
 };
 ```
 
-### 禁用状态
+### 选择器尺寸
 
-通过 `disabled` 属性设置禁用状态。
+通过 `size` 属性指定选择器尺寸。
 
 ```html
-<c-select :options="option" v-model="select" placeholder="请选择" disabled />
+<c-select
+  size="small"
+  :options="option"
+  v-model="select"
+  placeholder="请选择"
+/>
+```
+
+### 自定义控件
+
+通过 `reference` 插槽自定义选择器控件。
+
+```html
+<c-select
+  :options="option"
+  v-model="select"
+  placeholder="请选择"
+  placement="bottom-start"
+  :popperStyle="{ width: '178px', marginTop: '10px' }"
+>
+  <template #reference>
+    <span>
+      <span>请选择</span>
+      <c-icon name="arrow_down" />
+    </span>
+  </template>
+</c-select>
 ```
 
 ### 选项禁用
@@ -139,17 +171,28 @@ export default {
 };
 ```
 
+### 禁用状态
+
+通过 `disabled` 属性设置禁用状态。
+
+```html
+<c-select :options="option" v-model="select" placeholder="请选择" disabled />
+```
+
 ## API
 
 ### Props
 
-| 参数        | 说明                            | 类型       | 默认值   |
-| ----------- | ------------------------------- | ---------- | -------- |
-| v-model     | 当前分值                        | _number_   | -        |
-| size        | 尺寸，可选值为 `normal` `small` | _number_   | `normal` |
-| placeholder | 输入框占位提示文字              | _string_   | -        |
-| disabled    | 禁用状态                        | _boolean_  | `false`  |
-| options     | 选项列表                        | _Option[]_ | -        |
+| 参数        | 说明                                           | 类型       | 默认值   |
+| ----------- | ---------------------------------------------- | ---------- | -------- |
+| v-model     | 当前分值                                       | _number_   | -        |
+| size        | 尺寸，可选值为 `normal` `small`                | _number_   | `normal` |
+| placeholder | 输入框占位提示文字                             | _string_   | -        |
+| disabled    | 禁用状态                                       | _boolean_  | `false`  |
+| options     | 选项列表                                       | _Option[]_ | -        |
+| style       | 控件容器样式                                   | _object_   | -        |
+| popperStyle | 弹出层容器样式                                 | _object_   | -        |
+| placement   | 弹出位置，可选值为 `bottom-start` `bottom-end` | _object_   | `bottom` |
 
 ### Option 数据结构
 
@@ -167,6 +210,7 @@ export default {
 
 ### Slots
 
-| 名称   | 说明     |
-| ------ | -------- |
-| option | 选项内容 |
+| 名称      | 说明     |
+| --------- | -------- |
+| option    | 选项内容 |
+| reference | 控件内容 |

@@ -2,10 +2,12 @@
   <span
     ref="wrapperRef"
     :class="bem({ disabled })"
-    :style="style"
     @click="onClickWrapper"
+    :style="style"
   >
-    <c-input v-bind="inputAttrs" />
+    <slot name="reference">
+      <c-input v-bind="inputAttrs" />
+    </slot>
   </span>
   <c-popup
     ref="popoverRef"
@@ -16,7 +18,7 @@
     transition=""
     v-model:show="state.popupShow"
   >
-    <div :class="bem('content')" :style="contentStyle">
+    <div :class="bem('content')" :style="popStyle">
       <div
         v-for="(item, index) in options"
         :key="index"
@@ -53,11 +55,12 @@ import {
   unknownProp,
   ComponentInstance,
   addUnit,
+  extend,
   preventDefault,
 } from '../utils';
-import { Instance, createPopper } from '../utils/popper';
+import { Instance, createPopper, Placement } from '../utils/popper';
 import { useClickAway, useRect } from '../composables';
-import { InputSize } from '../input/index.vue';
+import type { InputSize } from '../input/index.vue';
 
 const [name, bem] = createNamespace('select');
 
@@ -74,20 +77,27 @@ export default defineComponent({
     modelValue: unknownProp,
     placeholder: String,
     disabled: Boolean,
+    placement: {
+      type: String as PropType<Placement>,
+      default: 'bottom',
+    },
     size: {
       type: String as PropType<InputSize>,
       default: 'normal',
-    },
-    style: {
-      type: Object as PropType<CSSProperties>,
     },
     options: {
       type: Array as PropType<SelectOption[]>,
       default: () => [],
     },
+    style: {
+      type: Object as PropType<CSSProperties>,
+    },
+    popperStyle: {
+      type: Object as PropType<CSSProperties>,
+    },
   },
 
-  emits: ['change', 'update:modelValue'],
+  emits: ['change', 'select', 'update:modelValue'],
 
   setup(props, { emit }) {
     let popper: Instance | null;
@@ -100,9 +110,8 @@ export default defineComponent({
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
-    const createPopperInstance = () => {
-      return createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
-        placement: 'bottom',
+    const createPopperInstance = () => createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
+        placement: props.placement,
         modifiers: [
           {
             name: 'computeStyles',
@@ -113,7 +122,6 @@ export default defineComponent({
           },
         ],
       });
-    };
 
     const updateLocation = () => {
       nextTick(() => {
@@ -126,7 +134,7 @@ export default defineComponent({
         if (!popper) {
           popper = createPopperInstance();
         } else {
-          popper.setOptions({ placement: 'bottom' });
+          popper.setOptions({});
         }
       });
     };
@@ -146,8 +154,13 @@ export default defineComponent({
         return preventDefault(event, true);
       }
 
-      emit('change', option);
-      emit('update:modelValue', option.value);
+      emit('select', option);
+
+      if (option.value !== props.modelValue) {
+        emit('change', option);
+        emit('update:modelValue', option.value);
+      }
+
       state.popupShow = false;
     };
 
@@ -170,9 +183,14 @@ export default defineComponent({
       size: props.size,
     }));
 
-    const contentStyle = computed(() => ({
-      width: addUnit(state.popupWidth),
-    }));
+    const popStyle = computed(() =>
+      extend(
+        {
+          width: addUnit(state.popupWidth),
+        },
+        props.popperStyle
+      )
+    );
 
     onMounted(updateLocation);
     onBeforeUnmount(() => {
@@ -187,7 +205,7 @@ export default defineComponent({
       wrapperRef,
       popoverRef,
       inputAttrs,
-      contentStyle,
+      popStyle,
       onClickWrapper,
       onClickOption,
       state,

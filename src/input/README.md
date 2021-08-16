@@ -38,6 +38,14 @@ export default {
 };
 ```
 
+### 输入框尺寸
+
+通过 `size` 属性设置输入框尺寸。
+
+```html
+<c-input v-model="value" size="small" placeholder="请输入文本" />
+```
+
 ### 禁用和只读
 
 通过 `readonly` 将输入框设置为只读状态，通过 `disabled` 将输入框设置为禁用状态。
@@ -121,6 +129,7 @@ export default {
 | v-model        | 当前输入的值                                                                                                | _number \| string_        | -          |
 | name           | 名称，提交表单的标识符                                                                                      | _string_                  | -          |
 | type           | 输入框类型, 可选值为 `tel` `digit`<br>`number` `textarea` `password` 等                                     | _string_                  | `text`     |
+| size           | 输入框尺寸, 可选值为 `small`                                                                                | _string_                  | `normal`   |
 | maxlength      | 输入的最大字符数                                                                                            | _number \| string_        | -          |
 | placeholder    | 输入框占位提示文字                                                                                          | _string_                  | -          |
 | style          | 自定义容器样式                                                                                              | _object_                  | -          |

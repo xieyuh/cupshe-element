@@ -2,7 +2,13 @@
   <demo-block title="基础用法">
     <div class="demo-input-row">
       <c-input v-model="value0" placeholder="请输入文本" />
-      <c-input v-model="value1" style="width: 220px" placeholder="自定义长度" />
+      <c-input v-model="value1" style="width: 220px" placeholder="请输入文本" />
+    </div>
+  </demo-block>
+
+  <demo-block title="输入框尺寸">
+    <div class="demo-input-row">
+      <c-input v-model="value2" size="small" placeholder="请输入文本" />
     </div>
   </demo-block>
 
@@ -16,12 +22,12 @@
   <demo-block title="格式化内容">
     <div class="demo-input-row">
       <c-input
-        v-model="value2"
+        v-model="value3"
         :formatter="formatter"
         placeholder="在输入时执行格式化"
       />
       <c-input
-        v-model="value3"
+        v-model="value4"
         :formatter="formatter"
         placeholder="在失焦时执行格式化"
         format-trigger="onBlur"
@@ -31,20 +37,20 @@
 
   <demo-block title="显示图标">
     <div class="demo-input-row">
-      <c-input v-model="value4" suffix="question" />
-      <c-input v-model="value5" prefix="search" />
+      <c-input v-model="value5" suffix="question" />
+      <c-input v-model="value6" prefix="search" />
     </div>
   </demo-block>
 
   <demo-block title="多行文本">
     <div class="demo-input-row">
-      <c-input v-model="value6" rows="2" type="textarea" autosize />
+      <c-input v-model="value7" rows="2" type="textarea" autosize />
     </div>
   </demo-block>
 
   <demo-block title="插入按钮">
     <div class="demo-input-row">
-      <c-input v-model="value7">
+      <c-input v-model="value8">
         <template #addon>
           <c-button type="primary" size="large" icon="copy" />
         </template>
@@ -67,6 +73,7 @@ export default {
       value5: '',
       value6: '',
       value7: '',
+      value8: '',
     });
 
     const onChange = (value) => {
