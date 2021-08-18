@@ -10,10 +10,10 @@
     tabindex="0"
   >
     <div
+      role="radio"
       v-for="item in list.map(renderStar)"
       :key="item.index"
       :ref="item.ref"
-      role="radio"
       :style="item.style"
       :class="bem('item')"
       tabindex="0"

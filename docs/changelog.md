@@ -6,12 +6,18 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.7
+
+**Bug Fixes**
+
+- 指定 Input 在不同 `size` 属性下的高度
+
 ### v1.8.6
 
 **Feature**
 
 - Input 组件新增 `size` 属性
-- Select 组件新增 `reference` 插槽，新增 `placement`，`size`, `popperStyle` 属性
+- Select 组件新增 `reference` 插槽，新增 `placement`, `size`, `popperStyle` 属性
 
 ### v1.8.5
 
