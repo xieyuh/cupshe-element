@@ -77,6 +77,7 @@ export default defineComponent({
     modelValue: unknownProp,
     placeholder: String,
     disabled: Boolean,
+    defaultText: String,
     placement: {
       type: String as PropType<Placement>,
       default: 'bottom',
@@ -110,7 +111,8 @@ export default defineComponent({
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
-    const createPopperInstance = () => createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
+    const createPopperInstance = () =>
+      createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
         placement: props.placement,
         modifiers: [
           {
@@ -173,15 +175,21 @@ export default defineComponent({
 
     useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
 
-    const inputAttrs = computed(() => ({
-      readonly: true,
-      suffix: 'arrow_down',
-      class: bem('control'),
-      disabled: props.disabled,
-      placeholder: props.placeholder,
-      modelValue: props.modelValue,
-      size: props.size,
-    }));
+    const inputAttrs = computed(() => {
+      const match = props.options.find(
+        (option) => option.value === props.modelValue
+      );
+
+      return {
+        readonly: true,
+        suffix: 'arrow_down',
+        class: bem('control'),
+        disabled: props.disabled,
+        placeholder: props.placeholder,
+        modelValue: match ? match.text : props.defaultText,
+        size: props.size,
+      };
+    });
 
     const popStyle = computed(() =>
       extend(

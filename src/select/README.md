@@ -188,6 +188,7 @@ export default {
 | v-model     | 当前分值                                       | _number_   | -        |
 | size        | 尺寸，可选值为 `normal` `small`                | _number_   | `normal` |
 | placeholder | 输入框占位提示文字                             | _string_   | -        |
+| defaultText | 未选中任何值的时候显示的文字                   | _string_   | -        |
 | disabled    | 禁用状态                                       | _boolean_  | `false`  |
 | options     | 选项列表                                       | _Option[]_ | -        |
 | style       | 控件容器样式                                   | _object_   | -        |

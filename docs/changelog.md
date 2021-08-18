@@ -6,6 +6,18 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.8
+
+**Feature**
+
+- Select 组件新增 `defaultText` 属性
+
+**Bug Fixes**
+
+- 修复了 Select 组件的显示的不是 `text` 而是 `value` 的问题
+
+## 更新内容
+
 ### v1.8.7
 
 **Bug Fixes**
