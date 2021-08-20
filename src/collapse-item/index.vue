@@ -74,7 +74,7 @@ export default defineComponent({
 
     const style = computed<CSSProperties>(() => {
       if (index.value === 0) {
-        return {};
+        return;
       }
 
       return {

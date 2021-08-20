@@ -1,8 +1,7 @@
 <template>
   <ul :class="bem()">
     <li
-      v-if="modelValue !== 1"
-      :class="bem('item')"
+      :class="bem('item', { disabled: modelValue === 1 })"
       @click="select(modelValue - 1)"
     >
       <c-icon name="arrow_left" :class="bem('prev')" />
@@ -16,8 +15,7 @@
       {{ page.ellipses ? '...' : page.number }}
     </li>
     <li
-      v-if="modelValue !== pageCount"
-      :class="bem('item')"
+      :class="bem('item', { disabled: modelValue === pageCount })"
       @click="select(modelValue + 1)"
     >
       <c-icon name="arrow_right" :class="bem('next')" />
@@ -99,6 +97,10 @@ export default defineComponent({
       if (!page) return;
 
       page = Math.min(props.pageCount, Math.max(1, page));
+
+      if (page < 1 || page > props.pageCount) {
+        return;
+      }
 
       if (props.modelValue !== page) {
         emit('update:modelValue', page);
