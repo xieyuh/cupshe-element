@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.11
+
+**Bug Fixes**
+
+- 更新 Select 组件部分样式
+
 ### v1.8.10
 
 **Bug Fixes**
