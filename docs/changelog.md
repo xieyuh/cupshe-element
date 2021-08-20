@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.10
+
+**Bug Fixes**
+
+- 去除 Input 在不同 `size` 属性下的高度
+
 ### v1.8.9
 
 **Feature**
