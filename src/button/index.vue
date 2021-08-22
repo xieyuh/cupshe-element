@@ -4,14 +4,14 @@
     :type="nativeType"
     :class="classes"
     :disabled="disabled"
-    :style="getStyle()"
+    :style="getStyle"
     @click="onClick"
   >
     <div :class="bem('content')">
       <slot name="icon">
         <c-icon v-if="icon" :name="icon" :class="bem('icon')" />
       </slot>
-      <span :class="bem('text')" :style="getTextStyle()" v-if="$slots.default">
+      <span :class="bem('text')" :style="textStyle" v-if="$slots.default">
         <slot />
       </span>
     </div>
@@ -24,6 +24,7 @@ import {
   PropType,
   ButtonHTMLAttributes,
   CSSProperties,
+  computed,
 } from 'vue';
 import { useRoute, routeProps } from '../composables';
 import { createNamespace, extend } from '../utils';
@@ -68,7 +69,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const route = useRoute();
 
-    const classes = [
+    const classes = computed(() => [
       bem([
         props.type,
         props.size,
@@ -79,9 +80,9 @@ export default defineComponent({
           disabled: props.disabled,
         },
       ]),
-    ];
+    ]);
 
-    const getStyle = () => {
+    const getStyle = computed(() => {
       if (props.color) {
         const style: CSSProperties = {
           color: props.ghost ? props.textColor : 'white',
@@ -99,13 +100,11 @@ export default defineComponent({
 
         return style;
       }
-    };
+    });
 
-    const getTextStyle = () => {
-      return {
-        color: props.textColor,
-      };
-    };
+    const textStyle = computed(() => ({
+      color: props.textColor,
+    }));
 
     const onClick = (event: MouseEvent) => {
       if (!props.disabled) {
@@ -118,7 +117,7 @@ export default defineComponent({
       bem,
       classes,
       getStyle,
-      getTextStyle,
+      textStyle,
       onClick,
     };
   },
