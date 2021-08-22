@@ -5,7 +5,7 @@
     @click="onClickWrapper"
     :style="style"
   >
-    <slot name="reference">
+    <slot name="reference" v-bind="{ match }">
       <c-input v-bind="inputAttrs" />
     </slot>
   </span>
@@ -173,23 +173,19 @@ export default defineComponent({
       updateShow(!state.popupShow);
     };
 
-    useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
+    const match = computed(() =>
+      props.options.find((option) => option.value === props.modelValue)
+    );
 
-    const inputAttrs = computed(() => {
-      const match = props.options.find(
-        (option) => option.value === props.modelValue
-      );
-
-      return {
+    const inputAttrs = computed(() => ({
         readonly: true,
         suffix: 'arrow_down',
         class: bem('control'),
         disabled: props.disabled,
         placeholder: props.placeholder,
-        modelValue: match ? match.text : props.defaultText,
+        modelValue: match.value ? match.value.text : props.defaultText,
         size: props.size,
-      };
-    });
+      }));
 
     const popStyle = computed(() =>
       extend(
@@ -208,6 +204,8 @@ export default defineComponent({
       }
     });
 
+    useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
+
     return {
       bem,
       wrapperRef,
@@ -216,6 +214,7 @@ export default defineComponent({
       popStyle,
       onClickWrapper,
       onClickOption,
+      match,
       state,
     };
   },

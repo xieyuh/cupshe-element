@@ -180,6 +180,7 @@ export default defineComponent({
       name: props.name,
       class: bem('control', [props.type]),
       disabled: props.disabled,
+      readonly: props.readonly,
       placeholder: props.placeholder,
       autofocus: props.autofocus,
       autocomplete: props.autocomplete,

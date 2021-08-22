@@ -6,6 +6,13 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.8.12
+
+**Bug Fixes**
+
+- 修复了 Checkbox 和 Radio 在 safari 下图标大小问题
+- Select 组件的 reference 插槽新增 match 参数
+
 ### v1.8.11
 
 **Bug Fixes**

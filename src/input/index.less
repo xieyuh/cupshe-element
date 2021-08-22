@@ -11,7 +11,6 @@
     border: 1px solid #d8d8d8;
     background: #fff;
     transition: border 0.1s;
-    .muli-light;
 
     &--normal {
       padding: 12px;
@@ -32,7 +31,6 @@
     &--disabled {
       background-color: #fafafa;
       cursor: not-allowed;
-      color: #999;
     }
 
     &--with-addon {
@@ -69,14 +67,17 @@
     font-size: 14px;
     background: transparent;
     cursor: inherit;
+    .muli-light;
 
     &--textarea {
       line-height: 21px;
       resize: none;
     }
 
-    &::-webkit-input-placeholder {
+    &:disabled,
+    &::placeholder {
       color: #999;
+      -webkit-text-fill-color: #999;
     }
   }
 

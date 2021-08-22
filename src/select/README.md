@@ -125,9 +125,9 @@ export default {
   placement="bottom-start"
   :popperStyle="{ width: '178px', marginTop: '10px' }"
 >
-  <template #reference>
+  <template #reference="{ match }">
     <span>
-      <span>请选择</span>
+      <span>{{ match ? match.text : '请选择' }}</span>
       <c-icon name="arrow_down" />
     </span>
   </template>

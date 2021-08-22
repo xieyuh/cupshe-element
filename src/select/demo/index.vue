@@ -34,9 +34,9 @@
       placement="bottom-start"
       :popper-style="{ width: '178px', marginTop: '10px' }"
     >
-      <template #reference>
+      <template #reference="{ match }">
         <span class="select-reference">
-          <span>请选择</span>
+          <span>{{ match ? match.text : '请选择' }}</span>
           <c-icon name="arrow_down" />
         </span>
       </template>
