@@ -12,6 +12,7 @@
           },
         ])
       "
+      @click="focus"
     >
       <div
         :class="bem('prefix')"
