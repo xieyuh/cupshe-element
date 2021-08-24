@@ -1,0 +1,22 @@
+.c-list {
+  &__loading,
+  &__finished-text,
+  &__error-text {
+    color: #969799;
+    font-size: 14px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  &__placeholder {
+    height: 0;
+    pointer-events: none;
+  }
+
+  &__loading-icon {
+    .van-loading__spinner {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
