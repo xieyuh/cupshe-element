@@ -1,47 +1,3 @@
-<template>
-  <div
-    role="radiogroup"
-    :class="
-      bem({
-        readonly,
-        disabled,
-      })
-    "
-    tabindex="0"
-  >
-    <div
-      role="radio"
-      v-for="item in list.map(renderStar)"
-      :key="item.index"
-      :ref="item.ref"
-      :style="item.style"
-      :class="bem('item')"
-      tabindex="0"
-      :aria-setsize="+count"
-      :aria-posinset="item.score"
-      :aria-checked="!item.isVoid"
-      @click="item.onClickItem"
-    >
-      <c-icon
-        :name="item.isFull ? icon : voidIcon"
-        :class="bem('icon', [size, { disabled, full: item.isFull }])"
-        :color="disabled ? disabledColor : item.isFull ? color : voidColor"
-      />
-      <c-icon
-        v-if="item.renderHalf"
-        :style="{ width: item.value + 'em' }"
-        :name="item.isVoid ? voidIcon : icon"
-        :class="bem('icon', ['half', size, { disabled, full: !item.isVoid }])"
-        :color="disabled ? disabledColor : item.isVoid ? voidColor : color"
-      />
-    </div>
-    <span v-if="$slots.text" :class="bem('text')" @click="onTextClick">
-      <slot name="text" />
-    </span>
-  </div>
-</template>
-
-<script lang="ts">
 import { defineComponent, computed, CSSProperties, PropType } from 'vue';
 import { addUnit, createNamespace } from '../utils';
 import { useRefs, useLinkField } from '../composables';
@@ -117,7 +73,7 @@ export default defineComponent({
 
   emits: ['change', 'update:modelValue', 'click-text'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const [itemRefs, setItemRefs] = useRefs();
 
     const list = computed<RateListItem[]>(() =>
@@ -185,27 +141,76 @@ export default defineComponent({
         select(props.allowHalf ? getScoreByPosition(event.clientX) : score);
       };
 
-      return {
-        index,
-        style,
-        score,
-        isVoid,
-        isFull,
-        renderHalf,
-        value: item.value,
-        onClickItem,
-        ref: setItemRefs(index),
-      };
+      return (
+        <div
+          key={index}
+          style={style}
+          ref={setItemRefs(index)}
+          class={bem('item')}
+          tabindex={0}
+          role="radio"
+          aria-setsize={+props.count}
+          aria-posinset={score}
+          aria-checked={!isVoid}
+          onClick={onClickItem}
+        >
+          <c-icon
+            name={isFull ? props.icon : props.voidIcon}
+            class={bem('icon', [
+              props.size,
+              {
+                disabled: props.disabled,
+                full: isFull,
+              },
+            ])}
+            color={
+              props.disabled
+                ? props.disabledColor
+                : isFull
+                ? props.voidColor
+                : props.color
+            }
+          />
+          {renderHalf && (
+            <c-icon
+              style={{ width: item.value + 'em' }}
+              name={isVoid ? props.voidIcon : props.icon}
+              class={bem('icon', [
+                'half',
+                props.size,
+                {
+                  disabled: props.disabled,
+                  full: isVoid,
+                },
+              ])}
+              color={
+                props.disabled
+                  ? props.disabledColor
+                  : isVoid
+                  ? props.voidColor
+                  : props.color
+              }
+            />
+          )}
+        </div>
+      );
     };
 
     useLinkField(() => props.modelValue);
 
-    return {
-      bem,
-      list,
-      renderStar,
-      onTextClick,
-    };
+    return () => (
+      <div
+        role="radiogroup"
+        class={bem({ readonly: props.readonly, disabled: props.disabled })}
+        tabindex={0}
+      >
+        {list.value.map(renderStar)}
+        {slots.text && (
+          <span class={bem('text')} onClick={onTextClick}>
+            {slots.text()}
+          </span>
+        )}
+      </div>
+    );
   },
 });
-</script>

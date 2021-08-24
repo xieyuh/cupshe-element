@@ -1,6 +1,6 @@
 {
   "name": "cupshe-element",
-  "version": "1.8.16",
+  "version": "1.8.17",
   "description": "卡佩希 Vue 组件库",
   "main": "lib/cupshe-element.js",
   "style": "lib/index.css",
