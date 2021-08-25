@@ -11,7 +11,10 @@
       <slot />
     </div>
     <slot name="indicator" v-bind="{ active: activeIndicator }">
-      <div :class="bem('indicators', { vertical })">
+      <div
+        v-if="showIndicators && count > 1"
+        :class="bem('indicators', { vertical })"
+      >
         <i
           v-for="(item, index) in Array(count).fill('').map(renderDot)"
           :key="index"
