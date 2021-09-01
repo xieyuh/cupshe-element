@@ -1,66 +1,26 @@
-<template>
-  <span
-    ref="wrapperRef"
-    :class="bem({ disabled })"
-    @click="onClickWrapper"
-    :style="style"
-  >
-    <slot name="reference" v-bind="{ match }">
-      <c-input v-bind="inputAttrs" />
-    </slot>
-  </span>
-  <c-popup
-    ref="popoverRef"
-    position=""
-    :overlay="false"
-    :lock-scroll="false"
-    :duration="0"
-    transition=""
-    v-model:show="state.popupShow"
-  >
-    <div :class="bem('content')" :style="popStyle">
-      <div
-        v-for="(item, index) in options"
-        :key="index"
-        :class="
-          bem('option', {
-            disabled: item.disabled,
-            selected: modelValue === item.value,
-          })
-        "
-        @click="onClickOption(item, $event)"
-      >
-        <slot name="option" v-bind="{ item, index }">
-          {{ item.text }}
-        </slot>
-      </div>
-    </div>
-  </c-popup>
-</template>
-
-<script lang="ts">
 import {
   defineComponent,
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  PropType,
   reactive,
+  PropType,
   CSSProperties,
   ref,
+  onMounted,
+  onBeforeUnmount,
+  nextTick,
 } from 'vue';
 import {
   createNamespace,
   unknownProp,
   ComponentInstance,
-  addUnit,
-  extend,
   preventDefault,
+  extend,
+  addUnit,
 } from '../utils';
-import { Instance, createPopper, Placement } from '../utils/popper';
-import { useClickAway, useRect } from '../composables';
-import type { InputSize } from '../input/index.vue';
+import { Placement, Instance, createPopper } from '../utils/popper';
+import { useRect, useClickAway } from '../composables';
+
+import Input, { InputSize } from '../input';
+import { Popup } from '../popup';
 
 const [name, bem] = createNamespace('select');
 
@@ -100,7 +60,7 @@ export default defineComponent({
 
   emits: ['change', 'select', 'update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     let popper: Instance | null;
 
     const state = reactive({
@@ -162,8 +122,6 @@ export default defineComponent({
         emit('change', option);
         emit('update:modelValue', option.value);
       }
-
-      state.popupShow = false;
     };
 
     const onClickWrapper = () => {
@@ -172,29 +130,6 @@ export default defineComponent({
       }
       updateShow(!state.popupShow);
     };
-
-    const match = computed(() =>
-      props.options.find((option) => option.value === props.modelValue)
-    );
-
-    const inputAttrs = computed(() => ({
-        readonly: true,
-        suffix: 'arrow_down',
-        class: bem('control'),
-        disabled: props.disabled,
-        placeholder: props.placeholder,
-        modelValue: match.value ? match.value.text : props.defaultText,
-        size: props.size,
-      }));
-
-    const popStyle = computed(() =>
-      extend(
-        {
-          width: addUnit(state.popupWidth),
-        },
-        props.popperStyle
-      )
-    );
 
     onMounted(updateLocation);
     onBeforeUnmount(() => {
@@ -206,17 +141,83 @@ export default defineComponent({
 
     useClickAway(wrapperRef, onClickAway, { eventName: 'click' });
 
-    return {
-      bem,
-      wrapperRef,
-      popoverRef,
-      inputAttrs,
-      popStyle,
-      onClickWrapper,
-      onClickOption,
-      match,
-      state,
+    return () => {
+      const {
+        disabled,
+        style,
+        size,
+        popperStyle,
+        options,
+        modelValue,
+        placeholder,
+        defaultText,
+      } = props;
+
+      const match = props.options.find(
+        (option) => option.value === props.modelValue
+      );
+
+      const popStyle = extend(
+        {
+          width: addUnit(state.popupWidth),
+        },
+        popperStyle
+      );
+
+      const renderReference = () => {
+        if (slots.reference) {
+          return slots.reference({ match });
+        }
+
+        return (
+          <Input
+            readonly
+            disabled={disabled}
+            suffix="arrow_down"
+            class={bem('control')}
+            placeholder={placeholder}
+            modelValue={match ? match.text : defaultText}
+            size={size}
+          />
+        );
+      };
+
+      const renderOption = (options: SelectOption[]) =>
+        options.map((item, index) => (
+          <div
+            key={index}
+            onClick={(event) => onClickOption(item, event)}
+            class={bem('option', {
+              disabled: item.disabled,
+              selected: modelValue === item.value,
+            })}
+          >
+            {slots.option ? slots.option({ item, index }) : item.text}
+          </div>
+        ));
+
+      return (
+        <span
+          ref={wrapperRef}
+          class={bem({ disabled })}
+          onClick={onClickWrapper}
+          style={style}
+        >
+          {renderReference()}
+          <Popup
+            v-model={[state.popupShow, 'show']}
+            duration={0}
+            position=""
+            lockScroll={false}
+            ref={popoverRef}
+            overlay={false}
+          >
+            <div class={bem('content')} style={popStyle}>
+              {renderOption(options)}
+            </div>
+          </Popup>
+        </span>
+      );
     };
   },
 });
-</script>

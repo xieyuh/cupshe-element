@@ -1,67 +1,38 @@
-<template>
-  <div ref="root" :class="bem()">
-    <div
-      :style="trackStyle"
-      :class="bem('track', { vertical })"
-      @touchstart="onTouchStart"
-      @touchend="onTouchEnd"
-      @touchmove="onTouchMove"
-      @touchcancel="onTouchEnd"
-    >
-      <slot />
-    </div>
-    <slot name="indicator" v-bind="{ active: activeIndicator }">
-      <div
-        v-if="showIndicators && count > 1"
-        :class="bem('indicators', { vertical })"
-      >
-        <i
-          v-for="(item, index) in Array(count).fill('').map(renderDot)"
-          :key="index"
-          :style="item.style"
-          :class="bem('indicator', { active: item.active })"
-        />
-      </div>
-    </slot>
-  </div>
-</template>
-
-<script lang="ts">
 import {
-  defineComponent,
   ref,
+  watch,
   reactive,
   computed,
-  ExtractPropTypes,
-  ComputedRef,
-  InjectionKey,
-  CSSProperties,
-  watch,
   onMounted,
   onActivated,
+  InjectionKey,
+  CSSProperties,
   onDeactivated,
   onBeforeUnmount,
+  defineComponent,
+  ExtractPropTypes,
 } from 'vue';
+
+// Utils
 import {
-  createNamespace,
-  truthProp,
   clamp,
-  preventDefault,
   isHidden,
+  truthProp,
+  preventDefault,
+  createNamespace,
 } from '../utils';
 import {
-  useChildren,
-  useTouch,
-  useWindowSize,
   doubleRaf,
-  useExpose,
+  useChildren,
+  useWindowSize,
   usePageVisibility,
+  useTouch,
+  useExpose,
   onPopupReopen,
 } from '../composables';
+import { SwipeState, SwipeExpose, SwipeProvide, SwipeToOptions } from './types';
 
-export type SwipeToOptions = {
-  immediate?: boolean;
-};
+const [name, bem] = createNamespace('swipe');
 
 const props = {
   loop: truthProp,
@@ -87,14 +58,7 @@ const props = {
   },
 };
 
-export type SwipeProvide = {
-  props: ExtractPropTypes<typeof props>;
-  size: ComputedRef<number>;
-  count: ComputedRef<number>;
-  activeIndicator: ComputedRef<number>;
-};
-
-const [name, bem] = createNamespace('swipe');
+export type SwipeProps = ExtractPropTypes<typeof props>;
 
 export const SWIPE_KEY: InjectionKey<SwipeProvide> = Symbol(name);
 
@@ -105,10 +69,10 @@ export default defineComponent({
 
   emits: ['change'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const root = ref<HTMLElement>();
-    const state = reactive({
-      rect: null as { width: number; height: number } | null,
+    const state = reactive<SwipeState>({
+      rect: null,
       width: 0,
       height: 0,
       offset: 0,
@@ -257,7 +221,6 @@ export default defineComponent({
       });
     };
 
-    // swipe to next item
     const next = () => {
       correctPosition();
       touch.reset();
@@ -271,7 +234,7 @@ export default defineComponent({
       });
     };
 
-    let autoplayTimer: any;
+    let autoplayTimer: NodeJS.Timeout;
 
     const stopAutoplay = () => clearTimeout(autoplayTimer);
 
@@ -285,7 +248,6 @@ export default defineComponent({
       }
     };
 
-    // initialize swipe position
     const initialize = (active = +props.initialSwipe) => {
       if (!root.value) {
         return;
@@ -410,10 +372,25 @@ export default defineComponent({
           }
         : undefined;
 
-      return { style, active };
+      return <i style={style} class={bem('indicator', { active })} />;
     };
 
-    useExpose({
+    const renderIndicator = () => {
+      if (slots.indicator) {
+        return slots.indicator({
+          active: activeIndicator.value,
+        });
+      }
+      if (props.showIndicators && count.value > 1) {
+        return (
+          <div class={bem('indicators', { vertical: props.vertical })}>
+            {Array(count.value).fill('').map(renderDot)}
+          </div>
+        );
+      }
+    };
+
+    useExpose<SwipeExpose>({
       prev,
       next,
       state,
@@ -450,17 +427,20 @@ export default defineComponent({
     onDeactivated(stopAutoplay);
     onBeforeUnmount(stopAutoplay);
 
-    return {
-      bem,
-      root,
-      trackStyle,
-      activeIndicator,
-      count,
-      renderDot,
-      onTouchStart,
-      onTouchEnd,
-      onTouchMove,
-    };
+    return () => (
+      <div ref={root} class={bem()}>
+        <div
+          style={trackStyle.value}
+          class={bem('track', { vertical: props.vertical })}
+          onTouchstart={onTouchStart}
+          onTouchmove={onTouchMove}
+          onTouchend={onTouchEnd}
+          onTouchcancel={onTouchEnd}
+        >
+          {slots.default?.()}
+        </div>
+        {renderIndicator()}
+      </div>
+    );
   },
 });
-</script>

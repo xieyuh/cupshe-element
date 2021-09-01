@@ -26,7 +26,11 @@
     }
 
     &--readonly {
-      cursor: default;
+      cursor: inherit;
+    }
+
+    &--error {
+      border-color: #ec4e4e;
     }
 
     &--disabled {
@@ -51,7 +55,7 @@
   &__suffix {
     display: inline-flex;
     align-items: center;
-    color: #999;
+    color: #333;
     cursor: pointer;
 
     .c-icon {

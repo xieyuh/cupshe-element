@@ -21,11 +21,27 @@ app.use(Tag);
 ### 基础用法
 
 ```html
-<c-tag>Tag</c-tag>
-<c-tag>
+<c-tag v-model:checked="value0">Tag</c-tag>
+<c-tag v-model:checked="value1">
   <c-icon name="star" />
   Tag
 </c-tag>
+```
+
+```js
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const value0 = ref(false);
+    const value1 = ref(false);
+
+    return {
+      value0,
+      value1,
+    };
+  },
+};
 ```
 
 ### 不可选中
@@ -44,31 +60,16 @@ app.use(Tag);
 <c-tag color="#ffe1e1" text-color="#ad0000">标签</c-tag>
 ```
 
-### 自定义样式
-
-设置 `checked-class` 属性自定义选中样式。
-
-```html
-<c-tag checked-class="checked">Tag</c-tag>
-```
-
-```css
-.checked {
-  color: #fff;
-  background-color: #000;
-}
-```
-
 ## API
 
 ### Props
 
-| 参数          | 说明             | 类型      | 默认值 |
-| ------------- | ---------------- | --------- | ------ |
-| color         | 标签背景颜色     | _string_  | -      |
-| text-color    | 文本颜色         | _string_  | -      |
-| checkable     | 是否为可选中标签 | _boolean_ | `true` |
-| checked-class | 选中下的样式类   | _string_  | -      |
+| 参数       | 说明             | 类型      | 默认值 |
+| ---------- | ---------------- | --------- | ------ |
+| color      | 标签背景颜色     | _string_  | -      |
+| text-color | 文本颜色         | _string_  | -      |
+| checkable  | 是否为可选中标签 | _boolean_ | `true` |
+| checked    | 选中状态         | _boolean_ | `true` |
 
 ### Slots
 
@@ -78,6 +79,7 @@ app.use(Tag);
 
 ### Events
 
-| 事件名 | 说明       | 回调参数            |
-| ------ | ---------- | ------------------- |
-| click  | 点击时触发 | _event: MouseEvent_ |
+| 事件名         | 说明                     | 回调参数            |
+| -------------- | ------------------------ | ------------------- |
+| click          | 点击时触发               | _event: MouseEvent_ |
+| update:checked | 点击时触发，切换选中状态 | -                   |

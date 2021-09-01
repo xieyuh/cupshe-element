@@ -22,12 +22,12 @@
   <demo-block title="格式化内容">
     <div class="demo-input-row">
       <c-input
-        v-model="value3"
+        v-model="value4"
         :formatter="formatter"
         placeholder="在输入时执行格式化"
       />
       <c-input
-        v-model="value4"
+        v-model="value5"
         :formatter="formatter"
         placeholder="在失焦时执行格式化"
         format-trigger="onBlur"
@@ -37,20 +37,20 @@
 
   <demo-block title="显示图标">
     <div class="demo-input-row">
-      <c-input v-model="value5" suffix="question" />
-      <c-input v-model="value6" prefix="search" />
+      <c-input v-model="value6" suffix="question" />
+      <c-input v-model="value7" prefix="search" />
     </div>
   </demo-block>
 
   <demo-block title="多行文本">
     <div class="demo-input-row">
-      <c-input v-model="value7" rows="2" type="textarea" autosize />
+      <c-input v-model="value8" rows="2" type="textarea" autosize />
     </div>
   </demo-block>
 
   <demo-block title="插入按钮">
     <div class="demo-input-row">
-      <c-input v-model="value8">
+      <c-input v-model="value9">
         <template #addon>
           <c-button type="primary" size="large" icon="copy" />
         </template>
@@ -59,7 +59,7 @@
   </demo-block>
 </template>
 
-<script lang="ts">
+<script>
 import { reactive, toRefs } from 'vue';
 
 export default {
@@ -74,13 +74,14 @@ export default {
       value6: '',
       value7: '',
       value8: '',
+      value9: '',
     });
 
     const onChange = (value) => {
       console.log(value);
     };
 
-    const formatter = (value: string) => value.replace(/\d/g, '');
+    const formatter = (value) => value.replace(/\d/g, '');
 
     return {
       ...toRefs(state),

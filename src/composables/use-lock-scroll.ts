@@ -1,7 +1,5 @@
 import { Ref, watch, onBeforeUnmount, onDeactivated } from 'vue';
-import { onMountedOrActivated } from './on-mounted-or-activated';
-import { getScrollParent } from './use-scroll-parent';
-import { supportsPassive } from './use-event-listener';
+import { getScrollParent, supportsPassive, onMountedOrActivated } from '.';
 import { useTouch } from './use-touch';
 import { preventDefault } from '../utils';
 

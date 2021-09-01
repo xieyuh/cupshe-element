@@ -1,6 +1,6 @@
 import { defineComponent, computed, CSSProperties, PropType } from 'vue';
 import { addUnit, createNamespace } from '../utils';
-import { useRefs, useLinkField } from '../composables';
+import { useRefs, useCustomFieldValue } from '../composables';
 
 type RateStatus = 'full' | 'half' | 'void';
 
@@ -73,7 +73,7 @@ export default defineComponent({
 
   emits: ['change', 'update:modelValue', 'click-text'],
 
-  setup(props, { emit, slots }) {
+  setup(props, { emit }) {
     const [itemRefs, setItemRefs] = useRefs();
 
     const list = computed<RateListItem[]>(() =>
@@ -122,8 +122,6 @@ export default defineComponent({
         emit('change', index);
       }
     };
-
-    const onTextClick = (e: MouseEvent) => emit('click-text', e);
 
     const renderStar = (item: RateListItem, index: number) => {
       const score = index + 1;
@@ -196,7 +194,7 @@ export default defineComponent({
       );
     };
 
-    useLinkField(() => props.modelValue);
+    useCustomFieldValue(() => props.modelValue);
 
     return () => (
       <div
@@ -205,11 +203,6 @@ export default defineComponent({
         tabindex={0}
       >
         {list.value.map(renderStar)}
-        {slots.text && (
-          <span class={bem('text')} onClick={onTextClick}>
-            {slots.text()}
-          </span>
-        )}
       </div>
     );
   },

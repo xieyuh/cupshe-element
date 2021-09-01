@@ -1,17 +1,7 @@
-<template>
-  <div
-    :style="style"
-    :class="bem({ [span]: span, [`offset-${offset}`]: offset })"
-  >
-    <slot />
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { createNamespace } from '../utils';
 import { useParent } from '../composables';
-import { ROW_KEY } from '../row/index.vue';
+import { ROW_KEY } from '../row/Row';
 
 const [name, bem] = createNamespace('col');
 
@@ -19,19 +9,20 @@ export default defineComponent({
   name,
 
   props: {
-    offset: [String, Number],
+    offset: [Number, String],
+
     span: {
-      type: [String, Number],
+      type: [Number, String],
       default: 0,
     },
   },
 
-  setup() {
+  setup(props, { slots }) {
     const { parent, index } = useParent(ROW_KEY);
 
     const style = computed(() => {
       if (!parent) {
-        return {};
+        return;
       }
 
       const { spaces } = parent;
@@ -43,14 +34,19 @@ export default defineComponent({
           paddingRight: right ? `${right}px` : null,
         };
       }
-
-      return {};
     });
 
-    return {
-      bem,
-      style,
+    return () => {
+      const { span, offset } = props;
+
+      return (
+        <div
+          style={style.value}
+          class={bem({ [span]: span, [`offset-${offset}`]: offset })}
+        >
+          {slots.default?.()}
+        </div>
+      );
     };
   },
 });
-</script>

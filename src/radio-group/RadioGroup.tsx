@@ -1,20 +1,13 @@
-<template>
-  <div :class="bem([direction])" role="radiogroup">
-    <slot />
-  </div>
-</template>
-
-<script lang="ts">
 import {
+  watch,
+  PropType,
+  InjectionKey,
   defineComponent,
   ExtractPropTypes,
-  InjectionKey,
-  PropType,
-  watch,
 } from 'vue';
-import { createNamespace, unknownProp } from '../utils';
-import { useChildren, useLinkField } from '../composables';
-import type { CheckerDirection } from '../checkbox/checker.vue';
+import { unknownProp, createNamespace } from '../utils';
+import { useChildren, useCustomFieldValue } from '../composables';
+import type { CheckerDirection } from '../checkbox/Checker';
 
 const [name, bem] = createNamespace('radio-group');
 
@@ -39,10 +32,11 @@ export default defineComponent({
 
   emits: ['change', 'update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const { linkChildren } = useChildren(RADIO_KEY);
 
     const updateValue = (value: unknown) => emit('update:modelValue', value);
+
     watch(
       () => props.modelValue,
       (value) => emit('change', value)
@@ -53,11 +47,12 @@ export default defineComponent({
       updateValue,
     });
 
-    useLinkField(() => props.modelValue);
+    useCustomFieldValue(() => props.modelValue);
 
-    return {
-      bem,
-    };
+    return () => (
+      <div class={bem([props.direction])} role="radiogroup">
+        {slots.default?.()}
+      </div>
+    );
   },
 });
-</script>

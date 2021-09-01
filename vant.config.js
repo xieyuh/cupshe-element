@@ -123,6 +123,10 @@ module.exports = {
             path: 'collapse',
             title: 'Collapse 折叠面板',
           },
+          {
+            path: 'list',
+            title: 'List 列表',
+          },
         ],
       },
       {

@@ -1,42 +1,26 @@
-<template>
-  <Checker
-    :bem="bem"
-    role="checkbox"
-    :parent="parent"
-    :checked="checked"
-    @toggle="toggle"
-    v-bind="props"
-  >
-    <slot />
-    <template #icon="prop">
-      <slot name="icon" v-bind="prop" />
-    </template>
-  </Checker>
-</template>
-
-<script lang="ts">
-import { defineComponent, computed, watch } from 'vue';
-import { createNamespace, extend, truthProp } from '../utils';
-import { useParent } from '../composables/use-parent';
-import { useExpose } from '../composables/use-expose';
-import { useLinkField } from '../composables/use-link-field';
-import { CHECKBOX_GROUP_KEY } from '../checkbox-group/index.vue';
-import Checker, { checkerProps } from './checker.vue';
+import { defineComponent, ExtractPropTypes, computed, watch } from 'vue';
+import { createNamespace, extend, pick, truthProp } from '../utils';
+import { useExpose, useParent, useCustomFieldValue } from '../composables';
+import { CHECKBOX_GROUP_KEY } from '../checkbox-group/CheckboxGroup';
+import Checker, { checkerProps } from './Checker';
+import { CheckboxExpose } from './types';
 
 const [name, bem] = createNamespace('checkbox');
+
+const props = extend({}, checkerProps, {
+  bindGroup: truthProp,
+});
+
+export type CheckboxProps = ExtractPropTypes<typeof props>;
 
 export default defineComponent({
   name,
 
-  components: { Checker },
-
-  props: extend({}, checkerProps, {
-    bindGroup: truthProp,
-  }),
+  props,
 
   emits: ['change', 'update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const { parent } = useParent(CHECKBOX_GROUP_KEY);
 
     const setParentValue = (checked: boolean) => {
@@ -87,16 +71,19 @@ export default defineComponent({
       (value) => emit('change', value)
     );
 
-    useExpose({ toggle, props, checked });
-    useLinkField(() => props.modelValue);
+    useExpose<CheckboxExpose>({ toggle, props, checked });
+    useCustomFieldValue(() => props.modelValue);
 
-    return {
-      bem,
-      parent,
-      checked,
-      toggle,
-      props,
-    };
+    return () => (
+      <Checker
+        v-slots={pick(slots, ['default', 'icon'])}
+        bem={bem}
+        role="checkbox"
+        parent={parent}
+        checked={checked.value}
+        onToggle={toggle}
+        {...props}
+      />
+    );
   },
 });
-</script>

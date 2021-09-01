@@ -14,10 +14,12 @@ export type AutoSizeConfig = {
   minHeight?: number;
 };
 
+type Booleanish = boolean | 'true' | 'false';
+
 export const inputProps = {
   placeholder: String,
-  autofocus: Boolean,
-  autocomplete: Boolean,
+  autofocus: String as PropType<Booleanish>,
+  autocomplete: String,
   maxlength: [String, Number],
   style: {
     type: Object as PropType<CSSProperties>,

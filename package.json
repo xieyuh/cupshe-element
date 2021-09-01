@@ -1,6 +1,6 @@
 {
   "name": "cupshe-element",
-  "version": "1.8.19",
+  "version": "1.8.20",
   "description": "卡佩希 Vue 组件库",
   "main": "lib/cupshe-element.js",
   "style": "lib/index.css",
@@ -23,8 +23,7 @@
   "lint-staged": {
     "*.md": "prettier --write",
     "*.{ts,tsx,js,vue,less,scss}": "prettier --write",
-    "*.{ts,tsx,js,vue}": "eslint --fix",
-    "*.{vue,css,less,scss}": "stylelint --fix"
+    "*.{ts,tsx,js,vue}": "eslint --fix"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
@@ -40,11 +39,7 @@
       "@vant"
     ]
   },
-  "stylelint": {
-    "extends": [
-      "@vant/stylelint-config"
-    ]
-  },
+  "stylelint": {},
   "prettier": {
     "singleQuote": true
   },

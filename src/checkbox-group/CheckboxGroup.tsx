@@ -1,20 +1,18 @@
-<template>
-  <div :class="bem([direction])">
-    <slot />
-  </div>
-</template>
-
-<script lang="ts">
 import {
-  defineComponent,
   PropType,
-  watch,
-  InjectionKey,
   ExtractPropTypes,
+  InjectionKey,
+  defineComponent,
+  watch,
 } from 'vue';
-import { CheckerParent, CheckerDirection } from '../checkbox/checker.vue';
 import { createNamespace } from '../utils';
-import { useChildren, useExpose, useLinkField } from '../composables';
+import { useChildren, useExpose, useCustomFieldValue } from '../composables';
+import type { CheckerDirection } from '../checkbox/Checker';
+import type {
+  CheckboxGroupProvide,
+  CheckboxGroupToggleAllOptions,
+  CheckboxGroupExpose,
+} from './types';
 
 const [name, bem] = createNamespace('checkbox-group');
 
@@ -29,17 +27,7 @@ const props = {
   },
 };
 
-export type CheckboxGroupToggleAllOptions =
-  | boolean
-  | {
-      checked?: boolean;
-      skipDisabled?: boolean;
-    };
-
-export type CheckboxGroupProvide = CheckerParent & {
-  props: ExtractPropTypes<typeof props>;
-  updateValue: (value: unknown[]) => void;
-};
+export type CheckboxGroupProps = ExtractPropTypes<typeof props>;
 
 export const CHECKBOX_GROUP_KEY: InjectionKey<CheckboxGroupProvide> = Symbol(
   name
@@ -52,7 +40,7 @@ export default defineComponent({
 
   emits: ['change', 'update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const { children, linkChildren } = useChildren(CHECKBOX_GROUP_KEY);
 
     const updateValue = (value: unknown[]) => emit('update:modelValue', value);
@@ -69,9 +57,9 @@ export default defineComponent({
           return false;
         }
         if (item.props.disabled && skipDisabled) {
-          return item.checked;
+          return item.checked.value;
         }
-        return checked ?? !item.checked;
+        return checked ?? !item.checked.value;
       });
 
       const names = checkedChildren.map((item: any) => item.name);
@@ -80,21 +68,13 @@ export default defineComponent({
 
     watch(
       () => props.modelValue,
-      (value) => {
-        emit('change', value);
-      }
+      (value) => emit('change', value)
     );
 
-    useExpose({ toggleAll });
-    useLinkField(() => props.modelValue);
-    linkChildren({
-      props,
-      updateValue,
-    });
+    useExpose<CheckboxGroupExpose>({ toggleAll });
+    useCustomFieldValue(() => props.modelValue);
+    linkChildren({ props, updateValue });
 
-    return {
-      bem,
-    };
+    return () => <div class={bem([props.direction])}>{slots.default?.()}</div>;
   },
 });
-</script>
