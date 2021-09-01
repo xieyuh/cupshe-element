@@ -2,6 +2,8 @@ import { defineComponent, computed, CSSProperties, PropType } from 'vue';
 import { addUnit, createNamespace } from '../utils';
 import { useRefs, useCustomFieldValue } from '../composables';
 
+import { Icon } from '../icon';
+
 type RateStatus = 'full' | 'half' | 'void';
 
 type RateSize = 'large' | 'normal' | 'small';
@@ -71,13 +73,13 @@ export default defineComponent({
     },
   },
 
-  emits: ['change', 'update:modelValue', 'click-text'],
+  emits: ['change', 'update:modelValue'],
 
   setup(props, { emit }) {
     const [itemRefs, setItemRefs] = useRefs();
 
     const list = computed<RateListItem[]>(() =>
-      Array(props.count)
+      Array(+props.count)
         .fill('')
         .map((_, i) =>
           getRateStatus(
@@ -124,19 +126,32 @@ export default defineComponent({
     };
 
     const renderStar = (item: RateListItem, index: number) => {
+      const {
+        icon,
+        voidColor,
+        color,
+        voidIcon,
+        gutter,
+        allowHalf,
+        count,
+        size,
+        disabled,
+        disabledColor,
+      } = props;
+
       const score = index + 1;
       const isFull = item.status === 'full';
       const isVoid = item.status === 'void';
-      const renderHalf = props.allowHalf && item.value > 0 && item.value < 1;
+      const renderHalf = allowHalf && item.value > 0 && item.value < 1;
 
       const style: CSSProperties = {};
-      if (props.gutter && score !== +props.count) {
-        style.paddingRight = addUnit(props.gutter);
+      if (gutter && score !== +count) {
+        style.paddingRight = addUnit(gutter);
       }
 
       const onClickItem = (event: MouseEvent) => {
         updateRanges();
-        select(props.allowHalf ? getScoreByPosition(event.clientX) : score);
+        select(allowHalf ? getScoreByPosition(event.clientX) : score);
       };
 
       return (
@@ -147,47 +162,35 @@ export default defineComponent({
           class={bem('item')}
           tabindex={0}
           role="radio"
-          aria-setsize={+props.count}
+          aria-setsize={+count}
           aria-posinset={score}
           aria-checked={!isVoid}
           onClick={onClickItem}
         >
-          <c-icon
-            name={isFull ? props.icon : props.voidIcon}
+          <Icon
+            name={isFull ? icon : voidIcon}
             class={bem('icon', [
-              props.size,
+              size,
               {
-                disabled: props.disabled,
+                disabled,
                 full: isFull,
               },
             ])}
-            color={
-              props.disabled
-                ? props.disabledColor
-                : isFull
-                ? props.voidColor
-                : props.color
-            }
+            color={disabled ? disabledColor : isFull ? voidColor : color}
           />
           {renderHalf && (
-            <c-icon
+            <Icon
               style={{ width: item.value + 'em' }}
-              name={isVoid ? props.voidIcon : props.icon}
+              name={isVoid ? voidIcon : icon}
               class={bem('icon', [
                 'half',
-                props.size,
+                size,
                 {
-                  disabled: props.disabled,
+                  disabled,
                   full: isVoid,
                 },
               ])}
-              color={
-                props.disabled
-                  ? props.disabledColor
-                  : isVoid
-                  ? props.voidColor
-                  : props.color
-              }
+              color={disabled ? disabledColor : isVoid ? voidColor : color}
             />
           )}
         </div>

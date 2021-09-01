@@ -54,7 +54,7 @@ import { toRefs, reactive } from 'vue';
 export default {
   setup() {
     const state = reactive({
-      value1: 3,
+      value1: 4.5,
       value2: 3,
       value3: 3,
       value4: 3,
