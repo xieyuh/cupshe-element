@@ -171,7 +171,7 @@ export default {
 | disabled-color | 禁用时的颜色                            | _string_           | `#c8c9cc`   |
 | icon           | 选中时的[图标名称](#/icon)或图片链接    | _string_           | `star_full` |
 | void-icon      | 未选中时的[图标名称](#/icon)或图片链接  | _string_           | `star`      |
-| allow-half     | 是否允许半选                            | _boolean_          | `false`     |
+| allow-half     | 是否允许半选                            | _boolean_          | `true`      |
 | readonly       | 是否为只读状态，只读状态下无法修改评分  | _boolean_          | `false`     |
 | disabled       | 是否禁用评分                            | _boolean_          | `false`     |
 

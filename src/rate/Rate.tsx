@@ -16,23 +16,14 @@ type RateListItem = {
 function getRateStatus(
   value: number,
   index: number,
-  allowHalf: boolean,
-  readonly: boolean
+  allowHalf: boolean
 ): RateListItem {
   if (value >= index) {
     return { status: 'full', value: 1 };
   }
 
-  if (value + 0.5 >= index && allowHalf && !readonly) {
+  if (value >= index - 0.5 && allowHalf) {
     return { status: 'half', value: 0.5 };
-  }
-
-  if (value + 1 >= index && allowHalf && readonly) {
-    const cardinal = 10 ** 10;
-    return {
-      status: 'half',
-      value: Math.round((value - index + 1) * cardinal) / cardinal,
-    };
   }
 
   return { status: 'void', value: 0 };
@@ -48,9 +39,12 @@ export default defineComponent({
     gutter: [Number, String],
     readonly: Boolean,
     disabled: Boolean,
-    allowHalf: Boolean,
     voidColor: String,
     disabledColor: String,
+    allowHalf: {
+      type: Boolean,
+      default: true,
+    },
     size: {
       type: String as PropType<RateSize>,
       default: 'normal',
@@ -81,14 +75,7 @@ export default defineComponent({
     const list = computed<RateListItem[]>(() =>
       Array(+props.count)
         .fill('')
-        .map((_, i) =>
-          getRateStatus(
-            props.modelValue,
-            i + 1,
-            props.allowHalf,
-            props.readonly
-          )
-        )
+        .map((_, i) => getRateStatus(+props.modelValue, i + 1, props.allowHalf))
     );
 
     let ranges: Array<{ left: number; score: number }>;

@@ -1,10 +1,10 @@
 <template>
   <demo-block title="基础用法">
-    <c-rate v-model="value1" />
+    <c-rate v-model="value1" readonly allow-half />
   </demo-block>
 
   <demo-block title="自定义图标">
-    <c-rate v-model="value2" icon="like" void-icon="like-o" />
+    <c-rate v-model="value2" icon="like_full" void-icon="like" />
   </demo-block>
 
   <demo-block title="自定义颜色">
@@ -54,7 +54,7 @@ import { toRefs, reactive } from 'vue';
 export default {
   setup() {
     const state = reactive({
-      value1: 4.5,
+      value1: 3.9,
       value2: 3,
       value3: 3,
       value4: 3,
