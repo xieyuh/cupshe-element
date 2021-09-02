@@ -112,7 +112,13 @@ export default defineComponent({
         nativeType,
       } = props;
 
-      const classes = [bem([type, size, { ghost, block, cover, disabled }])];
+      const classes = [
+        bem([
+          type,
+          size,
+          { ghost, block, cover: cover && !disabled, disabled },
+        ]),
+      ];
 
       return (
         <tag

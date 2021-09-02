@@ -58,7 +58,7 @@ export default defineComponent({
     },
   },
 
-  emits: ['change', 'select', 'update:modelValue'],
+  emits: ['change', 'select', 'click', 'update:modelValue'],
 
   setup(props, { emit, slots }) {
     let popper: Instance | null;
@@ -124,10 +124,11 @@ export default defineComponent({
       }
     };
 
-    const onClickWrapper = () => {
+    const onClickWrapper = (event: MouseEvent) => {
       if (props.disabled) {
         return;
       }
+      emit('click', event);
       updateShow(!state.popupShow);
     };
 
