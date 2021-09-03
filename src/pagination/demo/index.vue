@@ -1,6 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <c-pagination v-model="current1" :page-count="1" />
+    <c-pagination v-model="current1" :page-count="5" />
   </demo-block>
 </template>
 

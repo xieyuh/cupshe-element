@@ -26,6 +26,7 @@ import { BORDER_BOTTOM } from '../utils/constant';
 import { useClickAway } from '../composables';
 
 // Components
+import { Icon } from '../icon';
 import { Popup } from '../popup';
 
 const [name, bem] = createNamespace('popover');
@@ -105,8 +106,7 @@ export default defineComponent({
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
-    const createPopperInstance = () => {
-      return createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
+    const createPopperInstance = () => createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
         placement: props.placement,
         modifiers: [
           {
@@ -123,7 +123,6 @@ export default defineComponent({
           }),
         ],
       });
-    };
 
     const updateLocation = () => {
       nextTick(() => {
@@ -184,7 +183,7 @@ export default defineComponent({
           style={{ color }}
           onClick={() => onClickAction(action, index)}
         >
-          {icon && <c-icon name={icon} class={bem('action-icon')} />}
+          {icon && <Icon name={icon} class={bem('action-icon')} />}
           <div class={[bem('action-text'), BORDER_BOTTOM]}>{text}</div>
         </div>
       );

@@ -1,5 +1,7 @@
-import { defineComponent } from 'vue';
-import { createNamespace } from '../utils';
+import { defineComponent, Transition } from 'vue';
+import { createNamespace, truthProp } from '../utils';
+
+import { Icon } from '../icon';
 
 const [name, bem] = createNamespace('tag');
 
@@ -7,22 +9,27 @@ export default defineComponent({
   name,
 
   props: {
-    color: String,
-    textColor: String,
-    checkedClass: String,
-    checkable: {
-      type: Boolean,
-      default: true,
-    },
+    show: truthProp,
+    checkable: truthProp,
     checked: {
+      type: Boolean,
+      default: false,
+    },
+    closeable: {
       type: Boolean,
       default: false,
     },
   },
 
-  emits: ['click', 'update:checked'],
+  emits: ['click', 'close', 'update:checked'],
 
   setup(props, { emit, slots }) {
+    const onClose = (event: MouseEvent) => {
+      console.log(123);
+      event.stopPropagation();
+      emit('close', event);
+    };
+
     const onClick = (event: MouseEvent) => {
       if (props.checkable) {
         emit('update:checked', !props.checked);
@@ -31,17 +38,30 @@ export default defineComponent({
       emit('click', event);
     };
 
-    return () => {
-      const { checkable, checked, color, textColor } = props;
+    const renderClose = () => {
+      if (props.closeable) {
+        return <Icon name="close" class={bem('close')} onClick={onClose} />;
+      }
+    };
+
+    const renderTag = () => {
+      const { checkable, checked } = props;
 
       return (
-        <span
-          class={bem({ checkable, checked })}
-          style={{ color: textColor, backgroundColor: color }}
-          onClick={onClick}
-        >
+        <span class={bem({ checkable, checked })} onClick={onClick}>
           {slots.default?.()}
+          {renderClose()}
         </span>
+      );
+    };
+
+    return () => {
+      const { closeable, show } = props;
+
+      return (
+        <Transition name={closeable ? 'c-fade' : undefined}>
+          {show ? renderTag() : null}
+        </Transition>
       );
     };
   },

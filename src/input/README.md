@@ -120,6 +120,22 @@ export default {
 </c-input>
 ```
 
+### 错误状态
+
+通过 `required` 属性标记为必填项。
+
+```html
+<c-input error placeholder="请输入文本" />
+```
+
+### 必填项
+
+通过 `required` 属性标记为必填项。
+
+```html
+<c-input required placeholder="Phone" />
+```
+
 ## API
 
 ### Props
@@ -134,6 +150,8 @@ export default {
 | placeholder    | 输入框占位提示文字                                                                                          | _string_                  | -          |
 | style          | 自定义容器样式                                                                                              | _object_                  | -          |
 | disabled       | 是否禁用输入框                                                                                              | _boolean_                 | `false`    |
+| required       | 是否显示必填项标记                                                                                          | _boolean_                 | `false`    |
+| error          | 是否显示为错误状态                                                                                          | _boolean_                 | `false`    |
 | readonly       | 是否为只读状态，只读状态下无法输入内容                                                                      | _boolean_                 | `false`    |
 | formatter      | 输入内容格式化函数                                                                                          | _(val: string) => string_ | -          |
 | format-trigger | 格式化函数触发的时机，可选值为 `onBlur`                                                                     | _string_                  | `onChange` |

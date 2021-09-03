@@ -52,24 +52,42 @@ export default {
 <c-tag :checkable="false">Tag</c-tag>
 ```
 
-### 自定义颜色
+### 可关闭标签
 
-通过 `color` 和 `text-color` 属性设置标签颜色。
+设置 `checkable` 属性设置为 `false` 设置为不可选中。
 
 ```html
-<c-tag color="#ffe1e1" text-color="#ad0000">标签</c-tag>
+<c-tag closeable :show="value" @close="onClose">标签</c-tag>
+```
+
+```js
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const value = ref(true);
+
+    const onClose = () => {
+      value.value = false;
+    };
+
+    return {
+      value,
+      onClose,
+    };
+  },
+};
 ```
 
 ## API
 
 ### Props
 
-| 参数       | 说明             | 类型      | 默认值 |
-| ---------- | ---------------- | --------- | ------ |
-| color      | 标签背景颜色     | _string_  | -      |
-| text-color | 文本颜色         | _string_  | -      |
-| checkable  | 是否为可选中标签 | _boolean_ | `true` |
-| checked    | 选中状态         | _boolean_ | `true` |
+| 参数      | 说明             | 类型      | 默认值  |
+| --------- | ---------------- | --------- | ------- |
+| checkable | 是否为可选中标签 | _boolean_ | `true`  |
+| checked   | 选中状态         | _boolean_ | `false` |
+| closeable | 是否可关闭       | _boolean_ | `false` |
 
 ### Slots
 
@@ -82,4 +100,5 @@ export default {
 | 事件名         | 说明                     | 回调参数            |
 | -------------- | ------------------------ | ------------------- |
 | click          | 点击时触发               | _event: MouseEvent_ |
+| close          | 点击关闭时触发           | _event: MouseEvent_ |
 | update:checked | 点击时触发，切换选中状态 | -                   |

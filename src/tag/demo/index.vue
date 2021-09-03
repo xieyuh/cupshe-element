@@ -11,8 +11,8 @@
     <c-tag :checkable="false">Tag</c-tag>
   </demo-block>
 
-  <demo-block title="自定义颜色">
-    <c-tag color="#ffe1e1" text-color="#ad0000">标签</c-tag>
+  <demo-block title="可关闭标签">
+    <c-tag closeable :show="value3" @close="onClose">标签</c-tag>
   </demo-block>
 </template>
 
@@ -21,6 +21,11 @@ import { ref } from 'vue';
 
 const value0 = ref(false);
 const value1 = ref(false);
+const value3 = ref(true);
+
+const onClose = () => {
+  value3.value = false;
+};
 </script>
 
 <style lang="less">

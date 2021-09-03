@@ -21,6 +21,7 @@ import { useRect, useClickAway } from '../composables';
 
 import Input, { InputSize } from '../input';
 import { Popup } from '../popup';
+import { Icon } from '../icon';
 
 const [name, bem] = createNamespace('select');
 
@@ -170,11 +171,20 @@ export default defineComponent({
           return slots.reference({ match });
         }
 
+        const inputSlot = {
+          suffix: () => (
+            <Icon
+              name="arrow_down"
+              class={bem('arrow', { active: state.popupShow })}
+            />
+          ),
+        };
+
         return (
           <Input
             readonly
             disabled={disabled}
-            suffix="arrow_down"
+            v-slots={inputSlot}
             class={bem('control')}
             placeholder={placeholder}
             modelValue={match ? match.text : defaultText}

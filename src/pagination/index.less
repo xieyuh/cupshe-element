@@ -3,29 +3,28 @@
 .c-pagination {
   font-size: 14px;
   text-align: center;
-  user-select: none;
-  .muli-light;
 
   &__item {
     display: inline-block;
-    width: 40px;
+    width: 32px;
     padding: 12px 0;
-    margin: 0 9px;
+    margin: 0 8px;
     box-sizing: border-box;
     cursor: pointer;
     color: #333;
+    user-select: none;
 
     &--active {
-      color: #454545;
       border-bottom: 3px solid #000;
     }
 
     &--disabled {
-      color: #999;
+      color: #cfcfcf;
       cursor: not-allowed;
     }
 
     &--ellipses {
+      color: #cfcfcf;
       cursor: auto;
     }
   }

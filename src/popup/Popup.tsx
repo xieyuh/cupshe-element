@@ -25,6 +25,7 @@ import { useLazyRender } from '../composables/use-lazy-render';
 import { POPUP_TOGGLE_KEY } from '../composables/on-popup-reopen';
 
 // Components
+import { Icon } from '../icon';
 import { Overlay } from '../overlay';
 
 export type PopupPosition = 'top' | 'left' | 'bottom' | 'right' | 'center' | '';
@@ -160,7 +161,7 @@ export default defineComponent({
     const renderCloseIcon = () => {
       if (props.closeable) {
         return (
-          <c-icon
+          <Icon
             role="button"
             tabindex={0}
             name={props.closeIcon}

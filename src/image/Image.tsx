@@ -1,41 +1,24 @@
-<template>
-  <div :class="bem({ round })" :style="style">
-    <template v-if="renderImage">
-      <img v-if="lazyLoad" ref="imageRef" v-lazy="src" v-bind="attrs" />
-      <img v-else :src="src" @load="onLoad" @error="onError" v-bind="attrs" />
-    </template>
-    <!-- <div v-if="renderLoading" :class="bem('loading')">
-      <slot name="loading" />
-    </div>
-    <div v-if="renderError" :class="bem('error')">
-      <slot name="error" />
-    </div> -->
-    <slot />
-  </div>
-</template>
-
-<script lang="ts">
 import {
-  computed,
-  CSSProperties,
-  defineComponent,
-  getCurrentInstance,
-  PropType,
   ref,
   watch,
+  computed,
+  PropType,
+  CSSProperties,
   onBeforeUnmount,
+  defineComponent,
+  getCurrentInstance,
 } from 'vue';
 import {
-  addUnit,
-  ComponentInstance,
-  createNamespace,
   isDef,
-  truthProp,
+  addUnit,
   inBrowser,
+  createNamespace,
+  ComponentInstance,
 } from '../utils';
-import { ImageFit } from './types';
 
 const [name, bem] = createNamespace('image');
+
+export type ImageFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 
 export default defineComponent({
   name,
@@ -49,14 +32,11 @@ export default defineComponent({
     height: [Number, String],
     radius: [Number, String],
     lazyLoad: Boolean,
-    iconSize: [Number, String],
-    showError: truthProp,
-    showLoading: truthProp,
   },
 
   emits: ['load', 'error'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const error = ref(false);
     const loading = ref(true);
     const imageRef = ref<HTMLElement>();
@@ -64,22 +44,22 @@ export default defineComponent({
     const { $Lazyload } = getCurrentInstance()!.proxy as ComponentInstance;
 
     const style = computed(() => {
-      const s: CSSProperties = {};
+      const style: CSSProperties = {};
 
       if (isDef(props.width)) {
-        s.width = addUnit(props.width);
+        style.width = addUnit(props.width);
       }
 
       if (isDef(props.height)) {
-        s.height = addUnit(props.height);
+        style.height = addUnit(props.height);
       }
 
       if (isDef(props.radius)) {
-        s.overflow = 'hidden';
-        s.borderRadius = addUnit(props.radius);
+        style.overflow = 'hidden';
+        style.borderRadius = addUnit(props.radius);
       }
 
-      return s;
+      return style;
     });
 
     watch(
@@ -99,6 +79,28 @@ export default defineComponent({
       error.value = true;
       loading.value = false;
       emit('error', event);
+    };
+
+    const renderImage = () => {
+      if (error.value || !props.src) {
+        return;
+      }
+
+      const attrs = {
+        alt: props.alt,
+        class: bem('img'),
+        style: {
+          objectFit: props.fit,
+        },
+      };
+
+      if (props.lazyLoad) {
+        return <img ref={imageRef} v-lazy={props.src} {...attrs} />;
+      }
+
+      return (
+        <img src={props.src} onLoad={onLoad} onError={onError} {...attrs} />
+      );
     };
 
     const onLazyLoaded = ({ el }: { el: HTMLElement }) => {
@@ -123,29 +125,11 @@ export default defineComponent({
       });
     }
 
-    const renderImage = !(error.value || !props.src);
-    const renderLoading = loading.value && props.showLoading;
-    const renderError = error.value && props.showError;
-
-    const attrs = {
-      alt: props.alt,
-      class: bem('img'),
-      style: {
-        objectFit: props.fit,
-      },
-    };
-
-    return {
-      bem,
-      style,
-      renderImage,
-      renderLoading,
-      renderError,
-      imageRef,
-      attrs,
-      onLoad,
-      onError,
-    };
+    return () => (
+      <div class={bem({ round: props.round })} style={style.value}>
+        {renderImage()}
+        {slots.default?.()}
+      </div>
+    );
   },
 });
-</script>

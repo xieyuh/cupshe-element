@@ -31,6 +31,8 @@ export default defineComponent({
     prefix: String,
     suffix: String,
     error: Boolean,
+    required: Boolean,
+    showWordLimit: Boolean,
     size: {
       type: String as PropType<InputSize>,
       default: 'normal',
@@ -180,6 +182,12 @@ export default defineComponent({
       }
     };
 
+    const renderRequireMark = () => {
+      if (props.required) {
+        return <span class={bem('mark')}>*</span>;
+      }
+    };
+
     const renderSuffix = () => {
       if (slots.suffix || props.suffix) {
         return (
@@ -225,6 +233,7 @@ export default defineComponent({
             onClick={focus}
           >
             {renderPrefix()}
+            {renderRequireMark()}
             {renderInput()}
             {renderSuffix()}
           </span>

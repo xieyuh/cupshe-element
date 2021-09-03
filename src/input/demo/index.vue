@@ -44,7 +44,14 @@
 
   <demo-block title="多行文本">
     <div class="demo-input-row">
-      <c-input v-model="value8" rows="2" type="textarea" autosize />
+      <c-input
+        v-model="value8"
+        rows="2"
+        type="textarea"
+        autosize
+        show-word-limit
+        maxlength="200"
+      />
     </div>
   </demo-block>
 
@@ -55,6 +62,18 @@
           <c-button type="primary" size="large" icon="copy" />
         </template>
       </c-input>
+    </div>
+  </demo-block>
+
+  <demo-block title="错误状态">
+    <div class="demo-input-row">
+      <c-input v-model="value10" error placeholder="Phone" />
+    </div>
+  </demo-block>
+
+  <demo-block title="必填项">
+    <div class="demo-input-row">
+      <c-input v-model="value11" required placeholder="Phone" />
     </div>
   </demo-block>
 </template>
@@ -75,6 +94,8 @@ export default {
       value7: '',
       value8: '',
       value9: '',
+      value10: '',
+      value11: '',
     });
 
     const onChange = (value) => {

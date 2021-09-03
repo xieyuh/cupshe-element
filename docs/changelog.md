@@ -6,6 +6,15 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.9.0
+
+**Feature**
+
+- Input 组件新增 `required`, `error` 参数
+- Tag 组件新增 `closeable` 参数
+- Pagination 组件更新组件样式
+- Button 组件更新禁用状态样式
+
 ### v1.8.12
 
 **Bug Fixes**
