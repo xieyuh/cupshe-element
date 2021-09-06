@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue';
 import { useParent } from '../composables';
-import { pick, createNamespace } from '../utils';
+import { createNamespace } from '../utils';
 import { RADIO_KEY } from '../radio-group/RadioGroup';
 
 import Checker, { checkerProps } from '../checkbox/Checker';
@@ -30,9 +30,13 @@ export default defineComponent({
       }
     };
 
+    const iconSlot = ({ checked, disabled }) => (
+      <div class={bem('icon', { checked, disabled })}></div>
+    );
+
     return () => (
       <Checker
-        v-slots={pick(slots, ['default', 'icon'])}
+        v-slots={{ default: slots.default, icon: iconSlot }}
         bem={bem}
         role="radio"
         parent={parent}

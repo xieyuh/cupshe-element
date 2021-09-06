@@ -57,6 +57,10 @@ module.exports = {
             path: 'col',
             title: 'Layout 布局',
           },
+          {
+            path: 'toast',
+            title: 'Toast 轻提示',
+          },
         ],
       },
       {

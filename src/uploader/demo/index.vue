@@ -3,8 +3,8 @@
     <c-uploader :after-read="afterRead" />
   </demo-block>
 
-  <demo-block title="文件预览">
-    <c-uploader v-model="fileList" multiple accept="*" />
+  <demo-block title="上传状态">
+    <c-uploader v-model="statusFileList" :after-read="afterReadFailed" />
   </demo-block>
 
   <demo-block title="限制上传数量">
@@ -71,12 +71,12 @@ export default {
       {
         url: 'https://img.yzcdn.cn/vant/leaf.jpg',
         status: 'uploading',
-        message: '上传中...',
+        message: 'Uploading…',
       },
       {
         url: 'https://img.yzcdn.cn/vant/tree.jpg',
         status: 'failed',
-        message: '上传失败',
+        message: 'Upload failed',
       },
     ];
 

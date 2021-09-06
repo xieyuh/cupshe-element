@@ -1,4 +1,3 @@
-// border
 export const BORDER = 'c-hairline';
 export const BORDER_TOP = `${BORDER}--top`;
 export const BORDER_LEFT = `${BORDER}--left`;

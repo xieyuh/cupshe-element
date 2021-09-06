@@ -1,6 +1,7 @@
 export * from './base';
 export * from './create';
 export * from './validate';
+export * from './constant';
 export * from './format/unit';
 export * from './format/number';
 export * from './format/string';

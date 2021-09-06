@@ -23,25 +23,6 @@
       <c-radio name="2">单选框 2</c-radio>
     </c-radio-group>
   </demo-block>
-
-  <demo-block title="自定义图标">
-    <c-radio-group v-model="radio4" class="demo-radio-group">
-      <c-radio name="1"
-        >单选框 1
-        <template #icon="{ checked }">
-          <c-icon v-if="checked" name="tick" />
-          <c-icon v-else name="close" />
-        </template>
-      </c-radio>
-      <c-radio name="2"
-        >单选框 2
-        <template #icon="{ checked }">
-          <c-icon v-if="checked" name="tick" />
-          <c-icon v-else name="close" />
-        </template>
-      </c-radio>
-    </c-radio-group>
-  </demo-block>
 </template>
 
 <script lang="ts">

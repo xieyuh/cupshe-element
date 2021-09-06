@@ -1,0 +1,70 @@
+@import './var.less';
+
+.c-toast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  transition: all @animation-duration-fast;
+  width: 108px;
+  max-width: @toast-max-width;
+  min-height: @toast-default-min-height;
+  padding: 3px 16px;
+  color: @toast-text-color;
+  font-size: @toast-font-size;
+  line-height: @toast-line-height;
+  white-space: pre-wrap;
+  text-align: center;
+  word-break: break-all;
+  background-color: @toast-background-color;
+
+  &--unclickable {
+    // lock scroll
+    overflow: hidden;
+    cursor: not-allowed;
+
+    // should not add pointer-events: none directly to body tag
+    // that will cause unexpected tap-highlight-color in mobile safari
+    * {
+      pointer-events: none;
+    }
+  }
+
+  &--text,
+  &--html {
+    width: fit-content;
+    min-width: @toast-text-min-width;
+    min-height: 0;
+    padding: @toast-text-padding;
+
+    .c-toast__text {
+      margin-top: 0;
+    }
+  }
+
+  &--top {
+    top: @toast-position-top-distance;
+  }
+
+  &--bottom {
+    top: auto;
+    bottom: @toast-position-bottom-distance;
+  }
+
+  &__icon {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  &__loading {
+    padding: @padding-base;
+    color: @toast-loading-icon-color;
+  }
+
+  &__text {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
