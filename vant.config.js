@@ -41,10 +41,6 @@ module.exports = {
             path: 'icon',
             title: 'Icon 图标',
           },
-          // {
-          //   path: 'image',
-          //   title: 'Image 图片',
-          // },
           {
             path: 'popup',
             title: 'Popup 弹出层',
@@ -145,6 +141,10 @@ module.exports = {
       {
         title: '反馈组件',
         items: [
+          {
+            path: 'alert',
+            title: 'Alert 提示',
+          },
           {
             path: 'overlay',
             title: 'Overlay 遮罩层',

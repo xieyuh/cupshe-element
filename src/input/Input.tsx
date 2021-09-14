@@ -1,11 +1,4 @@
-import {
-  defineComponent,
-  nextTick,
-  onMounted,
-  PropType,
-  ref,
-  watch,
-} from 'vue';
+import { defineComponent, PropType, ref, watch } from 'vue';
 import { useExpose, useCustomFieldValue } from '../composables';
 import { createNamespace, extend, isDef, formatNumber } from '../utils';
 import {
@@ -14,7 +7,7 @@ import {
   InputFormatTrigger,
   InputExpose,
 } from './shared';
-import { endComposing, mapInputType, resizeTextarea } from './utils';
+import { endComposing, mapInputType } from './utils';
 
 import { Icon } from '../icon';
 
@@ -27,17 +20,16 @@ export default defineComponent({
 
   props: extend({}, inputProps, textareaProps, {
     name: String,
-    addon: String,
     prefix: String,
     suffix: String,
     error: Boolean,
     required: Boolean,
     showWordLimit: Boolean,
+    formatter: Function as PropType<(value: string) => string>,
     size: {
       type: String as PropType<InputSize>,
       default: 'normal',
     },
-    formatter: Function as PropType<(value: string) => string>,
     formatTrigger: {
       type: String as PropType<InputFormatTrigger>,
       default: 'onChange',
@@ -51,7 +43,6 @@ export default defineComponent({
     'blur',
     'click-prefix',
     'click-suffix',
-    'click-addon',
   ],
 
   setup(props, { emit, slots }) {
@@ -121,44 +112,42 @@ export default defineComponent({
       emit('change', event);
     };
 
-    const adjustTextareaSize = () => {
-      const input = inputRef.value;
-      if (props.type === 'textarea' && props.autosize && input) {
-        resizeTextarea(input, props.autosize);
-      }
-    };
-
     const onClickPrefix = (event: Event) => emit('click-prefix', event);
     const onClickSuffix = (event: Event) => emit('click-suffix', event);
-    const onClickAddon = (event: Event) => emit('click-addon', event);
-
-    onMounted(() => {
-      nextTick(adjustTextareaSize);
-    });
 
     watch(
       () => props.modelValue,
       () => {
         updateValue(getModelValue());
-        nextTick(adjustTextareaSize);
       }
     );
 
     const renderInput = () => {
-      const controlClass = bem('control', [props.type]);
+      const {
+        name,
+        type,
+        rows,
+        modelValue,
+        disabled,
+        readonly,
+        autofocus,
+        placeholder,
+        autocomplete,
+        maxlength,
+      } = props;
 
       const inputAttrs = {
         ref: inputRef,
-        name: props.name,
-        rows: isDef(props.rows) ? +props.rows : undefined,
-        class: controlClass,
-        value: props.modelValue,
-        disabled: props.disabled,
-        readonly: props.readonly,
-        autofocus: props.autofocus,
-        placeholder: props.placeholder,
-        autocomplete: props.autocomplete,
-        maxlength: props.maxlength,
+        value: modelValue,
+        rows: isDef(rows) ? +rows : undefined,
+        class: bem('control', [type]),
+        name,
+        disabled,
+        readonly,
+        autofocus,
+        placeholder,
+        autocomplete,
+        maxlength,
         onBlur,
         onFocus,
         onInput,
@@ -166,10 +155,10 @@ export default defineComponent({
       };
 
       if (props.type === 'textarea') {
-        return <textarea autofocus {...inputAttrs} />;
+        return <textarea {...inputAttrs} />;
       }
 
-      return <input {...inputAttrs} {...mapInputType(props.type)} />;
+      return <input {...inputAttrs} {...mapInputType(type)} />;
     };
 
     const renderPrefix = () => {
@@ -198,11 +187,15 @@ export default defineComponent({
       }
     };
 
-    const renderAddon = () => {
-      if (slots.addon) {
+    const hasWordLimit =
+      props.showWordLimit && props.maxlength && props.type === 'textarea';
+
+    const renderWordLimit = () => {
+      if (hasWordLimit) {
+        const count = getModelValue().length;
         return (
-          <div class={bem('addon')} onClick={onClickAddon}>
-            {slots.addon()}
+          <div class={bem('word-limit')}>
+            <span class={bem('word-num')}>{count}</span>/{props.maxlength}
           </div>
         );
       }
@@ -215,30 +208,29 @@ export default defineComponent({
     useCustomFieldValue(() => props.modelValue);
 
     return () => {
-      const { style, size, disabled, readonly, error } = props;
+      const { disabled, readonly, error, style, size } = props;
 
       return (
-        <span class={bem()} style={style}>
-          <span
-            class={bem('wrapper', [
-              size,
-              {
-                focused: focused.value,
-                disabled,
-                readonly,
-                error,
-                'with-addon': !!slots.addon,
-              },
-            ])}
+        <div
+          class={bem({
+            focused: focused.value,
+            disabled,
+            readonly,
+            error,
+          })}
+          style={style}
+        >
+          <div
+            class={bem('body', [size, { 'word-limit': hasWordLimit }])}
             onClick={focus}
           >
             {renderPrefix()}
             {renderRequireMark()}
             {renderInput()}
             {renderSuffix()}
-          </span>
-          {renderAddon()}
-        </span>
+          </div>
+          {renderWordLimit()}
+        </div>
       );
     };
   },

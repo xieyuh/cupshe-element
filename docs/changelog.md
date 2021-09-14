@@ -6,6 +6,19 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.10.0
+
+**New Component**
+
+- 新增 Alert 组件
+- 新增 Toast 组件
+
+**Feature**
+
+- Input 组件新增 `show-word-limit` 属性以在 `type` 为 `textarea` 时新增字数统计功能
+- Select 组件新增 `error` 属性以显示错误时样式
+- Popover 组件 `trigger` 属性新增 `hover` 可选值
+
 ### v1.9.0
 
 **Feature**

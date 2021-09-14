@@ -1,45 +1,68 @@
 @import '../style/font.less';
 
 .c-input {
-  display: inline-flex;
+  display: inline-block;
+  border: 1px solid #d8d8d8;
+  box-sizing: border-box;
+  background: #fff;
+  transition: border 0.1s;
+  color: #333;
+  cursor: text;
+
+  &--focused {
+    border-color: #000;
+  }
+
+  &--readonly {
+    cursor: inherit;
+  }
+
+  &--error {
+    border-color: #fa5050;
+  }
+
+  &--disabled {
+    background-color: #fafafa;
+    cursor: not-allowed;
+  }
 
   &__wrapper {
-    display: inline-flex;
-    width: 100%;
-    color: #333;
-    box-sizing: border-box;
-    border: 1px solid #d8d8d8;
-    background: #fff;
-    transition: border 0.1s;
-    cursor: text;
+    display: flex;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    font-size: 0;
 
     &--normal {
       padding: 12px;
     }
 
     &--small {
-      padding: 8px;
+      padding: 8px 10px;
     }
 
-    &--focused {
-      border-color: #000;
+    &--word-limit {
+      padding-bottom: 0;
     }
+  }
 
-    &--readonly {
-      cursor: inherit;
-    }
+  &__prefix {
+    padding-right: 8px;
+  }
 
-    &--error {
-      border-color: #fa5050;
-    }
+  &__suffix {
+    padding-left: 8px;
+  }
 
-    &--disabled {
-      background-color: #fafafa;
-      cursor: not-allowed;
-    }
+  &__prefix,
+  &__suffix {
+    color: #333;
+    cursor: pointer;
 
-    &--with-addon {
-      border-right: 0;
+    .c-icon {
+      font-size: 16px;
     }
   }
 
@@ -50,39 +73,20 @@
     .muli-light;
   }
 
-  &__prefix {
-    padding-right: 12px;
-  }
-
-  &__suffix {
-    padding-left: 12px;
-  }
-
-  &__prefix,
-  &__suffix {
-    display: inline-flex;
-    align-items: center;
-    color: #333;
-    cursor: pointer;
-
-    .c-icon {
-      font-size: 16px;
-    }
-  }
-
   &__control {
     border: 0;
-    height: 100%;
-    width: 100%;
     padding: 0;
-    line-height: 18px;
+    width: 100%;
+    height: 18px;
     font-size: 14px;
+    line-height: 18px;
     background: transparent;
     cursor: inherit;
     .muli-light;
 
     &--textarea {
-      line-height: 21px;
+      height: auto;
+      line-height: 18px;
       resize: none;
     }
 
@@ -93,7 +97,12 @@
     }
   }
 
-  &__addon {
-    height: 100%;
+  &__word-limit {
+    padding: 4px;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: right;
+    color: #999;
+    .muli-light;
   }
 }

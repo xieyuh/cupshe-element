@@ -46,22 +46,12 @@
     <div class="demo-input-row">
       <c-input
         v-model="value8"
-        rows="2"
+        rows="3"
         type="textarea"
         autosize
         show-word-limit
         maxlength="200"
       />
-    </div>
-  </demo-block>
-
-  <demo-block title="插入按钮">
-    <div class="demo-input-row">
-      <c-input v-model="value9">
-        <template #addon>
-          <c-button type="primary" size="large" icon="copy" />
-        </template>
-      </c-input>
     </div>
   </demo-block>
 

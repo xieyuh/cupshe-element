@@ -1,52 +1,28 @@
 <template>
   <demo-block title="基础用法">
     <c-popover
-      v-model:show="show.lightTheme"
+      v-model:show="show.value0"
       :actions="[{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }]"
       placement="bottom-start"
       @select="onSelect"
     >
       <template #reference>
-        <c-button type="primary">浅色风格</c-button>
+        <c-button type="primary">Click Me</c-button>
+      </template>
+    </c-popover>
+
+    <c-popover
+      v-model:show="show.value1"
+      :actions="[{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }]"
+      placement="bottom-start"
+      trigger="hover"
+      @select="onSelect"
+    >
+      <template #reference>
+        <c-button type="primary">Hover Me</c-button>
       </template>
     </c-popover>
   </demo-block>
-
-  <!-- <demo-block title="弹出位置">
-    <c-field
-      is-link
-      readonly
-      name="picker"
-      label="选择弹出位置"
-      @click="showPicker = true"
-    />
-
-    <c-popup
-      v-model:show="showPicker"
-      round
-      position="bottom"
-      get-container="body"
-    >
-      <div class="demo-popover-box">
-        <c-popover
-          v-model:show="show.placement"
-          theme="dark"
-          :actions="[{ text: '选项一' }, { text: '选项二' }]"
-          :placement="currentPlacement"
-          @select="onSelect"
-        >
-          <template #reference>
-            <div class="demo-popover-refer" />
-          </template>
-        </c-popover>
-      </div>
-      <c-picker
-        :columns="placements"
-        :show-toolbar="false"
-        @change="onPickerChange"
-      />
-    </c-popup>
-  </demo-block> -->
 
   <demo-block title="选项配置">
     <c-popover
@@ -129,6 +105,8 @@ export default {
   setup() {
     const state = reactive({
       show: {
+        value0: false,
+        value1: false,
         showIcon: false,
         placement: false,
         darkTheme: false,

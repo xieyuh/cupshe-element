@@ -9,11 +9,6 @@ export type InputType =
   | 'password'
   | 'textarea';
 
-export type AutoSizeConfig = {
-  maxHeight?: number;
-  minHeight?: number;
-};
-
 type Booleanish = boolean | 'true' | 'false';
 
 export const inputProps = {
@@ -43,8 +38,10 @@ export const inputProps = {
 };
 
 export const textareaProps = {
-  rows: [String, Number],
-  autosize: [Boolean, Object] as PropType<boolean | AutoSizeConfig>,
+  rows: {
+    type: [String, Number],
+    default: 4,
+  },
 };
 
 export type InputExpose = {

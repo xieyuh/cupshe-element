@@ -23,9 +23,20 @@ app.use(Popover);
 当 Popover 弹出时，会基于 `reference` 插槽的内容进行定位。
 
 ```html
-<c-popover v-model:show="showPopover" :actions="actions" @select="onSelect">
+<c-popover v-model:show="showPopover1" :actions="actions" @select="onSelect">
   <template #reference>
-    <c-button type="primary">浅色风格</c-button>
+    <c-button type="primary">Click Me</c-button>
+  </template>
+</c-popover>
+
+<c-popover
+  v-model:show="showPopover2"
+  trigger="hover"
+  :actions="actions"
+  @select="onSelect"
+>
+  <template #reference>
+    <c-button type="primary">Hover Me</c-button>
   </template>
 </c-popover>
 ```
@@ -36,7 +47,8 @@ import { Toast } from 'vant';
 
 export default {
   setup() {
-    const showPopover = ref(false);
+    const showPopover1 = ref(false);
+    const showPopover2 = ref(false);
 
     // 通过 actions 属性来定义菜单选项
     const actions = [
@@ -180,21 +192,21 @@ export default {
 
 ### Props
 
-| 参数                             | 说明                                                               | 类型                        | 默认值   |
-| -------------------------------- | ------------------------------------------------------------------ | --------------------------- | -------- |
-| v-model:show                     | 是否展示气泡弹出层                                                 | _boolean_                   | `false`  |
-| actions                          | 选项列表                                                           | _Action[]_                  | `[]`     |
-| placement                        | 弹出位置                                                           | _string_                    | `bottom` |
-| trigger                          | 触发方式，可选值为 `manual`                                        | `click`                     |
-| duration                         | 动画时长，单位秒                                                   | _number \| string_          | `0.3`    |
-| offset                           | 出现位置的偏移量                                                   | _[number, number]_          | `[0, 8]` |
-| overlay                          | 是否显示遮罩层                                                     | _boolean_                   | `false`  |
-| overlay-class `v3.0.10`          | 自定义遮罩层类名                                                   | _string \| Array \| object_ | -        |
-| overlay-style `v3.0.10`          | 自定义遮罩层样式                                                   | _object_                    | -        |
-| close-on-click-action            | 是否在点击选项后关闭                                               | _boolean_                   | `true`   |
-| close-on-click-outside           | 是否在点击外部元素后关闭菜单                                       | _boolean_                   | `true`   |
-| close-on-click-overlay `v3.0.10` | 是否在点击遮罩层后关闭菜单                                         | _boolean_                   | `true`   |
-| teleport                         | 指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi) | _string \| Element_         | `body`   |
+| 参数                   | 说明                                                         | 类型                        | 默认值   |
+| ---------------------- | ------------------------------------------------------------ | --------------------------- | -------- |
+| v-model:show           | 是否展示气泡弹出层                                           | _boolean_                   | `false`  |
+| actions                | 选项列表                                                     | _Action[]_                  | `[]`     |
+| placement              | 弹出位置                                                     | _string_                    | `bottom` |
+| trigger                | 触发方式，可选值为 `manual`、 `hover`                        | `click`                     |
+| duration               | 动画时长，单位秒                                             | _number \| string_          | `0.3`    |
+| offset                 | 出现位置的偏移量                                             | _[number, number]_          | `[0, 8]` |
+| overlay                | 是否显示遮罩层                                               | _boolean_                   | `false`  |
+| overlay-class          | 自定义遮罩层类名                                             | _string \| Array \| object_ | -        |
+| overlay-style          | 自定义遮罩层样式                                             | _object_                    | -        |
+| close-on-click-action  | 是否在点击选项后关闭                                         | _boolean_                   | `true`   |
+| close-on-click-outside | 是否在点击外部元素后关闭菜单                                 | _boolean_                   | `true`   |
+| close-on-click-overlay | 是否在点击遮罩层后关闭菜单                                   | _boolean_                   | `true`   |
+| teleport               | 指定挂载的节点，[用法示例](#/popup#zhi-ding-gua-zai-wei-zhi) | _string \| Element_         | `body`   |
 
 ### Action 数据结构
 

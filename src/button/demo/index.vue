@@ -28,7 +28,7 @@
 
   <demo-block title="图标按钮">
     <c-button type="primary" icon="star" />
-    <c-button ghost type="primary" icon="like">主要按钮</c-button>
+    <c-button icon="like">主要按钮</c-button>
     <c-button icon="https://img.yzcdn.cn/vant/user-active.png">按钮</c-button>
   </demo-block>
 

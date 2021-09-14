@@ -1,3 +1,4 @@
+@import '../style/font.less';
 @import './var.less';
 
 .c-toast {
@@ -5,27 +6,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-sizing: content-box;
+  box-sizing: border-box;
   transition: all @animation-duration-fast;
-  width: 108px;
-  max-width: @toast-max-width;
-  min-height: @toast-default-min-height;
-  padding: 3px 16px;
-  color: @toast-text-color;
-  font-size: @toast-font-size;
-  line-height: @toast-line-height;
+  min-width: 120px;
+  padding: 16px;
+  color: #fff;
   white-space: pre-wrap;
   text-align: center;
-  word-break: break-all;
   background-color: @toast-background-color;
 
+  @media (min-width: 769px) {
+    max-width: 260px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 200px;
+  }
+
   &--unclickable {
-    // lock scroll
     overflow: hidden;
     cursor: not-allowed;
 
-    // should not add pointer-events: none directly to body tag
-    // that will cause unexpected tap-highlight-color in mobile safari
     * {
       pointer-events: none;
     }
@@ -34,9 +35,9 @@
   &--text,
   &--html {
     width: fit-content;
-    min-width: @toast-text-min-width;
+    min-width: unset;
     min-height: 0;
-    padding: @toast-text-padding;
+    padding: 12px 16px;
 
     .c-toast__text {
       margin-top: 0;
@@ -53,18 +54,27 @@
   }
 
   &__icon {
-    font-size: 32px;
-    line-height: 32px;
-  }
+    @media (min-width: 769px) {
+      font-size: 40px;
+      line-height: 40px;
+    }
 
-  &__loading {
-    padding: @padding-base;
-    color: @toast-loading-icon-color;
+    @media (max-width: 768px) {
+      font-size: 36px;
+      line-height: 36px;
+    }
   }
 
   &__text {
-    margin-top: 12px;
-    font-size: 14px;
+    margin-top: 9px;
+    font-size: 12px;
     line-height: 18px;
+    .muli-bold;
+  }
+
+  &__icon + &__text {
+    font-size: 14px;
+    line-height: 21px;
+    .muli-light;
   }
 }

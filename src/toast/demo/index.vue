@@ -2,11 +2,18 @@
 import { Toast } from '..';
 
 const showSuccessToast = () => {
-  Toast.success('成功文案');
+  Toast.success({
+    message: 'Added Successfully Added Successfully Added Successfully',
+    duration: 0,
+  });
 };
 
 const showFailToast = () => {
-  Toast.fail('失败文案');
+  Toast({
+    icon: 'close',
+    message: 'Number copied Number copied Number copied',
+    duration: 100000,
+  });
 };
 
 const showTopToast = () => {
@@ -27,7 +34,7 @@ const showBottomToast = () => {
 
 const showIconToast = () => {
   Toast({
-    message: '自定义图标',
+    message: 'Added Successfully Added Successfully Added Successfully',
     icon: 'like',
     duration: 100000,
   });
@@ -63,7 +70,7 @@ const showCustomizedToast = () => {
 
 <template>
   <demo-block card title="基础用法">
-    <c-cell is-link title="文字提示" @click="Toast('提示内容')" />
+    <c-cell is-link title="文字提示" @click="Toast({ message: '文字提示' })" />
     <c-cell is-link title="成功提示" @click="showSuccessToast" />
     <c-cell is-link title="失败提示" @click="showFailToast" />
   </demo-block>

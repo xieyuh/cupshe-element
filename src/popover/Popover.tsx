@@ -41,7 +41,7 @@ const popupProps = [
   'closeOnClickOverlay',
 ] as const;
 
-export type PopoverTrigger = 'manual' | 'click';
+export type PopoverTrigger = 'manual' | 'click' | 'hover';
 export type PopoverPlacement =
   | 'top'
   | 'top-start'
@@ -98,7 +98,7 @@ export default defineComponent({
     },
   },
 
-  emits: ['select', 'touchstart', 'update:show'],
+  emits: ['select', 'update:show'],
 
   setup(props, { emit, slots, attrs }) {
     let popper: Instance | null;
@@ -106,7 +106,8 @@ export default defineComponent({
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
-    const createPopperInstance = () => createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
+    const createPopperInstance = () =>
+      createPopper(wrapperRef.value!, popoverRef.value!.popupRef.value, {
         placement: props.placement,
         modifiers: [
           {
@@ -148,10 +149,11 @@ export default defineComponent({
       }
     };
 
-    const onTouchstart = (event: TouchEvent) => {
-      event.stopPropagation();
-      emit('touchstart', event);
-    };
+    const createHoverHandler = (type: 'mouseover' | 'mouseleave') => () => {
+        if (props.trigger === 'hover') {
+          updateShow(type === 'mouseover');
+        }
+      };
 
     const onClickAction = (action: PopoverAction, index: number) => {
       if (action.disabled) {
@@ -203,7 +205,13 @@ export default defineComponent({
 
     return () => (
       <>
-        <span ref={wrapperRef} class={bem('wrapper')} onClick={onClickWrapper}>
+        <span
+          ref={wrapperRef}
+          class={bem('wrapper')}
+          onClick={onClickWrapper}
+          onMouseover={createHoverHandler('mouseover')}
+          onMouseleave={createHoverHandler('mouseleave')}
+        >
           {slots.reference?.()}
         </span>
         <Popup
@@ -212,7 +220,6 @@ export default defineComponent({
           position={''}
           transition="c-popover-zoom"
           lockScroll={false}
-          onTouchstart={onTouchstart}
           {...attrs}
           {...pick(props, popupProps)}
           {...{ 'onUpdate:show': updateShow }}

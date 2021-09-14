@@ -15,16 +15,6 @@
     <c-checkbox :model-value="true" disabled>复选框</c-checkbox>
   </demo-block>
 
-  <demo-block title="自定义图标">
-    <c-checkbox v-model="checkbox6"
-      >复选框
-      <template #icon="{ checked }">
-        <c-icon v-if="checked" name="tick" />
-        <c-icon v-else name="close" />
-      </template>
-    </c-checkbox>
-  </demo-block>
-
   <demo-block title="复选框组">
     <c-checkbox-group v-model="result">
       <c-checkbox name="a">复选框 a</c-checkbox>

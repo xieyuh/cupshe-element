@@ -1,0 +1,39 @@
+@import '../style/font.less';
+
+.c-alert {
+  padding: 8px 12px;
+  text-align: left;
+
+  &__title {
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 21px;
+    .muli-bold;
+  }
+
+  &__content {
+    font-size: 12px;
+    line-height: 15px;
+    .muli-light;
+  }
+
+  &--success {
+    color: #00b45a;
+    background-color: #d9f4e7;
+  }
+
+  &--error {
+    color: #fa5050;
+    background-color: #ffe5e5;
+  }
+
+  &--warning {
+    color: #f2a634;
+    background-color: #fdf2e1;
+  }
+
+  &--info {
+    color: #333;
+    background-color: #f7f7f7;
+  }
+}

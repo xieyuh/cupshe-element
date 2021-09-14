@@ -57,20 +57,6 @@ export default {
 <c-checkbox v-model="checked" disabled>复选框</c-checkbox>
 ```
 
-### 自定义图标
-
-通过 icon 插槽自定义图标，可以通过 slotProps 判断选中状态和禁用状态。
-
-```html
-<c-checkbox>
-  复选框
-  <template #icon="{ checked }">
-    <c-icon v-if="checked" name="tick" />
-    <c-icon v-else name="close" />
-  </template>
-</c-checkbox>
-```
-
 ### 复选框组
 
 复选框可以与复选框组一起使用，复选框组通过 `v-model` 数组绑定复选框的勾选状态。

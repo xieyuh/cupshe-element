@@ -108,18 +108,6 @@ export default {
 <c-input rows="2" type="textarea" autosize />
 ```
 
-### 插入按钮
-
-通过 `addon` 插槽可以在输入框尾部插入按钮。
-
-```html
-<c-input>
-  <template #addon>
-    <c-button type="primary" size="large" icon="copy" />
-  </template>
-</c-input>
-```
-
 ### 错误状态
 
 通过 `required` 属性标记为必填项。
@@ -171,7 +159,6 @@ export default {
 | blur               | 输入框失去焦点时触发 | _event: Event_                 |
 | click-prefix       | 点击左侧图标时触发   | _event: MouseEvent_            |
 | click-suffix       | 点击右侧图标时触发   | _event: MouseEvent_            |
-| click-addon        | 点击尾部按钮时触发   | _event: MouseEvent_            |
 
 ### 方法
 
@@ -188,4 +175,3 @@ export default {
 | ------ | -------------------- |
 | prefix | 自定义输入框头部图标 |
 | suffix | 自定义输入框尾部按钮 |
-| addon  | 自定义输入框尾部按钮 |

@@ -43,6 +43,10 @@
     </c-select>
   </demo-block>
 
+  <demo-block title="错误状态">
+    <c-select :options="option1" error v-model="select8" placeholder="请选择" />
+  </demo-block>
+
   <demo-block title="选项禁用">
     <c-select :options="option1" v-model="select6" placeholder="请选择" />
   </demo-block>
@@ -99,6 +103,7 @@ export default {
       select5: '',
       select6: '',
       select7: '',
+      select8: '',
     });
 
     return {
