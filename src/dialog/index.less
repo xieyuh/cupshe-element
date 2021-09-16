@@ -1,0 +1,124 @@
+@import '../style/font.less';
+@import './var.less';
+
+.c-dialog {
+  top: 45%;
+  left: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  backface-visibility: hidden;
+  transition: @dialog-transition;
+  transition-property: transform, opacity;
+
+  @media (max-width: 768px) {
+    width: 312px;
+    max-height: 90vh;
+  }
+
+  @media (min-width: 769px) {
+    max-width: 896px;
+    min-width: 440px;
+  }
+
+  &__header {
+    padding-top: 40px;
+    letter-spacing: 1px;
+    text-align: center;
+    .muli-bold;
+
+    @media (min-width: 769px) {
+      font-size: 18px;
+      line-height: 23px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    &--isolated {
+      padding: @dialog-header-isolated-padding;
+    }
+  }
+
+  &__content {
+    &--isolated {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__message {
+    flex: 1;
+    max-height: @dialog-message-max-height;
+    overflow-y: auto;
+    line-height: 21px;
+    color: #333;
+    white-space: pre-wrap;
+    text-align: center;
+    word-wrap: break-word;
+    -webkit-overflow-scrolling: touch;
+
+    &--has-title {
+      line-height: 18px;
+      .muli-light;
+    }
+
+    @media (min-width: 769px) {
+      padding: 40px;
+      font-size: 14px;
+      .muli-bold;
+
+      &--has-title {
+        padding-top: 20px;
+        .muli-light;
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding: 40px 24px 24px;
+      font-size: 14px;
+      .muli-semibold;
+
+      &--has-title {
+        padding-top: 16px;
+        font-size: 12px;
+        .muli-light;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+
+    @media (max-width: 768px) {
+      padding: 0 24px 32px;
+    }
+
+    @media (min-width: 769px) {
+      padding: 0 34px 40px;
+    }
+  }
+
+  &__confirm,
+  &__cancel {
+    flex: 1;
+    height: 44px;
+  }
+
+  &__cancel {
+    margin-right: 10px;
+  }
+
+  &-bounce-enter-from {
+    transform: translate3d(-50%, -50%, 0 scale(0.7));
+    opacity: 0;
+  }
+
+  &-bounce-leave-active {
+    transform: translate3d(-50%, -50%, 0 scale(0.9));
+    opacity: 0;
+  }
+}

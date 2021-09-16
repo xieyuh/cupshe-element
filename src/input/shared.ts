@@ -38,10 +38,7 @@ export const inputProps = {
 };
 
 export const textareaProps = {
-  rows: {
-    type: [String, Number],
-    default: 4,
-  },
+  rows: [String, Number],
 };
 
 export type InputExpose = {

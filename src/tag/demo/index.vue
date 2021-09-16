@@ -12,7 +12,9 @@
   </demo-block>
 
   <demo-block title="可关闭标签">
-    <c-tag closeable :show="value3" @close="onClose">标签</c-tag>
+    <c-tag closeable :show="show" v-model:checked="value3" @close="onClose"
+      >标签</c-tag
+    >
   </demo-block>
 </template>
 
@@ -21,10 +23,11 @@ import { ref } from 'vue';
 
 const value0 = ref(false);
 const value1 = ref(false);
-const value3 = ref(true);
+const value3 = ref(false);
+const show = ref(true);
 
 const onClose = () => {
-  value3.value = false;
+  show.value = false;
 };
 </script>
 

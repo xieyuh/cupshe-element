@@ -3,7 +3,7 @@ import { createNamespace } from '../utils';
 
 const [name, bem] = createNamespace('alert');
 
-export type AlertType = 'success' | 'error' | 'info' | 'warning';
+export type AlertType = 'success' | 'error' | 'info' | 'default';
 
 export default defineComponent({
   name,
@@ -12,7 +12,7 @@ export default defineComponent({
     title: String,
     type: {
       type: String as PropType<AlertType>,
-      default: '',
+      default: 'default',
     },
   },
 
@@ -28,10 +28,10 @@ export default defineComponent({
     };
 
     return () => (
-        <div class={bem([props.type])}>
-          {renderTitle()}
-          <div class={bem('content')}>{slots.default?.()}</div>
-        </div>
-      );
+      <div class={bem([props.type])}>
+        {renderTitle()}
+        <div class={bem('content')}>{slots.default?.()}</div>
+      </div>
+    );
   },
 });
