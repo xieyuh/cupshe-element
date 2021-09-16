@@ -1,5 +1,5 @@
 <template>
-  <div :class="bem({ border })">
+  <div :class="bem()">
     <button
       type="button"
       :class="bem('button', { disabled: minusDisabled })"
@@ -64,10 +64,6 @@ export default defineComponent({
     disableInput: Boolean,
     placeholder: String,
     beforeChange: Function as PropType<Interceptor>,
-    border: {
-      type: Boolean,
-      default: true,
-    },
     name: {
       type: [String, Number],
       default: '',

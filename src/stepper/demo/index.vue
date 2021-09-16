@@ -6,12 +6,6 @@
       </template>
     </c-cell>
 
-    <c-cell center title="无边框模式">
-      <template #value>
-        <c-stepper :border="false" v-model="stepper2" />
-      </template>
-    </c-cell>
-
     <c-cell center title="步长设置">
       <template #value>
         <c-stepper v-model="stepper3" step="2" />
@@ -62,13 +56,11 @@ export default {
       disabledInput: 1,
     });
 
-    const beforeChange = () => {
-      return new Promise((resolve) => {
+    const beforeChange = () => new Promise((resolve) => {
         setTimeout(() => {
           resolve(true);
         }, 500);
       });
-    };
 
     return {
       ...toRefs(state),

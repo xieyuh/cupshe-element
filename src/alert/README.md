@@ -20,13 +20,13 @@ app.use(Alert);
 
 ### 提示类型
 
-提示支持 `success`、`error`、`warning`、`info` 四种类型，默认为 `info`。
+提示支持 `success`、`error`、`info`、`default` 四种类型，默认为 `default`。
 
 ```html
 <c-alert type="success"> Global success prompt. </c-alert>
 <c-alert type="error"> Incorrect email or password. </c-alert>
-<c-alert type="warning"> Global success prompt. </c-alert>
 <c-alert type="info"> Global success prompt. </c-alert>
+<c-alert type="default"> Global success prompt. </c-alert>
 ```
 
 ### 提示标题
@@ -43,10 +43,10 @@ app.use(Alert);
 
 ### Props
 
-| 参数  | 说明                                       | 类型     | 默认值 |
-| ----- | ------------------------------------------ | -------- | ------ |
-| type  | 类型，可选值为 `error` `success` `warning` | _string_ | `info` |
-| title | 提示标题                                   | _string_ | -      |
+| 参数  | 说明                                    | 类型     | 默认值    |
+| ----- | --------------------------------------- | -------- | --------- |
+| type  | 类型，可选值为 `error` `success` `info` | _string_ | `default` |
+| title | 提示标题                                | _string_ | -         |
 
 ### Slots
 

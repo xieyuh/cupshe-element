@@ -18,20 +18,20 @@
     </c-alert>
   </demo-block>
   <demo-block title="提示">
-    <c-alert type="warning"> Global success prompt. </c-alert>
-    <c-alert type="warning">
-      Multi-line successful copywriting multi-line successful copywriting.
-    </c-alert>
-    <c-alert type="warning" title="Title">
-      Multi-line successful copywriting multi-line successful copywriting.
-    </c-alert>
-  </demo-block>
-  <demo-block title="释义">
     <c-alert type="info"> Global success prompt. </c-alert>
     <c-alert type="info">
       Multi-line successful copywriting multi-line successful copywriting.
     </c-alert>
     <c-alert type="info" title="Title">
+      Multi-line successful copywriting multi-line successful copywriting.
+    </c-alert>
+  </demo-block>
+  <demo-block title="释义">
+    <c-alert type="default"> Global success prompt. </c-alert>
+    <c-alert type="default">
+      Multi-line successful copywriting multi-line successful copywriting.
+    </c-alert>
+    <c-alert type="default" title="Title">
       Multi-line successful copywriting multi-line successful copywriting.
     </c-alert>
   </demo-block>

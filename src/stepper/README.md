@@ -110,7 +110,6 @@ export default {
 | v-model       | 当前输入的值                                                      | _number \| string_              | -       |
 | min           | 最小值                                                            | _number \| string_              | `1`     |
 | max           | 最大值                                                            | _number \| string_              | -       |
-| border        | 是否显示边框                                                      | _boolean_                       | `true`  |
 | default-value | 初始值，当 v-model 为空时生效                                     | _number \| string_              | `1`     |
 | step          | 步长，每次点击时改变的值                                          | _number \| string_              | `1`     |
 | name          | 标识符，可以在 `change` 事件回调参数中获取                        | _number \| string_              | -       |

@@ -134,6 +134,14 @@ export default {
 </c-select>
 ```
 
+### 错误状态
+
+通过 `error` 属性指定选择器为错误状态。
+
+```html
+<c-select error :options="option" v-model="select" placeholder="请选择" />
+```
+
 ### 选项禁用
 
 通过 `option` 插槽来自定义选项内容。
@@ -192,6 +200,7 @@ export default {
 | disabled    | 禁用状态                                       | _boolean_  | `false`  |
 | options     | 选项列表                                       | _Option[]_ | -        |
 | style       | 控件容器样式                                   | _object_   | -        |
+| error       | 错误状态                                       | _boolean_  | -        |
 | popperStyle | 弹出层容器样式                                 | _object_   | -        |
 | placement   | 弹出位置，可选值为 `bottom-start` `bottom-end` | _object_   | `bottom` |
 

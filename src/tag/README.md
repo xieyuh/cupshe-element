@@ -57,7 +57,9 @@ export default {
 设置 `checkable` 属性设置为 `false` 设置为不可选中。
 
 ```html
-<c-tag closeable :show="value" @close="onClose">标签</c-tag>
+<c-tag closeable v-model:checked="checked" :show="value" @close="onClose"
+  >标签</c-tag
+>
 ```
 
 ```js
@@ -66,6 +68,7 @@ import { ref } from 'vue';
 export default {
   setup() {
     const value = ref(true);
+    const checked = ref(false);
 
     const onClose = () => {
       value.value = false;
@@ -73,6 +76,7 @@ export default {
 
     return {
       value,
+      checked,
       onClose,
     };
   },
