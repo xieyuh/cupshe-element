@@ -146,10 +146,6 @@ module.exports = {
             title: 'Alert 提示',
           },
           {
-            path: 'loading',
-            title: 'Loading 加载',
-          },
-          {
             path: 'dialog',
             title: 'Dialog 弹窗',
           },
