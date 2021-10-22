@@ -43,7 +43,8 @@ const showIconToast = () => {
 const showImageToast = () => {
   Toast({
     message: '自定义图片',
-    icon: 'https://img.yzcdn.cn/vant/logo.png',
+    icon:
+      'https://cdn.shopifycdn.net/s/files/1/0784/0207/files/cupshe_32x32.png?v=1578467710',
     duration: 100000,
   });
 };
