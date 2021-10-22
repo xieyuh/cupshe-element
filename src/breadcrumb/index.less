@@ -1,0 +1,36 @@
+@import '../style/font.less';
+
+.c-breadcrumb {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  .muli-light;
+
+  &__item:last-child {
+    .c-breadcrumb__link,
+    .c-breadcrumb__text {
+      color: #999;
+    }
+
+    .c-breadcrumb__separator {
+      display: none;
+    }
+  }
+
+  &__link,
+  &__text {
+    color: #333;
+  }
+
+  &__link {
+    cursor: pointer;
+  }
+
+  &__text {
+    cursor: default;
+  }
+
+  &__separator {
+    margin: 0 6px;
+  }
+}

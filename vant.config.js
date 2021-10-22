@@ -133,6 +133,10 @@ module.exports = {
         title: '导航组件',
         items: [
           {
+            path: 'breadcrumb',
+            title: 'Breadcrumb 面包屑',
+          },
+          {
             path: 'pagination',
             title: 'Pagination 分页器',
           },
@@ -146,12 +150,25 @@ module.exports = {
             title: 'Alert 提示',
           },
           {
+            path: 'loading',
+            title: 'Loading 加载',
+          },
+          {
             path: 'dialog',
             title: 'Dialog 弹窗',
           },
           {
             path: 'overlay',
             title: 'Overlay 遮罩层',
+          },
+        ],
+      },
+      {
+        title: '业务组件',
+        items: [
+          {
+            path: 'ab-test',
+            title: 'AB 测试',
           },
         ],
       },
