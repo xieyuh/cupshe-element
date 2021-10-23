@@ -37,8 +37,14 @@ export const inputProps = {
   },
 };
 
+export type AutosizeConfig = {
+  maxHeight?: number;
+  minHeight?: number;
+};
+
 export const textareaProps = {
   rows: [String, Number],
+  autosize: [Boolean, Object] as PropType<boolean | AutosizeConfig>,
 };
 
 export type InputExpose = {

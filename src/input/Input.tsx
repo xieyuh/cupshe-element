@@ -1,4 +1,11 @@
-import { defineComponent, PropType, ref, watch } from 'vue';
+import {
+  defineComponent,
+  PropType,
+  ref,
+  watch,
+  nextTick,
+  onMounted,
+} from 'vue';
 import { useExpose, useCustomFieldValue } from '../composables';
 import { createNamespace, extend, isDef, formatNumber } from '../utils';
 import {
@@ -7,7 +14,7 @@ import {
   InputFormatTrigger,
   InputExpose,
 } from './shared';
-import { endComposing, mapInputType } from './utils';
+import { endComposing, mapInputType, resizeTextarea } from './utils';
 
 import { Icon } from '../icon';
 
@@ -115,12 +122,24 @@ export default defineComponent({
     const onClickPrefix = (event: Event) => emit('click-prefix', event);
     const onClickSuffix = (event: Event) => emit('click-suffix', event);
 
+    const adjustTextareaSize = () => {
+      const input = inputRef.value;
+      if (props.type === 'textarea' && props.autosize && input) {
+        resizeTextarea(input, props.autosize);
+      }
+    };
+
     watch(
       () => props.modelValue,
       () => {
         updateValue(getModelValue());
+        nextTick(adjustTextareaSize);
       }
     );
+
+    onMounted(() => {
+      nextTick(adjustTextareaSize);
+    });
 
     const renderInput = () => {
       const {
