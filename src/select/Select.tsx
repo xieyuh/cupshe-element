@@ -170,7 +170,7 @@ export default defineComponent({
 
       const renderReference = () => {
         if (slots.reference) {
-          return slots.reference({ match });
+          return slots.reference({ match, active: state.popupShow });
         }
 
         const inputSlot = {
