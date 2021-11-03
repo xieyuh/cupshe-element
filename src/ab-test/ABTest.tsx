@@ -1,7 +1,9 @@
-import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { createNamespace } from '../utils';
 
 const [name] = createNamespace('ab-test');
+
+export type ABTestMode = 'positive' | 'negative';
 
 export default defineComponent({
   name,
@@ -10,32 +12,21 @@ export default defineComponent({
     token: {
       type: String,
     },
+    mode: {
+      type: String as PropType<ABTestMode>,
+      default: 'positive',
+    },
   },
 
   setup(props, { slots }) {
-    const show = ref(false);
+    return () => {
+      let show = props.mode === 'positive';
 
-    const checkToken = () => {
-      if (!props.token) {
-        show.value = true;
-        return;
+      if (localStorage.getItem(props.token) !== props.token) {
+        show = !show;
       }
 
-      if (localStorage.getItem(props.token) === props.token) {
-        show.value = true;
-      }
-
-      show.value = false;
+      return show && slots.default?.();
     };
-
-    onMounted(() => {
-      checkToken();
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener('storage', checkToken);
-    });
-
-    return () => show.value && slots.default();
   },
 });
