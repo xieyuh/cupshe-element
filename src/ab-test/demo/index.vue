@@ -1,30 +1,46 @@
 <template>
   <demo-block title="基础用法">
     <div class="ab-test">
-      <c-ab-test>测试内容</c-ab-test>
-      <c-ab-test token="test-1">测试内容</c-ab-test>
+      <div class="c-muli">token值：'test-1'</div>
+      <div class="c-muli">localstorage中键为 'test-1' 的值：'test-1'</div>
+      <c-ab-test token="test-1">
+        <div class="c-muli-light ab-test-value">Test-1</div>
+      </c-ab-test>
+    </div>
+    <div class="ab-test">
+      <div class="c-muli">token值：'test-2'</div>
+      <div class="c-muli">localstorage中键为 'test-2' 的值：''</div>
+      <c-ab-test token="test-2">
+        <div class="c-muli-light ab-test-value">Test-2</div>
+      </c-ab-test>
     </div>
   </demo-block>
 
-  <demo-block title="监听变化">
+  <demo-block title="展示策略">
     <div class="ab-test">
-      <c-ab-test :token="token1" hot>测试内容</c-ab-test>
-      <c-button @click="toggle" type="primary">切换显示</c-button>
+      <div class="c-muli">token值：'test-3'</div>
+      <div class="c-muli">localstorage中键为 'test-3' 的值：'test-3'</div>
+      <c-ab-test token="test-3" mode="negative">
+        <div class="c-muli-light ab-test-value">Test-3</div>
+      </c-ab-test>
+    </div>
+    <div class="ab-test">
+      <div class="c-muli">token值：'test-4'</div>
+      <div class="c-muli">localstorage中键为 'test-4' 的值：''</div>
+      <c-ab-test token="test-4" mode="negative">
+        <div class="c-muli-light ab-test-value">Test-4</div>
+      </c-ab-test>
     </div>
   </demo-block>
 </template>
 
 <script setup>
-const token1 = 'token1';
+import { onMounted } from 'vue';
 
-const toggle = () => {
-  const value = localStorage.getItem(token1);
-  if (value === token1) {
-    localStorage.removeItem(token1);
-  } else {
-    localStorage.setItem(token1, token1);
-  }
-};
+onMounted(() => {
+  localStorage.setItem('test-1', 'test-1');
+  localStorage.setItem('test-3', 'test-3');
+});
 </script>
 
 <style lang="less">
@@ -32,7 +48,14 @@ const toggle = () => {
   background: #fff;
 
   .ab-test {
-    padding-left: 20px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+
+    .ab-test-value {
+      background: #fafafa;
+      margin: 20px 0;
+      padding: 10px;
+    }
   }
 }
 </style>
