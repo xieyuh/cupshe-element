@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.10.0
+
+**Feature**
+
+- 移除了 `Muli` 系列字体文件
+
 ### v1.11.0
 
 **New Component**
