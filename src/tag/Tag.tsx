@@ -19,6 +19,7 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    checkedClass: String,
   },
 
   emits: ['click', 'close', 'update:checked'],
@@ -45,10 +46,16 @@ export default defineComponent({
     };
 
     const renderTag = () => {
-      const { checkable, checked } = props;
+      const { checkable, checked, checkedClass } = props;
+
+      const classes = [bem({ checkable, checked })];
+
+      if (checked) {
+        classes.push(checkedClass);
+      }
 
       return (
-        <span class={bem({ checkable, checked })} onClick={onClick}>
+        <span class={classes} onClick={onClick}>
           {slots.default?.()}
           {renderClose()}
         </span>

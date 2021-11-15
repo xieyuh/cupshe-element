@@ -11,6 +11,10 @@
     <c-tag :checkable="false">Tag</c-tag>
   </demo-block>
 
+  <demo-block title="自定义样式">
+    <c-tag checked-class="checked" v-model:checked="value2">Tag</c-tag>
+  </demo-block>
+
   <demo-block title="可关闭标签">
     <c-tag closeable :show="show" v-model:checked="value3" @close="onClose"
       >标签</c-tag
@@ -23,6 +27,7 @@ import { ref } from 'vue';
 
 const value0 = ref(false);
 const value1 = ref(false);
+const value2 = ref(false);
 const value3 = ref(false);
 const show = ref(true);
 
@@ -40,8 +45,10 @@ const onClose = () => {
   }
 
   .checked {
-    color: #fff;
-    background-color: #000;
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
+    box-sizing: border-box;
   }
 }
 </style>
