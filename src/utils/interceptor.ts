@@ -1,18 +1,25 @@
-import { isPromise, noop } from '.';
+import { noop } from './basic';
+import { isPromise } from './validate';
 
-export type Interceptor = (...args: any[]) => Promise<boolean> | boolean;
+export type Interceptor = (
+  ...args: any[]
+) => Promise<boolean> | boolean | undefined;
 
-export function callInterceptor(options: {
-  interceptor?: Interceptor;
-  args?: any[];
-  done: () => void;
-  canceled?: () => void;
-}) {
-  const { interceptor, args, done, canceled } = options;
-
+export function callInterceptor(
+  interceptor: Interceptor | undefined,
+  {
+    args = [],
+    done,
+    canceled,
+  }: {
+    args?: unknown[];
+    done: () => void;
+    canceled?: () => void;
+  }
+) {
   if (interceptor) {
     // eslint-disable-next-line prefer-spread
-    const returnVal = interceptor.apply(null, args || []);
+    const returnVal = interceptor.apply(null, args);
 
     if (isPromise(returnVal)) {
       returnVal

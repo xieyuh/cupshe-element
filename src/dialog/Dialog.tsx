@@ -75,8 +75,7 @@ export default defineComponent({
       emit(action);
 
       if (props.beforeClose) {
-        callInterceptor({
-          interceptor: props.beforeClose,
+        callInterceptor(props.beforeClose, {
           args: [action],
           done() {
             close(action);

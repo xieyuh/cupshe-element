@@ -1,18 +1,25 @@
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { inBrowser } from '../utils';
-import { useEventListener } from './use-event-listener';
+
+let width: Ref<number>;
+let height: Ref<number>;
 
 export function useWindowSize() {
-  const width = ref(inBrowser ? window.innerWidth : 0);
-  const height = ref(inBrowser ? window.innerHeight : 0);
+  if (!width) {
+    width = ref(0);
+    height = ref(0);
 
-  const onResize = () => {
-    width.value = window.innerWidth;
-    height.value = window.innerHeight;
-  };
+    if (inBrowser) {
+      const update = () => {
+        width.value = window.innerWidth;
+        height.value = window.innerHeight;
+      };
 
-  useEventListener('resize', onResize);
-  useEventListener('orientationchange', onResize);
+      update();
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update, { passive: true });
+    }
+  }
 
   return { width, height };
 }
