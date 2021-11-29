@@ -52,6 +52,29 @@ export default {
 <c-tag :checkable="false">Tag</c-tag>
 ```
 
+### 自定义样式
+
+设置 `checked-class` 属性自定义选中时的样式类。
+
+```html
+<c-tag checked-class="checked" v-model:checked="value">Tag</c-tag>
+```
+
+```js
+import { ref } from 'vue';
+
+const value = ref(false);
+```
+
+```css
+.checked {
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  box-sizing: border-box;
+}
+```
+
 ### 可关闭标签
 
 设置 `checkable` 属性设置为 `false` 设置为不可选中。
@@ -87,11 +110,12 @@ export default {
 
 ### Props
 
-| 参数      | 说明             | 类型      | 默认值  |
-| --------- | ---------------- | --------- | ------- |
-| checkable | 是否为可选中标签 | _boolean_ | `true`  |
-| checked   | 选中状态         | _boolean_ | `false` |
-| closeable | 是否可关闭       | _boolean_ | `false` |
+| 参数          | 说明             | 类型      | 默认值  |
+| ------------- | ---------------- | --------- | ------- |
+| checkable     | 是否为可选中标签 | _boolean_ | `true`  |
+| checked       | 选中状态         | _boolean_ | `false` |
+| checked-class | 选中时样式类     | _string_  | -       |
+| closeable     | 是否可关闭       | _boolean_ | `false` |
 
 ### Slots
 

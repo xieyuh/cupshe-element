@@ -114,17 +114,14 @@ export default defineComponent({
       }
     };
 
-    const triggerClose = () => {
-      opened = false;
-      emit('close');
-      emit('update:show', false);
-    };
-
     const close = () => {
       if (opened) {
-        callInterceptor({
-          interceptor: props.beforeClose,
-          done: triggerClose,
+        callInterceptor(props.beforeClose, {
+          done() {
+            opened = false;
+            emit('close');
+            emit('update:show', false);
+          },
         });
       }
     };

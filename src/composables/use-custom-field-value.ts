@@ -7,7 +7,7 @@ export type CustomFieldInjectionValue = {
 };
 
 export const CUSTOM_FIELD_INJECTION_KEY: InjectionKey<CustomFieldInjectionValue> = Symbol(
-  'van-field'
+  'c-field'
 );
 
 export function useCustomFieldValue(customValue: () => unknown) {

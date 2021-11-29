@@ -20,3 +20,5 @@ export * from './use-window-size';
 export * from './use-page-visibility';
 export * from './use-lazy-render';
 export * from './use-tab-status';
+export * from './use-id';
+export * from './use-count-down';

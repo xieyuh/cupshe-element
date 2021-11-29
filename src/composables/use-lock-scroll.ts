@@ -1,5 +1,5 @@
 import { Ref, watch, onBeforeUnmount, onDeactivated } from 'vue';
-import { getScrollParent, supportsPassive, onMountedOrActivated } from '.';
+import { getScrollParent, onMountedOrActivated } from '.';
 import { useTouch } from './use-touch';
 import { preventDefault } from '../utils';
 
@@ -41,11 +41,7 @@ export function useLockScroll(
 
   const lock = () => {
     document.addEventListener('touchstart', touch.start);
-    document.addEventListener(
-      'touchmove',
-      onTouchMove,
-      supportsPassive ? { passive: false } : false
-    );
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
 
     if (!totalLockCount) {
       document.body.classList.add(BODY_LOCK_CLASS);
@@ -67,17 +63,9 @@ export function useLockScroll(
     }
   };
 
-  const init = () => {
-    if (shouldLock()) {
-      lock();
-    }
-  };
+  const init = () => shouldLock() && lock();
 
-  const destroy = () => {
-    if (shouldLock()) {
-      unlock();
-    }
-  };
+  const destroy = () => shouldLock() && unlock();
 
   onMountedOrActivated(init);
   onDeactivated(destroy);

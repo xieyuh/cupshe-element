@@ -153,6 +153,8 @@ export default defineComponent({
         placeholder,
         autocomplete,
         maxlength,
+        min,
+        max,
       } = props;
 
       const inputAttrs = {
@@ -167,6 +169,8 @@ export default defineComponent({
         placeholder,
         autocomplete,
         maxlength,
+        min,
+        max,
         onBlur,
         onFocus,
         onInput,
