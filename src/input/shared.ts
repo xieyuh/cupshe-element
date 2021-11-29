@@ -16,6 +16,8 @@ export const inputProps = {
   autofocus: String as PropType<Booleanish>,
   autocomplete: String,
   maxlength: [String, Number],
+  min: [String, Number],
+  max: [String, Number],
   style: {
     type: Object as PropType<CSSProperties>,
   },
