@@ -40,6 +40,7 @@ export default defineComponent({
     disabled: Boolean,
     defaultText: String,
     error: Boolean,
+    required: Boolean,
     placement: {
       type: String as PropType<Placement>,
       default: 'bottom',
@@ -149,6 +150,7 @@ export default defineComponent({
         disabled,
         style,
         error,
+        required,
         size,
         popperStyle,
         options,
@@ -186,6 +188,7 @@ export default defineComponent({
           <Input
             readonly
             error={error}
+            required={required}
             disabled={disabled}
             v-slots={inputSlot}
             class={bem('control')}
