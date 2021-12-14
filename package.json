@@ -48,6 +48,7 @@
     "iOS >= 10"
   ],
   "dependencies": {
+    "@cupshe/fonts": "^0.1.0",
     "@popperjs/core": "^2.9.2"
   }
 }

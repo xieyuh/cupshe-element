@@ -85,6 +85,7 @@
 
 <script lang="ts">
 import { reactive, toRefs } from 'vue';
+import '@cupshe/fonts';
 
 const placements = [
   'top',

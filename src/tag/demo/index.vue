@@ -24,6 +24,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import '@cupshe/fonts';
 
 const value0 = ref(false);
 const value1 = ref(false);

@@ -40,6 +40,7 @@
 
 <script lang="ts">
 import { reactive, toRefs } from 'vue';
+import '@cupshe/fonts';
 
 export default {
   setup() {
@@ -56,7 +57,8 @@ export default {
       disabledInput: 1,
     });
 
-    const beforeChange = () => new Promise((resolve) => {
+    const beforeChange = () =>
+      new Promise((resolve) => {
         setTimeout(() => {
           resolve(true);
         }, 500);

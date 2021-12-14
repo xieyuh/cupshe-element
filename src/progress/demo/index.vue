@@ -28,6 +28,10 @@
   </demo-block>
 </template>
 
+<script setup>
+import '@cupshe/fonts';
+</script>
+
 <style lang="less">
 @import '../../style/var';
 

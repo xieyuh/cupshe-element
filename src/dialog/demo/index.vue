@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import '@cupshe/fonts';
 import CCell from '../../cell';
 import { Dialog } from '..';
-import { ref } from 'vue';
 import type { DialogAction } from '../Dialog';
 
 const CDialog = Dialog.Component;

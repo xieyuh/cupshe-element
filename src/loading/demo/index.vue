@@ -8,6 +8,10 @@
   </demo-block>
 </template>
 
+<script setup>
+import '@cupshe/fonts';
+</script>
+
 <style lang="less">
 .demo-loading {
   background: #fff;

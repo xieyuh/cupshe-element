@@ -20,6 +20,7 @@ import {
   InjectionKey,
   PropType,
 } from 'vue';
+import '@cupshe/fonts';
 import { createNamespace, truthProp } from '../utils';
 import { useChildren } from '../composables';
 

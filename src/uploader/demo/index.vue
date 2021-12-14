@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { ref } from 'vue';
+import '@cupshe/fonts';
 import { UploaderFileListItem } from '../types';
 
 export default {
