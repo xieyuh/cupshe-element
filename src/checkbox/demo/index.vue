@@ -45,6 +45,7 @@
 </template>
 
 <script lang="ts">
+import '@cupshe/fonts';
 import { ref, reactive, toRefs } from 'vue';
 import { useRefs } from '../../composables/use-refs';
 import { ComponentInstance } from '../../utils';

@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+import '@cupshe/fonts';
+
 const routes1 = [
   { name: 'Home' },
   { name: 'New In' },

@@ -37,6 +37,10 @@
   </demo-block>
 </template>
 
+<script setup>
+import '@cupshe/fonts';
+</script>
+
 <style lang="less">
 .demo-alert {
   background: #fff;

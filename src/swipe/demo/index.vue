@@ -63,6 +63,8 @@
 </template>
 
 <script lang="ts">
+import '@cupshe/fonts';
+
 export default {
   setup() {
     const images = [

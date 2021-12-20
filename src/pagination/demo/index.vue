@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { reactive, toRefs } from 'vue';
+import '@cupshe/fonts';
 
 export default {
   setup() {

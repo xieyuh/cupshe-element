@@ -6,11 +6,11 @@
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
+通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/advanced-usage#zu-jian-zhu-ce)。
 
 ```js
 import { createApp } from 'vue';
-import { Loading } from 'vant';
+import { Loading } from 'cupshe-element';
 
 const app = createApp();
 app.use(Loading);
@@ -21,7 +21,7 @@ app.use(Loading);
 ### 基础用法
 
 ```html
-<van-loading />
+<c-loading />
 ```
 
 ### 自定义颜色
@@ -29,7 +29,7 @@ app.use(Loading);
 通过 `color` 属性设置加载图标的颜色。
 
 ```html
-<van-loading color="#1989fa" />
+<c-loading color="#1989fa" />
 ```
 
 ### 自定义大小
@@ -37,9 +37,9 @@ app.use(Loading);
 通过 `size` 属性设置加载图标的大小，默认单位为 `px`。
 
 ```html
-<van-loading size="24" />
+<c-loading size="24" />
 
-<van-loading size="24px" />
+<c-loading size="24px" />
 ```
 
 ### 自定义文案颜色
@@ -47,7 +47,7 @@ app.use(Loading);
 通过 `color` 属性设置加载文案的颜色。
 
 ```html
-<van-loading color="#0094ff" />
+<c-loading color="#0094ff" />
 ```
 
 ## API

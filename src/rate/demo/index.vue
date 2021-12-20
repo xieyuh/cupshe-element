@@ -50,6 +50,7 @@
 
 <script lang="ts">
 import { toRefs, reactive } from 'vue';
+import '@cupshe/fonts';
 
 export default {
   setup() {

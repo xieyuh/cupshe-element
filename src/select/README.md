@@ -203,6 +203,7 @@ export default {
 | error       | 错误状态                                       | _boolean_  | -        |
 | popperStyle | 弹出层容器样式                                 | _object_   | -        |
 | placement   | 弹出位置，可选值为 `bottom-start` `bottom-end` | _object_   | `bottom` |
+| required    | 是否必填，同 `Input` 组件                      | _boolean_  | `false`  |
 
 ### Option 数据结构
 

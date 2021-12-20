@@ -59,6 +59,8 @@
 </template>
 
 <script lang="ts">
+import '@cupshe/fonts';
+
 export default {
   setup() {
     const image = 'https://img.yzcdn.cn/vant/cat.jpeg';

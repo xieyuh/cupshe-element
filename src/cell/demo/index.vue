@@ -6,7 +6,7 @@
     </c-cell-group>
   </demo-block>
 
-  <demo-block v-if="!isWeapp" title="卡片风格">
+  <demo-block title="卡片风格">
     <c-cell-group inset>
       <c-cell title="单元格" value="内容" />
       <c-cell title="单元格" value="内容" label="描述信息" />
@@ -58,6 +58,10 @@
     <c-cell center title="单元格" value="内容" label="描述信息" />
   </demo-block>
 </template>
+
+<script setup>
+import '@cupshe/fonts';
+</script>
 
 <style lang="less">
 .demo-cell {

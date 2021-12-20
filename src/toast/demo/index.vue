@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import '@cupshe/fonts';
 import { Toast } from '..';
 
 const showSuccessToast = () => {

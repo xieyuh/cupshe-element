@@ -36,6 +36,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import '@cupshe/fonts';
 
 onMounted(() => {
   localStorage.setItem('test-1', 'test-1');
