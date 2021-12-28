@@ -156,6 +156,16 @@ export default defineComponent({
     };
 
     const renderCloseIcon = () => {
+      if (slots.icon) {
+        return (
+          <div
+            class={bem('close-icon', props.closeIconPosition)}
+            onClick={onClickCloseIcon}
+          >
+            {slots.icon()}
+          </div>
+        );
+      }
       if (props.closeable) {
         return (
           <Icon

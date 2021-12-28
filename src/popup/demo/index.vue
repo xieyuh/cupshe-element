@@ -32,6 +32,11 @@
   <demo-block card title="关闭图标">
     <c-cell title="关闭图标" is-link @click="showCloseIcon = true" />
     <c-cell title="自定义图标" is-link @click="showCustomCloseIcon = true" />
+    <c-cell
+      title="自定义关闭元素"
+      is-link
+      @click="showCustomCloseElement = true"
+    />
     <c-cell title="图标位置" is-link @click="showCustomIconPosition = true" />
 
     <c-popup
@@ -47,6 +52,15 @@
       position="bottom"
       :style="{ height: '30%' }"
     />
+    <c-popup
+      v-model:show="showCustomCloseElement"
+      position="bottom"
+      :style="{ height: '30%' }"
+    >
+      <template #icon>
+        <span>close</span>
+      </template>
+    </c-popup>
     <c-popup
       v-model:show="showCustomIconPosition"
       closeable
@@ -70,6 +84,7 @@ export default {
       showLeft: false,
       showRight: false,
       showCloseIcon: false,
+      showCustomCloseElement: false,
       showRoundCorner: false,
       showGetContainer: false,
       showCustomCloseIcon: false,

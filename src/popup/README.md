@@ -71,6 +71,11 @@ export default {
   position="bottom"
   :style="{ height: '30%' }"
 />
+<c-popup v-model:show="show" position="bottom" :style="{ height: '30%' }">
+  <template #icon>
+    <span>close</span>
+  </template>
+</c-popup>
 <!-- 图标位置 -->
 <c-popup
   v-model:show="show"
@@ -117,7 +122,8 @@ export default {
 
 ### Slots
 
-| 名称            | 说明         |
-| --------------- | ------------ |
-| default         | 弹窗内容     |
-| overlay-content | 遮罩层的内容 |
+| 名称            | 说明           |
+| --------------- | -------------- |
+| default         | 弹窗内容       |
+| overlay-content | 遮罩层的内容   |
+| icon            | 关闭按钮的内容 |
