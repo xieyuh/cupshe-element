@@ -1,11 +1,6 @@
-import {
-  defineComponent,
-  PropType,
-  ButtonHTMLAttributes,
-  CSSProperties,
-} from 'vue';
+import { defineComponent, ButtonHTMLAttributes, CSSProperties } from 'vue';
 import { routeProps, useRoute } from '../composables';
-import { createNamespace, extend } from '../utils';
+import { createNamespace, extend, makeStringProp } from '../utils';
 
 import { Icon } from '../icon';
 
@@ -26,22 +21,12 @@ export default defineComponent({
     ghost: Boolean,
     disabled: Boolean,
     cover: Boolean,
-    tag: {
-      type: String as PropType<keyof HTMLElementTagNameMap>,
-      default: 'button',
-    },
-    type: {
-      type: String as PropType<ButtonType>,
-      default: 'default',
-    },
-    size: {
-      type: String as PropType<ButtonSize>,
-      default: 'normal',
-    },
-    nativeType: {
-      type: String as PropType<ButtonHTMLAttributes['type']>,
-      default: 'button',
-    },
+    tag: makeStringProp<keyof HTMLElementTagNameMap>('button'),
+    type: makeStringProp<ButtonType>('default'),
+    size: makeStringProp<ButtonSize>('normal'),
+    nativeType: makeStringProp<NonNullable<ButtonHTMLAttributes['type']>>(
+      'button'
+    ),
   }),
 
   emits: ['click'],

@@ -2,9 +2,9 @@
  * Vue Router support
  */
 import {
+  getCurrentInstance,
   PropType,
   ExtractPropTypes,
-  getCurrentInstance,
   ComponentPublicInstance,
 } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';

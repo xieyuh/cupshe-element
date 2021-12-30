@@ -139,18 +139,18 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-popover {
+  background: #fff;
+
   &-refer {
     width: 60px;
     height: 60px;
-    background-color: @blue;
+    background-color: #1989fa;
     border-radius: 8px;
   }
 
   .c-popover__wrapper {
-    margin-left: @padding-md;
+    margin-left: 16px;
   }
 
   .c-field {

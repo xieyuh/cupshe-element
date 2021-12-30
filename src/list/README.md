@@ -2,15 +2,15 @@
 
 ### 介绍
 
-瀑布流滚动加载，用于展示长列表，当列表即将滚动到底部时，会触发事件并加载更多列表项。
+瀑布流滚动加载，用于展示长列表，当列表即将滚动到底部时，会触发事件并加载更多列表项。[PC 端预览](/mobile.html#/list)
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
+通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/advanced-usage#zu-jian-zhu-ce)。
 
 ```js
 import { createApp } from 'vue';
-import { List } from 'vant';
+import { List } from 'cupshe-element';
 
 const app = createApp();
 app.use(List);
@@ -23,14 +23,14 @@ app.use(List);
 List 组件通过 `loading` 和 `finished` 两个变量控制加载状态，当组件滚动到底部时，会触发 `load` 事件并将 `loading` 设置成 `true`。此时可以发起异步操作并更新数据，数据更新完毕后，将 `loading` 设置成 `false` 即可。若数据已全部加载完毕，则直接将 `finished` 设置成 `true` 即可。
 
 ```html
-<van-list
+<c-list
   v-model:loading="loading"
   :finished="finished"
   finished-text="没有更多了"
   @load="onLoad"
 >
-  <van-cell v-for="item in list" :key="item" :title="item" />
-</van-list>
+  <c-cell v-for="item in list" :key="item" :title="item" />
+</c-list>
 ```
 
 ```js
@@ -75,14 +75,14 @@ export default {
 若列表数据加载失败，将 `error` 设置成 `true` 即可显示错误提示，用户点击错误提示后会重新触发 load 事件。
 
 ```html
-<van-list
+<c-list
   v-model:loading="loading"
   v-model:error="error"
   error-text="请求失败，点击重新加载"
   @load="onLoad"
 >
-  <van-cell v-for="item in list" :key="item" :title="item" />
-</van-list>
+  <c-cell v-for="item in list" :key="item" :title="item" />
+</c-list>
 ```
 
 ```js
@@ -104,73 +104,6 @@ export default {
       error,
       onLoad,
       loading,
-    };
-  },
-};
-```
-
-### 下拉刷新
-
-List 组件可以与 [PullRefresh](#/zh-CN/pull-refresh) 组件结合使用，实现下拉刷新的效果。
-
-```html
-<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-  <van-list
-    v-model:loading="loading"
-    :finished="finished"
-    finished-text="没有更多了"
-    @load="onLoad"
-  >
-    <van-cell v-for="item in list" :key="item" :title="item" />
-  </van-list>
-</van-pull-refresh>
-```
-
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const list = ref([]);
-    const loading = ref(false);
-    const finished = ref(false);
-    const refreshing = ref(false);
-
-    const onLoad = () => {
-      setTimeout(() => {
-        if (refreshing.value) {
-          list.value = [];
-          refreshing.value = false;
-        }
-
-        for (let i = 0; i < 10; i++) {
-          list.value.push(list.value.length + 1);
-        }
-        loading.value = false;
-
-        if (list.value.length >= 40) {
-          finished.value = true;
-        }
-      }, 1000);
-    };
-
-    const onRefresh = () => {
-      // 清空列表数据
-      finished.value = false;
-
-      // 重新加载数据
-      // 将 loading 设置为 true，表示处于加载状态
-      loading.value = true;
-      onLoad();
-    };
-
-    return {
-      list,
-      onLoad,
-      loading,
-      finished,
-      onRefresh,
-      refreshing,
     };
   },
 };
@@ -200,7 +133,7 @@ export default {
 
 ### 方法
 
-通过 ref 可以获取到 List 实例并调用实例方法，详见[组件实例方法](#/zh-CN/advanced-usage#zu-jian-shi-li-fang-fa)。
+通过 ref 可以获取到 List 实例并调用实例方法，详见[组件实例方法](#/advanced-usage#zu-jian-shi-li-fang-fa)。
 
 | 方法名 | 说明                                                   | 参数 | 返回值 |
 | ------ | ------------------------------------------------------ | ---- | ------ |
@@ -208,11 +141,11 @@ export default {
 
 ### 类型定义
 
-通过 `ListInstance` 获取 List 实例的类型定义（从 3.2.0 版本开始支持）。
+通过 `ListInstance` 获取 List 实例的类型定义。
 
 ```ts
 import { ref } from 'vue';
-import type { ListInstance } from 'vant';
+import type { ListInstance } from 'cupshe-element';
 
 const listRef = ref<ListInstance>();
 
@@ -227,17 +160,6 @@ listRef.value?.check();
 | loading  | 自定义底部加载中提示       |
 | finished | 自定义加载完成后的提示文案 |
 | error    | 自定义加载失败后的提示文案 |
-
-### 样式变量
-
-组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/config-provider)。
-
-| 名称                         | 默认值                    | 描述 |
-| ---------------------------- | ------------------------- | ---- |
-| --van-list-text-color        | _var(--van-gray-6)_       | -    |
-| --van-list-text-font-size    | _var(--van-font-size-md)_ | -    |
-| --van-list-text-line-height  | _50px_                    | -    |
-| --van-list-loading-icon-size | _16px_                    | -    |
 
 ## 常见问题
 
@@ -265,16 +187,16 @@ List 初始化后会触发一次 load 事件，用于加载第一屏的数据，
 
 ### 使用 float 布局后一直触发加载？
 
-若 List 的内容使用了 float 布局，可以在容器上添加 `van-clearfix` 类名来清除浮动，使得 List 能正确判断元素位置
+若 List 的内容使用了 float 布局，可以在容器上添加 `c-clearfix` 类名来清除浮动，使得 List 能正确判断元素位置
 
 ```html
-<van-list>
-  <div class="van-clearfix">
+<c-list>
+  <div class="c-clearfix">
     <div class="float-item" />
     <div class="float-item" />
     <div class="float-item" />
   </div>
-</van-list>
+</c-list>
 ```
 
 ### 在 html、body 上设置 overflow 后一直触发加载？

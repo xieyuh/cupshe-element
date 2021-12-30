@@ -1,0 +1,100 @@
+@import '../style/font.less';
+
+.c-image-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transform: none;
+
+  &__swipe {
+    height: 100%;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+  }
+
+  &__cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__image {
+    width: 100%;
+    transition-property: transform;
+
+    &--vertical {
+      width: auto;
+      height: 100%;
+    }
+
+    img {
+      -webkit-user-drag: none;
+    }
+
+    .c-image {
+      &__error {
+        top: 30%;
+        height: 40%;
+      }
+
+      &__error-icon {
+        font-size: 36px;
+      }
+
+      &__loading {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__index {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    transform: translate(-50%, 0);
+    .muli-semibold;
+  }
+
+  &__overlay {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  &__close-icon {
+    position: absolute;
+    z-index: 1;
+    color: #c8c9cc;
+    font-size: 22px;
+    cursor: pointer;
+
+    &--top-left {
+      top: 16px;
+      left: 16px;
+    }
+
+    &--top-right {
+      top: 16px;
+      right: 16px;
+    }
+
+    &--bottom-left {
+      bottom: 16px;
+      left: 16px;
+    }
+
+    &--bottom-right {
+      right: 16px;
+      bottom: 16px;
+    }
+  }
+}
