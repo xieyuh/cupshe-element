@@ -22,56 +22,13 @@
       </c-col>
     </c-row>
   </demo-block>
-
-  <demo-block title="加载中提示">
-    <c-row gutter="20">
-      <c-col span="8">
-        <c-image width="100%" height="27vw" />
-        <div class="text">默认提示</div>
-      </c-col>
-
-      <c-col span="8">
-        <c-image width="100%" height="27vw">
-          <template #loading>
-            <c-loading type="spinner" size="20" />
-          </template>
-        </c-image>
-        <div class="text">自定义提示</div>
-      </c-col>
-    </c-row>
-  </demo-block>
-
-  <demo-block title="加载失败提示">
-    <c-row gutter="20">
-      <c-col span="8">
-        <c-image width="100%" height="27vw" src="x" />
-        <div class="text">默认提示</div>
-      </c-col>
-
-      <c-col span="8">
-        <c-image width="100%" height="27vw" src="x">
-          <template #error>加载失败</template>
-        </c-image>
-        <div class="text">自定义提示</div>
-      </c-col>
-    </c-row>
-  </demo-block>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import '@cupshe/fonts';
 
-export default {
-  setup() {
-    const image = 'https://img.yzcdn.cn/vant/cat.jpeg';
-    const fits = ['contain', 'cover', 'fill', 'none', 'scale-down'];
-
-    return {
-      image,
-      fits,
-    };
-  },
-};
+const image = 'https://img.yzcdn.cn/vant/cat.jpeg';
+const fits = ['contain', 'cover', 'fill', 'none', 'scale-down'];
 </script>
 
 <style lang="less">

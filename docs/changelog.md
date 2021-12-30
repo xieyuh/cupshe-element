@@ -6,6 +6,13 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.13.0
+
+**New Component**
+
+- 新增 Image 组件
+- 新增 ImagePreview 组件
+
 ### v1.10.0
 
 **Feature**

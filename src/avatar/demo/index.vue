@@ -19,6 +19,8 @@ import '@cupshe/fonts';
 
 <style lang="less">
 .demo-avatar {
+  background: #fff;
+
   .c-avatar {
     margin-left: 20px;
   }

@@ -42,6 +42,10 @@ module.exports = {
             title: 'Icon 图标',
           },
           {
+            path: 'image',
+            title: 'Image 图片',
+          },
+          {
             path: 'popup',
             title: 'Popup 弹出层',
           },
@@ -126,6 +130,10 @@ module.exports = {
           {
             path: 'list',
             title: 'List 列表',
+          },
+          {
+            path: 'image-preview',
+            title: 'ImagePreview 图片预览',
           },
         ],
       },
