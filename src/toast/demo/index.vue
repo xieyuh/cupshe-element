@@ -3,25 +3,17 @@ import '@cupshe/fonts';
 import { Toast } from '..';
 
 const showSuccessToast = () => {
-  Toast.success({
-    message: 'Added Successfully Added Successfully Added Successfully',
-    duration: 0,
-  });
+  Toast.success('Added Successfully Added Successfully Added Successfully');
 };
 
 const showFailToast = () => {
-  Toast({
-    icon: 'close',
-    message: 'Number copied Number copied Number copied',
-    duration: 100000,
-  });
+  Toast.fail('Number copied Number copied Number copied');
 };
 
 const showTopToast = () => {
   Toast({
     message: '顶部展示',
     position: 'top',
-    duration: 100000,
   });
 };
 
@@ -29,7 +21,6 @@ const showBottomToast = () => {
   Toast({
     message: '底部展示',
     position: 'bottom',
-    duration: 100000,
   });
 };
 
@@ -37,7 +28,6 @@ const showIconToast = () => {
   Toast({
     message: 'Added Successfully Added Successfully Added Successfully',
     icon: 'like',
-    duration: 100000,
   });
 };
 
@@ -46,7 +36,6 @@ const showImageToast = () => {
     message: '自定义图片',
     icon:
       'https://cdn.shopifycdn.net/s/files/1/0784/0207/files/cupshe_32x32.png?v=1578467710',
-    duration: 100000,
   });
 };
 
