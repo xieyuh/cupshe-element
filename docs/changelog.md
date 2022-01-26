@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.14.1
+
+**Bug Fixes**
+
+- 修复了 Toast 组件的 `fail` 方法为空的问题
+
 ### v1.14.0
 
 **New Component**

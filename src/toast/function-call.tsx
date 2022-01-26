@@ -137,6 +137,8 @@ const createMethod = (type: ToastType) => (options: string | ToastOptions) =>
 
 Toast.loading = createMethod('loading');
 Toast.success = createMethod('success');
+Toast.fail = (options: string | ToastOptions) =>
+  Toast(extend({ icon: 'close' }, parseOptions(options)));
 
 Toast.clear = (all?: boolean) => {
   if (queue.length) {
