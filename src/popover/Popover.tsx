@@ -19,6 +19,7 @@ import {
   unknownProp,
   createNamespace,
   ComponentInstance,
+  stopPropagation,
 } from '../utils';
 import { BORDER_BOTTOM } from '../utils/constant';
 
@@ -76,6 +77,10 @@ export default defineComponent({
     closeOnClickAction: truthProp,
     closeOnClickOverlay: truthProp,
     closeOnClickOutside: truthProp,
+    mouseDelay: {
+      type: Number,
+      default: 100,
+    },
     offset: {
       type: (Array as unknown) as PropType<[number, number]>,
       default: () => [0, 8],
@@ -103,6 +108,7 @@ export default defineComponent({
   setup(props, { emit, slots, attrs }) {
     let popper: Instance | null;
 
+    const delayTimer = ref<NodeJS.Timeout>();
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
@@ -143,6 +149,26 @@ export default defineComponent({
 
     const updateShow = (value: boolean) => emit('update:show', value);
 
+    const clearDelayTimer = () => {
+      if (delayTimer.value) {
+        clearTimeout(delayTimer.value);
+        delayTimer.value = null;
+      }
+    };
+
+    const delayUpdateShow = (show: boolean, delay: number) => {
+      if (!delay) {
+        updateShow(show);
+        return;
+      }
+
+      clearDelayTimer();
+      delayTimer.value = setTimeout(() => {
+        updateShow(show);
+        clearDelayTimer();
+      }, delay);
+    };
+
     const onClickWrapper = () => {
       if (props.trigger === 'click') {
         updateShow(!props.show);
@@ -150,12 +176,18 @@ export default defineComponent({
     };
 
     const createHoverHandler = (type: 'mouseover' | 'mouseleave') => () => {
-        if (props.trigger === 'hover') {
-          updateShow(type === 'mouseover');
-        }
-      };
+      if (props.trigger === 'hover') {
+        delayUpdateShow(type === 'mouseover', props.mouseDelay);
+      }
+    };
 
-    const onClickAction = (action: PopoverAction, index: number) => {
+    const onClickAction = (
+      action: PopoverAction,
+      index: number,
+      event: MouseEvent
+    ) => {
+      stopPropagation(event);
+
       if (action.disabled) {
         return;
       }
@@ -183,7 +215,7 @@ export default defineComponent({
           role="menuitem"
           class={[bem('action', { disabled, 'with-icon': icon }), className]}
           style={{ color }}
-          onClick={() => onClickAction(action, index)}
+          onClick={(e) => onClickAction(action, index, e)}
         >
           {icon && <Icon name={icon} class={bem('action-icon')} />}
           <div class={[bem('action-text'), BORDER_BOTTOM]}>{text}</div>
@@ -225,7 +257,12 @@ export default defineComponent({
           {...{ 'onUpdate:show': updateShow }}
         >
           <div class={bem('arrow')} />
-          <div role="menu" class={bem('content')}>
+          <div
+            role="menu"
+            class={bem('content')}
+            onMouseover={createHoverHandler('mouseover')}
+            onMouseleave={createHoverHandler('mouseleave')}
+          >
             {slots.default ? slots.default() : props.actions.map(renderAction)}
           </div>
         </Popup>

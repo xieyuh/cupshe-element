@@ -201,6 +201,7 @@ export default {
 | duration               | 动画时长，单位秒                                             | _number \| string_          | `0.3`    |
 | offset                 | 出现位置的偏移量                                             | _[number, number]_          | `[0, 8]` |
 | overlay                | 是否显示遮罩层                                               | _boolean_                   | `false`  |
+| mouse-delay            | `hover` 事件触发延时，单位 `ms`                              | _number_                    | `100`    |
 | overlay-class          | 自定义遮罩层类名                                             | _string \| Array \| object_ | -        |
 | overlay-style          | 自定义遮罩层样式                                             | _object_                    | -        |
 | close-on-click-action  | 是否在点击选项后关闭                                         | _boolean_                   | `true`   |
