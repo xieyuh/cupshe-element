@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.14.3
+
+**Bug Fixes**
+
+- 修复了 Popover 组件的自定义内容点击时会触发关闭的问题
+
 ### v1.14.2
 
 **Bug Fixes**
