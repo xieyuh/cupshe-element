@@ -1,7 +1,7 @@
 <template>
   <demo-block title="基础用法">
     <c-popover
-      v-model:show="show.value0"
+      v-model:show="state.show.value0"
       :actions="[{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }]"
       placement="bottom-start"
       @select="onSelect"
@@ -12,7 +12,7 @@
     </c-popover>
 
     <c-popover
-      v-model:show="show.value1"
+      v-model:show="state.show.value1"
       :actions="[{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }]"
       placement="bottom-start"
       trigger="hover"
@@ -26,7 +26,7 @@
 
   <demo-block title="选项配置">
     <c-popover
-      v-model:show="show.showIcon"
+      v-model:show="state.show.showIcon"
       :actions="[
         { text: '选项一', icon: 'plus' },
         { text: '选项二', icon: 'tick' },
@@ -36,12 +36,12 @@
       @select="onSelect"
     >
       <template #reference>
-        <c-button type="primary"> 展示图标 </c-button>
+        <c-button type="primary">展示图标</c-button>
       </template>
     </c-popover>
 
     <c-popover
-      v-model:show="show.disableAction"
+      v-model:show="state.show.disableAction"
       :actions="[
         { text: '选项一', disabled: true },
         { text: '选项二', disabled: true },
@@ -50,7 +50,7 @@
       @select="onSelect"
     >
       <template #reference>
-        <c-button type="primary"> 禁用选项 </c-button>
+        <c-button type="primary">禁用选项</c-button>
       </template>
     </c-popover>
   </demo-block>
@@ -83,59 +83,26 @@
   </demo-block> -->
 </template>
 
-<script lang="ts">
-import { reactive, toRefs } from 'vue';
+<script lang="ts" setup>
+import { reactive } from 'vue';
 import '@cupshe/fonts';
 
-const placements = [
-  'top',
-  'top-start',
-  'top-end',
-  'left',
-  'left-start',
-  'left-end',
-  'right',
-  'right-start',
-  'right-end',
-  'bottom',
-  'bottom-start',
-  'bottom-end',
-];
-
-export default {
-  setup() {
-    const state = reactive({
-      show: {
-        value0: false,
-        value1: false,
-        showIcon: false,
-        placement: false,
-        darkTheme: false,
-        lightTheme: false,
-        customContent: false,
-        disableAction: false,
-      },
-      showPicker: false,
-      currentPlacement: 'top',
-    });
-
-    const onPickerChange = (value: string) => {
-      setTimeout(() => {
-        state.show.placement = true;
-        state.currentPlacement = value;
-      });
-    };
-
-    const onSelect = (action: { text: string }) => console.log(action.text);
-
-    return {
-      ...toRefs(state),
-      onSelect,
-      placements,
-      onPickerChange,
-    };
+const state = reactive({
+  show: {
+    value0: false,
+    value1: false,
+    showIcon: false,
+    placement: false,
+    darkTheme: false,
+    lightTheme: false,
+    customContent: false,
+    disableAction: false,
   },
-};
+  showPicker: false,
+  currentPlacement: 'top',
+});
+
+const onSelect = (action: { text: string }) => console.log(action.text);
 </script>
 
 <style lang="less">

@@ -20,12 +20,12 @@
     <c-popup
       v-model:show="showLeft"
       position="left"
-      :style="{ width: '30%', height: '100%' }"
+      :style="{ width: '30%' }"
     />
     <c-popup
       v-model:show="showRight"
       position="right"
-      :style="{ width: '30%', height: '100%' }"
+      :style="{ width: '30%' }"
     />
   </demo-block>
 

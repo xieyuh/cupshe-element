@@ -6,6 +6,14 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.14.2
+
+**Bug Fixes**
+
+- 修复了 Popover 组件选项为 `disabled` 时仍能触发关闭的问题
+- Popver 组件新增 `mouse-delay` 属性
+- Popup 组件在 `position` 属性值为 `left` 或 `right` 时默认高度为 `100%`
+
 ### v1.14.1
 
 **Bug Fixes**
