@@ -262,6 +262,7 @@ export default defineComponent({
             class={bem('content')}
             onMouseover={createHoverHandler('mouseover')}
             onMouseleave={createHoverHandler('mouseleave')}
+            onClick={stopPropagation}
           >
             {slots.default ? slots.default() : props.actions.map(renderAction)}
           </div>
