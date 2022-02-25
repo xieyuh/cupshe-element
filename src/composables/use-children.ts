@@ -20,6 +20,7 @@ export function flattenVNodes(children: VNodeNormalizedChildren) {
           result.push(child);
 
           if (child.component?.subTree) {
+            result.push(child.component.subTree);
             traverse(child.component.subTree.children);
           }
 
@@ -81,16 +82,13 @@ export function useChildren<
       internalChildren.splice(index, 1);
     };
 
-    provide(
-      key,
-      {
-        link,
-          unlink,
-          children: publicChildren,
-          internalChildren,
-        ...value
-      }
-    );
+    provide(key, {
+      link,
+      unlink,
+      children: publicChildren,
+      internalChildren,
+      ...value,
+    });
   };
 
   return {

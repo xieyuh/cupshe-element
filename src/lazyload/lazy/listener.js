@@ -1,4 +1,5 @@
-import { loadImageAsync, noop } from './util';
+import { loadImageAsync } from './util';
+import { noop, useRect } from '../../utils';
 
 export default class ReactiveListener {
   constructor({
@@ -26,13 +27,10 @@ export default class ReactiveListener {
 
     this.options = options;
 
-    this.rect = null;
-
     this.$parent = $parent;
     this.elRenderer = elRenderer;
-    this._imageCache = imageCache;
+    this.imageCache = imageCache;
     this.performanceData = {
-      init: Date.now(),
       loadStart: 0,
       loadEnd: 0,
     };
@@ -89,24 +87,16 @@ export default class ReactiveListener {
   }
 
   /*
-   * get el node rect
-   * @return
-   */
-  getRect() {
-    this.rect = this.el.getBoundingClientRect();
-  }
-
-  /*
    *  check el is in view
    * @return {Boolean} el is in view
    */
   checkInView() {
-    this.getRect();
+    const rect = useRect(this.el);
     return (
-      this.rect.top < window.innerHeight * this.options.preLoad &&
-      this.rect.bottom > this.options.preLoadTop &&
-      this.rect.left < window.innerWidth * this.options.preLoad &&
-      this.rect.right > 0
+      rect.top < window.innerHeight * this.options.preLoad &&
+      rect.bottom > this.options.preLoadTop &&
+      rect.left < window.innerWidth * this.options.preLoad &&
+      rect.right > 0
     );
   }
 
@@ -140,10 +130,6 @@ export default class ReactiveListener {
         // handler `loading image` load failed
         cb();
         this.state.loading = false;
-        if (!this.options.silent)
-          console.warn(
-            `VueLazyload log: load failed with loading image(${this.loading})`
-          );
       }
     );
   }
@@ -154,15 +140,11 @@ export default class ReactiveListener {
    */
   load(onFinish = noop) {
     if (this.attempt > this.options.attempt - 1 && this.state.error) {
-      if (!this.options.silent)
-        console.log(
-          `VueLazyload log: ${this.src} tried too more than ${this.options.attempt} times`
-        );
       onFinish();
       return;
     }
     if (this.state.rendered && this.state.loaded) return;
-    if (this._imageCache.has(this.src)) {
+    if (this.imageCache.has(this.src)) {
       this.state.loaded = true;
       this.render('loaded', true);
       this.state.rendered = true;
@@ -188,7 +170,7 @@ export default class ReactiveListener {
           this.record('loadEnd');
           this.render('loaded', false);
           this.state.rendered = true;
-          this._imageCache.add(this.src);
+          this.imageCache.add(this.src);
           onFinish();
         },
         (err) => {

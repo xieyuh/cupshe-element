@@ -1,28 +1,11 @@
-<template>
-  <div :class="bem()">
-    <template v-if="$slots.text || text">
-      <span :class="bem('text')">
-        <slot name="text">{{ text }}</slot>
-      </span>
-    </template>
-    <div :class="bem('track')" :style="rootStyle" ref="root">
-      <span :class="bem('portion')" :style="portionStyle" />
-    </div>
-    <span :class="bem('percentage')">
-      <slot name="percentage">{{ percentage }}%</slot>
-    </span>
-  </div>
-</template>
-
-<script lang="ts">
 import {
   defineComponent,
   computed,
-  CSSProperties,
   nextTick,
   onMounted,
   reactive,
   ref,
+  CSSProperties,
 } from 'vue';
 import { addUnit, createNamespace } from '../utils';
 
@@ -43,7 +26,7 @@ export default defineComponent({
     },
   },
 
-  setup(props) {
+  setup(props, { slots }) {
     const root = ref<HTMLElement>();
 
     const state = reactive({
@@ -56,26 +39,39 @@ export default defineComponent({
       });
     };
 
-    onMounted(() => resize());
+    onMounted(resize);
 
     const rootStyle: CSSProperties = {
       background: props.trackColor,
       height: addUnit(props.strokeWidth),
     };
 
-    const portionStyle = computed<CSSProperties>(() => {
-      return {
-        background: props.color,
-        width: (state.rootWidth * +props.percentage) / 100 + 'px',
-      };
-    });
+    const portionStyle = computed<CSSProperties>(() => ({
+      background: props.color,
+      width: (state.rootWidth * +props.percentage) / 100 + 'px',
+    }));
 
-    return {
-      bem,
-      root,
-      rootStyle,
-      portionStyle,
+    const renderText = () => {
+      if (slots.text || props.text) {
+        return (
+          <span class={bem('text')}>
+            {slots.text ? slots.text() : props.text}
+          </span>
+        );
+      }
     };
+
+    const renderPercent = () =>
+      slots.percentage ? slots.percentage() : `${props.percentage} %`;
+
+    return () => (
+      <div class={bem()}>
+        {renderText()}
+        <div class={bem('track')} style={rootStyle} ref={root}>
+          <span class={bem('portion')} style={portionStyle.value} />
+        </div>
+        <span class={bem('percentage')}>{renderPercent()}</span>
+      </div>
+    );
   },
 });
-</script>

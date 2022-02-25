@@ -1,9 +1,9 @@
 import {
+  defineComponent,
   computed,
   PropType,
   ComputedRef,
   InjectionKey,
-  defineComponent,
 } from 'vue';
 import { createNamespace, truthProp } from '../utils';
 import { useChildren } from '../composables';

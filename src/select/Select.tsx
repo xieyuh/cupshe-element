@@ -1,12 +1,12 @@
 import {
   defineComponent,
   reactive,
-  PropType,
-  CSSProperties,
   ref,
   onMounted,
   onBeforeUnmount,
   nextTick,
+  PropType,
+  CSSProperties,
 } from 'vue';
 import {
   createNamespace,

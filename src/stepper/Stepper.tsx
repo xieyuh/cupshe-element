@@ -1,42 +1,5 @@
-<template>
-  <div :class="bem()">
-    <button
-      type="button"
-      :class="bem('button', { disabled: minusDisabled })"
-      @click="createListener('minus', $event)"
-      :style="buttonStyle"
-    >
-      <c-icon :class="bem('icon')" name="minus" />
-    </button>
-    <input
-      :class="bem('input', { disabled })"
-      :style="inputStyle"
-      :value="current"
-      :disabled="disabled"
-      :readonly="disableInput"
-      :aria-valuemax="+max"
-      :aria-valuemin="+min"
-      :aria-valuenow="+current"
-      :placeholder="placeholder"
-      @input="onInput"
-      @blur="onBlur"
-      @focus="onFocus"
-      ref="inputRef"
-      role="spinbutton"
-    />
-    <button
-      type="button"
-      :class="bem('button', { disabled: plusDisabled })"
-      @click="createListener('plus', $event)"
-      :style="buttonStyle"
-    >
-      <c-icon :class="bem('icon')" name="plus" />
-    </button>
-  </div>
-</template>
-
-<script lang="ts">
 import { defineComponent, ref, computed, watch, nextTick, PropType } from 'vue';
+import { Icon } from '../icon';
 import {
   createNamespace,
   formatNumber,
@@ -138,9 +101,8 @@ export default defineComponent({
 
     const setValue = (value: string | number) => {
       if (props.beforeChange) {
-        callInterceptor({
+        callInterceptor(props.beforeChange, {
           args: [value],
-          interceptor: props.beforeChange,
           done() {
             current.value = value;
           },
@@ -229,19 +191,41 @@ export default defineComponent({
 
     const buttonStyle = computed(() => getSizeStyle(props.buttonSize));
 
-    return {
-      bem,
-      inputStyle,
-      buttonStyle,
-      current,
-      inputRef,
-      minusDisabled,
-      plusDisabled,
-      createListener,
-      onInput,
-      onFocus,
-      onBlur,
-    };
+    return () => (
+      <div class={bem()}>
+        <button
+          type="button"
+          class={bem('button', { disabled: minusDisabled.value })}
+          onClick={(event) => createListener('minus', event)}
+          style={buttonStyle.value}
+        >
+          <Icon class={bem('icon')} name="minus" />
+        </button>
+        <input
+          class={bem('input', { disabled: props.disabled })}
+          style={inputStyle.value}
+          value={current.value}
+          disabled={props.disabled}
+          readonly={props.disableInput}
+          aria-valuemax={props.max}
+          aria-valuemin={props.min}
+          aria-valuenow={current.value}
+          placeholder={props.placeholder}
+          onInput={onInput}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          role="spinbutton"
+          ref={inputRef}
+        />
+        <button
+          type="button"
+          class={bem('button', { disabled: plusDisabled.value })}
+          onClick={(event) => createListener('plus', event)}
+          style={buttonStyle.value}
+        >
+          <Icon class={bem('icon')} name="plus" />
+        </button>
+      </div>
+    );
   },
 });
-</script>

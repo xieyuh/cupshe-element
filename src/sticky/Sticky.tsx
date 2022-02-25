@@ -2,12 +2,11 @@ import {
   ref,
   watch,
   computed,
-  PropType,
   reactive,
-  CSSProperties,
   defineComponent,
+  PropType,
+  CSSProperties,
 } from 'vue';
-
 import {
   extend,
   isHidden,
@@ -16,7 +15,6 @@ import {
   getZIndexStyle,
   createNamespace,
 } from '../utils';
-
 import {
   useRect,
   useEventListener,

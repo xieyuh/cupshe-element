@@ -1,12 +1,12 @@
 import {
   defineComponent,
-  PropType,
-  ExtractPropTypes,
   ref,
   nextTick,
   watch,
   onMounted,
   onUpdated,
+  PropType,
+  ExtractPropTypes,
 } from 'vue';
 import { createNamespace, truthProp, isHidden } from '../utils';
 import {

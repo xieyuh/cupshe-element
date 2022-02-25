@@ -3,8 +3,8 @@
     <c-tag v-model:checked="value0">Tag</c-tag>
     <c-tag v-model:checked="value1">
       <c-icon name="star" />
-      Tag</c-tag
-    >
+      Tag
+    </c-tag>
   </demo-block>
 
   <demo-block title="不可选中">
@@ -16,13 +16,13 @@
   </demo-block>
 
   <demo-block title="可关闭标签">
-    <c-tag closeable :show="show" v-model:checked="value3" @close="onClose"
-      >标签</c-tag
-    >
+    <c-tag closeable :show="show" v-model:checked="value3" @close="onClose">
+      标签
+    </c-tag>
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import '@cupshe/fonts';
 
@@ -50,6 +50,7 @@ const onClose = () => {
     border: 1px solid #000;
     color: #000;
     box-sizing: border-box;
+    line-height: 34px;
   }
 }
 </style>

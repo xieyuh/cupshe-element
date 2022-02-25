@@ -1,9 +1,9 @@
 import {
+  defineComponent,
+  watch,
   PropType,
   ExtractPropTypes,
   InjectionKey,
-  defineComponent,
-  watch,
 } from 'vue';
 import { createNamespace } from '../utils';
 import { useChildren, useExpose, useCustomFieldValue } from '../composables';

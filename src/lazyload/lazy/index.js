@@ -1,6 +1,6 @@
 import Lazy from './lazy';
 import LazyComponent from './lazy-component';
-import LazyContainer from './lazy-container';
+import LazyContainer from './lazy-container-manager';
 import LazyImage from './lazy-image';
 
 export const Lazyload = {

@@ -80,7 +80,7 @@ export default {
 ```
 
 ```js
-import { Toast } from 'vant';
+import { Toast } from 'cupshe-element';
 
 export default {
   setup() {

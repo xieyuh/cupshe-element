@@ -3019,9 +3019,9 @@
   "version" "6.2.0"
 
 "caniuse-lite@^1.0.30001109", "caniuse-lite@^1.0.30001248":
-  "integrity" "sha1-aFOmBuxQiTEV22YPgsCU0Y8JbYU="
-  "resolved" "https://registry.nlark.com/caniuse-lite/download/caniuse-lite-1.0.30001251.tgz"
-  "version" "1.0.30001251"
+  "integrity" "sha512-Wiz1Psk2MEK0pX3rUzWaunLTZzqS2JYZFzNKqAiJGiuxIjRPLgV6+VDPOg6lQOUxmDwhTlh198JsTTi8Hzw6aQ=="
+  "resolved" "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001312.tgz"
+  "version" "1.0.30001312"
 
 "capture-exit@^2.0.0":
   "integrity" "sha1-+5U7+uvreB9iiYI52rtCbQilCaQ="

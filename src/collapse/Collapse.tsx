@@ -1,10 +1,3 @@
-<template>
-  <div :class="bem()">
-    <slot />
-  </div>
-</template>
-
-<script lang="ts">
 import { defineComponent, ExtractPropTypes, InjectionKey, PropType } from 'vue';
 import { createNamespace } from '../utils';
 import { useChildren } from '../composables';
@@ -72,7 +65,7 @@ export default defineComponent({
 
   emits: ['change', 'update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const { linkChildren } = useChildren(COLLAPSE_KEY);
 
     const updateName = (name: number | string | Array<number | string>) => {
@@ -106,9 +99,6 @@ export default defineComponent({
 
     linkChildren({ props, toggle, isExpanded });
 
-    return {
-      bem,
-    };
+    return () => <div class={bem()}>{slots.default?.()}</div>;
   },
 });
-</script>

@@ -108,12 +108,12 @@ module.exports = {
             title: 'Avatar 头像',
           },
           {
-            path: 'popover',
-            title: 'Popover 气泡弹出框',
+            path: 'badge',
+            title: 'Badge 徽标',
           },
           {
-            path: 'currency',
-            title: 'Currency 货币',
+            path: 'popover',
+            title: 'Popover 气泡弹出框',
           },
           {
             path: 'progress',
@@ -172,15 +172,6 @@ module.exports = {
           {
             path: 'overlay',
             title: 'Overlay 遮罩层',
-          },
-        ],
-      },
-      {
-        title: '业务组件',
-        items: [
-          {
-            path: 'ab-test',
-            title: 'AB 测试',
           },
         ],
       },

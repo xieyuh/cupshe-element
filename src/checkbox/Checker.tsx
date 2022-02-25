@@ -83,21 +83,21 @@ export default defineComponent({
     };
 
     return () => (
-        <div
-          role={props.role}
-          class={props.bem([
-            direction.value,
-            {
-              disabled: disabled.value,
-            },
-          ])}
-          tabindex={disabled.value ? -1 : 0}
-          aria-checked={props.checked}
-          onClick={onClick}
-        >
-          {renderIcon()}
-          {renderLabel()}
-        </div>
-      );
+      <div
+        role={props.role}
+        class={props.bem([
+          direction.value,
+          {
+            disabled: disabled.value,
+          },
+        ])}
+        tabindex={disabled.value ? -1 : 0}
+        aria-checked={props.checked}
+        onClick={onClick}
+      >
+        {renderIcon()}
+        {renderLabel()}
+      </div>
+    );
   },
 });

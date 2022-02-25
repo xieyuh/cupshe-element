@@ -2,16 +2,14 @@ import {
   ref,
   watch,
   nextTick,
-  PropType,
   onMounted,
-  CSSProperties,
-  TeleportProps,
   onBeforeUnmount,
   defineComponent,
+  PropType,
+  CSSProperties,
+  TeleportProps,
 } from 'vue';
 import { Instance, createPopper, offsetModifier } from '../utils/popper';
-
-// Utils
 import {
   pick,
   extend,
@@ -20,13 +18,9 @@ import {
   createNamespace,
   ComponentInstance,
   stopPropagation,
+  BORDER_BOTTOM,
 } from '../utils';
-import { BORDER_BOTTOM } from '../utils/constant';
-
-// Composables
 import { useClickAway } from '../composables';
-
-// Components
 import { Icon } from '../icon';
 import { Popup } from '../popup';
 
@@ -107,8 +101,7 @@ export default defineComponent({
 
   setup(props, { emit, slots, attrs }) {
     let popper: Instance | null;
-
-    const delayTimer = ref<NodeJS.Timeout>();
+    let timer: NodeJS.Timeout | undefined;
     const wrapperRef = ref<HTMLElement>();
     const popoverRef = ref<ComponentInstance>();
 
@@ -150,9 +143,9 @@ export default defineComponent({
     const updateShow = (value: boolean) => emit('update:show', value);
 
     const clearDelayTimer = () => {
-      if (delayTimer.value) {
-        clearTimeout(delayTimer.value);
-        delayTimer.value = null;
+      if (timer) {
+        clearTimeout(timer);
+        timer = undefined;
       }
     };
 
@@ -163,7 +156,7 @@ export default defineComponent({
       }
 
       clearDelayTimer();
-      delayTimer.value = setTimeout(() => {
+      timer = setTimeout(() => {
         updateShow(show);
         clearDelayTimer();
       }, delay);

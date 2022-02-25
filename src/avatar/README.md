@@ -1,4 +1,4 @@
-# Progress 进度条
+# Avatar 头像
 
 ### 介绍
 
@@ -10,10 +10,10 @@
 
 ```js
 import { createApp } from 'vue';
-import { Progress } from 'cupshe-element';
+import { Avatar } from 'cupshe-element';
 
 const app = createApp();
-app.use(Progress);
+app.use(Avatar);
 ```
 
 ## 代码演示

@@ -30,8 +30,10 @@ export default defineComponent({
       }
     };
 
-    const iconSlot = ({ checked, disabled }) => (
-      <div class={bem('icon', { checked, disabled })}></div>
+    const iconSlot = () => (
+      <div
+        class={bem('icon', { checked: checked(), disabled: props.disabled })}
+      ></div>
     );
 
     return () => (

@@ -1,4 +1,4 @@
-import { PropType, CSSProperties, defineComponent } from 'vue';
+import { PropType, defineComponent, CSSProperties } from 'vue';
 import {
   createNamespace,
   extend,
@@ -6,7 +6,7 @@ import {
   truthProp,
   unknownProp,
 } from '../utils';
-import { useRoute, routeProps } from '../composables/use-route';
+import { useRoute, routeProps } from '../composables';
 import { Icon } from '../icon';
 
 const [name, bem] = createNamespace('cell');

@@ -5,15 +5,13 @@ import {
   computed,
   onMounted,
   onActivated,
-  InjectionKey,
-  CSSProperties,
   onDeactivated,
   onBeforeUnmount,
   defineComponent,
+  InjectionKey,
+  CSSProperties,
   ExtractPropTypes,
 } from 'vue';
-
-// Utils
 import {
   clamp,
   isHidden,
@@ -30,7 +28,12 @@ import {
   useExpose,
   onPopupReopen,
 } from '../composables';
-import { SwipeState, SwipeExpose, SwipeProvide, SwipeToOptions } from './types';
+import type {
+  SwipeState,
+  SwipeExpose,
+  SwipeProvide,
+  SwipeToOptions,
+} from './types';
 
 const [name, bem] = createNamespace('swipe');
 

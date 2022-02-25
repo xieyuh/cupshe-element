@@ -1,5 +1,7 @@
 import { CSSProperties, PropType } from 'vue';
 
+export type InputSize = 'normal' | 'small';
+
 export type InputType =
   | 'tel'
   | 'text'
@@ -39,14 +41,14 @@ export const inputProps = {
   },
 };
 
-export type AutosizeConfig = {
+export type AutoSizeConfig = {
   maxHeight?: number;
   minHeight?: number;
 };
 
 export const textareaProps = {
   rows: [String, Number],
-  autosize: [Boolean, Object] as PropType<boolean | AutosizeConfig>,
+  autosize: [Boolean, Object] as PropType<boolean | AutoSizeConfig>,
 };
 
 export type InputExpose = {
@@ -55,3 +57,9 @@ export type InputExpose = {
 };
 
 export type InputFormatTrigger = 'onBlur' | 'onChange';
+
+declare global {
+  interface EventTarget {
+    composing?: boolean;
+  }
+}

@@ -3,8 +3,8 @@ import {
   nextTick,
   reactive,
   onMounted,
-  CSSProperties,
   defineComponent,
+  CSSProperties,
 } from 'vue';
 import { createNamespace } from '../utils';
 import { SWIPE_KEY } from '../swipe/Swipe';
@@ -15,7 +15,7 @@ const [name, bem] = createNamespace('swipe-item');
 export default defineComponent({
   name,
 
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     let rendered: boolean;
     const state = reactive({
       offset: 0,
