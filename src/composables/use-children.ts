@@ -82,16 +82,13 @@ export function useChildren<
       internalChildren.splice(index, 1);
     };
 
-    provide(
-      key,
-      {
-        link,
-          unlink,
-          children: publicChildren,
-          internalChildren,
-        ...value
-      }
-    );
+    provide<any>(key, {
+      link,
+      unlink,
+      children: publicChildren,
+      internalChildren,
+      ...value,
+    });
   };
 
   return {
