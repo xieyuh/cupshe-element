@@ -1,4 +1,4 @@
-import { defineComponent, ExtractPropTypes, computed, watch } from 'vue';
+import { defineComponent, computed, watch, ExtractPropTypes } from 'vue';
 import { createNamespace, extend, pick, truthProp } from '../utils';
 import { useExpose, useParent, useCustomFieldValue } from '../composables';
 import { CHECKBOX_GROUP_KEY } from '../checkbox-group/CheckboxGroup';

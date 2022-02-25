@@ -1,4 +1,4 @@
-import { ref, App, TeleportProps, getCurrentInstance, watch } from 'vue';
+import { ref, TeleportProps, getCurrentInstance, watch, App } from 'vue';
 import {
   extend,
   isObject,

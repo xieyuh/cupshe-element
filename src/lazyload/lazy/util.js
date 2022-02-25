@@ -1,63 +1,23 @@
-const inBrowser = typeof window !== 'undefined' && window !== null;
+import { inBrowser } from '../../utils';
 
-function checkIntersectionObserver() {
-  if (
-    inBrowser &&
-    'IntersectionObserver' in window &&
-    'IntersectionObserverEntry' in window &&
-    'intersectionRatio' in window.IntersectionObserverEntry.prototype
-  ) {
-    // Minimal polyfill for Edge 15's lack of `isIntersecting`
-    // See: https://github.com/w3c/IntersectionObserver/issues/211
-    if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
-      Object.defineProperty(
-        window.IntersectionObserverEntry.prototype,
-        'isIntersecting',
-        {
-          get() {
-            return this.intersectionRatio > 0;
-          },
-        }
-      );
-    }
-    return true;
-  }
-  return false;
-}
-
-export const hasIntersectionObserver = checkIntersectionObserver();
+export const hasIntersectionObserver =
+  inBrowser &&
+  'IntersectionObserver' in window &&
+  'IntersectionObserverEntry' in window &&
+  'intersectionRatio' in window.IntersectionObserverEntry.prototype;
 
 export const modeType = {
   event: 'event',
   observer: 'observer',
 };
 
-// CustomEvent polyfill
-const CustomEvent = (function () {
-  if (!inBrowser) return;
-  if (typeof window.CustomEvent === 'function') return window.CustomEvent;
-  function CustomEvent(event, params) {
-    params = params || { bubbles: false, cancelable: false, detail: undefined };
-    const evt = document.createEvent('CustomEvent');
-    evt.initCustomEvent(
-      event,
-      params.bubbles,
-      params.cancelable,
-      params.detail
-    );
-    return evt;
-  }
-  CustomEvent.prototype = window.Event.prototype;
-  return CustomEvent;
-})();
-
-function remove(arr, item) {
+export function remove(arr, item) {
   if (!arr.length) return;
   const index = arr.indexOf(item);
   if (index > -1) return arr.splice(index, 1);
 }
 
-function getBestSelectionFromSrcset(el, scale) {
+export function getBestSelectionFromSrcset(el, scale) {
   if (el.tagName !== 'IMG' || !el.getAttribute('data-srcset')) return;
 
   let options = el.getAttribute('data-srcset');
@@ -86,7 +46,7 @@ function getBestSelectionFromSrcset(el, scale) {
     return [tmpWidth, tmpSrc];
   });
 
-  result.sort(function (a, b) {
+  result.sort((a, b) => {
     if (a[0] < b[0]) {
       return 1;
     }
@@ -122,21 +82,10 @@ function getBestSelectionFromSrcset(el, scale) {
   return bestSelectedSrc;
 }
 
-function find(arr, fn) {
-  let item;
-  for (let i = 0, len = arr.length; i < len; i++) {
-    if (fn(arr[i])) {
-      item = arr[i];
-      break;
-    }
-  }
-  return item;
-}
-
-const getDPR = (scale = 1) =>
+export const getDPR = (scale = 1) =>
   inBrowser ? window.devicePixelRatio || scale : scale;
 
-function supportWebp() {
+export function supportWebp() {
   if (!inBrowser) return false;
 
   let support = true;
@@ -154,7 +103,7 @@ function supportWebp() {
   return support;
 }
 
-function throttle(action, delay) {
+export function throttle(action, delay) {
   let timeout = null;
   let lastRun = 0;
   return function (...args) {
@@ -175,47 +124,22 @@ function throttle(action, delay) {
   };
 }
 
-function testSupportsPassive() {
-  if (!inBrowser) return;
-  let support = false;
-  try {
-    const opts = Object.defineProperty({}, 'passive', {
-      // eslint-disable-next-line getter-return
-      get() {
-        support = true;
-      },
-    });
-    window.addEventListener('test', null, opts);
-  } catch (e) {
-    //
-  }
-  return support;
+export function on(el, type, func) {
+  el.addEventListener(type, func, {
+    capture: false,
+    passive: true,
+  });
 }
 
-const supportsPassive = testSupportsPassive();
+export function off(el, type, func) {
+  el.removeEventListener(type, func, false);
+}
 
-const _ = {
-  on(el, type, func, capture = false) {
-    if (supportsPassive) {
-      el.addEventListener(type, func, {
-        capture,
-        passive: true,
-      });
-    } else {
-      el.addEventListener(type, func, capture);
-    }
-  },
-  off(el, type, func, capture = false) {
-    el.removeEventListener(type, func, capture);
-  },
-};
-
-const loadImageAsync = (item, resolve, reject) => {
+export const loadImageAsync = (item, resolve, reject) => {
   const image = new Image();
 
   if (!item || !item.src) {
-    const err = new Error('image src is required');
-    return reject(err);
+    return reject(new Error('image src is required'));
   }
 
   image.src = item.src;
@@ -223,102 +147,37 @@ const loadImageAsync = (item, resolve, reject) => {
     image.crossOrigin = item.cors;
   }
 
-  image.onload = function () {
+  image.onload = () =>
     resolve({
       naturalHeight: image.naturalHeight,
       naturalWidth: image.naturalWidth,
       src: image.src,
     });
-  };
 
-  image.onerror = function (e) {
-    reject(e);
-  };
+  image.onerror = (e) => reject(e);
 };
 
-const style = (el, prop) => {
-  return typeof getComputedStyle !== 'undefined'
-    ? getComputedStyle(el, null).getPropertyValue(prop)
-    : el.style[prop];
-};
-
-const overflow = (el) => {
-  return (
-    style(el, 'overflow') + style(el, 'overflow-y') + style(el, 'overflow-x')
-  );
-};
-
-const scrollParent = (el) => {
-  if (!inBrowser) return;
-  if (!(el instanceof HTMLElement)) {
-    return window;
-  }
-
-  let parent = el;
-
-  while (parent) {
-    if (parent === document.body || parent === document.documentElement) {
-      break;
-    }
-
-    if (!parent.parentNode) {
-      break;
-    }
-
-    if (/(scroll|auto)/.test(overflow(parent))) {
-      return parent;
-    }
-
-    parent = parent.parentNode;
-  }
-
-  return window;
-};
-
-function isObject(obj) {
-  return obj !== null && typeof obj === 'object';
-}
-
-function noop() {}
-
-class ImageCache {
+export class ImageCache {
   constructor({ max }) {
     this.options = {
       max: max || 100,
     };
-    this._caches = [];
+    this.caches = [];
   }
 
   has(key) {
-    return this._caches.indexOf(key) > -1;
+    return this.caches.indexOf(key) > -1;
   }
 
   add(key) {
     if (this.has(key)) return;
-    this._caches.push(key);
-    if (this._caches.length > this.options.max) {
+    this.caches.push(key);
+    if (this.caches.length > this.options.max) {
       this.free();
     }
   }
 
   free() {
-    this._caches.shift();
+    this.caches.shift();
   }
 }
-
-export {
-  ImageCache,
-  inBrowser,
-  CustomEvent,
-  remove,
-  find,
-  noop,
-  _,
-  isObject,
-  throttle,
-  supportWebp,
-  getDPR,
-  scrollParent,
-  loadImageAsync,
-  getBestSelectionFromSrcset,
-};

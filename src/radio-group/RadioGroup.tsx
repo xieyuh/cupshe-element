@@ -1,8 +1,8 @@
 import {
   watch,
+  defineComponent,
   PropType,
   InjectionKey,
-  defineComponent,
   ExtractPropTypes,
 } from 'vue';
 import { unknownProp, createNamespace } from '../utils';

@@ -9,8 +9,17 @@
     />
   </demo-block>
 
+  <demo-block title="限定滚动高度">
+    <c-select
+      :options="option2"
+      v-model="select3"
+      placeholder="请选择"
+      :popper-style="{ maxHeight: '140px' }"
+    />
+  </demo-block>
+
   <demo-block title="自定义选项内容">
-    <c-select :options="option" v-model="select3" placeholder="请选择">
+    <c-select :options="option" v-model="select4" placeholder="请选择">
       <template #option="{ index }">
         <c-rate :model-value="index" readonly />
       </template>
@@ -20,7 +29,7 @@
   <demo-block title="选择器尺寸">
     <c-select
       :options="option"
-      v-model="select4"
+      v-model="select5"
       placeholder="请选择"
       size="small"
     />
@@ -29,7 +38,7 @@
   <demo-block title="自定义控件">
     <c-select
       :options="option"
-      v-model="select5"
+      v-model="select6"
       placeholder="请选择"
       placement="bottom-start"
       :popper-style="{ width: '178px', marginTop: '10px' }"
@@ -44,18 +53,18 @@
   </demo-block>
 
   <demo-block title="错误状态">
-    <c-select :options="option1" error v-model="select8" placeholder="请选择" />
+    <c-select :options="option1" error v-model="select7" placeholder="请选择" />
   </demo-block>
 
   <demo-block title="选项禁用">
-    <c-select :options="option1" v-model="select6" placeholder="请选择" />
+    <c-select :options="option1" v-model="select8" placeholder="请选择" />
   </demo-block>
 
   <demo-block title="禁用状态">
     <c-select
       disabled
       :options="option"
-      v-model="select7"
+      v-model="select9"
       placeholder="请选择"
     />
   </demo-block>
@@ -64,6 +73,12 @@
 <script>
 import { reactive, toRefs } from 'vue';
 import '@cupshe/fonts';
+
+const option2 = [];
+
+for (let i = 0; i < 20; i++) {
+  option2.push({ text: `选项${i + 1}`, value: i });
+}
 
 export default {
   setup() {
@@ -97,6 +112,7 @@ export default {
           value: '3',
         },
       ],
+      option2,
       select1: '',
       select2: '',
       select3: '',
@@ -105,6 +121,7 @@ export default {
       select6: '',
       select7: '',
       select8: '',
+      select9: '',
     });
 
     return {

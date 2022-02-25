@@ -1,10 +1,10 @@
 import {
   defineComponent,
-  PropType,
   ref,
   watch,
   nextTick,
   onMounted,
+  PropType,
 } from 'vue';
 import { useExpose, useCustomFieldValue } from '../composables';
 import { createNamespace, extend, isDef, formatNumber } from '../utils';
@@ -13,14 +13,13 @@ import {
   textareaProps,
   InputFormatTrigger,
   InputExpose,
+  InputSize,
 } from './shared';
 import { endComposing, mapInputType, resizeTextarea } from './utils';
 
 import { Icon } from '../icon';
 
 const [name, bem] = createNamespace('input');
-
-export type InputSize = 'normal' | 'small';
 
 export default defineComponent({
   name,
@@ -133,12 +132,12 @@ export default defineComponent({
       () => props.modelValue,
       () => {
         updateValue(getModelValue());
-        nextTick(adjustTextareaSize);
+        nextTick().then(adjustTextareaSize);
       }
     );
 
     onMounted(() => {
-      nextTick(adjustTextareaSize);
+      nextTick().then(adjustTextareaSize);
     });
 
     const renderInput = () => {
@@ -188,7 +187,7 @@ export default defineComponent({
       if (slots.prefix || props.prefix) {
         return (
           <div class={bem('prefix')} onClick={onClickPrefix}>
-            {slots.prefix ? slots.prefix() : <Icon name={props.prefix} />}
+            {slots.prefix ? slots.prefix() : <Icon name={props.prefix!} />}
           </div>
         );
       }
@@ -204,7 +203,7 @@ export default defineComponent({
       if (slots.suffix || props.suffix) {
         return (
           <div class={bem('suffix')} onClick={onClickSuffix}>
-            {slots.suffix ? slots.suffix() : <Icon name={props.suffix} />}
+            {slots.suffix ? slots.suffix() : <Icon name={props.suffix!} />}
           </div>
         );
       }

@@ -72,21 +72,21 @@ export default defineComponent({
     });
 
     const select = (page: number) => () => {
-        const { modelValue, pageCount } = props;
+      const { modelValue, pageCount } = props;
 
-        if (!page) return;
+      if (!page) return;
 
-        page = Math.min(pageCount, Math.max(1, page));
+      page = Math.min(pageCount, Math.max(1, page));
 
-        if (page < 1 || page > pageCount) {
-          return;
-        }
+      if (page < 1 || page > pageCount) {
+        return;
+      }
 
-        if (modelValue !== page) {
-          emit('update:modelValue', page);
-          emit('change', page);
-        }
-      };
+      if (modelValue !== page) {
+        emit('update:modelValue', page);
+        emit('change', page);
+      }
+    };
 
     watch(
       () => props.modelValue,
@@ -94,10 +94,11 @@ export default defineComponent({
       { immediate: true }
     );
 
-    const renderPages = () => pages.value.map((page) => (
+    const renderPages = () =>
+      pages.value.map((page) => (
         <li
           key={page.number}
-          onClick={select(page.number)}
+          onClick={select(page.number!)}
           class={bem('item', { active: page.active, ellipses: page.ellipses })}
         >
           {page.ellipses ? '···' : page.number}

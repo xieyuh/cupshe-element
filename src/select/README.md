@@ -56,6 +56,17 @@ export default {
 };
 ```
 
+### 限制滚动高度
+
+```html
+<c-select
+  :options="option"
+  v-model="select"
+  placeholder="请选择"
+  :popper-style="{ maxHeight: '140px' }"
+/>
+```
+
 ### 自定义选项内容
 
 通过 `option` 插槽来自定义选项内容。

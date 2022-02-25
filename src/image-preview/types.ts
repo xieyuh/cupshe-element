@@ -1,4 +1,8 @@
-import { CSSProperties, TeleportProps, ComponentPublicInstance } from 'vue';
+import type {
+  CSSProperties,
+  TeleportProps,
+  ComponentPublicInstance,
+} from 'vue';
 import type { Interceptor } from '../utils';
 import type { SwipeToOptions } from '../swipe';
 import type { PopupCloseIconPosition } from '../popup';

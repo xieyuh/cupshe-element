@@ -1,4 +1,4 @@
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, CSSProperties } from 'vue';
 import { createNamespace } from '../utils';
 import { useParent } from '../composables';
 import { ROW_KEY } from '../row/Row';
@@ -22,7 +22,7 @@ export default defineComponent({
 
     const style = computed(() => {
       if (!parent) {
-        return;
+        return {} as CSSProperties;
       }
 
       const { spaces } = parent;
@@ -30,9 +30,9 @@ export default defineComponent({
       if (spaces && spaces.value && spaces.value[index.value]) {
         const { left, right } = spaces.value[index.value];
         return {
-          paddingLeft: left ? `${left}px` : null,
-          paddingRight: right ? `${right}px` : null,
-        };
+          paddingLeft: left ? `${left}px` : '',
+          paddingRight: right ? `${right}px` : '',
+        } as CSSProperties;
       }
     });
 

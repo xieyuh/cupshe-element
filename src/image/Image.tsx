@@ -2,11 +2,11 @@ import {
   ref,
   watch,
   computed,
-  PropType,
-  CSSProperties,
   onBeforeUnmount,
   defineComponent,
   getCurrentInstance,
+  PropType,
+  CSSProperties,
 } from 'vue';
 import {
   isDef,
@@ -95,11 +95,17 @@ export default defineComponent({
       };
 
       if (props.lazyLoad) {
-        return <img ref={imageRef} v-lazy={props.src} {...attrs} />;
+        return <img ref={imageRef} v-lazy={props.src} {...attrs} alt="" />;
       }
 
       return (
-        <img src={props.src} onLoad={onLoad} onError={onError} {...attrs} />
+        <img
+          src={props.src}
+          onLoad={onLoad}
+          onError={onError}
+          {...attrs}
+          alt=""
+        />
       );
     };
 

@@ -43,7 +43,7 @@ app.use(Popover);
 
 ```js
 import { ref } from 'vue';
-import { Toast } from 'vant';
+import { Toast } from 'cupshe-element';
 
 export default {
   setup() {

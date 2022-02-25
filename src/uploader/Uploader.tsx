@@ -1,8 +1,8 @@
 import {
   ref,
   reactive,
-  PropType,
   defineComponent,
+  PropType,
   ExtractPropTypes,
 } from 'vue';
 import {

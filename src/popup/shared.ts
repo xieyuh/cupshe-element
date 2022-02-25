@@ -1,6 +1,6 @@
 import { PropType, CSSProperties, TeleportProps } from 'vue';
 import { truthProp, unknownProp } from '../utils';
-import type { Interceptor } from '../utils/interceptor';
+import type { Interceptor } from '../utils';
 
 export const popupSharedProps = {
   // whether to show popup

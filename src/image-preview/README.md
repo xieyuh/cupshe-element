@@ -9,7 +9,7 @@
 `ImagePreview` 是一个函数，调用函数后会直接在页面中展示图片预览界面。
 
 ```js
-import { ImagePreview } from 'vant';
+import { ImagePreview } from 'cupshe-element';
 
 ImagePreview(['https://img.yzcdn.cn/vant/apple-1.jpg']);
 ```
@@ -20,7 +20,7 @@ ImagePreview(['https://img.yzcdn.cn/vant/apple-1.jpg']);
 
 ```js
 import { createApp } from 'vue';
-import { ImagePreview } from 'vant';
+import { ImagePreview } from 'cupshe-element';
 
 // 全局注册
 const app = createApp();
@@ -38,14 +38,14 @@ export default {
 
 ```html
 <script setup>
-  const VanImagePreview = ImagePreview.Component;
+  const CImagePreview = ImagePreview.Component;
 </script>
 
 <template>
   <!-- 中划线命名 -->
-  <van-image-preview />
+  <c-image-preview />
   <!-- 也支持大驼峰命名 -->
-  <VanImagePreview>
+  <CImagePreview>
 </template>
 ```
 
@@ -95,7 +95,7 @@ ImagePreview({
 通过 `onClose` 选项监听图片预览的关闭事件。
 
 ```js
-import { Toast } from 'vant';
+import { Toast } from 'cupshe-element';
 
 ImagePreview({
   images: [
@@ -132,9 +132,9 @@ setTimeout(() => {
 如果需要在图片预览内嵌入组件或其他自定义内容，可以使用组件调用的方式，调用前需要通过 `app.use` 注册组件。
 
 ```html
-<van-image-preview v-model:show="show" :images="images" @change="onChange">
+<c-image-preview v-model:show="show" :images="images" @change="onChange">
   <template v-slot:index>第{{ index }}页</template>
-</van-image-preview>
+</c-image-preview>
 ```
 
 ```js
@@ -168,55 +168,55 @@ export default {
 
 通过函数调用 `ImagePreview` 时，支持传入以下选项：
 
-| 参数名                | 说明                                                                                                            | 类型                                                | 默认值      |
-| --------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------- |
-| images                | 需要预览的图片 URL 数组                                                                                         | _string[]_                                          | `[]`        |
-| startPosition         | 图片预览起始位置索引                                                                                            | _number \| string_                                  | `0`         |
-| swipeDuration         | 动画时长，单位为 `ms`                                                                                           | _number \| string_                                  | `300`       |
-| showIndex             | 是否显示页码                                                                                                    | _boolean_                                           | `true`      |
-| showIndicators        | 是否显示轮播指示器                                                                                              | _boolean_                                           | `false`     |
-| loop                  | 是否开启循环播放                                                                                                | _boolean_                                           | `true`      |
-| onClose               | 关闭时的回调函数                                                                                                | _Function_                                          | -           |
-| onChange              | 切换图片时的回调函数，回调参数为当前索引                                                                        | _Function_                                          | -           |
-| onScale               | 缩放图片时的回调函数，回调参数为当前索引和当前缩放值组成的对象                                                  | _Function_                                          | -           |
-| beforeClose           | 关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise                                                     | _(active: number) => boolean \| Promise\<boolean\>_ | -           |
-| closeOnPopstate       | 是否在页面回退时自动关闭                                                                                        | _boolean_                                           | `true`      |
-| className             | 自定义类名                                                                                                      | _string \| Array \| object_                         | -           |
-| maxZoom               | 手势缩放时，最大缩放比例                                                                                        | _number \| string_                                  | `3`         |
-| minZoom               | 手势缩放时，最小缩放比例                                                                                        | _number \| string_                                  | `1/3`       |
-| closeable             | 是否显示关闭图标                                                                                                | _boolean_                                           | `false`     |
-| closeIcon             | 关闭图标名称或图片链接                                                                                          | _string_                                            | `clear`     |
-| closeIconPosition     | 关闭图标位置，可选值为 `top-left`<br>`bottom-left` `bottom-right`                                               | _string_                                            | `top-right` |
-| transition `v3.0.8`   | 动画类名，等价于 [transition](https://v3.cn.vuejs.org/api/built-in-components.html#transition) 的 `name` 属性   | _string_                                            | `van-fade`  |
-| overlayClass `v3.2.8` | 自定义遮罩层类名                                                                                                | _string \| Array \| object_                         | -           |
-| overlayStyle `v3.0.8` | 自定义遮罩层样式                                                                                                | _object_                                            | -           |
-| teleport              | 指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport) | _string \| Element_                                 | -           |
+| 参数名            | 说明                                                                                                            | 类型                                                | 默认值      |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------- |
+| images            | 需要预览的图片 URL 数组                                                                                         | _string[]_                                          | `[]`        |
+| startPosition     | 图片预览起始位置索引                                                                                            | _number \| string_                                  | `0`         |
+| swipeDuration     | 动画时长，单位为 `ms`                                                                                           | _number \| string_                                  | `300`       |
+| showIndex         | 是否显示页码                                                                                                    | _boolean_                                           | `true`      |
+| showIndicators    | 是否显示轮播指示器                                                                                              | _boolean_                                           | `false`     |
+| loop              | 是否开启循环播放                                                                                                | _boolean_                                           | `true`      |
+| onClose           | 关闭时的回调函数                                                                                                | _Function_                                          | -           |
+| onChange          | 切换图片时的回调函数，回调参数为当前索引                                                                        | _Function_                                          | -           |
+| onScale           | 缩放图片时的回调函数，回调参数为当前索引和当前缩放值组成的对象                                                  | _Function_                                          | -           |
+| beforeClose       | 关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise                                                     | _(active: number) => boolean \| Promise\<boolean\>_ | -           |
+| closeOnPopstate   | 是否在页面回退时自动关闭                                                                                        | _boolean_                                           | `true`      |
+| className         | 自定义类名                                                                                                      | _string \| Array \| object_                         | -           |
+| maxZoom           | 手势缩放时，最大缩放比例                                                                                        | _number \| string_                                  | `3`         |
+| minZoom           | 手势缩放时，最小缩放比例                                                                                        | _number \| string_                                  | `1/3`       |
+| closeable         | 是否显示关闭图标                                                                                                | _boolean_                                           | `false`     |
+| closeIcon         | 关闭图标名称或图片链接                                                                                          | _string_                                            | `clear`     |
+| closeIconPosition | 关闭图标位置，可选值为 `top-left`<br>`bottom-left` `bottom-right`                                               | _string_                                            | `top-right` |
+| transition        | 动画类名，等价于 [transition](https://v3.cn.vuejs.org/api/built-in-components.html#transition) 的 `name` 属性   | _string_                                            | `van-fade`  |
+| overlayClass      | 自定义遮罩层类名                                                                                                | _string \| Array \| object_                         | -           |
+| overlayStyle      | 自定义遮罩层样式                                                                                                | _object_                                            | -           |
+| teleport          | 指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport) | _string \| Element_                                 | -           |
 
 ### Props
 
 通过组件调用 `ImagePreview` 时，支持以下 Props：
 
-| 参数                   | 说明                                                                                                            | 类型                                                | 默认值      |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------- |
-| v-model:show           | 是否展示图片预览                                                                                                | _boolean_                                           | `false`     |
-| images                 | 需要预览的图片 URL 数组                                                                                         | _string[]_                                          | `[]`        |
-| start-position         | 图片预览起始位置索引                                                                                            | _number \| string_                                  | `0`         |
-| swipe-duration         | 动画时长，单位为 ms                                                                                             | _number \| string_                                  | `300`       |
-| show-index             | 是否显示页码                                                                                                    | _boolean_                                           | `true`      |
-| show-indicators        | 是否显示轮播指示器                                                                                              | _boolean_                                           | `false`     |
-| loop                   | 是否开启循环播放                                                                                                | _boolean_                                           | `true`      |
-| before-close           | 关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise                                                     | _(active: number) => boolean \| Promise\<boolean\>_ | -           |
-| close-on-popstate      | 是否在页面回退时自动关闭                                                                                        | _boolean_                                           | `true`      |
-| class-name             | 自定义类名                                                                                                      | _string \| Array \| object_                         | -           |
-| max-zoom               | 手势缩放时，最大缩放比例                                                                                        | _number \| string_                                  | `3`         |
-| min-zoom               | 手势缩放时，最小缩放比例                                                                                        | _number \| string_                                  | `1/3`       |
-| closeable              | 是否显示关闭图标                                                                                                | _boolean_                                           | `false`     |
-| close-icon             | 关闭图标名称或图片链接                                                                                          | _string_                                            | `clear`     |
-| close-icon-position    | 关闭图标位置，可选值为 `top-left`<br>`bottom-left` `bottom-right`                                               | _string_                                            | `top-right` |
-| transition `v3.0.8`    | 动画类名，等价于 [transition](https://v3.cn.vuejs.org/api/built-in-components.html#transition) 的 `name` 属性   | _string_                                            | `van-fade`  |
-| overlay-class `v3.2.8` | 自定义遮罩层类名                                                                                                | _string \| Array \| object_                         | -           |
-| overlay-style `v3.0.8` | 自定义遮罩层样式                                                                                                | _object_                                            | -           |
-| teleport               | 指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport) | _string \| Element_                                 | -           |
+| 参数                | 说明                                                                                                            | 类型                                                | 默认值      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------- |
+| v-model:show        | 是否展示图片预览                                                                                                | _boolean_                                           | `false`     |
+| images              | 需要预览的图片 URL 数组                                                                                         | _string[]_                                          | `[]`        |
+| start-position      | 图片预览起始位置索引                                                                                            | _number \| string_                                  | `0`         |
+| swipe-duration      | 动画时长，单位为 ms                                                                                             | _number \| string_                                  | `300`       |
+| show-index          | 是否显示页码                                                                                                    | _boolean_                                           | `true`      |
+| show-indicators     | 是否显示轮播指示器                                                                                              | _boolean_                                           | `false`     |
+| loop                | 是否开启循环播放                                                                                                | _boolean_                                           | `true`      |
+| before-close        | 关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise                                                     | _(active: number) => boolean \| Promise\<boolean\>_ | -           |
+| close-on-popstate   | 是否在页面回退时自动关闭                                                                                        | _boolean_                                           | `true`      |
+| class-name          | 自定义类名                                                                                                      | _string \| Array \| object_                         | -           |
+| max-zoom            | 手势缩放时，最大缩放比例                                                                                        | _number \| string_                                  | `3`         |
+| min-zoom            | 手势缩放时，最小缩放比例                                                                                        | _number \| string_                                  | `1/3`       |
+| closeable           | 是否显示关闭图标                                                                                                | _boolean_                                           | `false`     |
+| close-icon          | 关闭图标名称或图片链接                                                                                          | _string_                                            | `clear`     |
+| close-icon-position | 关闭图标位置，可选值为 `top-left`<br>`bottom-left` `bottom-right`                                               | _string_                                            | `top-right` |
+| transition          | 动画类名，等价于 [transition](https://v3.cn.vuejs.org/api/built-in-components.html#transition) 的 `name` 属性   | _string_                                            | `van-fade`  |
+| overlay-class       | 自定义遮罩层类名                                                                                                | _string \| Array \| object_                         | -           |
+| overlay-style       | 自定义遮罩层样式                                                                                                | _object_                                            | -           |
+| teleport            | 指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport) | _string \| Element_                                 | -           |
 
 ### Events
 
@@ -247,14 +247,14 @@ import type {
   ImagePreviewOptions,
   ImagePreviewInstance,
   ImagePreviewScaleEventParams,
-} from 'vant';
+} from 'cupshe-element';
 ```
 
 `ImagePreviewInstance` 是组件实例的类型，用法如下：
 
 ```ts
 import { ref } from 'vue';
-import type { ImagePreviewInstance } from 'vant';
+import type { ImagePreviewInstance } from 'cupshe-element';
 
 const imagePreviewRef = ref<ImagePreviewInstance>();
 

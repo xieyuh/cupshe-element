@@ -1,21 +1,15 @@
 import { HTMLAttributes, InputHTMLAttributes } from 'vue';
-import {
-  trigger,
-  getRootScrollTop,
-  isObject,
-  setRootScrollTop,
-} from '../utils';
+import { getRootScrollTop, isObject, setRootScrollTop } from '../utils';
 import { AutoSizeConfig, InputType } from './shared';
 
 export function startComposing(event: Event) {
   (event.target as any).composing = true;
 }
 
-export function endComposing(event: Event) {
-  const { target } = event;
-  if ((target as any).composing) {
-    (target as any).composing = false;
-    trigger(target as Element, 'input');
+export function endComposing({ target }: Event) {
+  if (target!.composing) {
+    target!.composing = false;
+    target!.dispatchEvent(new Event('input'));
   }
 }
 

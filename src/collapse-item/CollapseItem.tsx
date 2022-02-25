@@ -1,52 +1,8 @@
-<template>
-  <div :class="bem({ border: index && border })" :style="style">
-    <div
-      role="button"
-      :class="[
-        bem('title', [
-          size,
-          theme,
-          { disabled, expanded, borderless: !border },
-        ]),
-        titleClass,
-      ]"
-      :aria-expanded="String(expanded)"
-      @click="onClickTitle"
-    >
-      <div :class="bem('title-content')">
-        <slot name="title">
-          {{ title }}
-        </slot>
-      </div>
-      <slot name="icon" v-bind="{ expanded }">
-        <c-icon :class="bem('right-icon')" :name="rightIcon" />
-      </slot>
-    </div>
-    <div
-      v-show="show"
-      ref="wrapperRef"
-      :class="bem('wrapper', [theme])"
-      @transitionend="onTransitionEnd"
-    >
-      <div :class="bem('content')" ref="contentRef">
-        <slot />
-      </div>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-import {
-  defineComponent,
-  computed,
-  CSSProperties,
-  nextTick,
-  ref,
-  watch,
-} from 'vue';
+import { defineComponent, computed, nextTick, ref, watch } from 'vue';
 import { addUnit, createNamespace, unknownProp } from '../utils';
 import { useParent, raf, doubleRaf, useExpose } from '../composables';
-import { COLLAPSE_KEY } from '../collapse/index.vue';
+import { Icon } from '../icon';
+import { COLLAPSE_KEY } from '../collapse';
 
 const [name, bem] = createNamespace('collapse-item');
 
@@ -61,7 +17,7 @@ export default defineComponent({
     disabled: Boolean,
   },
 
-  setup(props) {
+  setup(props, { slots }) {
     const wrapperRef = ref<HTMLElement>();
     const contentRef = ref<HTMLElement>();
     const { parent, index } = useParent(COLLAPSE_KEY);
@@ -72,7 +28,7 @@ export default defineComponent({
 
     const show = ref(expanded.value);
 
-    const style = computed<CSSProperties>(() => {
+    const style = computed(() => {
       if (index.value === 0) {
         return;
       }
@@ -141,21 +97,44 @@ export default defineComponent({
 
     useExpose({ toggle });
 
-    return {
-      bem,
-      wrapperRef,
-      contentRef,
-      show,
-      onClickTitle,
-      onTransitionEnd,
-      expanded,
-      rightIcon,
-      size,
-      theme,
-      border,
-      index,
-      style,
-    };
+    return () => (
+      <div class={bem({ border: index && border })} style={style.value}>
+        <div
+          class={[
+            bem('title', [
+              size,
+              theme,
+              {
+                disabled: props.disabled,
+                expanded: expanded.value,
+                borderless: !border,
+              },
+            ]),
+            props.titleClass,
+          ]}
+          aria-expanded={expanded.value}
+          onClick={onClickTitle}
+        >
+          <div class={bem('title-content')}>
+            {slots.title ? slots.title() : props.title}
+          </div>
+          {slots.icon ? (
+            slots.icon({ expanded })
+          ) : (
+            <Icon class={bem('right-icon')} name={rightIcon.value} />
+          )}
+        </div>
+        <div
+          v-show={show.value}
+          ref={wrapperRef}
+          class={bem('wrapper', [theme])}
+          onTransitionend={onTransitionEnd}
+        >
+          <div class={bem('content')} ref={contentRef}>
+            {slots.default?.()}
+          </div>
+        </div>
+      </div>
+    );
   },
 });
-</script>

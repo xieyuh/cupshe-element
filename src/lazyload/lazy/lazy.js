@@ -1,20 +1,17 @@
 import { nextTick } from 'vue';
 import {
-  inBrowser,
-  CustomEvent,
   remove,
-  find,
-  _,
+  on,
+  off,
   throttle,
   supportWebp,
   getDPR,
-  scrollParent,
   getBestSelectionFromSrcset,
-  isObject,
   hasIntersectionObserver,
   modeType,
   ImageCache,
 } from './util';
+import { isObject, inBrowser, getScrollParent } from '../../utils';
 import ReactiveListener from './listener';
 
 const DEFAULT_URL =
@@ -52,9 +49,9 @@ export default function () {
       observerOptions,
     }) {
       this.mode = modeType.event;
-      this.ListenerQueue = [];
-      this.TargetIndex = 0;
-      this.TargetQueue = [];
+      this.listeners = [];
+      this.targetIndex = 0;
+      this.targets = [];
       this.options = {
         silent,
         dispatchEvent: !!dispatchEvent,
@@ -66,17 +63,16 @@ export default function () {
         attempt: attempt || 3,
         scale: scale || getDPR(scale),
         ListenEvents: listenEvents || DEFAULT_EVENTS,
-        hasbind: false,
         supportWebp: supportWebp(),
         filter: filter || {},
         adapter: adapter || {},
         observer: !!observer,
         observerOptions: observerOptions || DEFAULT_OBSERVER_OPTIONS,
       };
-      this._initEvent();
-      this._imageCache = new ImageCache({ max: 200 });
+      this.initEvent();
+      this.imageCache = new ImageCache({ max: 200 });
       this.lazyLoadHandler = throttle(
-        this._lazyLoadHandler.bind(this),
+        this.lazyLoadHandler.bind(this),
         this.options.throttleWait
       );
 
@@ -97,7 +93,7 @@ export default function () {
      * @return {Array}
      */
     performance() {
-      return this.ListenerQueue.map((item) => item.performance());
+      return this.listeners.map((item) => item.performance());
     }
 
     /*
@@ -106,12 +102,12 @@ export default function () {
      * @return
      */
     addLazyBox(vm) {
-      this.ListenerQueue.push(vm);
+      this.listeners.push(vm);
       if (inBrowser) {
-        this._addListenerTarget(window);
-        this._observer && this._observer.observe(vm.el);
+        this.addListenerTarget(window);
+        this.observer && this.observer.observe(vm.el);
         if (vm.$el && vm.$el.parentNode) {
-          this._addListenerTarget(vm.$el.parentNode);
+          this.addListenerTarget(vm.$el.parentNode);
         }
       }
     }
@@ -124,17 +120,17 @@ export default function () {
      * @return
      */
     add(el, binding, vnode) {
-      if (this.ListenerQueue.some((item) => item.el === el)) {
+      if (this.listeners.some((item) => item.el === el)) {
         this.update(el, binding);
         return nextTick(this.lazyLoadHandler);
       }
 
-      const value = this._valueFormatter(binding.value);
+      const value = this.valueFormatter(binding.value);
       let { src } = value;
 
       nextTick(() => {
         src = getBestSelectionFromSrcset(el, this.options.scale) || src;
-        this._observer && this._observer.observe(el);
+        this.observer && this.observer.observe(el);
 
         const container = Object.keys(binding.modifiers)[0];
         let $parent;
@@ -148,7 +144,7 @@ export default function () {
         }
 
         if (!$parent) {
-          $parent = scrollParent(el);
+          $parent = getScrollParent(el);
         }
 
         const newListener = new ReactiveListener({
@@ -159,16 +155,16 @@ export default function () {
           loading: value.loading,
           error: value.error,
           cors: value.cors,
-          elRenderer: this._elRenderer.bind(this),
+          elRenderer: this.elRenderer.bind(this),
           options: this.options,
-          imageCache: this._imageCache,
+          imageCache: this.imageCache,
         });
 
-        this.ListenerQueue.push(newListener);
+        this.listeners.push(newListener);
 
         if (inBrowser) {
-          this._addListenerTarget(window);
-          this._addListenerTarget($parent);
+          this.addListenerTarget(window);
+          this.addListenerTarget($parent);
         }
 
         this.lazyLoadHandler();
@@ -183,11 +179,11 @@ export default function () {
      * @return
      */
     update(el, binding, vnode) {
-      const value = this._valueFormatter(binding.value);
+      const value = this.valueFormatter(binding.value);
       let { src } = value;
       src = getBestSelectionFromSrcset(el, this.options.scale) || src;
 
-      const exist = find(this.ListenerQueue, (item) => item.el === el);
+      const exist = this.listeners.find((item) => item.el === el);
       if (!exist) {
         this.add(el, binding, vnode);
       } else {
@@ -197,9 +193,9 @@ export default function () {
           loading: value.loading,
         });
       }
-      if (this._observer) {
-        this._observer.unobserve(el);
-        this._observer.observe(el);
+      if (this.observer) {
+        this.observer.unobserve(el);
+        this.observer.observe(el);
       }
       this.lazyLoadHandler();
       nextTick(() => this.lazyLoadHandler());
@@ -212,12 +208,12 @@ export default function () {
      */
     remove(el) {
       if (!el) return;
-      this._observer && this._observer.unobserve(el);
-      const existItem = find(this.ListenerQueue, (item) => item.el === el);
+      this.observer && this.observer.unobserve(el);
+      const existItem = this.listeners.find((item) => item.el === el);
       if (existItem) {
-        this._removeListenerTarget(existItem.$parent);
-        this._removeListenerTarget(window);
-        remove(this.ListenerQueue, existItem);
+        this.removeListenerTarget(existItem.$parent);
+        this.removeListenerTarget(window);
+        remove(this.listeners, existItem);
         existItem.$destroy();
       }
     }
@@ -229,12 +225,12 @@ export default function () {
      */
     removeComponent(vm) {
       if (!vm) return;
-      remove(this.ListenerQueue, vm);
-      this._observer && this._observer.unobserve(vm.el);
+      remove(this.listeners, vm);
+      this.observer && this.observer.unobserve(vm.el);
       if (vm.$parent && vm.$el.parentNode) {
-        this._removeListenerTarget(vm.$el.parentNode);
+        this.removeListenerTarget(vm.$el.parentNode);
       }
-      this._removeListenerTarget(window);
+      this.removeListenerTarget(window);
     }
 
     setMode(mode) {
@@ -245,21 +241,21 @@ export default function () {
       this.mode = mode; // event or observer
 
       if (mode === modeType.event) {
-        if (this._observer) {
-          this.ListenerQueue.forEach((listener) => {
-            this._observer.unobserve(listener.el);
+        if (this.observer) {
+          this.listeners.forEach((listener) => {
+            this.observer.unobserve(listener.el);
           });
-          this._observer = null;
+          this.observer = null;
         }
 
-        this.TargetQueue.forEach((target) => {
-          this._initListen(target.el, true);
+        this.targets.forEach((target) => {
+          this.initListen(target.el, true);
         });
       } else {
-        this.TargetQueue.forEach((target) => {
-          this._initListen(target.el, false);
+        this.targets.forEach((target) => {
+          this.initListen(target.el, false);
         });
-        this._initIntersectionObserver();
+        this.initIntersectionObserver();
       }
     }
 
@@ -272,22 +268,22 @@ export default function () {
      * @param  {DOM} el listener target
      * @return
      */
-    _addListenerTarget(el) {
+    addListenerTarget(el) {
       if (!el) return;
-      let target = find(this.TargetQueue, (target) => target.el === el);
+      let target = this.targets.find((target) => target.el === el);
       if (!target) {
         target = {
           el,
-          id: ++this.TargetIndex,
+          id: ++this.targetIndex,
           childrenCount: 1,
           listened: true,
         };
-        this.mode === modeType.event && this._initListen(target.el, true);
-        this.TargetQueue.push(target);
+        this.mode === modeType.event && this.initListen(target.el, true);
+        this.targets.push(target);
       } else {
         target.childrenCount++;
       }
-      return this.TargetIndex;
+      return this.targetIndex;
     }
 
     /*
@@ -295,13 +291,13 @@ export default function () {
      * @param  {DOM} el or window
      * @return
      */
-    _removeListenerTarget(el) {
-      this.TargetQueue.forEach((target, index) => {
+    removeListenerTarget(el) {
+      this.targets.forEach((target, index) => {
         if (target.el === el) {
           target.childrenCount--;
           if (!target.childrenCount) {
-            this._initListen(target.el, false);
-            this.TargetQueue.splice(index, 1);
+            this.initListen(target.el, false);
+            this.targets.splice(index, 1);
             target = null;
           }
         }
@@ -314,13 +310,13 @@ export default function () {
      * @param  {boolean} start flag
      * @return
      */
-    _initListen(el, start) {
+    initListen(el, start) {
       this.options.ListenEvents.forEach((evt) =>
-        _[start ? 'on' : 'off'](el, evt, this.lazyLoadHandler)
+        (start ? on : off)(el, evt, this.lazyLoadHandler)
       );
     }
 
-    _initEvent() {
+    initEvent() {
       this.Event = {
         listeners: {
           loading: [],
@@ -361,9 +357,9 @@ export default function () {
      * find nodes which in viewport and trigger load
      * @return
      */
-    _lazyLoadHandler() {
+    lazyLoadHandler() {
       const freeList = [];
-      this.ListenerQueue.forEach((listener) => {
+      this.listeners.forEach((listener) => {
         if (!listener.el || !listener.el.parentNode) {
           freeList.push(listener);
         }
@@ -372,7 +368,7 @@ export default function () {
         listener.load();
       });
       freeList.forEach((item) => {
-        remove(this.ListenerQueue, item);
+        remove(this.listeners, item);
         item.$destroy();
       });
     }
@@ -382,19 +378,19 @@ export default function () {
      * set mode to observer
      * @return
      */
-    _initIntersectionObserver() {
+    initIntersectionObserver() {
       if (!hasIntersectionObserver) {
         return;
       }
 
-      this._observer = new IntersectionObserver(
-        this._observerHandler.bind(this),
+      this.observer = new IntersectionObserver(
+        this.observerHandler.bind(this),
         this.options.observerOptions
       );
 
-      if (this.ListenerQueue.length) {
-        this.ListenerQueue.forEach((listener) => {
-          this._observer.observe(listener.el);
+      if (this.listeners.length) {
+        this.listeners.forEach((listener) => {
+          this.observer.observe(listener.el);
         });
       }
     }
@@ -403,13 +399,13 @@ export default function () {
      * init IntersectionObserver
      * @return
      */
-    _observerHandler(entries) {
+    observerHandler(entries) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          this.ListenerQueue.forEach((listener) => {
+          this.listeners.forEach((listener) => {
             if (listener.el === entry.target) {
               if (listener.state.loaded)
-                return this._observer.unobserve(listener.el);
+                return this.observer.unobserve(listener.el);
               listener.load();
             }
           });
@@ -424,7 +420,7 @@ export default function () {
      * @param  {bool} inCache  is rendered from cache
      * @return
      */
-    _elRenderer(listener, state, cache) {
+    elRenderer(listener, state, cache) {
       if (!listener.el) return;
       const { el, bindType } = listener;
 
@@ -466,14 +462,12 @@ export default function () {
      * @param {string} image's src
      * @return {object} image's loading, loaded, error url
      */
-    _valueFormatter(value) {
+    valueFormatter(value) {
       let src = value;
       let { loading, error } = this.options;
 
       // value is object
       if (isObject(value)) {
-        if (!value.src && !this.options.silent)
-          console.error('Vue Lazyload warning: miss src with ' + value);
         ({ src } = value);
         loading = value.loading || this.options.loading;
         error = value.error || this.options.error;

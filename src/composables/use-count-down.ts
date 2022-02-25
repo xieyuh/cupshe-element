@@ -106,8 +106,6 @@ export function useCountDown(options: UseCountDownOptions) {
   };
 
   const tick = () => {
-    // should not start counting in server
-    // see: https://github.com/youzan/vant/issues/7807
     if (!inBrowser) {
       return;
     }

@@ -2,29 +2,25 @@ import {
   ref,
   watch,
   provide,
-  Teleport,
   computed,
-  PropType,
   onMounted,
-  Transition,
   onActivated,
-  CSSProperties,
   onDeactivated,
   defineComponent,
+  Teleport,
+  PropType,
+  Transition,
+  CSSProperties,
 } from 'vue';
-
-// Utils
 import { popupSharedProps } from './shared';
 import { createNamespace, extend, isDef, callInterceptor } from '../utils';
-
-// Composables
-import { useEventListener } from '../composables';
-import { useExpose } from '../composables/use-expose';
-import { useLockScroll } from '../composables/use-lock-scroll';
-import { useLazyRender } from '../composables/use-lazy-render';
-import { POPUP_TOGGLE_KEY } from '../composables/on-popup-reopen';
-
-// Components
+import {
+  useEventListener,
+  useExpose,
+  useLockScroll,
+  useLazyRender,
+  POPUP_TOGGLE_KEY,
+} from '../composables';
 import { Icon } from '../icon';
 import { Overlay } from '../overlay';
 

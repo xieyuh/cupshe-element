@@ -1,4 +1,4 @@
-import { defineComponent, reactive, computed, CSSProperties, watch } from 'vue';
+import { defineComponent, reactive, computed, watch, CSSProperties } from 'vue';
 import {
   createNamespace,
   makeRequiredProp,
@@ -6,7 +6,7 @@ import {
   clamp,
   preventDefault,
 } from '../utils';
-import { useTouch } from '../composables/use-touch';
+import { useTouch } from '../composables';
 import { Image } from '../image';
 import { SwipeItem } from '../swipe-item';
 

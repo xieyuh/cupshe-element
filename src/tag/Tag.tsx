@@ -51,7 +51,7 @@ export default defineComponent({
       const classes = [bem({ checkable, checked })];
 
       if (checked) {
-        classes.push(checkedClass);
+        classes.push(checkedClass!);
       }
 
       return (

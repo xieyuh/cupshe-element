@@ -84,14 +84,13 @@ export default {
   setup() {
     const value = ref(1);
 
-    const beforeChange = (value) => {
-      return new Promise((resolve) => {
+    const beforeChange = (value) =>
+      new Promise((resolve) => {
         setTimeout(() => {
           // 在 resolve 函数中返回 true 或 false
           resolve(true);
         }, 500);
       });
-    };
 
     return {
       value,
