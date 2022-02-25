@@ -82,7 +82,7 @@ export function useChildren<
       internalChildren.splice(index, 1);
     };
 
-    provide(key, {
+    provide<any>(key, {
       link,
       unlink,
       children: publicChildren,
