@@ -11,7 +11,8 @@ import {
   modeType,
   ImageCache,
 } from './util';
-import { isObject, inBrowser, getScrollParent } from '../../utils';
+import { isObject, inBrowser } from '../../utils';
+import { getScrollParent } from '../../composables';
 import ReactiveListener from './listener';
 
 const DEFAULT_URL =

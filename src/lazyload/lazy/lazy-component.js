@@ -1,5 +1,6 @@
 import { h } from 'vue';
-import { inBrowser, useRect } from '../../utils';
+import { inBrowser } from '../../utils';
+import { useRect } from '../../composables';
 
 export default (lazy) => ({
   props: {
