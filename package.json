@@ -1,6 +1,6 @@
 {
   "name": "cupshe-element",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "description": "卡佩希 Vue 组件库",
   "main": "lib/cupshe-element.js",
   "typings": "lib/index.d.ts",
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@vant/cli": "^3.9.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "@cupshe/fonts": "^0.1.0",
     "vue": "^3.0.0"
   },
   "eslintConfig": {
@@ -49,7 +50,6 @@
     "iOS >= 10"
   ],
   "dependencies": {
-    "@cupshe/fonts": "^0.1.0",
     "@popperjs/core": "^2.9.2"
   }
 }
