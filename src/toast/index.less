@@ -1,5 +1,4 @@
 @import '../style/font.less';
-@import './var.less';
 
 .c-toast {
   display: flex;
@@ -7,13 +6,13 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  transition: all @animation-duration-fast;
+  transition: all 0.2s;
   min-width: 120px;
   padding: 16px;
   color: #fff;
   white-space: pre-wrap;
   text-align: center;
-  background-color: @toast-background-color;
+  background-color: rgba(0, 0, 0, 0.7);
 
   @media (min-width: 769px) {
     max-width: 260px;
@@ -45,12 +44,12 @@
   }
 
   &--top {
-    top: @toast-position-top-distance;
+    top: 20%;
   }
 
   &--bottom {
     top: auto;
-    bottom: @toast-position-bottom-distance;
+    bottom: 20%;
   }
 
   &__icon {

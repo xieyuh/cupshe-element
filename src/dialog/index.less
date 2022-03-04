@@ -1,5 +1,4 @@
 @import '../style/font.less';
-@import './var.less';
 
 .c-dialog {
   top: 45%;
@@ -7,7 +6,7 @@
   overflow: hidden;
   background-color: #fff;
   backface-visibility: hidden;
-  transition: @dialog-transition;
+  transition: 0.3s;
   transition-property: transform, opacity;
 
   @media (max-width: 768px) {
@@ -20,10 +19,21 @@
     min-width: 440px;
   }
 
-  &__header {
-    padding-top: 40px;
-    letter-spacing: 1px;
+  &__content {
+    color: #333;
     text-align: center;
+
+    @media (min-width: 769px) {
+      padding: 40px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 40px 24px 32px;
+    }
+  }
+
+  &__title {
+    letter-spacing: 1px;
     .muli-bold;
 
     @media (min-width: 769px) {
@@ -35,55 +45,29 @@
       font-size: 14px;
       line-height: 18px;
     }
-
-    &--isolated {
-      padding: @dialog-header-isolated-padding;
-    }
-  }
-
-  &__content {
-    &--isolated {
-      display: flex;
-      align-items: center;
-    }
   }
 
   &__message {
     flex: 1;
-    max-height: @dialog-message-max-height;
+    max-height: 60vh;
     overflow-y: auto;
+    font-size: 14px;
     line-height: 21px;
-    color: #333;
     white-space: pre-wrap;
-    text-align: center;
     word-wrap: break-word;
     -webkit-overflow-scrolling: touch;
+    .muli-semibold;
 
     &--has-title {
-      line-height: 18px;
       .muli-light;
-    }
 
-    @media (min-width: 769px) {
-      padding: 40px;
-      font-size: 14px;
-      .muli-bold;
-
-      &--has-title {
-        padding-top: 20px;
-        .muli-light;
-      }
-    }
-
-    @media (max-width: 768px) {
-      padding: 40px 24px 24px;
-      font-size: 14px;
-      .muli-semibold;
-
-      &--has-title {
-        padding-top: 16px;
+      @media (max-width: 768px) {
         font-size: 12px;
-        .muli-light;
+        margin-top: 16px;
+      }
+
+      @media (min-width: 769px) {
+        margin-top: 20px;
       }
     }
   }
@@ -94,11 +78,11 @@
     user-select: none;
 
     @media (max-width: 768px) {
-      padding: 0 24px 32px;
+      margin-top: 24px;
     }
 
     @media (min-width: 769px) {
-      padding: 0 34px 40px;
+      margin-top: 32px;
     }
   }
 

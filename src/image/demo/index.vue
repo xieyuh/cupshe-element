@@ -32,14 +32,12 @@ const fits = ['contain', 'cover', 'fill', 'none', 'scale-down'];
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-image {
   overflow-x: hidden;
-  background-color: @white;
+  background-color: #fff;
 
   .c-row {
-    padding: 0 @padding-md;
+    padding: 0 16px;
   }
 
   .c-col {
@@ -48,7 +46,7 @@ const fits = ['contain', 'cover', 'fill', 'none', 'scale-down'];
 
   .text {
     margin-top: 5px;
-    color: @gray-7;
+    color: #646566;
     font-size: 14px;
     text-align: center;
   }

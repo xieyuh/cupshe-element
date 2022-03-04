@@ -8,13 +8,14 @@
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@cupshe/fonts';
 </script>
 
 <style lang="less">
 .demo-loading {
   background: #fff;
+  color: #333;
 
   .c-loading {
     display: inline-block;

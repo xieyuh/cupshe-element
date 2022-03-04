@@ -35,111 +35,62 @@
   </demo-block>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue';
 import '@cupshe/fonts';
 import { UploaderFileListItem } from '../types';
 
-export default {
-  setup() {
-    const fileList = ref([
-      { url: 'https://img.yzcdn.cn/vant/leaf.jpg' },
-      { url: 'https://img.yzcdn.cn/vant/tree.jpg' },
-    ]);
+const fileList2 = ref([{ url: 'https://img.yzcdn.cn/vant/sand.jpg' }]);
 
-    const fileList2 = ref([{ url: 'https://img.yzcdn.cn/vant/sand.jpg' }]);
+const fileList3 = ref([]);
 
-    const fileList3 = ref([]);
+const fileList4 = ref([{ url: 'https://img.yzcdn.cn/vant/sand.jpg' }]);
 
-    const fileList4 = ref([{ url: 'https://img.yzcdn.cn/vant/sand.jpg' }]);
-
-    const fileList5 = ref([
-      { url: 'https://img.yzcdn.cn/vant/leaf.jpg' },
-      {
-        url: 'https://img.yzcdn.cn/vant/sand.jpg',
-        deletable: true,
-        beforeDelete: () => {},
-      },
-      {
-        url: 'https://img.yzcdn.cn/vant/tree.jpg',
-        deletable: true,
-        imageFit: 'contain',
-        previewSize: 120,
-      },
-    ]);
-
-    const statusFileList = [
-      {
-        url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-        status: 'uploading',
-        message: 'Uploading…',
-      },
-      {
-        url: 'https://img.yzcdn.cn/vant/tree.jpg',
-        status: 'failed',
-        message: 'Upload failed',
-      },
-    ];
-
-    const previewCoverFiles = ref([
-      {
-        url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-        file: {
-          name: '图片名称',
-        },
-      },
-    ]);
-
-    const beforeRead = (file: File) => {
-      if (file.type !== 'image/jpeg') {
-        return false;
-      }
-      return true;
-    };
-
-    const afterRead = (file: UploaderFileListItem, detail: unknown) => {
-      console.log(file, detail);
-    };
-
-    const afterReadFailed = (item: UploaderFileListItem) => {
-      item.status = 'uploading';
-      item.message = '上传中...';
-
-      setTimeout(() => {
-        item.status = 'failed';
-        item.message = '上传失败';
-      }, 1000);
-    };
-
-    const onOversize = (file: UploaderFileListItem, detail: unknown) => {
-      console.log(file, detail);
-    };
-
-    return {
-      fileList,
-      fileList2,
-      fileList3,
-      fileList4,
-      fileList5,
-      statusFileList,
-      previewCoverFiles,
-      beforeRead,
-      afterRead,
-      afterReadFailed,
-      onOversize,
-    };
+const statusFileList = [
+  {
+    url: 'https://img.yzcdn.cn/vant/leaf.jpg',
+    status: 'uploading',
+    message: 'Uploading…',
   },
+  {
+    url: 'https://img.yzcdn.cn/vant/tree.jpg',
+    status: 'failed',
+    message: 'Upload failed',
+  },
+];
+
+const beforeRead = (file: File) => {
+  if (file.type !== 'image/jpeg') {
+    return false;
+  }
+  return true;
+};
+
+const afterRead = (file: UploaderFileListItem, detail: unknown) => {
+  console.log(file, detail);
+};
+
+const afterReadFailed = (item: UploaderFileListItem) => {
+  item.status = 'uploading';
+  item.message = '上传中...';
+
+  setTimeout(() => {
+    item.status = 'failed';
+    item.message = '上传失败';
+  }, 1000);
+};
+
+const onOversize = (file: UploaderFileListItem, detail: unknown) => {
+  console.log(file, detail);
 };
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-uploader {
-  background-color: @white;
+  background-color: #fff;
 
   .c-uploader {
-    margin-left: @padding-md;
+    margin-left: 16px;
   }
 
   .preview-cover {

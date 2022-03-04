@@ -98,10 +98,8 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-checkbox {
-  background: @white;
+  background: #fff;
 
   .c-checkbox {
     margin-left: 20px;
@@ -118,10 +116,10 @@ export default {
   }
 
   &-buttons {
-    margin-top: @padding-md;
+    margin-top: 16px;
 
     .c-button {
-      margin-left: @padding-md;
+      margin-left: 16px;
     }
   }
 

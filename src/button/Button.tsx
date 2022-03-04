@@ -1,12 +1,18 @@
 import { defineComponent, ButtonHTMLAttributes, CSSProperties } from 'vue';
 import { routeProps, useRoute } from '../composables';
-import { createNamespace, extend, makeStringProp } from '../utils';
+import {
+  createNamespace,
+  extend,
+  makeStringProp,
+  preventDefault,
+} from '../utils';
 
 import { Icon } from '../icon';
+import { Loading } from '../loading';
 
 const [name, bem] = createNamespace('button');
 
-export type ButtonType = 'info' | 'primary' | 'default' | 'success' | 'warning';
+export type ButtonType = 'primary' | 'default';
 
 export type ButtonSize = 'large' | 'normal' | 'small';
 
@@ -20,6 +26,7 @@ export default defineComponent({
     block: Boolean,
     ghost: Boolean,
     disabled: Boolean,
+    loading: Boolean,
     cover: Boolean,
     tag: makeStringProp<keyof HTMLElementTagNameMap>('button'),
     type: makeStringProp<ButtonType>('default'),
@@ -34,7 +41,13 @@ export default defineComponent({
   setup(props, { emit, slots }) {
     const route = useRoute();
 
+    const renderLoadingIcon = () => <Loading class={bem('loading')} />;
+
     const renderIcon = () => {
+      if (props.loading) {
+        return renderLoadingIcon();
+      }
+
       if (slots.icon) {
         return <div class={bem('icon')}>{slots.icon()}</div>;
       }
@@ -69,6 +82,10 @@ export default defineComponent({
     const textStyle = () => ({ color: props.textColor });
 
     const renderText = () => {
+      if (props.loading) {
+        return;
+      }
+
       if (slots.default) {
         return (
           <span class={bem('text')} style={textStyle()}>
@@ -79,6 +96,10 @@ export default defineComponent({
     };
 
     const onClick = (event: MouseEvent) => {
+      if (props.loading) {
+        preventDefault(event);
+      }
+
       if (!props.disabled) {
         emit('click', event);
         route();
@@ -91,6 +112,7 @@ export default defineComponent({
         type,
         size,
         ghost,
+        loading,
         block,
         cover,
         disabled,
@@ -101,7 +123,7 @@ export default defineComponent({
         bem([
           type,
           size,
-          { ghost, block, cover: cover && !disabled, disabled },
+          { ghost, block, cover: cover && !disabled, disabled, loading },
         ]),
       ];
 

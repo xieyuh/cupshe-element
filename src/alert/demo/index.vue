@@ -37,7 +37,7 @@
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@cupshe/fonts';
 </script>
 

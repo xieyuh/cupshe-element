@@ -67,12 +67,7 @@ const onClickBeforeClose = () => {
 
   <demo-block card title="组件调用">
     <c-cell is-link title="组件调用" @click="show = true" />
-    <c-dialog
-      v-model:show="show"
-      title="TITLE"
-      show-cancel-button
-      :lazy-render="false"
-    >
+    <c-dialog v-model:show="show" show-cancel-button :lazy-render="false">
       <img :src="image" />
     </c-dialog>
   </demo-block>

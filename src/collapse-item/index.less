@@ -1,4 +1,3 @@
-@import './var.less';
 @import '../style/mixins/hairline';
 @import '../style/font.less';
 
@@ -7,7 +6,7 @@
 
   &--border {
     &::after {
-      .hairline-top(@border-color, @padding-md, @padding-md);
+      .hairline-top(#ebedf0, 16px, 16px);
     }
   }
 
@@ -19,7 +18,7 @@
     .c-collapse-item__right-icon::before {
       color: #999;
       transform: rotate(0);
-      transition: all @collapse-item-transition-duration;
+      transition: all 0.3s;
     }
 
     &--light {
@@ -39,7 +38,7 @@
     }
 
     &::after {
-      right: @padding-md;
+      right: 16px;
       display: none;
     }
 
@@ -65,7 +64,7 @@
 
       &,
       & .c-collapse-item__right-icon {
-        color: @collapse-item-title-disabled-color;
+        color: #c8c9cc;
       }
     }
   }
@@ -80,7 +79,7 @@
 
   &__wrapper {
     overflow: hidden;
-    transition: height @collapse-item-transition-duration ease-in-out;
+    transition: height 0.3s ease-in-out;
     will-change: height;
 
     &--light {

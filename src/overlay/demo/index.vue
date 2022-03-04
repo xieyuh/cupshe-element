@@ -1,19 +1,22 @@
 <template>
   <demo-block title="基础用法">
-    <c-button type="primary" style="margin-left: 16px" @click="show = true"
+    <c-button
+      type="primary"
+      style="margin-left: 16px"
+      @click="state.show = true"
       >显示遮罩层</c-button
     >
-    <c-overlay :show="show" @click="show = false" />
+    <c-overlay :show="state.show" @click="state.show = false" />
   </demo-block>
 
   <demo-block title="嵌入内容">
     <c-button
       type="primary"
       style="margin-left: 16px"
-      @click="showEmbedded = true"
+      @click="state.showEmbedded = true"
       >嵌入内容</c-button
     >
-    <c-overlay :show="showEmbedded" @click="showEmbedded = false">
+    <c-overlay :show="state.showEmbedded" @click="state.showEmbedded = false">
       <div class="wrapper">
         <div class="block" />
       </div>
@@ -21,29 +24,19 @@
   </demo-block>
 </template>
 
-<script lang="ts">
-import { reactive, toRefs } from 'vue';
+<script lang="ts" setup>
+import { reactive } from 'vue';
 import '@cupshe/fonts';
 
-export default {
-  setup() {
-    const state = reactive({
-      show: false,
-      showEmbedded: false,
-    });
-
-    return {
-      ...toRefs(state),
-    };
-  },
-};
+const state = reactive({
+  show: false,
+  showEmbedded: false,
+});
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-overlay {
-  background: @white;
+  background: #fff;
 
   .wrapper {
     display: flex;
@@ -55,7 +48,7 @@ export default {
   .block {
     width: 120px;
     height: 120px;
-    background-color: @white;
+    background-color: #fff;
     border-radius: 4px;
   }
 }

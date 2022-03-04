@@ -24,7 +24,7 @@
     </c-row>
   </demo-block>
 
-  <demo-block v-if="!isWeapp" title="对齐方式">
+  <demo-block title="对齐方式">
     <c-row justify="center">
       <c-col span="6">span: 6</c-col>
       <c-col span="6">span: 6</c-col>
@@ -51,18 +51,16 @@
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@cupshe/fonts';
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-col {
-  background: @white;
+  background: #fff;
 
   .van-doc-demo-block {
-    padding: 0 @padding-md;
+    padding: 0 16px;
   }
 
   .van-doc-demo-block__title {
@@ -71,7 +69,7 @@ import '@cupshe/fonts';
 
   .c-col {
     margin-bottom: 10px;
-    color: @white;
+    color: #fff;
     font-size: 13px;
     line-height: 30px;
     text-align: center;

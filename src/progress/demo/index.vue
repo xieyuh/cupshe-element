@@ -28,15 +28,13 @@
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@cupshe/fonts';
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-progress {
-  background: @white;
+  background: #fff;
 
   .c-progress {
     margin: 20px;

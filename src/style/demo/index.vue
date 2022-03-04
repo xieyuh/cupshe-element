@@ -22,41 +22,31 @@
     <c-cell is-link title="Slide Right" @click="animate('c-slide-right')" />
   </demo-block>
 
-  <transition :name="transitionName">
-    <div v-show="show" class="demo-animate-block" />
+  <transition :name="state.transitionName">
+    <div v-show="state.show" class="demo-animate-block" />
   </transition>
 </template>
 
-<script lang="ts">
-import { reactive, toRefs } from 'vue';
+<script lang="ts" setup>
+import { reactive } from 'vue';
 import '@cupshe/fonts';
 
-export default {
-  setup() {
-    const state = reactive({
-      show: false,
-      transitionName: '',
-    });
+const state = reactive({
+  show: false,
+  transitionName: '',
+});
 
-    const animate = (transitionName: string) => {
-      state.show = true;
-      state.transitionName = transitionName;
+const animate = (transitionName: string) => {
+  state.show = true;
+  state.transitionName = transitionName;
 
-      setTimeout(() => {
-        state.show = false;
-      }, 500);
-    };
-
-    return {
-      ...toRefs(state),
-      animate,
-    };
-  },
+  setTimeout(() => {
+    state.show = false;
+  }, 500);
 };
 </script>
 
 <style lang="less">
-@import '../../style/var';
 @import '../../style/font';
 
 .demo-style {
@@ -66,18 +56,18 @@ export default {
   .c-ellipsis,
   .c-multi-ellipsis--l2 {
     max-width: 300px;
-    margin-left: @padding-md;
+    margin-left: 16px;
     font-size: 14px;
     line-height: 18px;
   }
 
   .c-ellipsis {
-    margin-bottom: @padding-md;
+    margin-bottom: 16px;
   }
 
   .c-hairline--top {
     height: 30px;
-    background-color: @white;
+    background-color: #fff;
 
     &::after {
       top: 5px;
@@ -91,7 +81,7 @@ export default {
     width: 100px;
     height: 100px;
     margin: -50px 0 0 -50px;
-    background-color: @blue;
+    background-color: #1989fa;
     border-radius: 8px;
   }
 }

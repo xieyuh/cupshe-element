@@ -62,38 +62,26 @@
   </demo-block>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import '@cupshe/fonts';
 
-export default {
-  setup() {
-    const images = [
-      'https://img.yzcdn.cn/vant/apple-1.jpg',
-      'https://img.yzcdn.cn/vant/apple-2.jpg',
-      'https://img.yzcdn.cn/vant/apple-3.jpg',
-      'https://img.yzcdn.cn/vant/apple-4.jpg',
-    ];
+const images = [
+  'https://img.yzcdn.cn/vant/apple-1.jpg',
+  'https://img.yzcdn.cn/vant/apple-2.jpg',
+  'https://img.yzcdn.cn/vant/apple-3.jpg',
+  'https://img.yzcdn.cn/vant/apple-4.jpg',
+];
 
-    const onChange = (index: number) =>
-      console.log('当前 Swipe 索引：' + index);
-
-    return {
-      images,
-      onChange,
-    };
-  },
-};
+const onChange = (index: number) => console.log('当前 Swipe 索引：' + index);
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-swipe {
   padding-bottom: 30px;
 
   .c-swipe {
     &-item {
-      color: @white;
+      color: #fff;
       font-size: 20px;
       line-height: 150px;
       text-align: center;
@@ -113,7 +101,7 @@ export default {
       width: 100%;
       height: 240px;
       padding: 30px 60px;
-      background-color: @white;
+      background-color: #fff;
       pointer-events: none;
     }
   }
@@ -129,7 +117,7 @@ export default {
     right: 5px;
     bottom: 5px;
     padding: 2px 5px;
-    color: @white;
+    color: #fff;
     font-size: 12px;
     background: rgba(0, 0, 0, 0.1);
   }

@@ -1,9 +1,7 @@
-@import './var.less';
-
 .c-popover {
   position: absolute;
   overflow: visible;
-  color: @popover-light-text-color;
+  color: #333;
   background-color: transparent;
   transition: opacity 0.15s, transform 0.15s;
 
@@ -18,7 +16,7 @@
     border-color: transparent;
     border-style: solid;
     color: #fff;
-    border-width: @popover-arrow-size;
+    border-width: 6px;
   }
 
   &__content {
@@ -32,19 +30,19 @@
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    width: @popover-action-width;
-    height: @popover-action-height;
-    padding: 0 @padding-md;
-    font-size: @popover-action-font-size;
-    line-height: @line-height-md;
+    width: 128px;
+    height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 20px;
     cursor: pointer;
 
     &:active {
-      background-color: @active-color;
+      background-color: #f2f3f5;
     }
 
     &--disabled {
-      color: @popover-light-action-disabled-text-color;
+      color: #c8c9cc;
       cursor: not-allowed;
 
       &:active {
@@ -67,8 +65,8 @@
     }
 
     &-icon {
-      margin-right: @padding-xs;
-      font-size: @popover-action-icon-size;
+      margin-right: 8px;
+      font-size: 20px;
     }
 
     &--with-icon {
@@ -99,7 +97,7 @@
     transform-origin: 0 100%;
 
     .c-popover__arrow {
-      left: @padding-md;
+      left: 16px;
     }
   }
 
@@ -107,7 +105,7 @@
     transform-origin: 100% 100%;
 
     .c-popover__arrow {
-      right: @padding-md;
+      right: 16px;
     }
   }
 
@@ -132,7 +130,7 @@
     transform-origin: 100% 0;
 
     .c-popover__arrow {
-      top: @padding-md;
+      top: 16px;
     }
   }
 
@@ -140,7 +138,7 @@
     transform-origin: 100% 100%;
 
     .c-popover__arrow {
-      bottom: @padding-md;
+      bottom: 16px;
     }
   }
 
@@ -165,7 +163,7 @@
     transform-origin: 0 0;
 
     .c-popover__arrow {
-      top: @padding-md;
+      top: 16px;
     }
   }
 
@@ -173,7 +171,7 @@
     transform-origin: 0 100%;
 
     .c-popover__arrow {
-      bottom: @padding-md;
+      bottom: 16px;
     }
   }
 
@@ -198,7 +196,7 @@
     transform-origin: 0 0;
 
     .c-popover__arrow {
-      left: @padding-md;
+      left: 16px;
     }
   }
 
@@ -206,7 +204,7 @@
     transform-origin: 100% 0;
 
     .c-popover__arrow {
-      right: @padding-md;
+      right: 16px;
     }
   }
 

@@ -1,5 +1,3 @@
-@import '../var';
-
 .hairline-common() {
   position: absolute;
   box-sizing: border-box;
@@ -7,7 +5,7 @@
   pointer-events: none;
 }
 
-.hairline(@color: @border-color) {
+.hairline(@color: #ebedf0) {
   .hairline-common();
 
   top: -50%;
@@ -18,7 +16,7 @@
   transform: scale(0.5);
 }
 
-.hairline-top(@color: @border-color, @left: 0, @right: 0) {
+.hairline-top(@color: #ebedf0, @left: 0, @right: 0) {
   .hairline-common();
 
   top: 0;
@@ -28,7 +26,7 @@
   transform: scaleY(0.5);
 }
 
-.hairline-bottom(@color: @border-color, @left: 0, @right: 0) {
+.hairline-bottom(@color: #ebedf0, @left: 0, @right: 0) {
   .hairline-common();
 
   right: @right;
