@@ -1,5 +1,6 @@
 import { loadImageAsync } from './util';
-import { noop, useRect } from '../../utils';
+import { noop } from '../../utils';
+import { useRect } from '../../composables';
 
 export default (lazyManager) => ({
   props: {
