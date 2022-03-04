@@ -1,4 +1,3 @@
-@import './var.less';
 @import '../style/mixins/hairline';
 
 .c-cell {
@@ -6,15 +5,15 @@
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  padding: @cell-vertical-padding @cell-horizontal-padding;
+  padding: 10px 16px;
   overflow: hidden;
-  color: @cell-text-color;
-  font-size: @cell-font-size;
-  line-height: @cell-line-height;
-  background-color: @cell-background-color;
+  color: #323233;
+  font-size: 14px;
+  line-height: 24px;
+  background-color: #fff;
 
   &::after {
-    .hairline-bottom(@cell-border-color, @padding-md, @padding-md);
+    .hairline-bottom(#ebedf0, 16px, 16px);
   }
 
   &:last-child::after,
@@ -23,10 +22,10 @@
   }
 
   &__label {
-    margin-top: @cell-label-margin-top;
-    color: @cell-label-color;
-    font-size: @cell-label-font-size;
-    line-height: @cell-label-line-height;
+    margin-top: 4px;
+    color: #969799;
+    font-size: 12px;
+    line-height: 18px;
   }
 
   &__title,
@@ -37,38 +36,38 @@
   &__value {
     position: relative;
     overflow: hidden;
-    color: @cell-value-color;
+    color: #969799;
     text-align: right;
     vertical-align: middle;
     word-wrap: break-word;
 
     &--alone {
-      color: @text-color;
+      color: #323233;
       text-align: left;
     }
   }
 
   &__left-icon,
   &__right-icon {
-    height: @cell-line-height;
-    font-size: @cell-icon-size;
-    line-height: @cell-line-height;
+    height: 24px;
+    font-size: 16px;
+    line-height: 24px;
   }
 
   &__left-icon {
-    margin-right: @padding-base;
+    margin-right: 4px;
   }
 
   &__right-icon {
-    margin-left: @padding-base;
-    color: @cell-right-icon-color;
+    margin-left: 4px;
+    color: #969799;
   }
 
   &--clickable {
     cursor: pointer;
 
     &:active {
-      background-color: @cell-active-color;
+      background-color: #f2f3f5;
     }
   }
 
@@ -77,9 +76,9 @@
 
     &::before {
       position: absolute;
-      left: @padding-xs;
-      color: @cell-required-color;
-      font-size: @cell-font-size;
+      left: 8px;
+      color: #ee0a24;
+      font-size: 14px;
       content: '*';
     }
   }
@@ -89,15 +88,15 @@
   }
 
   &--large {
-    padding-top: @cell-large-vertical-padding;
-    padding-bottom: @cell-large-vertical-padding;
+    padding-top: 16px;
+    padding-bottom: 16px;
 
     .c-cell__title {
-      font-size: @cell-large-title-font-size;
+      font-size: 18px;
     }
 
     .c-cell__label {
-      font-size: @cell-large-label-font-size;
+      font-size: 14px;
     }
   }
 }

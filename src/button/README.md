@@ -20,22 +20,27 @@ app.use(Button);
 
 ### 按钮类型
 
-按钮支持 `primary`、`default`、`success`、`warning`、`info` 五种类型，默认为 `default`。
+按钮支持 `primary`、`default` 两种类型，默认为 `default`。
 
 ```html
 <c-button type="primary">主要按钮</c-button>
-<c-button type="success">成功按钮</c-button>
 <c-button type="default">默认按钮</c-button>
-<c-button type="warning">警告按钮</c-button>
-<c-button type="info">信息按钮</c-button>
 ```
 
-### 朴素按钮
+### 透明按钮
 
-通过 `ghost` 属性将按钮设置为朴素按钮，朴素按钮的文字为按钮颜色，背景为透明。
+通过 `ghost` 属性将按钮设置为透明按钮，透明按钮的文字为按钮颜色，背景为透明。
 
 ```html
-<c-button ghost type="primary">朴素按钮</c-button>
+<c-button ghost type="primary">透明按钮</c-button>
+```
+
+### 加载状态
+
+通过 `loading` 属性设置加载状态，禁用状态下按钮不可点击。
+
+```html
+<c-button type="primary" loading>加载状态</c-button>
 ```
 
 ### 禁用状态
@@ -48,7 +53,7 @@ app.use(Button);
 
 ### 动画效果
 
-通过 `cover` 设置按钮 hover 动画。目前支持 `type` 为 `primary` 和 `default` 的按钮。
+通过 `cover` 设置按钮 hover 动画。
 
 ```html
 <c-button type="primary" cover>主要按钮</c-button>
@@ -120,6 +125,7 @@ app.use(Button);
 | block       | 是否为块级元素                                      | _boolean_ | `false`   |
 | ghost       | 是否为透明按钮                                      | _boolean_ | `false`   |
 | disabled    | 是否禁用按钮                                        | _boolean_ | `false`   |
+| loading     | 是否为加载状态                                      | _boolean_ | `false`   |
 
 ### Events
 

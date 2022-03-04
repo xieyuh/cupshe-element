@@ -1,4 +1,3 @@
-@import './var';
 @import './mixins/hairline';
 
 [class*='c-hairline'] {
@@ -19,29 +18,29 @@
   }
 
   &--top::after {
-    border-top-width: @border-width-base;
+    border-top-width: 1px;
   }
 
   &--left::after {
-    border-left-width: @border-width-base;
+    border-left-width: 1px;
   }
 
   &--right::after {
-    border-right-width: @border-width-base;
+    border-right-width: 1px;
   }
 
   &--bottom::after {
-    border-bottom-width: @border-width-base;
+    border-bottom-width: 1px;
   }
 
   &,
   &-unset {
     &--top-bottom::after {
-      border-width: @border-width-base 0;
+      border-width: 1px 0;
     }
   }
 
   &--surround::after {
-    border-width: @border-width-base;
+    border-width: 1px;
   }
 }

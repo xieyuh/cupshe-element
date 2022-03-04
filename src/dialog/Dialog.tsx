@@ -93,21 +93,13 @@ export default defineComponent({
       const title = slots.title ? slots.title() : props.title;
 
       if (title) {
-        return (
-          <div
-            class={bem('header', {
-              isolated: !props.message && !slots.default,
-            })}
-          >
-            {title}
-          </div>
-        );
+        return <div class={bem('title')}>{title}</div>;
       }
     };
 
-    const renderMessage = (hasTitle: boolean) => {
+    const renderText = () => {
       const { message, allowHtml } = props;
-      const classNames = bem('message', { 'has-title': hasTitle });
+      const classNames = bem('text');
 
       const content = isFunction(message) ? message() : message;
 
@@ -118,20 +110,25 @@ export default defineComponent({
       return <div class={classNames}>{content}</div>;
     };
 
-    const renderContent = () => {
+    const renderMessage = () => {
+      const { title, message, allowHtml } = props;
+      const hasTitle = !!(title || slots.title);
+
       if (slots.default) {
-        return <div class={bem('content')}>{slots.default()}</div>;
+        return (
+          <div class={bem('message', { 'has-title': hasTitle })}>
+            {slots.default()}
+          </div>
+        );
       }
 
-      const { title, message, allowHtml } = props;
       if (message) {
-        const hasTitle = !!(title || slots.title);
         return (
           <div
             key={allowHtml ? 1 : 0}
-            class={bem('content', { isolated: !hasTitle })}
+            class={bem('message', { 'has-title': hasTitle })}
           >
-            {renderMessage(hasTitle)}
+            {renderText()}
           </div>
         );
       }
@@ -163,9 +160,11 @@ export default defineComponent({
           {...pick(props, popupKeys)}
           {...{ 'onUpdate:show': updateShow }}
         >
-          {renderTitle()}
-          {renderContent()}
-          {renderButtons()}
+          <div class={bem('content')}>
+            {renderTitle()}
+            {renderMessage()}
+            {renderButtons()}
+          </div>
         </Popup>
       );
     };

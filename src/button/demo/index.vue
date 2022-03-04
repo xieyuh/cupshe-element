@@ -4,21 +4,27 @@
       <c-button type="primary">主要按钮</c-button>
       <c-button type="default">默认按钮</c-button>
     </div>
-    <div class="demo-button-row">
-      <c-button type="success">成功按钮</c-button>
-      <c-button type="warning">警告按钮</c-button>
-    </div>
-    <div class="demo-button-row">
-      <c-button type="info">信息按钮</c-button>
-    </div>
   </demo-block>
 
-  <demo-block title="朴素按钮">
-    <c-button ghost type="primary">朴素按钮</c-button>
+  <demo-block title="透明按钮">
+    <c-button ghost type="primary">透明按钮</c-button>
   </demo-block>
 
   <demo-block title="禁用状态">
     <c-button disabled type="primary">禁用状态</c-button>
+  </demo-block>
+
+  <demo-block title="加载状态">
+    <c-button
+      type="primary"
+      :loading="state.loading1"
+      @click="state.loading1 = true"
+    >
+      点击加载
+    </c-button>
+    <c-button :loading="state.loading2" @click="state.loading2 = true">
+      点击加载
+    </c-button>
   </demo-block>
 
   <demo-block title="动画效果">
@@ -51,20 +57,26 @@
   </demo-block>
 
   <demo-block title="渲染为其他标签">
-    <c-button tag="a" url="https://baidu.com">外部链接</c-button>
+    <c-button tag="a" url="https://baidu.com" target="_blank"
+      >外部链接</c-button
+    >
     <c-button tag="a" to="/home">内部路由</c-button>
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { reactive } from 'vue';
 import '@cupshe/fonts';
+
+const state = reactive({
+  loading1: false,
+  loading2: false,
+});
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-button {
-  background: @white;
+  background: #fff;
 
   .c-button {
     &--large,
@@ -75,7 +87,7 @@ import '@cupshe/fonts';
   }
 
   .van-doc-demo-block {
-    padding: 0 @padding-md;
+    padding: 0 16px;
   }
 
   .van-doc-demo-block__title {

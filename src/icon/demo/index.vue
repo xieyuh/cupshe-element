@@ -112,10 +112,8 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../style/var';
-
 .demo-icon {
-  background: @white;
+  background: #fff;
   font-size: 0;
 
   &-list {
@@ -140,19 +138,19 @@ export default {
       height: 36px;
       margin: -4px 0 4px;
       padding: 0 5px;
-      color: @gray-7;
+      color: #646566;
       font-size: 12px;
       line-height: 18px;
     }
 
     &:active {
-      background-color: @active-color;
+      background-color: #f2f3f5;
     }
   }
 
   .c-icon {
     margin: 16px 0 16px;
-    color: @text-color;
+    color: #333;
     font-size: 32px;
   }
 
