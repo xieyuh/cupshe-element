@@ -6,3 +6,9 @@ const Popup = withInstall<typeof _Popup>(_Popup);
 export default Popup;
 export { Popup };
 export type { PopupPosition, PopupCloseIconPosition } from './Popup';
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CPopup: typeof Popup;
+  }
+}

@@ -6,3 +6,9 @@ const Sticky = withInstall<typeof _Sticky>(_Sticky);
 export default Sticky;
 export { Sticky };
 export type { StickyPosition } from './Sticky';
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CSticky: typeof Sticky;
+  }
+}

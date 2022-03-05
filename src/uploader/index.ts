@@ -8,3 +8,9 @@ export type {
   UploaderResultType,
   UploaderFileListItem,
 } from './types';
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CUploader: typeof Uploader;
+  }
+}

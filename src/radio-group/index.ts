@@ -5,3 +5,9 @@ const RadioGroup = withInstall<typeof _RadioGroup>(_RadioGroup);
 
 export default RadioGroup;
 export { RadioGroup };
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CRadioGroup: typeof RadioGroup;
+  }
+}

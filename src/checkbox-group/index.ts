@@ -9,3 +9,9 @@ export type {
   CheckboxGroupInstance,
   CheckboxGroupToggleAllOptions,
 } from './types';
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CCheckboxGroup: typeof CheckboxGroup;
+  }
+}

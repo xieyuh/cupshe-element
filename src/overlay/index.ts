@@ -5,3 +5,9 @@ const Overlay = withInstall<typeof _Overlay>(_Overlay);
 
 export default Overlay;
 export { Overlay };
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    COverlay: typeof Overlay;
+  }
+}

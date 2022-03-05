@@ -6,3 +6,9 @@ const Checkbox = withInstall<typeof _Checkbox>(_Checkbox);
 export default Checkbox;
 export { Checkbox };
 export type { CheckboxInstance } from './types';
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CCheckbox: typeof Checkbox;
+  }
+}
