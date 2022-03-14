@@ -1,7 +1,7 @@
 import { withInstall } from '../utils';
 import _Icon from './Icon';
 
-const Icon = withInstall<typeof _Icon>(_Icon);
+const Icon = withInstall(_Icon);
 
 export default Icon;
 export { Icon };

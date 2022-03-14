@@ -1,7 +1,7 @@
 import { withInstall } from '../utils';
 import _Button from './Button';
 
-const Button = withInstall<typeof _Button>(_Button);
+const Button = withInstall(_Button);
 
 export default Button;
 export { Button };

@@ -1,7 +1,7 @@
 import { withInstall } from '../utils';
 import _Alert from './Alert';
 
-const Alert = withInstall<typeof _Alert>(_Alert);
+const Alert = withInstall(_Alert);
 
 export default Alert;
 export { Alert };

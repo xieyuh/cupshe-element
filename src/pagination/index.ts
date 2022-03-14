@@ -1,7 +1,7 @@
 import { withInstall } from '../utils';
 import _Pagination from './Pagination';
 
-const Pagination = withInstall<typeof _Pagination>(_Pagination);
+const Pagination = withInstall(_Pagination);
 
 export default Pagination;
 export { Pagination };

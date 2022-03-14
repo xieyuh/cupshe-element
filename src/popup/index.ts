@@ -1,7 +1,7 @@
 import { withInstall } from '../utils';
 import _Popup from './Popup';
 
-const Popup = withInstall<typeof _Popup>(_Popup);
+const Popup = withInstall(_Popup);
 
 export default Popup;
 export { Popup };

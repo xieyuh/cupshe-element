@@ -1,7 +1,7 @@
 import { withInstall } from '../utils';
 import _Collapse from './Collapse';
 
-const Collapse = withInstall<typeof _Collapse>(_Collapse);
+const Collapse = withInstall(_Collapse);
 
 export default Collapse;
 export { Collapse };
