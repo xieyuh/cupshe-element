@@ -6,3 +6,9 @@ const Collapse = withInstall<typeof _Collapse>(_Collapse);
 export default Collapse;
 export { Collapse };
 export { COLLAPSE_KEY } from './Collapse';
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    CCollapse: typeof Collapse;
+  }
+}
