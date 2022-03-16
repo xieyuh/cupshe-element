@@ -98,9 +98,7 @@ export default defineComponent({
     const onClick = (event: MouseEvent) => {
       if (props.loading) {
         preventDefault(event);
-      }
-
-      if (!props.disabled) {
+      } else if (!props.disabled) {
         emit('click', event);
         route();
       }
