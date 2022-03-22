@@ -6,7 +6,7 @@
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
+通过以下方式来全局注册组件。
 
 ```js
 import { createApp } from 'vue';
@@ -116,6 +116,8 @@ export default {
 | button-size   | 按钮大小以及输入框高度，默认单位为 `px`                           | _number \| string_              | `28px`  |
 | placeholder   | 输入框占位提示文字                                                | _string_                        | -       |
 | disabled      | 是否禁用步进器                                                    | _boolean_                       | `false` |
+| disable-plus  | 是否禁用增加按钮                                                  | _boolean_                       | `false` |
+| disable-minus | 是否禁用减少按钮                                                  | _boolean_                       | `false` |
 | disable-input | 是否禁用输入框                                                    | _boolean_                       | `false` |
 | before-change | 输入值变化前的回调函数，返回 `false` 可阻止输入，支持返回 Promise | _(value) => boolean \| Promise_ | `false` |
 

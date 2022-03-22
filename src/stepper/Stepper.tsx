@@ -24,6 +24,8 @@ export default defineComponent({
     inputWidth: [String, Number],
     buttonSize: [String, Number],
     disabled: Boolean,
+    disablePlus: Boolean,
+    disableMinus: Boolean,
     disableInput: Boolean,
     placeholder: String,
     beforeChange: Function as PropType<Interceptor>,
@@ -85,11 +87,11 @@ export default defineComponent({
     const current = ref(getInitialValue());
 
     const minusDisabled = computed(
-      () => props.disabled || current.value <= +props.min
+      () => props.disabled || props.disableMinus || current.value <= +props.min
     );
 
     const plusDisabled = computed(
-      () => props.disabled || current.value >= +props.max
+      () => props.disabled || props.disablePlus || current.value >= +props.max
     );
 
     const check = () => {
@@ -198,6 +200,7 @@ export default defineComponent({
           class={bem('button', { disabled: minusDisabled.value })}
           onClick={(event) => createListener('minus', event)}
           style={buttonStyle.value}
+          aria-disabled={minusDisabled.value || undefined}
         >
           <Icon class={bem('icon')} name="minus" />
         </button>
@@ -222,6 +225,7 @@ export default defineComponent({
           class={bem('button', { disabled: plusDisabled.value })}
           onClick={(event) => createListener('plus', event)}
           style={buttonStyle.value}
+          aria-disabled={plusDisabled.value || undefined}
         >
           <Icon class={bem('icon')} name="plus" />
         </button>

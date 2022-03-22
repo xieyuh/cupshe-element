@@ -6,6 +6,18 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.15.3
+
+**Feature**
+
+- Stepper 组件新增了 `disable-minus`，`disable-plus` 属性
+
+### v1.15.2
+
+**Bug Fixes**
+
+- 修复了 Button 组件在 `loading` 状态仍能触发点击事件的问题
+
 ### v1.15.1
 
 **Bug Fixes**
