@@ -4,7 +4,7 @@ type Intl = {
   sign: boolean;
 };
 
-const IntlMap: Record<string, Intl> = {
+export const IntlMap: Record<string, Intl> = {
   '1': { code: 'en-US', currency: 'USD', sign: false },
   '2': { code: 'de-DE', currency: 'EUR', sign: false },
   '3': { code: 'de-DE', currency: 'EUR', sign: false },
@@ -16,7 +16,7 @@ const IntlMap: Record<string, Intl> = {
 };
 
 export function createCurrency(locale: string) {
-  return function (val: number | string, digit = 0): string {
+  return function (val: number | string): string {
     if (!(locale in IntlMap)) {
       return '';
     }
@@ -25,9 +25,9 @@ export function createCurrency(locale: string) {
 
     const text = (+val).toLocaleString(intl.code, {
       style: 'currency',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
       currency: intl.currency,
-      minimumFractionDigits: digit,
-      maximumFractionDigits: digit,
     });
 
     return intl.sign ? text.replace(/.*(\$|£)/g, intl.currency + ' $1') : text;
