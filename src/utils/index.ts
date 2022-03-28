@@ -8,3 +8,4 @@ export * from './validate';
 export * from './interceptor';
 export * from './with-install';
 export * from './popper';
+export * from './currency';
