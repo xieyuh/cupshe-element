@@ -15,7 +15,7 @@ export const IntlMap: Record<string, Intl> = {
   '14': { code: 'en-GB', currency: 'NZD', sign: true },
 };
 
-export function createCurrency(locale: string) {
+export function useCurrency(locale: string) {
   return function (val: number | string): string {
     if (!(locale in IntlMap)) {
       locale = '1';
