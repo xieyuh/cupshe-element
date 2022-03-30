@@ -175,6 +175,15 @@ module.exports = {
           },
         ],
       },
+      {
+        title: '工具函数',
+        items: [
+          {
+            path: 'use-currency',
+            title: 'useCurrency',
+          },
+        ],
+      },
     ],
   },
 };
