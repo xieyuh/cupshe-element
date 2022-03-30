@@ -18,7 +18,11 @@ export const IntlMap: Record<string, Intl> = {
 export function createCurrency(locale: string) {
   return function (val: number | string): string {
     if (!(locale in IntlMap)) {
-      return '';
+      locale = '1';
+    }
+
+    if (Number.isNaN(+val)) {
+      return val as string;
     }
 
     const intl = IntlMap[locale];
