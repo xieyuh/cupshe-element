@@ -27,7 +27,11 @@ export default defineComponent({
   setup(props, { emit, slots }) {
     const renderSeparator = () => {
       if (props.separator) {
-        return <span class={bem('separator')}>{props.separator}</span>;
+        return (
+          <span class={bem('separator')} aria-hidden="true">
+            {props.separator}
+          </span>
+        );
       }
     };
 
@@ -64,6 +68,10 @@ export default defineComponent({
       );
     };
 
-    return () => <div class={bem()}>{props.routes.map(renderRoute)}</div>;
+    return () => (
+      <nav class={bem()} role="navigation" aria-label="breadcrumbs">
+        {props.routes.map(renderRoute)}
+      </nav>
+    );
   },
 });
