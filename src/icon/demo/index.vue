@@ -11,31 +11,9 @@
 
 <script lang="ts" setup>
 import { Toast } from '../../toast';
-// from https://30secondsofcode.org
+
 function copyToClipboard(str: string) {
-  const el = document.createElement('textarea');
-  el.value = str;
-  el.setAttribute('readonly', '');
-  el.style.position = 'absolute';
-  el.style.left = '-9999px';
-  document.body.appendChild(el);
-
-  const selection = document.getSelection();
-
-  if (!selection) {
-    return;
-  }
-
-  const selected = selection.rangeCount > 0 ? selection.getRangeAt(0) : false;
-
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-
-  if (selected) {
-    selection.removeAllRanges();
-    selection.addRange(selected);
-  }
+  navigator.clipboard.writeText(str);
 }
 
 const icons = [
@@ -45,9 +23,9 @@ const icons = [
   'arrow_right',
   'close',
   'plus',
+  'minus',
   'tick',
   'search',
-  'wishlist_nor',
   'account',
   'bag',
   'dislike',
@@ -71,6 +49,8 @@ const icons = [
   'sale',
   'sort',
   'filter',
+  'password_on',
+  'password_off',
   'points',
   'time',
   'video',
@@ -80,12 +60,15 @@ const icons = [
   'failure',
   'right',
   'left',
-  'minus',
   'menu',
+  'country',
+  'wishlist_nor',
+  'wishlist_pre',
+  'star',
+  'star_full',
+  'star_half',
   'play',
   'pause',
-  'star',
-  'country',
   'update_delete',
   'video_full',
   'account_sel',
@@ -109,11 +92,8 @@ const icons = [
   'right_full',
   'question_full',
   'info_full',
-  'star_full',
-  'star_half',
   'dislike_full',
   'like_full',
-  'icon_shop',
   'nextstep',
   'share_facebook',
   'share_linkin',
@@ -126,56 +106,23 @@ const icons = [
   'share_snapchat',
   'share_whats',
   'share_mail',
+  'icon_shop',
   'return_documents',
   'contact',
   'return_successde',
   'return_successau',
   'return_instructions',
-  'createaccount1',
   'afterpay',
-  'anniversary',
   'birthday',
-  'checkout',
-  'facebook',
-  'honorarymember',
-  'instagram',
   'exclusivediscounts',
-  'personalexposure',
-  'product_4',
-  'makeapurchase_au',
   'freeshipping_fast',
-  'makeapurchase_de',
-  'product_2',
-  'product_6',
-  'product_1',
   'klarna',
   'freeshipping',
-  'product_7',
-  'refer',
-  'product_3',
-  'redeem_coupon',
-  'signin_monthly',
-  'tierup',
-  'product_5',
-  'sale_early',
-  'voucher_freeproduct',
-  'subscribe',
-  'surprisepackage',
   'zahlen',
-  'valued_coupon',
-  'writeareview',
-  'afterpay_1',
-  'afterpay_4',
-  'afterpay_2',
-  'afterpay_3',
-  'checkbox_nor',
-  'radio_sel',
-  'checkbox_sel',
-  'radio_nor',
 ];
 
 const copy = (icon: string) => {
-  const tag = `<c-icon name="${icon}"`;
+  const tag = `<c-icon name="${icon}" />`;
   copyToClipboard(tag);
 
   Toast({

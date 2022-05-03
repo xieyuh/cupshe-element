@@ -113,19 +113,19 @@ app.use(Button);
 
 ### Props
 
-| 参数        | 说明                                                | 类型      | 默认值    |
-| ----------- | --------------------------------------------------- | --------- | --------- |
-| type        | 类型，可选值为 `primary` `success` `warning` `info` | _string_  | `default` |
-| size        | 尺寸，可选值为 `large` `small`                      | _string_  | `normal`  |
-| color       | 按钮颜色，支持传入 `linear-gradient` 渐变色         | _string_  | -         |
-| tag         | 按钮根节点的 HTML 标签                              | _string_  | `button`  |
-| text-color  | 按钮文字颜色                                        | _string_  | -         |
-| icon        | 左侧[图标名称](#/icon)或图片链接                    | _string_  | -         |
-| native-type | 原生 button 标签的 type 属性                        | _string_  | `button`  |
-| block       | 是否为块级元素                                      | _boolean_ | `false`   |
-| ghost       | 是否为透明按钮                                      | _boolean_ | `false`   |
-| disabled    | 是否禁用按钮                                        | _boolean_ | `false`   |
-| loading     | 是否为加载状态                                      | _boolean_ | `false`   |
+| 参数        | 说明                                        | 类型      | 默认值    |
+| ----------- | ------------------------------------------- | --------- | --------- |
+| type        | 类型，可选值为 `primary`                    | _string_  | `default` |
+| size        | 尺寸，可选值为 `large` `small`              | _string_  | `normal`  |
+| color       | 按钮颜色，支持传入 `linear-gradient` 渐变色 | _string_  | -         |
+| tag         | 按钮根节点的 HTML 标签                      | _string_  | `button`  |
+| text-color  | 按钮文字颜色                                | _string_  | -         |
+| icon        | 左侧[图标名称](#/icon)或图片链接            | _string_  | -         |
+| native-type | 原生 button 标签的 type 属性                | _string_  | `button`  |
+| block       | 是否为块级元素                              | _boolean_ | `false`   |
+| ghost       | 是否为透明按钮                              | _boolean_ | `false`   |
+| disabled    | 是否禁用按钮                                | _boolean_ | `false`   |
+| loading     | 是否为加载状态                              | _boolean_ | `false`   |
 
 ### Events
 
