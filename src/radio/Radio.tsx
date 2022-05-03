@@ -30,15 +30,13 @@ export default defineComponent({
       }
     };
 
-    const iconSlot = () => (
-      <div
-        class={bem('icon', { checked: checked(), disabled: props.disabled })}
-      ></div>
+    const icon = ({ disabled }) => (
+      <div class={bem('icon', { checked: checked(), disabled })} />
     );
 
     return () => (
       <Checker
-        v-slots={{ default: slots.default, icon: iconSlot }}
+        v-slots={{ default: slots.default, icon }}
         bem={bem}
         role="radio"
         parent={parent}
