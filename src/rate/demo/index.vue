@@ -53,7 +53,7 @@ import { reactive } from 'vue';
 import '@cupshe/fonts';
 
 const state = reactive({
-  value1: 3.9,
+  value1: 3,
   value2: 3,
   value3: 3,
   value4: 3,
