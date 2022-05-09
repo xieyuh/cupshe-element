@@ -132,6 +132,10 @@ module.exports = {
             title: 'List 列表',
           },
           {
+            path: 'sticky',
+            title: 'Sticky 粘性布局',
+          },
+          {
             path: 'image-preview',
             title: 'ImagePreview 图片预览',
           },

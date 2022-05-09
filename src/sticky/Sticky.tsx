@@ -6,15 +6,21 @@ import {
   defineComponent,
   PropType,
   CSSProperties,
+  ExtractPropTypes,
 } from 'vue';
+
 import {
   extend,
   isHidden,
   unitToPx,
+  numericProp,
   getScrollTop,
   getZIndexStyle,
+  makeStringProp,
+  makeNumericProp,
   createNamespace,
 } from '../utils';
+
 import {
   useRect,
   useEventListener,
@@ -26,25 +32,20 @@ const [name, bem] = createNamespace('sticky');
 
 export type StickyPosition = 'top' | 'bottom';
 
+const stickyProps = {
+  zIndex: numericProp,
+  position: makeStringProp<StickyPosition>('top'),
+  container: Object as PropType<Element>,
+  offsetTop: makeNumericProp(0),
+  offsetBottom: makeNumericProp(0),
+};
+
+export type StickyProps = ExtractPropTypes<typeof stickyProps>;
+
 export default defineComponent({
   name,
 
-  props: {
-    zIndex: [Number, String],
-    container: Object as PropType<Element>,
-    offsetTop: {
-      type: [Number, String],
-      default: 0,
-    },
-    offsetBottom: {
-      type: [Number, String],
-      default: 0,
-    },
-    position: {
-      type: String as PropType<StickyPosition>,
-      default: 'top',
-    },
-  },
+  props: stickyProps,
 
   emits: ['scroll', 'change'],
 
