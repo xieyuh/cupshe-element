@@ -39,9 +39,9 @@ export default defineComponent({
       emit('click', item);
     };
 
-    const renderRoute = (route: Route) => {
+    const renderRoute = (route: Route, index: number) => {
       if (slots.item) {
-        return slots.item({ route, separator: props.separator });
+        return slots.item({ route, separator: props.separator, index });
       }
 
       let link: JSX.Element;
