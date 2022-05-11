@@ -16,16 +16,12 @@ export const IntlMap: Record<string, Intl> = {
 };
 
 export function useCurrency(locale: string) {
-  return function (val: number | string): string {
-    if (!(locale in IntlMap)) {
-      locale = '1';
-    }
+  const intl = locale in IntlMap ? IntlMap[locale] : IntlMap['1'];
 
+  return function (val: number | string): string {
     if (Number.isNaN(+val)) {
       return val as string;
     }
-
-    const intl = IntlMap[locale];
 
     const text = (+val).toLocaleString(intl.code, {
       style: 'currency',
