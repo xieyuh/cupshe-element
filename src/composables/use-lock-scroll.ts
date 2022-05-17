@@ -1,6 +1,5 @@
 import { Ref, watch, onBeforeUnmount, onDeactivated } from 'vue';
-import { getScrollParent, onMountedOrActivated } from '.';
-import { useTouch } from './use-touch';
+import { getScrollParent, onMountedOrActivated, useTouch } from '.';
 import { preventDefault } from '../utils';
 
 let totalLockCount = 0;

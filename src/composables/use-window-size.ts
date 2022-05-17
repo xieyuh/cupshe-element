@@ -1,5 +1,5 @@
 import { ref, Ref } from 'vue';
-import { inBrowser } from '../utils';
+import { inBrowser } from './utils';
 
 let width: Ref<number>;
 let height: Ref<number>;

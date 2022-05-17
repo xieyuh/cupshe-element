@@ -1,6 +1,7 @@
 import { unref, Ref } from 'vue';
 import { isIOS as checkIsIOS } from './validate';
-import { useRect, useWindowSize } from '../composables';
+import { useRect } from '../composables/use-rect';
+import { useWindowSize } from '../composables/use-window-size';
 
 export type ScrollElement = Element | Window;
 
