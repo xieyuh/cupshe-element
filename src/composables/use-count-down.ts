@@ -5,7 +5,8 @@ import {
   onDeactivated,
   onBeforeUnmount,
 } from 'vue';
-import { raf, cancelRaf, inBrowser } from './utils';
+import { raf, cancelRaf } from './utils';
+import { inBrowser } from '../utils';
 
 export type CurrentTime = {
   days: number;

@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.16.0
+
+**Feature**
+
+- Lazyload 指令新增了自动增加 webp 后缀的功能
+
 ### v1.15.4
 
 **Feature**

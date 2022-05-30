@@ -139,6 +139,10 @@ module.exports = {
             path: 'image-preview',
             title: 'ImagePreview 图片预览',
           },
+          {
+            path: 'lazyload',
+            title: 'Lazyload 懒加载',
+          },
         ],
       },
       {

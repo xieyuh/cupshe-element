@@ -1,4 +1,5 @@
 import { nextTick } from 'vue';
+import { getScrollParent } from '../../composables';
 import {
   remove,
   on,
@@ -12,7 +13,6 @@ import {
   ImageCache,
 } from './util';
 import { isObject, inBrowser } from '../../utils';
-import { getScrollParent } from '../../composables';
 import ReactiveListener from './listener';
 
 const DEFAULT_URL =
@@ -132,7 +132,10 @@ export default function () {
       nextTick(() => {
         src = getBestSelectionFromSrcset(el, this.options.scale) || src;
         this.observer && this.observer.observe(el);
-
+        console.log(
+          'Object.keys(binding.modifiers)',
+          Object.keys(binding.modifiers)
+        );
         const container = Object.keys(binding.modifiers)[0];
         let $parent;
 
@@ -469,6 +472,14 @@ export default function () {
 
       // value is object
       if (isObject(value)) {
+        if (
+          process.env.NODE_ENV !== 'production' &&
+          !value.src &&
+          !this.options.silent
+        ) {
+          console.error('[@vant/lazyload] miss src with ' + value);
+        }
+
         ({ src } = value);
         loading = value.loading || this.options.loading;
         error = value.error || this.options.error;

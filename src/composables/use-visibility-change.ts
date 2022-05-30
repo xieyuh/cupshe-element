@@ -1,6 +1,6 @@
 import { Ref, onDeactivated, onBeforeUnmount } from 'vue';
 import { onMountedOrActivated } from '.';
-import { inBrowser } from './utils';
+import { inBrowser } from '../utils';
 
 // @Experimental
 export function useVisibilityChange(
