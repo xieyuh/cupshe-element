@@ -19,7 +19,8 @@ app.use(Lazyload);
 
 // 注册时可以配置额外的选项
 app.use(Lazyload, {
-  loading: 'assets/loading.gif',
+  loading: 'assets/loading.gif', // 图片 loading 时的占位
+  error: 'assets/error.gif', // 图片加载失败时的占位
 });
 ```
 
@@ -41,6 +42,26 @@ export default {
         'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
         'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
       ],
+    };
+  },
+};
+```
+
+### webp 转换
+
+`v-lazy` 会在浏览器支持 `webp` 格式的图片时自动加上 webp 格式后缀，默认为 aws 云后缀，图片宽度默认为容器宽度的 1.5 倍。
+
+```html
+<img v-lazy="image" />
+```
+
+```js
+export default {
+  setup() {
+    return {
+      // url加上后缀 ?x-oss-process=image/resize,w_300/format,webp
+      image:
+        'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
     };
   },
 };

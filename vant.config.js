@@ -7,6 +7,7 @@ module.exports = {
     site: {
       publicPath: '/',
     },
+    skipInstall: ['lazyload'],
   },
   site: {
     title: 'cupshe-element',

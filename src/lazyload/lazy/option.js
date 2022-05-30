@@ -1,9 +1,14 @@
 import { useRect } from '../../composables';
 import { extend } from '../../utils';
 
-const DEFAULT_RECT_WIDTH = 300;
+const DEFAULT_RECT_WIDTH = 200;
 
-function getWebp(src, width) {
+function getWebp(src, rectWidth = DEFAULT_RECT_WIDTH) {
+  if (typeof src !== 'string') {
+    return src;
+  }
+
+  const width = Math.floor(rectWidth * 1.5);
   const url = `x-oss-process=image/resize,w_${width}/format,webp`;
   const prefix = src.endsWith('?') ? '&' : '?';
 
@@ -14,9 +19,7 @@ export default function getDefaultOption(option) {
   const defaultOption = {
     filter: {
       webp(listener) {
-        const { width } = useRect(listener.el);
-
-        listener.src += getWebp(listener.src, width || DEFAULT_RECT_WIDTH);
+        listener.src += getWebp(listener.src, useRect(listener.el).width);
       },
     },
   };

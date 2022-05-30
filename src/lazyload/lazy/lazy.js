@@ -132,10 +132,6 @@ export default function () {
       nextTick(() => {
         src = getBestSelectionFromSrcset(el, this.options.scale) || src;
         this.observer && this.observer.observe(el);
-        console.log(
-          'Object.keys(binding.modifiers)',
-          Object.keys(binding.modifiers)
-        );
         const container = Object.keys(binding.modifiers)[0];
         let $parent;
 
