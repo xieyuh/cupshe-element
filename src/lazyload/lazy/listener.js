@@ -131,11 +131,6 @@ export default class ReactiveListener {
         // handler `loading image` load failed
         cb();
         this.state.loading = false;
-
-        if (process.env.NODE_ENV !== 'production' && !this.options.silent)
-          console.warn(
-            `[@vant/lazyload] load failed with loading image(${this.loading})`
-          );
       }
     );
   }
@@ -146,12 +141,6 @@ export default class ReactiveListener {
    */
   load(onFinish = noop) {
     if (this.attempt > this.options.attempt - 1 && this.state.error) {
-      if (process.env.NODE_ENV !== 'production' && !this.options.silent) {
-        console.log(
-          `[@vant/lazyload] ${this.src} tried too more than ${this.options.attempt} times`
-        );
-      }
-
       onFinish();
       return;
     }
@@ -185,8 +174,7 @@ export default class ReactiveListener {
           this.imageCache.add(this.src);
           onFinish();
         },
-        (err) => {
-          !this.options.silent && console.error(err);
+        () => {
           this.state.error = true;
           this.state.loaded = false;
           this.render('error', false);

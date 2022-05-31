@@ -30,7 +30,7 @@ export default defineComponent({
       }
     };
 
-    const icon = ({ disabled }) => (
+    const icon = ({ disabled }: any) => (
       <div class={bem('icon', { checked: checked(), disabled })} />
     );
 
