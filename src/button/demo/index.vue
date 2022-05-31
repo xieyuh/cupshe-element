@@ -1,6 +1,6 @@
 <template>
   <demo-block title="按钮类型">
-    <div class="demo-button-row">
+    <div>
       <c-button type="primary">主要按钮</c-button>
       <c-button type="default">默认按钮</c-button>
     </div>
