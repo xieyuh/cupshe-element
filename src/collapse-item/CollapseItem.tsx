@@ -119,7 +119,7 @@ export default defineComponent({
             {slots.title ? slots.title() : props.title}
           </div>
           {slots.icon ? (
-            slots.icon({ expanded })
+            slots.icon({ expanded: expanded.value })
           ) : (
             <Icon class={bem('right-icon')} name={rightIcon.value} />
           )}
