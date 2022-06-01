@@ -9,6 +9,7 @@ import {
   ComponentPublicInstance,
   ComponentInternalInstance,
 } from 'vue';
+import { extend } from '../utils';
 
 export function flattenVNodes(children: VNodeNormalizedChildren) {
   const result: VNode[] = [];
@@ -84,13 +85,15 @@ export function useChildren<
 
     provide(
       key,
-      {
-        link,
+      extend(
+        {
+          link,
           unlink,
           children: publicChildren,
           internalChildren,
-        ...value
-      }
+        },
+        value
+      )
     );
   };
 
