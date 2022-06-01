@@ -2,11 +2,11 @@
 
 ### 介绍
 
-用于循环播放一组图片或内容。
+用于循环播放一组图片或内容。[PC 端预览](/mobile.html#/swipe)
 
 ### 引入
 
-通过以下方式来全局注册组件。[PC 端预览](/mobile.html#/swipe)
+通过以下方式来全局注册组件。
 
 ```js
 import { createApp } from 'vue';
