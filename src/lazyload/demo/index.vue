@@ -3,7 +3,7 @@ import { getCurrentInstance } from 'vue';
 import Lazyload from '..';
 
 const app = getCurrentInstance();
-app.appContext.app.use(Lazyload);
+app?.appContext.app.use(Lazyload);
 
 const imageList = [
   'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',

@@ -7,7 +7,7 @@ module.exports = {
     site: {
       publicPath: '/',
     },
-    skipInstall: ['lazyload'],
+    skipInstall: ['lazyload', 'track'],
   },
   site: {
     title: 'cupshe-element',
@@ -61,6 +61,10 @@ module.exports = {
           {
             path: 'toast',
             title: 'Toast 轻提示',
+          },
+          {
+            path: 'track',
+            title: 'Track 事件追踪',
           },
         ],
       },
