@@ -1,7 +1,7 @@
 {
   "name": "cupshe-element",
-  "version": "1.17.1",
-  "description": "卡佩希 Vue 组件库",
+  "version": "1.17.2",
+  "description": "Base UI Component for Cupshe",
   "main": "lib/cupshe-element.js",
   "typings": "lib/index.d.ts",
   "style": "lib/index.css",
