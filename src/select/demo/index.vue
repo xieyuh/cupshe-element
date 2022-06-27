@@ -147,7 +147,7 @@ export default {
     width: 131px;
     color: #333;
     border-bottom: 1px solid #333;
-    font-family: 'Muli-light', sans-serif;
+    font-family: 'Muli', sans-serif;
     font-size: 14px;
   }
 }

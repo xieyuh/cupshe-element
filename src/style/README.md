@@ -9,7 +9,6 @@ cupshe-element 中默认包含了一些常用样式，可以直接通过 class �
 cupshe-element 已将 `Muli` 系列字体内置，可通过 class 的方式直接使用，或通过 less 函数的方式使用。
 
 ```html
-<div class="c-muli-light">AaBbCc</div>
 <div class="c-muli">AaBbCc</div>
 <div class="c-muli-semibold">AaBbCc</div>
 <div class="c-muli-bold">AaBbCc</div>
@@ -20,7 +19,6 @@ cupshe-element 已将 `Muli` 系列字体内置，可通过 class 的方式直�
 @import 'cupshe-elemnt/lib/style/font.less';
 
 .some-class {
-  .muli-light;
   .muli;
   .muli-bold;
   .muli-semibold;

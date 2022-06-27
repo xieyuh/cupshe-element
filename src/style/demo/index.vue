@@ -1,6 +1,5 @@
 <template>
   <demo-block title="内置字体">
-    <div class="c-muli-light">AaBbCc</div>
     <div class="c-muli">AaBbCc</div>
     <div class="c-muli-semibold">AaBbCc</div>
     <div class="c-muli-bold">AaBbCc</div>
