@@ -8,6 +8,7 @@ const modifiers = {
     if (!w) {
       const { width } = useRect(el);
       w = Math.max(300, width * 1.5);
+      w = Math.floor(w);
     }
 
     return `resize,w_${w}`;
