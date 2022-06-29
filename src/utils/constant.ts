@@ -1,6 +1,3 @@
-import type { InjectionKey } from 'vue';
-import type { FormProvide } from '../form/types';
-
 export const BORDER = 'c-hairline';
 export const BORDER_TOP = `${BORDER}--top`;
 export const BORDER_LEFT = `${BORDER}--left`;
@@ -10,4 +7,3 @@ export const BORDER_TOP_BOTTOM = `${BORDER}--top-bottom`;
 export const BORDER_UNSET_TOP_BOTTOM = `${BORDER}-unset--top-bottom`;
 
 export const HAPTICS_FEEDBACK = 'c-haptics-feedback';
-export const FORM_KEY: InjectionKey<FormProvide> = Symbol('c-form');
