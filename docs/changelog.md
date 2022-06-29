@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.18.0
+
+**Feature**
+
+- 增强了 `v-lazy` 指令。
+
 ### v1.17.0
 
 **Feature**

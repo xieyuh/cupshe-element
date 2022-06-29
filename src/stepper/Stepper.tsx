@@ -219,7 +219,7 @@ export default defineComponent({
           onFocus={onFocus}
           role="spinbutton"
           ref={inputRef}
-          type="number"
+          type="tel"
         />
         <button
           type="button"

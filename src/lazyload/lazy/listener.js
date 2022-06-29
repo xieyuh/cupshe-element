@@ -11,6 +11,7 @@ export default class ReactiveListener {
     bindType,
     $parent,
     options,
+    args,
     cors,
     elRenderer,
     imageCache,
@@ -27,6 +28,7 @@ export default class ReactiveListener {
     this.naturalWidth = 0;
 
     this.options = options;
+    this.args = args;
 
     this.$parent = $parent;
     this.elRenderer = elRenderer;
@@ -106,7 +108,7 @@ export default class ReactiveListener {
    */
   filter() {
     Object.keys(this.options.filter).forEach((key) => {
-      this.options.filter[key](this, this.options);
+      this.options.filter[key](this, this.args, this.options);
     });
   }
 

@@ -5,23 +5,20 @@ import Lazyload from '..';
 const app = getCurrentInstance();
 app?.appContext.app.use(Lazyload);
 
-const imageList = [
-  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
-  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
-  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-4.jpeg',
-];
-
 const image =
   'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg';
 </script>
 
 <template>
   <demo-block title="基础用法">
-    <img v-for="img in imageList" :key="img" v-lazy="img" />
+    <img v-lazy="image" />
   </demo-block>
 
-  <demo-block title="webp转换">
+  <demo-block title="webp参数">
+    <img v-lazy="{ src: image, q: 80, w: 600 }" alt="" />
+  </demo-block>
+
+  <demo-block title="立即加载">
     <img v-lazy="image" alt="" />
   </demo-block>
 </template>

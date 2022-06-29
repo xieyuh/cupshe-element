@@ -6,8 +6,6 @@
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[快速上手](#/quickstart)。
-
 `Lazyload` 是 `Vue` 指令，使用前需要对指令进行注册。
 
 ```js
@@ -20,7 +18,7 @@ app.use(Lazyload);
 // 注册时可以配置额外的选项
 app.use(Lazyload, {
   loading: 'assets/loading.gif', // 图片 loading 时的占位
-  error: 'assets/error.gif', // 图片加载失败时的占位
+  error: 'assets/error.gif', // 图片 error 时的占位
 });
 ```
 
@@ -28,28 +26,7 @@ app.use(Lazyload, {
 
 ### 基础用法
 
-将 `v-lazy` 指令的值设置为你需要懒加载的图片。
-
-```html
-<img v-for="img in imageList" v-lazy="img" />
-```
-
-```js
-export default {
-  setup() {
-    return {
-      imageList: [
-        'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-        'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
-      ],
-    };
-  },
-};
-```
-
-### webp 转换
-
-`v-lazy` 会在浏览器支持 `webp` 格式的图片时自动加上 webp 格式后缀，默认为 aws 云后缀，图片宽度默认为容器宽度的 1.5 倍。
+将 `v-lazy` 指令的值设置为你需要懒加载的图片。`v-lazy` 会在浏览器支持 `webp` 格式的图片时自动加上 webp 格式后缀，默认为 aws 云后缀，图片宽度默认为容器宽度的 1.5 倍，默认图像质量为 100%。
 
 ```html
 <img v-lazy="image" />
@@ -59,7 +36,45 @@ export default {
 export default {
   setup() {
     return {
-      // url加上后缀 ?x-oss-process=image/resize,w_300/format,webp
+      // 转化为 https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg?x-oss-process=image/format,webp/quality,q_100/resize,w_492
+      image:
+        'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
+    };
+  },
+};
+```
+
+### webp 参数
+
+`v-lazy` 指令可以手动配置 webp 图片参数，支持 `w` 图片宽度和 `q` 图像质量。使用时以对象形式传递给指令。
+
+```html
+<img v-lazy="{ src: image, q: 80, w: 600 }" />
+```
+
+```js
+export default {
+  setup() {
+    return {
+      image:
+        'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
+    };
+  },
+};
+```
+
+### 立即加载
+
+`v-lazy` 指令使用 `now` 修饰符，可以立即加载所传递的图片，也不影响 webp 参数的设置。
+
+```html
+<img v-lazy.now="image" />
+```
+
+```js
+export default {
+  setup() {
+    return {
       image:
         'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
     };

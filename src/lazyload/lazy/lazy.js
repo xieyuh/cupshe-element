@@ -117,10 +117,9 @@ export default function () {
      * add image listener to queue
      * @param  {DOM} el
      * @param  {object} binding vue directive binding
-     * @param  {vnode} vnode vue directive vnode
      * @return
      */
-    add(el, binding, vnode) {
+    add(el, binding) {
       if (this.listeners.some((item) => item.el === el)) {
         this.update(el, binding);
         return nextTick(this.lazyLoadHandler);
@@ -132,20 +131,7 @@ export default function () {
       nextTick(() => {
         src = getBestSelectionFromSrcset(el, this.options.scale) || src;
         this.observer && this.observer.observe(el);
-        const container = Object.keys(binding.modifiers)[0];
-        let $parent;
-
-        if (container) {
-          $parent = vnode.context.$refs[container];
-          // if there is container passed in, try ref first, then fallback to getElementById to support the original usage
-          $parent = $parent
-            ? $parent.$el || $parent
-            : document.getElementById(container);
-        }
-
-        if (!$parent) {
-          $parent = getScrollParent(el);
-        }
+        const $parent = getScrollParent(el);
 
         const newListener = new ReactiveListener({
           bindType: binding.arg,
@@ -157,10 +143,15 @@ export default function () {
           cors: value.cors,
           elRenderer: this.elRenderer.bind(this),
           options: this.options,
+          args: value.args,
           imageCache: this.imageCache,
         });
 
         this.listeners.push(newListener);
+
+        if (binding.modifiers.now) {
+          return newListener.render('loaded');
+        }
 
         if (inBrowser) {
           this.addListenerTarget(window);
@@ -463,17 +454,21 @@ export default function () {
      * @return {object} image's loading, loaded, error url
      */
     valueFormatter(value) {
-      let src = value;
-      let { loading, error } = this.options;
-
-      // value is object
       if (isObject(value)) {
-        ({ src } = value);
-        loading = value.loading || this.options.loading;
-        error = value.error || this.options.error;
+        const { src, loading, error, ...args } = value;
+
+        return {
+          src,
+          loading: loading || this.options.loading,
+          error: error || this.options.error,
+          args,
+        };
       }
+
+      const { loading, error } = this.options;
+
       return {
-        src,
+        src: value,
         loading,
         error,
       };
