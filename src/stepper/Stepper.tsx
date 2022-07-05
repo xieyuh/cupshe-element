@@ -1,4 +1,5 @@
 import { defineComponent, ref, computed, watch, nextTick, PropType } from 'vue';
+import { useCustomFieldValue } from '../composables';
 import { Icon } from '../icon';
 import {
   createNamespace,
@@ -192,6 +193,8 @@ export default defineComponent({
     }));
 
     const buttonStyle = computed(() => getSizeStyle(props.buttonSize));
+
+    useCustomFieldValue(() => props.modelValue);
 
     return () => (
       <div class={bem()}>

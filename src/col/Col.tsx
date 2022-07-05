@@ -1,21 +1,26 @@
-import { computed, defineComponent, CSSProperties } from 'vue';
-import { createNamespace } from '../utils';
+import {
+  computed,
+  defineComponent,
+  CSSProperties,
+  ExtractPropTypes,
+} from 'vue';
+import { createNamespace, makeNumericProp, numericProp } from '../utils';
 import { useParent } from '../composables';
 import { ROW_KEY } from '../row/Row';
 
 const [name, bem] = createNamespace('col');
 
+const colProps = {
+  span: makeNumericProp(0),
+  offset: numericProp,
+};
+
+export type ColProps = ExtractPropTypes<typeof colProps>;
+
 export default defineComponent({
   name,
 
-  props: {
-    offset: [Number, String],
-
-    span: {
-      type: [Number, String],
-      default: 0,
-    },
-  },
+  props: colProps,
 
   setup(props, { slots }) {
     const { parent, index } = useParent(ROW_KEY);

@@ -99,6 +99,10 @@ module.exports = {
             path: 'uploader',
             title: 'Uploader 文件上传',
           },
+          {
+            path: 'form',
+            title: 'Form 表单',
+          },
         ],
       },
       {
