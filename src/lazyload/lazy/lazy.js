@@ -148,6 +148,10 @@ export default function () {
           now: binding.modifiers.now,
         });
 
+        if (binding.modifiers.now) {
+          return;
+        }
+
         this.listeners.push(newListener);
 
         if (inBrowser) {

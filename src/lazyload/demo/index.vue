@@ -19,7 +19,7 @@ const image =
   </demo-block>
 
   <demo-block title="立即加载">
-    <img v-lazy="image" alt="" />
+    <img v-lazy.now="image" alt="" />
   </demo-block>
 </template>
 
