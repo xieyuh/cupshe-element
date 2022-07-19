@@ -15,12 +15,14 @@ const modifiers = {
   },
 };
 
-export function webp(listener, args = {}) {
-  const buffer = [];
+export function webp(listener, args = {}, options) {
+  if (options.supportWebp) {
+    const buffer = [];
 
-  Object.keys(modifiers).forEach((key) => {
-    buffer.push(modifiers[key](args[key], listener.el));
-  });
+    Object.keys(modifiers).forEach((key) => {
+      buffer.push(modifiers[key](args[key], listener.el));
+    });
 
-  listener.src += signature + buffer.join('/');
+    listener.src += signature + buffer.join('/');
+  }
 }
