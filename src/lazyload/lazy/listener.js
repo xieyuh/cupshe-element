@@ -15,6 +15,7 @@ export default class ReactiveListener {
     cors,
     elRenderer,
     imageCache,
+    now,
   }) {
     this.el = el;
     this.src = src;
@@ -40,7 +41,11 @@ export default class ReactiveListener {
 
     this.filter();
     this.initState();
-    this.render('loading', false);
+    if (now) {
+      this.render('loaded');
+    } else {
+      this.render('loading', false);
+    }
   }
 
   /*

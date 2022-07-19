@@ -145,13 +145,10 @@ export default function () {
           options: this.options,
           args: value.args,
           imageCache: this.imageCache,
+          now: binding.modifiers.now,
         });
 
         this.listeners.push(newListener);
-
-        if (binding.modifiers.now) {
-          return newListener.render('loaded');
-        }
 
         if (inBrowser) {
           this.addListenerTarget(window);
