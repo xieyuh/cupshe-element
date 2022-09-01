@@ -96,6 +96,10 @@ module.exports = {
             title: 'Select 选择器',
           },
           {
+            path: 'switch',
+            title: 'Switch 开关',
+          },
+          {
             path: 'uploader',
             title: 'Uploader 文件上传',
           },

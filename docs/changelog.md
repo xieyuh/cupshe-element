@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.20.0
+
+**New Component**
+
+- 新增了 Switch 开关组件
+
 ### v1.19.0
 
 **New Component**
