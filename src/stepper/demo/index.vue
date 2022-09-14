@@ -40,7 +40,6 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue';
-import '@cupshe/fonts';
 import { Interceptor } from '../../utils';
 
 const state = reactive({

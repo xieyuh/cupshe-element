@@ -8,9 +8,7 @@
   </demo-block>
 </template>
 
-<script setup lang="ts">
-import '@cupshe/fonts';
-</script>
+<script setup lang="ts"></script>
 
 <style lang="less">
 .demo-loading {

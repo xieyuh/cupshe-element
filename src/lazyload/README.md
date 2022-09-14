@@ -95,5 +95,3 @@ export default {
 | listenEvents | 监听的事件       | _string[]_ | `scroll`等 |
 | adapter      | 适配器           | _object_   | -          |
 | filter       | 图片 URL 过滤    | _object_   | -          |
-
-> 更多内容请参照：[vue-lazyload 官方文档](https://github.com/hilongjw/vue-lazyload)

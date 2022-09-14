@@ -1,0 +1,50 @@
+@import '../style/font.less';
+
+.c-dropdown {
+  user-select: none;
+
+  &__bar {
+    position: relative;
+    display: flex;
+    height: 40px;
+    background: #fff;
+
+    &--opened {
+      z-index: 11;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+
+    &--disabled {
+      .c-dropdown__title {
+        color: #999;
+      }
+    }
+  }
+
+  &__title {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 0 8px;
+    color: #333;
+    font-size: 14px;
+    line-height: 18px;
+    .c-muli-semibold;
+  }
+
+  &__icon {
+    margin-left: 6px;
+    color: #878787;
+
+    &--active {
+      transform: rotate(-180deg);
+    }
+  }
+}

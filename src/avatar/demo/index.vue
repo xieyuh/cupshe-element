@@ -13,9 +13,7 @@
   </demo-block>
 </template>
 
-<script setup>
-import '@cupshe/fonts';
-</script>
+<script setup></script>
 
 <style lang="less">
 .demo-avatar {

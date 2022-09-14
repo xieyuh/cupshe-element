@@ -20,9 +20,7 @@
   </demo-block>
 </template>
 
-<script setup>
-import '@cupshe/fonts';
-
+<script lang="ts" setup>
 const routes1 = [
   { name: 'Home' },
   { name: 'New In' },

@@ -27,7 +27,7 @@
     </c-button>
   </demo-block>
 
-  <demo-block title="动画效果">
+  <demo-block title="动画效果(仅PC端可用)">
     <c-button type="primary" cover>主要按钮</c-button>
     <c-button cover>默认按钮</c-button>
   </demo-block>
@@ -66,7 +66,6 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-import '@cupshe/fonts';
 
 const state = reactive({
   loading1: false,

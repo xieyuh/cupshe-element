@@ -6,7 +6,7 @@
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[快速上手](#/quickstart)。
+通过以下方式来全局注册组件。
 
 ```js
 import { createApp } from 'vue';

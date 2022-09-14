@@ -27,9 +27,8 @@
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
-import '@cupshe/fonts';
 
 const container = ref();
 </script>

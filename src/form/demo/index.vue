@@ -100,11 +100,10 @@
   </demo-block>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, ref } from 'vue';
-import '@cupshe/fonts';
 
-const state = reactive({
+const state: any = reactive({
   form1: {
     username: '',
     password: '',
@@ -123,17 +122,17 @@ const state = reactive({
 
 const form = ref();
 
-const onSubmit = (value) => {
+const onSubmit = (value: any) => {
   console.log(value);
 };
 
 const onSubmit2 = () => {
   form.value
     .validate()
-    .then((res) => {
+    .then((res: any) => {
       console.log(res);
     })
-    .catch((err) => {
+    .catch((err: any) => {
       console.log(err);
     });
 };

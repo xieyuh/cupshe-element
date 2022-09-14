@@ -70,11 +70,10 @@
   </demo-block>
 </template>
 
-<script>
+<script lang="ts">
 import { reactive, toRefs } from 'vue';
-import '@cupshe/fonts';
 
-const option2 = [];
+const option2: any[] = [];
 
 for (let i = 0; i < 20; i++) {
   option2.push({ text: `选项${i + 1}`, value: i });

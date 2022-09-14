@@ -175,12 +175,12 @@ module.exports = {
         title: '反馈组件',
         items: [
           {
-            path: 'action-sheet',
-            title: 'ActionSheet 动作面板',
-          },
-          {
             path: 'alert',
             title: 'Alert 提示',
+          },
+          {
+            path: 'dropdown',
+            title: 'Dropdown 下拉菜单',
           },
           {
             path: 'loading',

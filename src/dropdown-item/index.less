@@ -1,0 +1,49 @@
+@import '../style/font.less';
+
+.c-dropdown-item {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 11;
+  overflow: hidden;
+
+  &__icon {
+    display: block;
+    line-height: inherit;
+    position: relative;
+    overflow: hidden;
+    text-align: right;
+    word-wrap: break-word;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 16px;
+    text-align: left;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: 12px;
+    .c-muli;
+
+    &--active {
+      .c-muli-bold;
+    }
+  }
+
+  &--up {
+    top: 0;
+  }
+
+  &--down {
+    bottom: 0;
+  }
+
+  &__content {
+    position: absolute;
+    max-height: 80%;
+  }
+}

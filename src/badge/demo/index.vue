@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import '@cupshe/fonts';
 import CBadge from '..';
 </script>
 

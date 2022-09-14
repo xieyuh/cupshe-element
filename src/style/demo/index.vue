@@ -28,7 +28,6 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue';
-import '@cupshe/fonts';
 
 const state = reactive({
   show: false,

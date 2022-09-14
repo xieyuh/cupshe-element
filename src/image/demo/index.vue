@@ -25,10 +25,10 @@
 </template>
 
 <script lang="ts" setup>
-import '@cupshe/fonts';
+import { ImageFit } from '../Image';
 
 const image = 'https://img.yzcdn.cn/vant/cat.jpeg';
-const fits = ['contain', 'cover', 'fill', 'none', 'scale-down'];
+const fits: ImageFit[] = ['contain', 'cover', 'fill', 'none', 'scale-down'];
 </script>
 
 <style lang="less">

@@ -37,7 +37,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import '@cupshe/fonts';
 import { UploaderFileListItem } from '../types';
 
 const fileList2 = ref([{ url: 'https://img.yzcdn.cn/vant/sand.jpg' }]);
@@ -46,7 +45,7 @@ const fileList3 = ref([]);
 
 const fileList4 = ref([{ url: 'https://img.yzcdn.cn/vant/sand.jpg' }]);
 
-const statusFileList = [
+const statusFileList: any[] = [
   {
     url: 'https://img.yzcdn.cn/vant/leaf.jpg',
     status: 'uploading',
@@ -59,18 +58,18 @@ const statusFileList = [
   },
 ];
 
-const beforeRead = (file: File) => {
+const beforeRead: any = (file: File) => {
   if (file.type !== 'image/jpeg') {
     return false;
   }
   return true;
 };
 
-const afterRead = (file: UploaderFileListItem, detail: unknown) => {
+const afterRead: any = (file: UploaderFileListItem, detail: unknown) => {
   console.log(file, detail);
 };
 
-const afterReadFailed = (item: UploaderFileListItem) => {
+const afterReadFailed: any = (item: UploaderFileListItem) => {
   item.status = 'uploading';
   item.message = '上传中...';
 

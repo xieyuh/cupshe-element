@@ -68,9 +68,8 @@
   </demo-block>
 </template>
 
-<script>
+<script lang="ts">
 import { reactive, toRefs } from 'vue';
-import '@cupshe/fonts';
 
 export default {
   setup() {
@@ -89,11 +88,11 @@ export default {
       value11: '',
     });
 
-    const onChange = (value) => {
+    const onChange = (value: any) => {
       console.log(value);
     };
 
-    const formatter = (value) => value.replace(/\d/g, '');
+    const formatter = (value: any) => value.replace(/\d/g, '');
 
     return {
       ...toRefs(state),
