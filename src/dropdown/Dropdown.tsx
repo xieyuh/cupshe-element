@@ -124,7 +124,7 @@ export default defineComponent({
           }}
         >
           <span
-            class={[bem('title'), titleClass]}
+            class={[bem('title', { active: showPopup }), titleClass]}
             style={{ color: showPopup ? props.activeColor : '' }}
           >
             <div class="c-ellipsis">
