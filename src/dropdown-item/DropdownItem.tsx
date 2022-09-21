@@ -159,7 +159,7 @@ export default defineComponent({
           <Popup
             v-model={[state.showPopup, 'show']}
             role="menu"
-            class={bem('content')}
+            class={bem('content', [direction])}
             overlay={overlay}
             position={direction === 'down' ? 'top' : 'bottom'}
             duration={state.transition ? duration : 0}

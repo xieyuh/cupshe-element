@@ -127,13 +127,11 @@ export default defineComponent({
             class={[bem('title', { active: showPopup }), titleClass]}
             style={{ color: showPopup ? props.activeColor : '' }}
           >
-            <div class="c-ellipsis">
-              {item.renderTitle()}
-              <Icon
-                class={bem('icon', { active: showPopup })}
-                name="arrow_down"
-              />
-            </div>
+            {item.renderTitle()}
+            <Icon
+              class={bem('icon', { active: showPopup })}
+              name="arrow_down"
+            />
           </span>
         </div>
       );
