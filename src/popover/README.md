@@ -197,6 +197,7 @@ export default {
 | v-model:show           | 是否展示气泡弹出层                                           | _boolean_                   | `false`  |
 | actions                | 选项列表                                                     | _Action[]_                  | `[]`     |
 | placement              | 弹出位置                                                     | _string_                    | `bottom` |
+| fallback-placements    | 当菜单被页面遮挡时的备用位置                                 | _string[]_                  | -        |
 | trigger                | 触发方式，可选值为 `manual`、 `hover`                        | `click`                     |
 | duration               | 动画时长，单位秒                                             | _number \| string_          | `0.3`    |
 | offset                 | 出现位置的偏移量                                             | _[number, number]_          | `[0, 8]` |

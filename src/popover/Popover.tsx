@@ -9,7 +9,12 @@ import {
   CSSProperties,
   TeleportProps,
 } from 'vue';
-import { Instance, createPopper, offsetModifier } from '../utils/popper';
+import {
+  Instance,
+  createPopper,
+  offsetModifier,
+  flipModifier,
+} from '../utils/popper';
 import {
   pick,
   extend,
@@ -75,6 +80,10 @@ export default defineComponent({
       type: Number,
       default: 100,
     },
+    fallbackPlacements: {
+      type: Array as PropType<PopoverPlacement[]>,
+      default: () => [],
+    },
     offset: {
       type: (Array as unknown) as PropType<[number, number]>,
       default: () => [0, 8],
@@ -116,6 +125,11 @@ export default defineComponent({
               gpuAcceleration: false,
             },
           },
+          extend({}, flipModifier, {
+            options: {
+              fallbackPlacements: props.fallbackPlacements,
+            },
+          }),
           extend({}, offsetModifier, {
             options: {
               offset: props.offset,
