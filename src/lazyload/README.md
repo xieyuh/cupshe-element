@@ -63,6 +63,25 @@ export default {
 };
 ```
 
+### 渐进式加载
+
+`v-lazy` 指令可以开启渐进式渲染功能，使用质量为 `1%` 的图片代替配置的 loading 图片。
+
+```html
+<img v-lazy="{ src: image, progressive: true, q: 80, w: 300 }" />
+```
+
+```js
+export default {
+  setup() {
+    return {
+      image:
+        'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
+    };
+  },
+};
+```
+
 ### 立即加载
 
 `v-lazy` 指令使用 `now` 修饰符，可以立即加载所传递的图片，也不影响 webp 参数的设置。
