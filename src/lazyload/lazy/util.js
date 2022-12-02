@@ -1,5 +1,8 @@
 import { inBrowser } from '../../utils';
 
+export const DEFAULT_AVIF =
+  'data:image/avif;base64,AAAAHGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZgAAAOptZXRhAAAAAAAAACFoZGxyAAAAAAAAAABwaWN0AAAAAAAAAAAAAAAAAAAAAA5waXRtAAAAAAABAAAAImlsb2MAAAAAREAAAQABAAAAAAEOAAEAAAAAAAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAAamlwcnAAAABLaXBjbwAAABNjb2xybmNseAACAAIABoAAAAAMYXYxQ4EADAAAAAAUaXNwZQAAAAAAAABAAAAAQAAAABBwaXhpAAAAAAMICAgAAAAXaXBtYQAAAAAAAAABAAEEgYIDhAAAACNtZGF0EgAKCRgVf/2iBAQNCDIMGAAAAFAAAAoBky+A';
+
 export const hasIntersectionObserver =
   inBrowser &&
   'IntersectionObserver' in window &&
@@ -85,22 +88,32 @@ export function getBestSelectionFromSrcset(el, scale) {
 export const getDPR = (scale = 1) =>
   inBrowser ? window.devicePixelRatio || scale : scale;
 
+let webpSupport = true;
+
+try {
+  const elem = document.createElement('canvas');
+  if (elem.getContext && elem.getContext('2d')) {
+    webpSupport = elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  }
+} catch (err) {
+  webpSupport = false;
+}
+
 export function supportWebp() {
   if (!inBrowser) return false;
 
-  let support = true;
+  return webpSupport;
+}
 
-  try {
-    const elem = document.createElement('canvas');
+let avifSupport = false;
+const img = new Image();
+img.onload = () => {
+  avifSupport = true;
+};
+img.src = DEFAULT_AVIF;
 
-    if (elem.getContext && elem.getContext('2d')) {
-      support = elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-    }
-  } catch (err) {
-    support = false;
-  }
-
-  return support;
+export function supportAvif() {
+  return avifSupport;
 }
 
 export function throttle(action, delay) {
