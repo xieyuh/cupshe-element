@@ -14,8 +14,12 @@ const image =
     <img v-lazy="image" />
   </demo-block>
 
-  <demo-block title="图片加载参数">
+  <demo-block title="webp参数">
     <img v-lazy="{ src: image, q: 80, w: 300 }" alt="" />
+  </demo-block>
+
+  <demo-block title="渐进式加载">
+    <img v-lazy="{ src: image, progressive: true, q: 80, w: 300 }" alt="" />
   </demo-block>
 
   <demo-block title="立即加载">

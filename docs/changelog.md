@@ -6,11 +6,11 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
-### v1.21.5
+### v1.21.4
 
 **Feature**
 
-- 增强了 `v-lazy` 指令，同时支持 avif 和 webp 图片格式转化
+- 增强了 `v-lazy` 指令，支持渐进式加载图片
 
 ### v1.21.0
 
