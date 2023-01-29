@@ -1,6 +1,6 @@
 {
   "name": "cupshe-element",
-  "version": "1.21.4",
+  "version": "1.21.6",
   "description": "Base UI Component for Cupshe",
   "main": "lib/cupshe-element.js",
   "typings": "lib/index.d.ts",
