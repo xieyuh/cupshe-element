@@ -26,7 +26,7 @@ app.use(Lazyload, {
 
 ### 基础用法
 
-将 `v-lazy` 指令的值设置为你需要懒加载的图片。`v-lazy` 会在浏览器支持 `webp` 格式的图片时自动加上 webp 格式后缀，默认为 aws 云后缀，图片宽度默认为容器宽度的 1.5 倍，默认图像质量为 100%。
+将 `v-lazy` 指令的值设置为你需要懒加载的图片。`v-lazy` 会在检测浏览器是否支持 `avif` 或 `webp` 格式，并自动添加相应的格式后缀，默认为 aws 云后缀，图片宽度默认为容器宽度的 1.5 倍，默认图像质量为 100%。
 
 ```html
 <img v-lazy="image" />
@@ -36,7 +36,7 @@ app.use(Lazyload, {
 export default {
   setup() {
     return {
-      // 转化为 https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg?x-oss-process=image/format,webp/quality,q_100/resize,w_492
+      // 转化为 https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_492
       image:
         'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
     };
@@ -50,25 +50,6 @@ export default {
 
 ```html
 <img v-lazy="{ src: image, q: 80, w: 600 }" />
-```
-
-```js
-export default {
-  setup() {
-    return {
-      image:
-        'https://cdn-review.cupshe.com/rms-admin/20220125/f43fa5acbf5e44839e81563235afdf8f.jpg',
-    };
-  },
-};
-```
-
-### 渐进式加载
-
-`v-lazy` 指令可以开启渐进式渲染功能，使用质量为 `1%` 的图片代替配置的 loading 图片。
-
-```html
-<img v-lazy="{ src: image, progressive: true, q: 80, w: 300 }" />
 ```
 
 ```js

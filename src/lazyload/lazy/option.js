@@ -1,10 +1,10 @@
 import { extend } from '../../utils';
-import { webp } from './webp';
+import { format } from './format';
 
 export default function getDefaultOption(option) {
   const defaultOption = {
     filter: {
-      webp,
+      format,
     },
   };
 

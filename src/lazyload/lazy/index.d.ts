@@ -13,8 +13,7 @@ declare type ListenEvent =
 declare type Callback = (listener: any, options: LazyloadOptions) => void;
 
 declare type Filter = {
-  webp?: Callback;
-  progressive?: Callback;
+  format?: Callback;
 };
 
 declare type Adapter = {

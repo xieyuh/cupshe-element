@@ -1,7 +1,6 @@
 import { loadImageAsync } from './util';
 import { noop } from '../../utils';
 import { useRect } from '../../composables';
-import { generateWebp } from './webp';
 
 export default class ReactiveListener {
   constructor({
@@ -40,7 +39,6 @@ export default class ReactiveListener {
       loadEnd: 0,
     };
 
-    this.progressive();
     this.filter();
     this.initState();
     if (now) {
@@ -108,15 +106,6 @@ export default class ReactiveListener {
       rect.left < window.innerWidth * this.options.preLoad &&
       rect.right > 0
     );
-  }
-
-  /*
-   * progressive loading
-   */
-  progressive() {
-    if (this.args && this.args.progressive && this.options.supportWebp) {
-      this.loading = this.src + generateWebp({ q: 1, w: 200 });
-    }
   }
 
   /*
