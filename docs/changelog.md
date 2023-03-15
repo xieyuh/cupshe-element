@@ -6,6 +6,16 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.23.0
+
+**Feature**
+
+- Rate 组件新增了 icon 插槽
+
+**Bug Fixes**
+
+- 修复了表单中的 Input 无法触发 onBlur 检验的问题
+
 ### v1.21.5
 
 **Feature**

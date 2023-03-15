@@ -3,7 +3,13 @@
     <c-form @submit="onSubmit">
       <c-form-item
         name="username"
-        :rules="[{ required: true, message: 'username is required' }]"
+        :rules="[
+          {
+            required: true,
+            message: 'username is required',
+            trigger: 'onBlur',
+          },
+        ]"
       >
         <c-input
           v-model="state.form1.username"

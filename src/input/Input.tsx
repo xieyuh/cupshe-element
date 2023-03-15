@@ -5,8 +5,13 @@ import {
   nextTick,
   onMounted,
   PropType,
+  inject,
 } from 'vue';
-import { useExpose, useCustomFieldValue } from '../composables';
+import {
+  useExpose,
+  useCustomFieldValue,
+  CUSTOM_FIELD_INJECTION_KEY,
+} from '../composables';
 import { createNamespace, extend, isDef, formatNumber } from '../utils';
 import {
   inputProps,
@@ -54,6 +59,7 @@ export default defineComponent({
   setup(props, { emit, slots }) {
     const inputRef = ref<HTMLInputElement>();
     const focused = ref(false);
+    const field = inject(CUSTOM_FIELD_INJECTION_KEY, null);
 
     const getModelValue = () => String(props.modelValue);
 
@@ -108,9 +114,14 @@ export default defineComponent({
     };
 
     const onBlur = (event: Event) => {
+      if (props.readonly) {
+        return;
+      }
+
       focused.value = false;
       updateValue(getModelValue(), 'onBlur');
       emit('blur', event);
+      field?.validateWithTrigger('onBlur');
     };
 
     const onInput = (event: Event) => {

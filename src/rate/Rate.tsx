@@ -69,7 +69,7 @@ export default defineComponent({
 
   emits: ['change', 'update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const [itemRefs, setItemRefs] = useRefs();
 
     const list = computed<RateListItem[]>(() =>
@@ -129,7 +129,7 @@ export default defineComponent({
       const score = index + 1;
       const isFull = item.status === 'full';
       const isVoid = item.status === 'void';
-      const renderHalf = allowHalf && item.value > 0 && item.value < 1;
+      const isHalf = allowHalf && item.value > 0 && item.value < 1;
 
       const style: CSSProperties = {};
       if (gutter && score !== +count) {
@@ -154,31 +154,37 @@ export default defineComponent({
           aria-checked={!isVoid}
           onClick={onClickItem}
         >
-          <Icon
-            name={isFull ? icon : voidIcon}
-            class={bem('icon', [
-              size,
-              {
-                disabled,
-                full: isFull,
-              },
-            ])}
-            color={disabled ? disabledColor : isFull ? voidColor : color}
-          />
-          {renderHalf && (
-            <Icon
-              style={{ width: item.value + 'em' }}
-              name={isVoid ? voidIcon : icon}
-              class={bem('icon', [
-                'half',
-                size,
-                {
-                  disabled,
-                  full: isVoid,
-                },
-              ])}
-              color={disabled ? disabledColor : isVoid ? voidColor : color}
-            />
+          {slots.icon ? (
+            slots.icon({ isFull, isVoid, isHalf, size, disabled, color })
+          ) : (
+            <>
+              <Icon
+                name={isFull ? icon : voidIcon}
+                class={bem('icon', [
+                  size,
+                  {
+                    disabled,
+                    full: isFull,
+                  },
+                ])}
+                color={disabled ? disabledColor : isFull ? voidColor : color}
+              />
+              {isHalf && (
+                <Icon
+                  style={{ width: item.value + 'em' }}
+                  name={isVoid ? voidIcon : icon}
+                  class={bem('icon', [
+                    'half',
+                    size,
+                    {
+                      disabled,
+                      full: isVoid,
+                    },
+                  ])}
+                  color={disabled ? disabledColor : isVoid ? voidColor : color}
+                />
+              )}
+            </>
           )}
         </div>
       );
