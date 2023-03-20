@@ -114,11 +114,11 @@ export default defineComponent({
     };
 
     const onBlur = (event: Event) => {
+      focused.value = false;
       if (props.readonly) {
         return;
       }
 
-      focused.value = false;
       updateValue(getModelValue(), 'onBlur');
       emit('blur', event);
       field?.validateWithTrigger('onBlur');
