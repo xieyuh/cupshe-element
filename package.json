@@ -30,7 +30,6 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@cupshe/fonts": "^0.1.0",
     "@vant/cli": "^3.9.0",
     "@vue/compiler-sfc": "^3.0.0",
     "vue": "^3.0.0"
