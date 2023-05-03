@@ -6,6 +6,12 @@ cupshe-element 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本�
 
 ## 更新内容
 
+### v1.24.0
+
+**Feature**
+
+- Toast 组件新增了 `loading` 方法
+
 ### v1.23.0
 
 **Feature**

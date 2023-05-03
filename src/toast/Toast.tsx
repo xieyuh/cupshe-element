@@ -9,6 +9,7 @@ import {
 import { createNamespace, unknownProp, isDef } from '../utils';
 import { lockClick } from './lock-click';
 import { Icon } from '../icon';
+import { Loading } from '../loading';
 import { Popup } from '../popup';
 
 const [name, bem] = createNamespace('toast');
@@ -75,9 +76,13 @@ export default defineComponent({
 
     const renderIcon = () => {
       const { icon, type, iconSize } = props;
-      const hasIcon = icon || type === 'success' || type === 'fail';
+      const hasIcon =
+        icon || type === 'success' || type === 'fail' || type === 'loading';
 
       if (hasIcon) {
+        if (type === 'loading') {
+          return <Loading size={iconSize} class={bem('icon')} />;
+        }
         return <Icon name={icon || type} size={iconSize} class={bem('icon')} />;
       }
     };

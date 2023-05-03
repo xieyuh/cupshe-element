@@ -9,6 +9,10 @@ const showFailToast = () => {
   Toast.fail('Number copied Number copied Number copied');
 };
 
+const showLoadingToast = () => {
+  Toast.loading('Loading...');
+};
+
 const showTopToast = () => {
   Toast({
     message: '顶部展示',
@@ -63,6 +67,7 @@ const showCustomizedToast = () => {
     <c-cell is-link title="文字提示" @click="Toast({ message: '文字提示' })" />
     <c-cell is-link title="成功提示" @click="showSuccessToast" />
     <c-cell is-link title="失败提示" @click="showFailToast" />
+    <c-cell is-link title="加载提示" @click="showLoadingToast" />
   </demo-block>
 
   <demo-block card title="自定义图标">

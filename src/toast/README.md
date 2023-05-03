@@ -44,9 +44,17 @@ Toast.success('成功文案');
 Toast.fail('失败文案');
 ```
 
+### 加载中提示
+
+使用 `Toast.loading` 方法展示加载中提示，使用 `Toast.loading` 方法展示加载中提示。
+
+```js
+Toast.loading('加载中文案');
+```
+
 ### 自定义图标
 
-通过 `icon` 选项可以自定义图标，支持传入[图标名称](#/icon)或图片链接，通过`loadingType` 属性可以自定义加载图标类型。
+通过 `icon` 选项可以自定义图标，支持传入[图标名称](#/icon)或图片链接。
 
 ```js
 Toast({
@@ -57,12 +65,6 @@ Toast({
 Toast({
   message: '自定义图片',
   icon: 'https://img.yzcdn.cn/vant/logo.png',
-});
-
-Toast.loading({
-  message: '加载中...',
-  forbidClick: true,
-  loadingType: 'spinner',
 });
 ```
 
