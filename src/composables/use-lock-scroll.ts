@@ -2,15 +2,24 @@ import { Ref, watch, onBeforeUnmount, onDeactivated } from 'vue';
 import { getScrollParent, onMountedOrActivated, useTouch } from '.';
 import { preventDefault } from '../utils';
 
-let totalLockCount = 0;
-
 const BODY_LOCK_CLASS = 'c-overflow-hidden';
+const BODY_LOCK_ATTRIBUTE = 'data-lock-count';
 
 export function useLockScroll(
   rootRef: Ref<HTMLElement | undefined>,
   shouldLock: () => boolean
 ) {
   const touch = useTouch();
+
+  const getLockCount = () => {
+    const lockCount = Number(document.body.getAttribute(BODY_LOCK_ATTRIBUTE));
+
+    return Number.isNaN(lockCount) ? 0 : lockCount;
+  };
+
+  const setLockCount = (count: number) => {
+    document.body.setAttribute(BODY_LOCK_ATTRIBUTE, String(count));
+  };
 
   const onTouchMove = (event: TouchEvent) => {
     touch.move(event);
@@ -42,21 +51,27 @@ export function useLockScroll(
     document.addEventListener('touchstart', touch.start);
     document.addEventListener('touchmove', onTouchMove, { passive: false });
 
-    if (!totalLockCount) {
+    const lockCount = getLockCount();
+
+    if (!lockCount) {
       document.body.classList.add(BODY_LOCK_CLASS);
     }
 
-    totalLockCount++;
+    setLockCount(lockCount + 1);
   };
 
   const unlock = () => {
-    if (totalLockCount) {
+    let lockCount = getLockCount();
+
+    if (lockCount) {
       document.removeEventListener('touchstart', touch.start);
       document.removeEventListener('touchmove', onTouchMove);
 
-      totalLockCount--;
+      lockCount--;
 
-      if (!totalLockCount) {
+      setLockCount(lockCount);
+
+      if (!lockCount) {
         document.body.classList.remove(BODY_LOCK_CLASS);
       }
     }
