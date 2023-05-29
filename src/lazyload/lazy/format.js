@@ -30,6 +30,8 @@ export function addSuffix(args) {
 }
 
 export function format(listener, args = {}) {
+  if (listener.src && listener.src.includes('.gif')) return;
+
   if (!args.w) {
     const { width } = useRect(listener.el);
     args.w = Math.floor(Math.max(300, width * 1.5));
