@@ -178,6 +178,15 @@ export default defineComponent({
       () => props.startPosition,
       (value) => setActive(+value)
     );
+    watch(
+      () => props,
+      (value) => {
+        if (value.startPosition !== state.active) {
+          setActive(+value.startPosition);
+        }
+      },
+      { deep: true }
+    );
 
     watch(
       () => props.show,
