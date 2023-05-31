@@ -180,9 +180,10 @@ export default defineComponent({
     );
     watch(
       () => props,
-      (value) => {
-        if (value.startPosition !== state.active) {
-          setActive(+value.startPosition);
+      (newVal) => {
+        if (newVal.startPosition !== state.active) {
+          setActive(+newVal.startPosition);
+          swipeTo(+newVal.startPosition);
         }
       },
       { deep: true }
