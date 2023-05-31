@@ -51,14 +51,15 @@ function initInstance() {
 
 const ImagePreview = (
   options: string[] | ImagePreviewOptions,
-  startPosition = 0
+  startPosition = 0,
+  reset = false
 ) => {
   /* istanbul ignore if */
   if (!inBrowser) {
     return;
   }
 
-  if (!instance) {
+  if (!instance || reset) {
     initInstance();
   }
 
