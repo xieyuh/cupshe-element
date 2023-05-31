@@ -194,6 +194,7 @@ export default defineComponent({
             index: state.active,
             url: images[state.active],
           });
+          setActive(0);
         }
       }
     );
