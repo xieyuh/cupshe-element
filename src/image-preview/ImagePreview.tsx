@@ -178,16 +178,6 @@ export default defineComponent({
       () => props.startPosition,
       (value) => setActive(+value)
     );
-    watch(
-      () => props,
-      (newVal) => {
-        if (newVal.startPosition !== state.active) {
-          setActive(+newVal.startPosition);
-          swipeTo(+newVal.startPosition);
-        }
-      },
-      { deep: true }
-    );
 
     watch(
       () => props.show,

@@ -23,6 +23,7 @@ export default defineComponent({
     className: unknownProp,
     lockScroll: truthProp,
     customStyle: Object as PropType<CSSProperties>,
+    transition: { type: String, default: 'c-fade' },
   },
 
   setup(props, { slots }) {
@@ -54,6 +55,8 @@ export default defineComponent({
       );
     });
 
-    return () => <Transition name="c-fade">{renderOverlay()}</Transition>;
+    return () => (
+      <Transition name={props.transition}>{renderOverlay()}</Transition>
+    );
   },
 });
